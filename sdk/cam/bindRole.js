@@ -1,4 +1,4 @@
-const {CamV2Client, CamClient} = require('../../library/tencent-cloud/client')
+const { CamV2Client, CamClient } = require('../../library/tencent-cloud/client')
 
 class BindRole {
   constructor(credentials = {}) {
@@ -47,8 +47,7 @@ class BindRole {
           ]
         })
       })
-    } catch (e) {
-    }
+    } catch (e) {}
 
     try {
       await camClient.request({
@@ -66,8 +65,7 @@ class BindRole {
         'policyId.9': '276210',
         'policyId.10': '32475945'
       })
-    } catch (e) {
-    }
+    } catch (e) {}
   }
 
   async bindSCFQcsRoleV2() {
@@ -90,8 +88,7 @@ class BindRole {
           ]
         })
       })
-    } catch (e) {
-    }
+    } catch (e) {}
 
     try {
       await camClient.request({
@@ -99,8 +96,7 @@ class BindRole {
         roleName: roleName,
         'policyId.0': '28341895'
       })
-    } catch (e) {
-    }
+    } catch (e) {}
   }
 
   async bindSLSQcsRoleV3() {
@@ -124,27 +120,29 @@ class BindRole {
           ]
         })
       })
-    } catch (e) {
-    }
+    } catch (e) {}
 
     const time = Date.now()
     const handlers = []
     try {
-      handlers.push(camClient.request({
-        Action: 'AttachRolePolicy',
-        Version: '2019-01-16',
-        AttachRoleName: roleName,
-        PolicyName: 'QcloudAPIGWFullAccess'
-      }))
-      handlers.push(camClient.request({
-        Action: 'AttachRolePolicy',
-        Version: '2019-01-16',
-        AttachRoleName: roleName,
-        PolicyName: 'QcloudSCFFullAccess'
-      }))
+      handlers.push(
+        camClient.request({
+          Action: 'AttachRolePolicy',
+          Version: '2019-01-16',
+          AttachRoleName: roleName,
+          PolicyName: 'QcloudAPIGWFullAccess'
+        })
+      )
+      handlers.push(
+        camClient.request({
+          Action: 'AttachRolePolicy',
+          Version: '2019-01-16',
+          AttachRoleName: roleName,
+          PolicyName: 'QcloudSCFFullAccess'
+        })
+      )
       await Promise.all(handlers)
-    } catch (e) {
-    }
+    } catch (e) {}
 
     while (true) {
       if (Date.now() - time >= 1100) {
@@ -160,8 +158,7 @@ class BindRole {
         AttachRoleName: roleName,
         PolicyName: 'QcloudCOSFullAccess'
       })
-    } catch (e) {
-    }
+    } catch (e) {}
   }
 
   async bindSCFQcsRoleV3() {
@@ -185,8 +182,7 @@ class BindRole {
           ]
         })
       })
-    } catch (e) {
-    }
+    } catch (e) {}
 
     try {
       await camClient.request({
@@ -195,11 +191,8 @@ class BindRole {
         AttachRoleName: roleName,
         PolicyId: '28341895'
       })
-    } catch (e) {
-    }
+    } catch (e) {}
   }
-
-
 }
 
 module.exports = {
