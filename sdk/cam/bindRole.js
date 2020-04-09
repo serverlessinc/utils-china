@@ -5,7 +5,7 @@ class BindRole {
     this.credentials = credentials
   }
 
-  sleep(ms) {
+  async sleep(ms) {
     return new Promise((resolve) => {
       setTimeout(resolve, ms)
     })
