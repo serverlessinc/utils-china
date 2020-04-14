@@ -1,11 +1,6 @@
 const http = require('http')
 const os = require('os')
 
-try {
-  const globalTunnel = require('../../library/globel-tunnel')
-  globalTunnel.initialize()
-} catch (e) {}
-
 class DataReport {
   async report(inputs = {}) {
     try {
