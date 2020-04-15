@@ -19,13 +19,6 @@ class BindRole {
     }
   }
 
-  async bindSCFQcsRole() {
-    if (this.credentials.Token || this.credentials.token) {
-      await this.bindSCFQcsRoleV3()
-    } else {
-      await this.bindSCFQcsRoleV2()
-    }
-  }
 
   async bindSLSQcsRoleV2() {
     const roleName = 'SLS_QcsRole'
@@ -64,37 +57,6 @@ class BindRole {
         'policyId.8': '2851631',
         'policyId.9': '276210',
         'policyId.10': '32475945'
-      })
-    } catch (e) {}
-  }
-
-  async bindSCFQcsRoleV2() {
-    const roleName = 'SCF_QcsRole'
-    const camClient = new CamV2Client(this.credentials)
-    try {
-      await camClient.request({
-        Action: 'CreateRole',
-        roleName: roleName,
-        policyDocument: JSON.stringify({
-          version: '2.0',
-          statement: [
-            {
-              effect: 'allow',
-              principal: {
-                service: 'scf.qcloud.com'
-              },
-              action: 'sts:AssumeRole'
-            }
-          ]
-        })
-      })
-    } catch (e) {}
-
-    try {
-      await camClient.request({
-        Action: 'AttachRolePolicies',
-        roleName: roleName,
-        'policyId.0': '28341895'
       })
     } catch (e) {}
   }
@@ -161,7 +123,7 @@ class BindRole {
     } catch (e) {}
   }
 
-  async bindSCFQcsRoleV3() {
+  async bindSCFQcsRole() {
     const roleName = 'SCF_QcsRole'
     const camClient = new CamClient(this.credentials)
     try {
@@ -190,6 +152,39 @@ class BindRole {
         Version: '2019-01-16',
         AttachRoleName: roleName,
         PolicyId: '28341895'
+      })
+    } catch (e) {}
+  }
+
+  async bindTCBQcsRole() {
+    const roleName = 'TCB_QcsRole'
+    const camClient = new CamClient(this.credentials)
+    try {
+      await camClient.request({
+        Action: 'CreateRole',
+        Version: '2019-01-16',
+        RoleName: roleName,
+        PolicyDocument: JSON.stringify({
+          version: '2.0',
+          statement: [
+            {
+              effect: 'allow',
+              principal: {
+                service: ['tcb.cloud.tencent.com', 'scf.qcloud.com', 'sls.cloud.tencent.com']
+              },
+              action: 'sts:AssumeRole'
+            }
+          ]
+        })
+      })
+    } catch (e) {}
+
+    try {
+      await camClient.request({
+        Action: 'AttachRolePolicy',
+        Version: '2019-01-16',
+        AttachRoleName: roleName,
+        PolicyId: '8825032'
       })
     } catch (e) {}
   }
