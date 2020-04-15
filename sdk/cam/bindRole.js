@@ -170,7 +170,7 @@ class BindRole {
             {
               effect: 'allow',
               principal: {
-                service: ['tcb.cloud.tencent.com', 'scf.qcloud.com']
+                service: ['tcb.cloud.tencent.com', 'scf.qcloud.com', 'sls.cloud.tencent.com']
               },
               action: 'sts:AssumeRole'
             }
