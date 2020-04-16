@@ -445,9 +445,9 @@ let ret = await sls.getComponentAndVersions('Component name');
 console.log(ret)
 
 // the getComponentAndVersions/getComponentVersion is public
-ret = await Serverless.getComponentAndVersions('name');
+ret = await Serverless.getComponentAndVersions('name', {region: 'ap-guangzhou'} /*optional*/);
 console.log(ret)
-ret = await Serverless.getComponentVersion('name', 'version');
+ret = await Serverless.getComponentVersion('name', 'version', {region: 'ap-guangzhou'}/*optional*/);
 console.log(ret)
 ```
 
