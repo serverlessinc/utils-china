@@ -65,9 +65,7 @@ class BindRole {
         // 完成之后进行进行回写
         await this.getRole(AppId, 'report')
       }
-    } catch (e) {
-      console.log(e)
-    }
+    } catch (e) {}
   }
 
   async bindSLSQcsRole() {
