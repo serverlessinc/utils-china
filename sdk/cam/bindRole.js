@@ -13,7 +13,7 @@ class BindRole {
     })
   }
 
-  async getRole(user, action) {
+  async getOrUpdateBindRoleState(user, action) {
     const data = {
       user: user
     }
@@ -54,7 +54,7 @@ class BindRole {
       const userInformation = new GetUserInformation()
       const { AppId } = await userInformation.getUserInformation(this.credentials)
 
-      const haveRole = await this.getRole(AppId, 'search')
+      const haveRole = await this.getOrUpdateBindRoleState(AppId, 'search')
       // 请求后台，看用户是否绑定role
       if (!haveRole.error && !haveRole.message) {
         // 如果标记没有绑定role，则进行绑定
@@ -63,7 +63,7 @@ class BindRole {
         await this.bindSCFQcsRole()
 
         // 完成之后进行进行回写
-        await this.getRole(AppId, 'report')
+        await this.getOrUpdateBindRoleState(AppId, 'report')
       }
     } catch (e) {}
   }
