@@ -149,7 +149,16 @@ class BindRole {
       })
     })
 
+    await this.sleep(1000)
+    let thisTime = Date.now()
     for (let i = 0; i < policyList.length; i++) {
+      if ((i + 2) % 3 == 0 && i >= 1) {
+        const diffTime = 1000 - (Date.now() - thisTime)
+        if (diffTime > 0) {
+          await this.sleep(diffTime)
+        }
+        thisTime = Date.now()
+      }
       await camClient.request({
         Action: 'AttachRolePolicy',
         Version: '2019-01-16',
