@@ -72,7 +72,7 @@ class BindRole {
     if (this.credentials.Token || this.credentials.token) {
       await this.bindSLSQcsRoleV3()
     } else {
-      await this.bindSLSQcsRoleV3()
+      await this.bindSLSQcsRoleV2()
     }
   }
 
