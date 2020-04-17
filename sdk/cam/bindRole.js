@@ -58,10 +58,9 @@ class BindRole {
       // 请求后台，看用户是否绑定role
       if (!haveRole.error && !haveRole.message) {
         // 如果标记没有绑定role，则进行绑定
-        await this.bindTCBQcsRole()
-        await this.bindSLSQcsRole()
-        await this.bindSCFQcsRole()
+        await Promise.all([this.bindTCBQcsRole(), this.bindSCFQcsRole()])
 
+        await this.bindSLSQcsRole()
         // 完成之后进行进行回写
         await this.getOrUpdateBindRoleState(AppId, 'report')
       }
@@ -69,10 +68,11 @@ class BindRole {
   }
 
   async bindSLSQcsRole() {
+    await this.sleep(1000)
     if (this.credentials.Token || this.credentials.token) {
       await this.bindSLSQcsRoleV3()
     } else {
-      await this.bindSLSQcsRoleV2()
+      await this.bindSLSQcsRoleV3()
     }
   }
 
@@ -149,16 +149,16 @@ class BindRole {
       })
     })
 
-    await this.sleep(1000)
-    let thisTime = Date.now()
+    const timeList = []
     for (let i = 0; i < policyList.length; i++) {
-      if ((i + 2) % 3 == 0 && i >= 1) {
-        const diffTime = 1000 - (Date.now() - thisTime)
+      timeList.push(Date.now())
+      if (timeList.length >= 3) {
+        const diffTime = 1000 - (Date.now() - timeList[i - 2])
         if (diffTime > 0) {
-          await this.sleep(diffTime)
+          await this.sleep(diffTime + 50)
         }
-        thisTime = Date.now()
       }
+
       await camClient.request({
         Action: 'AttachRolePolicy',
         Version: '2019-01-16',
