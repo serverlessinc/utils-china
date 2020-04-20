@@ -7,6 +7,12 @@ class BindRole {
     this.credentials = credentials
   }
 
+  async throwError(response) {
+    if (JSON.stringify(response).includes('Error')) {
+      throw new Error(JSON.stringify(response))
+    }
+  }
+
   async sleep(ms) {
     return new Promise((resolve) => {
       setTimeout(resolve, ms)
@@ -53,13 +59,13 @@ class BindRole {
       // 获取appid
       const userInformation = new GetUserInformation()
       const { AppId } = await userInformation.getUserInformation(this.credentials)
-
       const haveRole = await this.getOrUpdateBindRoleState(AppId, 'search')
+
       // 请求后台，看用户是否绑定role
       if (!haveRole.error && !haveRole.message) {
         // 如果标记没有绑定role，则进行绑定
-        await Promise.all([this.bindTCBQcsRole(), this.bindSCFQcsRole()])
-
+        await this.bindTCBQcsRole()
+        await this.bindSCFQcsRole()
         await this.bindSLSQcsRole()
         // 完成之后进行进行回写
         await this.getOrUpdateBindRoleState(AppId, 'report')
@@ -97,7 +103,7 @@ class BindRole {
       })
     })
 
-    await camClient.request({
+    const response = await camClient.request({
       Action: 'AttachRolePolicies',
       roleName: roleName,
       'policyId.0': '219188',
@@ -112,6 +118,9 @@ class BindRole {
       'policyId.9': '276210',
       'policyId.10': '32475945'
     })
+    if (response.code != 0) {
+      throw new Error(JSON.stringify(response))
+    }
   }
 
   async bindSLSQcsRoleV3() {
@@ -159,12 +168,14 @@ class BindRole {
         }
       }
 
-      await camClient.request({
-        Action: 'AttachRolePolicy',
-        Version: '2019-01-16',
-        AttachRoleName: roleName,
-        PolicyId: policyList[i]
-      })
+      await this.throwError(
+        await camClient.request({
+          Action: 'AttachRolePolicy',
+          Version: '2019-01-16',
+          AttachRoleName: roleName,
+          PolicyId: policyList[i]
+        })
+      )
     }
   }
 
@@ -190,12 +201,14 @@ class BindRole {
       })
     })
 
-    await camClient.request({
-      Action: 'AttachRolePolicy',
-      Version: '2019-01-16',
-      AttachRoleName: roleName,
-      PolicyId: '28341895'
-    })
+    await this.throwError(
+      await camClient.request({
+        Action: 'AttachRolePolicy',
+        Version: '2019-01-16',
+        AttachRoleName: roleName,
+        PolicyId: '28341895'
+      })
+    )
   }
 
   async bindTCBQcsRole() {
@@ -220,12 +233,14 @@ class BindRole {
       })
     })
 
-    await camClient.request({
-      Action: 'AttachRolePolicy',
-      Version: '2019-01-16',
-      AttachRoleName: roleName,
-      PolicyId: '8825032'
-    })
+    await this.throwError(
+      await camClient.request({
+        Action: 'AttachRolePolicy',
+        Version: '2019-01-16',
+        AttachRoleName: roleName,
+        PolicyId: '8825032'
+      })
+    )
   }
 }
 
