@@ -1,7 +1,7 @@
 {
   "name": "@serverless/utils-china",
   "description": "Tencent Cloud Tools For Serverless Framewoek",
-  "version": "0.1.0",
+  "version": "0.1.5",
   "main": "./index.js",
   "publishConfig": {
     "access": "public"
@@ -15,8 +15,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint . --fix --cache"
   },
-  "author": "Dfounderliu",
-  "license": "Apache",
+  "author": "Tencent Cloud, Inc.",
+  "license": "MIT",
   "dependencies": {
     "@tencent-sdk/capi": "^0.2.15-alpha.0",
     "dijkstrajs": "^1.0.1",
@@ -35,5 +35,13 @@
     "eslint-plugin-import": "^2.18.0",
     "eslint-plugin-prettier": "^3.0.1",
     "prettier": "^1.18.2"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/serverless/utils-china.git"
+  },
+  "bugs": {
+    "url": "https://github.com/serverless/utils-china/issues"
+  },
+  "homepage": "https://github.com/serverless/utils-china#readme"
 }
