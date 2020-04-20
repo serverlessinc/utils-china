@@ -42,10 +42,11 @@ class Serverless {
     return scfCli
   }
 
-  static async getComponentAndVersions(name) {
+  static async getComponentAndVersions(name, options) {
     assert(name, 'The request is missing a required parameter name')
     const compVersion = {
-      ComponentName: name
+      ComponentName: name,
+      Region: (options ? options.region : 'ap-guangzhou') || 'ap-guangzhou'
     }
     return Serverless.doRequest('GetComponentAndVersions', compVersion)
   }
@@ -56,8 +57,7 @@ class Serverless {
   }
 
   static async doRequest(action, params) {
-    const proxyOrigin =
-      'https://service-m98cluso-1253970226.gz.apigw.tencentcs.com/release/listcompversion'
+    const proxyOrigin = 'https://service-cqwfbiyw-1300862921.gz.apigw.tencentcs.com/release/listcompversion'
 
     const optional = {
       timeout: 30 * 1000
@@ -96,12 +96,13 @@ class Serverless {
     })
   }
 
-  static async getComponentVersion(name, version) {
+  static async getComponentVersion(name, version, options) {
     assert(name, 'The request is missing a required parameter name')
     // assert(version, 'The request is missing a required parameter version')
     const componentVersion = {
       ComponentName: name,
-      ComponentVersion: version || ''
+      ComponentVersion: version || '',
+      Region: (options ? options.region : 'ap-guangzhou') || 'ap-guangzhou'
     }
 
     return Serverless.doRequest('GetComponentVersion', componentVersion)
