@@ -64,6 +64,7 @@ class BindRole {
       // 请求后台，看用户是否绑定role
       if (!haveRole.error && !haveRole.message) {
         // 如果标记没有绑定role，则进行绑定
+        // 此处将原有的同步改成异步
         await this.bindTCBQcsRole()
         await this.bindSCFQcsRole()
         await this.bindSLSQcsRole()
