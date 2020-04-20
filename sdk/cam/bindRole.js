@@ -8,7 +8,7 @@ class BindRole {
   }
 
   throwError(response) {
-    if (JSON.stringify(response).includes('Error') || response.code != 0) {
+    if (JSON.stringify(response).includes('Error') || (response.code && response.code != 0)) {
       throw new Error(JSON.stringify(response))
     }
   }
