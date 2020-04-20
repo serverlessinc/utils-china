@@ -7,8 +7,8 @@ class BindRole {
     this.credentials = credentials
   }
 
-  async throwError(response) {
-    if (JSON.stringify(response).includes('Error')) {
+  throwError(response) {
+    if (JSON.stringify(response).includes('Error') || response.code != 0) {
       throw new Error(JSON.stringify(response))
     }
   }
@@ -103,24 +103,23 @@ class BindRole {
       })
     })
 
-    const response = await camClient.request({
-      Action: 'AttachRolePolicies',
-      roleName: roleName,
-      'policyId.0': '219188',
-      'policyId.1': '534122',
-      'policyId.2': '4917788',
-      'policyId.3': '29828213',
-      'policyId.4': '16026171',
-      'policyId.5': '219185',
-      'policyId.6': '534788',
-      'policyId.7': '186451',
-      'policyId.8': '2851631',
-      'policyId.9': '276210',
-      'policyId.10': '32475945'
-    })
-    if (response.code != 0) {
-      throw new Error(JSON.stringify(response))
-    }
+    this.throwError(
+      await camClient.request({
+        Action: 'AttachRolePolicies',
+        roleName: roleName,
+        'policyId.0': '219188',
+        'policyId.1': '534122',
+        'policyId.2': '4917788',
+        'policyId.3': '29828213',
+        'policyId.4': '16026171',
+        'policyId.5': '219185',
+        'policyId.6': '534788',
+        'policyId.7': '186451',
+        'policyId.8': '2851631',
+        'policyId.9': '276210',
+        'policyId.10': '32475945'
+      })
+    )
   }
 
   async bindSLSQcsRoleV3() {
@@ -168,7 +167,7 @@ class BindRole {
         }
       }
 
-      await this.throwError(
+      this.throwError(
         await camClient.request({
           Action: 'AttachRolePolicy',
           Version: '2019-01-16',
@@ -201,7 +200,7 @@ class BindRole {
       })
     })
 
-    await this.throwError(
+    this.throwError(
       await camClient.request({
         Action: 'AttachRolePolicy',
         Version: '2019-01-16',
@@ -233,7 +232,7 @@ class BindRole {
       })
     })
 
-    await this.throwError(
+    this.throwError(
       await camClient.request({
         Action: 'AttachRolePolicy',
         Version: '2019-01-16',
