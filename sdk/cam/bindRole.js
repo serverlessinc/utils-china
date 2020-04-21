@@ -118,7 +118,8 @@ class BindRole {
         'policyId.7': '186451',
         'policyId.8': '2851631',
         'policyId.9': '276210',
-        'policyId.10': '32475945'
+        'policyId.10': '32475945',
+        'policyId.11': '25024747'
       })
     )
   }
@@ -136,7 +137,8 @@ class BindRole {
       '186451',
       '2851631',
       '276210',
-      '32475945'
+      '32475945',
+      '25024747'
     ]
     const camClient = new CamClient(this.credentials)
 
