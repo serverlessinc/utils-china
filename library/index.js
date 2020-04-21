@@ -3,5 +3,6 @@ module.exports = {
   cam: require('./cam'),
   scf: require('./scf'),
   common: require('./common'),
-  uuid: require('./uuid')
+  uuid: require('./uuid'),
+  monitor: require('./monitor')
 }

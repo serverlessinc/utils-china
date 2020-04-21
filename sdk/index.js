@@ -5,5 +5,6 @@ module.exports = {
   Logs: require('./logs/index'),
   Account: require('./account/index'),
   Others: require('./others/index'),
-  Serverless: require('./serverless')
+  Serverless: require('./serverless'),
+  SlsMonitor: require('./monitor')
 }

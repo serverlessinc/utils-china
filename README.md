@@ -451,4 +451,30 @@ ret = await Serverless.getComponentVersion('name', 'version', {region: 'ap-guang
 console.log(ret)
 ```
 
+### Scf 监控接口
+
+```
+const { SlsMonitor } = require('./sdk')
+
+const slsClient = new SlsMonitor({
+  appid: app_id,
+  secret_id: secret_id,
+  secret_key: secret_key,
+  options: {
+    region: 'ap-guangzhou',
+    token: 'xxxxxx'
+  }
+})
+
+const rangeTime = {
+    rangeStart: 'begin Time Object', 
+    rangeEnd: 'end Time Object'
+}
+const period = 3600
+const ret = await slsClient.getScfMetrics('ap-guangzhou', rangeTime, period, 'funcName', 'default', '$latest')
+console.log(ret)
+```
+
+参考地址: https://cloud.tencent.com/document/product/248/31649
+
 （* 该接口目前为1.0版本，后期会增加其复杂度，但是接口规范不会变。）
