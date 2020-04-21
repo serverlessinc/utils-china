@@ -494,8 +494,8 @@ const slsClient = new SlsMonitor({
 })
 
 const rangeTime = {
-    rangeStart: 'begin Time Object', 
-    rangeEnd: 'end Time Object'
+    rangeStart: 'begin Time', //  format string `2020-04-14T16:19:41+08:00`
+    rangeEnd: 'end Time' // format string `2020-04-15T16:19:41+08:00`
 }
 const period = 3600
 const ret = await slsClient.getScfMetrics('ap-guangzhou', rangeTime, period, 'funcName', 'default', '$latest')
