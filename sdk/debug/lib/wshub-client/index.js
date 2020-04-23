@@ -44,7 +44,7 @@ var __spreadArrays = (this && this.__spreadArrays) || function () {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var socketIo = require("socket.io-client");
-var socketIoStream = require("socket.io-stream");
+var socketIoStream = require("../wshub-socket.io-stream");
 var net_1 = require("net");
 var wshub_bipipe_1 = require("../wshub-bipipe");
 var wshub_proxy_1 = require("../wshub-proxy");
