@@ -8,7 +8,7 @@ class BindRole {
   }
 
   throwError(response) {
-    if (JSON.stringify(response).includes('Error') || response.code != 0) {
+    if (JSON.stringify(response).includes('Error') || (response.code && response.code != 0)) {
       throw new Error(JSON.stringify(response))
     }
   }
@@ -64,8 +64,9 @@ class BindRole {
       // 请求后台，看用户是否绑定role
       if (!haveRole.error && !haveRole.message) {
         // 如果标记没有绑定role，则进行绑定
-        await Promise.all([this.bindTCBQcsRole(), this.bindSCFQcsRole()])
-
+        // 此处将原有的同步改成异步
+        await this.bindTCBQcsRole()
+        await this.bindSCFQcsRole()
         await this.bindSLSQcsRole()
         // 完成之后进行进行回写
         await this.getOrUpdateBindRoleState(AppId, 'report')
@@ -117,7 +118,8 @@ class BindRole {
         'policyId.7': '186451',
         'policyId.8': '2851631',
         'policyId.9': '276210',
-        'policyId.10': '32475945'
+        'policyId.10': '32475945',
+        'policyId.11': '25024747'
       })
     )
   }
@@ -135,7 +137,8 @@ class BindRole {
       '186451',
       '2851631',
       '276210',
-      '32475945'
+      '32475945',
+      '25024747'
     ]
     const camClient = new CamClient(this.credentials)
 
