@@ -4,7 +4,13 @@ const http = require('http')
 
 class BindRole {
   constructor(credentials = {}) {
-    this.credentials = credentials
+    this.credentials = {
+      SecretId: credentials.SecretId,
+      SecretKey: credentials.SecretKey
+    }
+    if (credentials.token || credentials.Token) {
+      this.credentials.token = credentials.token ? credentials.token : credentials.Token
+    }
   }
 
   throwError(response) {
