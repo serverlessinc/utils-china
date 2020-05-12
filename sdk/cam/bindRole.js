@@ -31,15 +31,20 @@ class BindRole {
       path: `/release/serverless/v2/role/bind/${action}`,
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Content-Length': requestData.length
       }
     }
 
     return new Promise(function(resolve, reject) {
       const req = http.request(options, function(res) {
         res.setEncoding('utf8')
+        let rawData = ''
         res.on('data', function(chunk) {
-          resolve(JSON.parse(chunk))
+          rawData += chunk
+        })
+        res.on('end', function() {
+          resolve(JSON.parse(rawData))
         })
       })
 
