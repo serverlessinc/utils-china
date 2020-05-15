@@ -35,6 +35,16 @@ const sdk = new Sdk(auth, func, region)
 // 开启调试和实时日志
 await sdk.remoteDebug()
 
+// 开启调试的标准接口（推荐使用）
+try {
+  await sdk.standardRemoteDebug({
+    logger: console.log,
+    stdout: process.stdout
+  })
+} catch(e){
+  console.error(e)
+}
+
 // 调试后结束
 await sdk.stop()
 ```
