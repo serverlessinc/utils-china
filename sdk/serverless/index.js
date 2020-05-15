@@ -109,6 +109,15 @@ class Serverless {
     return Serverless.doRequest('GetComponentVersion', componentVersion)
   }
 
+  static async listComponents(queryParams, options) {
+    const params = {
+      Body: JSON.stringify(queryParams),
+      Region: (options ? options.region : 'ap-guangzhou') || 'ap-guangzhou'
+    }
+
+    return Serverless.doRequest('ListComponents', params)
+  }
+
   async prePublishComponent(body = {}) {
     if (!body.component || !body.component.componentName || !body.component.version) {
       throw new Error('componentName and version are required.')
