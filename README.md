@@ -502,6 +502,42 @@ const ret = await slsClient.getScfMetrics('ap-guangzhou', rangeTime, period, 'fu
 console.log(ret)
 ```
 
+### Cls 日志服务接口
+```
+  const { Cls } = require('./sdk');
+  // log array
+  const logs = [
+      {
+          "key": "err_msg",
+          "value": "error message"
+      },
+      // more...
+  ]
+  const cred = {
+    secret_id: '',
+    secret_key: '',
+    options: {
+        region: 'ap-shanghai'
+    }
+  }
+
+  try {
+
+    const clsClient = new Cls(cred)
+
+    // deliver log set to cls, if success return empty string
+    const ret = await clsClient.structuredLog(
+      'topic_id', 
+      logs, 
+      'timestamp', /*optional default current timestamp*/
+      'filename', /*optional default value 'default'*/ 
+      'source' /*optional default value ''*/
+      )
+  } catch (e) {
+    console.log(e)
+  }
+```
+
 参考地址: https://cloud.tencent.com/document/product/248/31649
 
 （\* 该接口目前为 1.0 版本，后期会增加其复杂度，但是接口规范不会变。）
