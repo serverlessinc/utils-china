@@ -500,6 +500,28 @@ const rangeTime = {
 const period = 3600
 const ret = await slsClient.getScfMetrics('ap-guangzhou', rangeTime, period, 'funcName', 'default', '$latest')
 console.log(ret)
+
+// report custom monitor metrics
+const metrics = [
+    {
+      MetricName: 'metric_name',
+      Value: 1
+    },
+    {
+      MetricName: 'metric_name',
+      Value: 1
+    }
+  ]
+  try {
+    await slsClient.putMonitorData(
+      metrics, 
+      'instance',
+      'announceIp', /*optional*/
+      'timestamp' /*optional*/
+      )
+  } catch (e) {
+    console.log(e)
+  }
 ```
 
 ### Cls 日志服务接口

@@ -45,6 +45,20 @@ class SlsMonitor {
     return handler(params)
   }
 
+  async putMonitorData(metrics, instance, announceIp, timestamp) {
+      assert(instance, 'instance should not is empty')
+
+      const req = new Models.PutMonitorDataRequest()
+      req.Metrics = metrics
+      req.AnnounceInstance = instance
+      if (announceIp)
+          req.AnnounceIp = announceIp
+      if (timestamp)
+          req.AnnounceTimestamp = timestamp
+
+      return this._call('PutMonitorData', req)
+  }
+
   async getScfMetrics(region, rangeTime, period, funcName, ns, version) {
 
     const metrics = ['Duration', 'Invocation', 'Error', 'ConcurrentExecutions', 'ConfigMem', 'FunctionErrorPercentage', 'Http2xx', 'Http432', 'Http433', 'Http434', 'Http4xx', 'Mem', 'MemDuration'];
