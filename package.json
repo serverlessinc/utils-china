@@ -1,7 +1,7 @@
 {
   "name": "@serverless/utils-china",
   "description": "Tencent Cloud Tools For Serverless Framewoek",
-  "version": "0.1.6",
+  "version": "0.1.9",
   "main": "./index.js",
   "publishConfig": {
     "access": "public"
@@ -20,13 +20,14 @@
   "dependencies": {
     "@tencent-sdk/capi": "^0.2.15-alpha.0",
     "dijkstrajs": "^1.0.1",
+    "dot-qs": "0.2.0",
     "duplexify": "^4.1.1",
     "end-of-stream": "^1.4.4",
     "https-proxy-agent": "^5.0.0",
+    "object-assign": "^4.1.1",
     "socket.io-client": "^2.3.0",
     "socket.io-stream": "^0.9.1",
-    "winston": "^3.2.1",
-    "dot-qs": "0.2.0"
+    "winston": "^3.2.1"
   },
   "devDependencies": {
     "babel-eslint": "9.0.0",

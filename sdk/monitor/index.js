@@ -7,7 +7,6 @@ const Credential = common.Credential
 const Client = monitor.v20180724.Client
 const Models = monitor.v20180724.Models
 
-
 class SlsMonitor {
   constructor({ appid, secret_id, secret_key, options }) {
     this.appid = appid
@@ -45,6 +44,7 @@ class SlsMonitor {
     return handler(params)
   }
 
+
   async putMonitorData(metrics, instance, announceIp, timestamp) {
       assert(instance, 'instance should not is empty')
 
@@ -60,73 +60,88 @@ class SlsMonitor {
   }
 
   async getScfMetrics(region, rangeTime, period, funcName, ns, version) {
-
-    const metrics = ['Duration', 'Invocation', 'Error', 'ConcurrentExecutions', 'ConfigMem', 'FunctionErrorPercentage', 'Http2xx', 'Http432', 'Http433', 'Http434', 'Http4xx', 'Mem', 'MemDuration'];
+    const metrics = [
+      'Duration',
+      'Invocation',
+      'Error',
+      'ConcurrentExecutions',
+      'ConfigMem',
+      'FunctionErrorPercentage',
+      'Http2xx',
+      'Http432',
+      'Http433',
+      'Http434',
+      'Http4xx',
+      'Mem',
+      'MemDuration'
+    ]
 
     const result = {
-        rangeStart: rangeTime.rangeStart,
-        rangeEnd: rangeTime.rangeEnd,
-        metrics: []
+      rangeStart: rangeTime.rangeStart,
+      rangeEnd: rangeTime.rangeEnd,
+      metrics: []
     }
-    
+
     const requestHandlers = []
     for (var i = 0; i < metrics.length; i++) {
-        const req = new Models.GetMonitorDataRequest()
-        req.Namespace = 'qce/scf_v2';
-        req.MetricName = metrics[i];
-        req.Period = period;
-        req.StartTime = rangeTime.rangeStart;
-        req.EndTime = rangeTime.rangeEnd;
-        req.Instances = [{ 
-            Dimensions: [
-                {
-                    Name: 'functionName',
-                    Value: funcName,
-                },
-                {
-                    Name: 'version',
-                    Value: version || '$latest',
-                },
-                {
-                    Name: 'namespace',
-                    Value: ns,
-                }
-            ]
-        }];
-        requestHandlers.push(this._call('GetMonitorData', req)) 
-    }
-    return new Promise((resolve, reject)=> {
-        Promise.all(requestHandlers).then((results) => {
-            for (var i = 0; i < results.length; i++) {
-                const response = results[i];
-                const metric = {
-                    type: response.MetricName,
-                    title: response.MetricName,
-                    values: [],
-                    total: 0
-                }
-
-                response.DataPoints[0].Timestamps.forEach((val, i) => {
-                    if (!metric.values[i]) {
-                        metric.values[i] = {
-                            timestamp: val
-                        }
-                    } else {
-                        metric.values[i].timestamp = val
-                    }
-
-                    if (response.DataPoints[0].Values[i] != undefined) {
-                        metric.values[i].value = response.DataPoints[0].Values[i]
-                        metric.total = Math.round(metric.total + metric.values[i].value)
-                    }
-
-                })
-                result.metrics.push(metric)
+      const req = new Models.GetMonitorDataRequest()
+      req.Namespace = 'qce/scf_v2'
+      req.MetricName = metrics[i]
+      req.Period = period
+      req.StartTime = rangeTime.rangeStart
+      req.EndTime = rangeTime.rangeEnd
+      req.Instances = [
+        {
+          Dimensions: [
+            {
+              Name: 'functionName',
+              Value: funcName
+            },
+            {
+              Name: 'version',
+              Value: version || '$latest'
+            },
+            {
+              Name: 'namespace',
+              Value: ns
             }
-            resolve(result)
-            
-        }).catch((error) => {
-            reject(error)
+          ]
+        }
+      ]
+      requestHandlers.push(this._call('GetMonitorData', req))
+    }
+    return new Promise((resolve, reject) => {
+      Promise.all(requestHandlers)
+        .then((results) => {
+          for (var i = 0; i < results.length; i++) {
+            const response = results[i]
+            const metric = {
+              type: response.MetricName,
+              title: response.MetricName,
+              values: [],
+              total: 0
+            }
+
+            response.DataPoints[0].Timestamps.forEach((val, i) => {
+              if (!metric.values[i]) {
+                metric.values[i] = {
+                  timestamp: val
+                }
+              } else {
+                metric.values[i].timestamp = val
+              }
+
+              if (response.DataPoints[0].Values[i] != undefined) {
+                metric.values[i].value = response.DataPoints[0].Values[i]
+                metric.total = Math.round(metric.total + metric.values[i].value)
+              }
+            })
+            result.metrics.push(metric)
+          }
+          resolve(result)
+        })
+        .catch((error) => {
+          reject(error)
         })
     })
   }

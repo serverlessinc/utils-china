@@ -35,6 +35,16 @@ const sdk = new Sdk(auth, func, region)
 // 开启调试和实时日志
 await sdk.remoteDebug()
 
+// 开启调试的标准接口（推荐使用）
+try {
+  await sdk.standardRemoteDebug({
+    logger: console.log,
+    stdout: process.stdout
+  })
+} catch(e){
+  console.error(e)
+}
+
 // 调试后结束
 await sdk.stop()
 ```
@@ -500,6 +510,7 @@ const rangeTime = {
 const period = 3600
 const ret = await slsClient.getScfMetrics('ap-guangzhou', rangeTime, period, 'funcName', 'default', '$latest')
 console.log(ret)
+<<<<<<< HEAD
 
 // report custom monitor metrics
 const metrics = [
@@ -558,6 +569,8 @@ const metrics = [
   } catch (e) {
     console.log(e)
   }
+=======
+>>>>>>> 113b535e7a1053834e27fe0ff7132a88ce297edb
 ```
 
 参考地址: https://cloud.tencent.com/document/product/248/31649

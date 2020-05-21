@@ -13,7 +13,13 @@ var defaults = {
 
 class TencentCloudClient {
   constructor(credentials = {}, service = {}) {
-    this.credentials = credentials
+    this.credentials = {
+      SecretId: credentials.SecretId,
+      SecretKey: credentials.SecretKey
+    }
+    if (credentials.token || credentials.Token) {
+      this.credentials.Token = credentials.token ? credentials.token : credentials.Token
+    }
     this.service = service
   }
 
