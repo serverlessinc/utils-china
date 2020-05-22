@@ -2,7 +2,6 @@
   "name": "@serverless/utils-china",
   "description": "Tencent Cloud Tools For Serverless Framewoek",
   "version": "0.1.12",
-  "main": "./index.js",
   "publishConfig": {
     "access": "public"
   },
@@ -12,8 +11,7 @@
     "Cloud function"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint . --fix --cache"
+    "lint": "eslint ."
   },
   "author": "Tencent Cloud, Inc.",
   "license": "MIT",
