@@ -510,64 +510,6 @@ const rangeTime = {
 const period = 3600
 const ret = await slsClient.getScfMetrics('ap-guangzhou', rangeTime, period, 'funcName', 'default', '$latest')
 console.log(ret)
-
-// report custom monitor metrics
-const metrics = [
-    {
-      MetricName: 'metric_name',
-      Value: 1
-    },
-    {
-      MetricName: 'metric_name',
-      Value: 1
-    }
-  ]
-  try {
-    await slsClient.putMonitorData(
-      metrics, 
-      'instance',
-      'announceIp', /*optional*/
-      'timestamp' /*optional*/
-      )
-  } catch (e) {
-    console.log(e)
-  }
-```
-
-### Cls 日志服务接口
-```
-  const { Cls } = require('./sdk');
-  // log array
-  const logs = [
-      {
-          "key": "err_msg",
-          "value": "error message"
-      },
-      // more...
-  ]
-  const cred = {
-    secret_id: '',
-    secret_key: '',
-    options: {
-        region: 'ap-shanghai'
-    }
-  }
-
-  try {
-
-    const clsClient = new Cls(cred)
-
-    // deliver log set to cls, if success return empty string
-    const ret = await clsClient.structuredLog(
-      'topic_id', 
-      logs, 
-      'timestamp', /*optional default current timestamp*/
-      'filename', /*optional default value 'default'*/ 
-      'source' /*optional default value ''*/
-      )
-  } catch (e) {
-    console.log(e)
-  }
 ```
 
 参考地址: https://cloud.tencent.com/document/product/248/31649
