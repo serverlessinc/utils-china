@@ -1,3 +1,5 @@
+'use strict'
+
 /**
  * 认证信息类
  * @class

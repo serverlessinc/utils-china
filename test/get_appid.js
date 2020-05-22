@@ -1,3 +1,5 @@
+'use strict'
+
 const { GetUserInformation } = require('../sdk/cam/index')
 
 class UserInformation {

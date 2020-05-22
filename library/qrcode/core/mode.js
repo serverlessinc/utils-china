@@ -1,6 +1,8 @@
-var Utils = require('./utils')
+'use strict'
+
+const Utils = require('./utils')
 // var VersionCheck = require('./version-check')
-var Regex = require('./regex')
+const Regex = require('./regex')
 
 /**
  * Numeric mode encodes data from the decimal digit set (0 - 9)
@@ -74,11 +76,11 @@ exports.MIXED = {
  * @param  {Number} version QR Code version
  * @return {Number}         Number of bits
  */
-exports.getCharCountIndicator = function getCharCountIndicator (mode, version) {
-  if (!mode.ccBits) throw new Error('Invalid mode: ' + mode)
+exports.getCharCountIndicator = function getCharCountIndicator(mode, version) {
+  if (!mode.ccBits) throw new Error(`Invalid mode: ${mode}`)
 
   if (!Utils.VersionIsValid(version)) {
-    throw new Error('Invalid version: ' + version)
+    throw new Error(`Invalid version: ${version}`)
   }
 
   if (version >= 1 && version < 10) return mode.ccBits[0]
@@ -92,11 +94,11 @@ exports.getCharCountIndicator = function getCharCountIndicator (mode, version) {
  * @param  {String} dataStr Input data string
  * @return {Mode}           Best mode
  */
-exports.getBestModeForData = function getBestModeForData (dataStr) {
+exports.getBestModeForData = function getBestModeForData(dataStr) {
   if (Regex.testNumeric(dataStr)) return exports.NUMERIC
   else if (Regex.testAlphanumeric(dataStr)) return exports.ALPHANUMERIC
   else if (Regex.testKanji(dataStr)) return exports.KANJI
-  else return exports.BYTE
+  return exports.BYTE
 }
 
 /**
@@ -105,7 +107,7 @@ exports.getBestModeForData = function getBestModeForData (dataStr) {
  * @param {Mode} mode Mode object
  * @returns {String}  Mode name
  */
-exports.toString = function toString (mode) {
+exports.toString = function toString(mode) {
   if (mode && mode.id) return mode.id
   throw new Error('Invalid mode')
 }
@@ -116,7 +118,7 @@ exports.toString = function toString (mode) {
  * @param   {Mode}    mode Mode object
  * @returns {Boolean} True if valid mode, false otherwise
  */
-exports.isValid = function isValid (mode) {
+exports.isValid = function isValid(mode) {
   return mode && mode.bit && mode.ccBits
 }
 
@@ -126,12 +128,12 @@ exports.isValid = function isValid (mode) {
  * @param   {String} string Mode name
  * @returns {Mode}          Mode object
  */
-function fromString (string) {
+function fromString(string) {
   if (typeof string !== 'string') {
     throw new Error('Param is not a string')
   }
 
-  var lcStr = string.toLowerCase()
+  const lcStr = string.toLowerCase()
 
   switch (lcStr) {
     case 'numeric':
@@ -143,7 +145,7 @@ function fromString (string) {
     case 'byte':
       return exports.BYTE
     default:
-      throw new Error('Unknown mode: ' + string)
+      throw new Error(`Unknown mode: ${string}`)
   }
 }
 
@@ -155,7 +157,7 @@ function fromString (string) {
  * @param  {Mode}        defaultValue Fallback value
  * @return {Mode}                     Encoding mode
  */
-exports.from = function from (value, defaultValue) {
+exports.from = function from(value, defaultValue) {
   if (exports.isValid(value)) {
     return value
   }

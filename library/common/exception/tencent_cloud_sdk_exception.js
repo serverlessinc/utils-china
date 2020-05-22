@@ -1,3 +1,5 @@
+'use strict'
+
 /**
  * @inner
  */
@@ -16,23 +18,13 @@ class TencentCloudSDKHttpException extends Error {
   }
 
   toString() {
-    return (
-      '[TencentCloudSDKException]' +
-      'message:' +
-      this.getMessage() +
-      '  requestId:' +
-      this.getRequestId()
-    )
+    return `${'[TencentCloudSDKException]' +
+      'message:'}${this.getMessage()}  requestId:${this.getRequestId()}`
   }
 
   toLocaleString() {
-    return (
-      '[TencentCloudSDKException]' +
-      'message:' +
-      this.getMessage() +
-      '  requestId:' +
-      this.getRequestId()
-    )
+    return `${'[TencentCloudSDKException]' +
+      'message:'}${this.getMessage()}  requestId:${this.getRequestId()}`
   }
 }
 module.exports = TencentCloudSDKHttpException

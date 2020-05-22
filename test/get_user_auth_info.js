@@ -1,3 +1,5 @@
+'use strict'
+
 const { GetUserAuthInfo } = require('../sdk/account/index')
 
 class UserAuthInfo {

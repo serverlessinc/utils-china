@@ -1,3 +1,5 @@
+'use strict'
+
 const Credential = require('./credential')
 const sdkVersion = require('./sdk_version')
 const ClientProfile = require('./profile/client_profile')
@@ -31,7 +33,7 @@ class AbstractClient {
      * @type {string || null}
      */
     this.region = region || null
-    this.sdkVersion = 'SDK_NODEJS_' + sdkVersion
+    this.sdkVersion = `SDK_NODEJS_${sdkVersion}`
     this.apiVersion = version
     this.endpoint = endpoint
 
@@ -124,7 +126,7 @@ class AbstractClient {
         continue
       }
       if (data[k] instanceof Array || data[k] instanceof Object) {
-        Object.assign(ret, this.mergeData(data[k], prefix + k + '.'))
+        Object.assign(ret, this.mergeData(data[k], `${prefix + k}.`))
       } else {
         ret[prefix + k] = data[k]
       }
@@ -172,14 +174,11 @@ class AbstractClient {
     keys.sort()
     for (const k in keys) {
       // k = k.replace(/_/g, '.');
-      strParam += '&' + keys[k] + '=' + params[keys[k]]
+      strParam += `&${keys[k]}=${params[keys[k]]}`
     }
-    const strSign =
-      this.profile.httpProfile.reqMethod.toLocaleUpperCase() +
+    const strSign = `${this.profile.httpProfile.reqMethod.toLocaleUpperCase() +
       this.getEndpoint() +
-      this.path +
-      '?' +
-      strParam.slice(1)
+      this.path}?${strParam.slice(1)}`
     return strSign
   }
 }

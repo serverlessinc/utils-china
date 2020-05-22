@@ -1,10 +1,12 @@
+'use strict'
+
 const assign = require('object-assign')
 const qs = require('querystring')
 const dotQs = require('dot-qs')
 const crypto = require('crypto')
 const https = require('https')
 
-var defaults = {
+const defaults = {
   signatureMethod: 'HmacSHA1',
   method: 'GET',
   Region: 'ap-guangzhou',
@@ -24,7 +26,7 @@ class TencentCloudClient {
   }
 
   async cloudApiGenerateQueryString(data) {
-    var param = assign(
+    let param = assign(
       {
         Region: defaults.Region,
         SecretId: this.credentials.SecretId,
@@ -44,25 +46,25 @@ class TencentCloudClient {
     param.SignatureMethod = defaults.signatureMethod
     param = dotQs.flatten(param)
     const { host, path } = this.service
-    var keys = Object.keys(param)
-    var qstr = ''
+    const keys = Object.keys(param)
+    let qstr = ''
     keys.sort()
-    keys.forEach(function(key) {
-      var val = param[key]
+    keys.forEach((key) => {
+      let val = param[key]
       if (key === '') {
         return
       }
       if (val === undefined || val === null || (typeof val === 'number' && isNaN(val))) {
         val = ''
       }
-      qstr += '&' + (key.indexOf('_') ? key.replace(/_/g, '.') : key) + '=' + val
+      qstr += `&${key.indexOf('_') ? key.replace(/_/g, '.') : key}=${val}`
     })
 
     qstr = qstr.slice(1)
 
     const hmac = crypto.createHmac('sha1', this.credentials.SecretKey || '')
     param.Signature = hmac
-      .update(new Buffer.from(defaults.method.toUpperCase() + host + path + '?' + qstr, 'utf8'))
+      .update(new Buffer.from(`${defaults.method.toUpperCase() + host + path}?${qstr}`, 'utf8'))
       .digest('base64')
 
     return qs.stringify(param)
@@ -73,16 +75,16 @@ class TencentCloudClient {
 
     const options = {
       hostname: this.service.host,
-      path: this.service.path + '?' + httpBody
+      path: `${this.service.path}?${httpBody}`
     }
-    return new Promise(function(resolve, reject) {
-      const req = https.get(options, function(res) {
+    return new Promise((resolve, reject) => {
+      const req = https.get(options, (res) => {
         res.setEncoding('utf8')
-        res.on('data', function(chunk) {
+        res.on('data', (chunk) => {
           resolve(JSON.parse(chunk))
         })
       })
-      req.on('error', function(e) {
+      req.on('error', (e) => {
         reject(e.message)
       })
       // req.write(httpBody)

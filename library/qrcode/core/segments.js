@@ -1,83 +1,85 @@
-var Mode = require('./mode')
+'use strict'
+
+const Mode = require('./mode')
 // var NumericData = require('./numeric-data')
 // var AlphanumericData = require('./alphanumeric-data')
 // var ByteData = require('./byte-data')
 // var KanjiData = require('./kanji-data')
-var Regex = require('./regex')
-var Utils = require('./utils')
-var dijkstra = require('dijkstrajs')
+const Regex = require('./regex')
+const Utils = require('./utils')
+const dijkstra = require('dijkstrajs')
 
-
-function KanjiData (data) {
+function KanjiData(data) {
   this.mode = Mode.KANJI
   this.data = data
 }
 
-KanjiData.getBitsLength = function getBitsLength (length) {
+KanjiData.getBitsLength = function getBitsLength(length) {
   return length * 13
 }
 
-KanjiData.prototype.getLength = function getLength () {
+KanjiData.prototype.getLength = function getLength() {
   return this.data.length
 }
 
-KanjiData.prototype.getBitsLength = function getBitsLength () {
+KanjiData.prototype.getBitsLength = function getBitsLength() {
   return KanjiData.getBitsLength(this.data.length)
 }
 
-KanjiData.prototype.write = function (bitBuffer) {
-  var i
+KanjiData.prototype.write = function(bitBuffer) {
+  let i
 
   // In the Shift JIS system, Kanji characters are represented by a two byte combination.
   // These byte values are shifted from the JIS X 0208 values.
   // JIS X 0208 gives details of the shift coded representation.
   for (i = 0; i < this.data.length; i++) {
-    var value = Utils.toSJIS(this.data[i])
+    let value = Utils.toSJIS(this.data[i])
 
     // For characters with Shift JIS values from 0x8140 to 0x9FFC:
-    if (value >= 0x8140 && value <= 0x9FFC) {
+    if (value >= 0x8140 && value <= 0x9ffc) {
       // Subtract 0x8140 from Shift JIS value
       value -= 0x8140
 
-    // For characters with Shift JIS values from 0xE040 to 0xEBBF
-    } else if (value >= 0xE040 && value <= 0xEBBF) {
+      // For characters with Shift JIS values from 0xE040 to 0xEBBF
+    } else if (value >= 0xe040 && value <= 0xebbf) {
       // Subtract 0xC140 from Shift JIS value
-      value -= 0xC140
+      value -= 0xc140
     } else {
       throw new Error(
-        'Invalid SJIS character: ' + this.data[i] + '\n' +
-        'Make sure your charset is UTF-8')
+        `Invalid SJIS character: ${this.data[i]}\n` + 'Make sure your charset is UTF-8'
+      )
     }
 
     // Multiply most significant byte of result by 0xC0
     // and add least significant byte to product
-    value = (((value >>> 8) & 0xff) * 0xC0) + (value & 0xff)
+    value = ((value >>> 8) & 0xff) * 0xc0 + (value & 0xff)
 
     // Convert result to a 13-bit binary string
     bitBuffer.put(value, 13)
   }
 }
 
-
-function NumericData (data) {
+function NumericData(data) {
   this.mode = Mode.NUMERIC
   this.data = data.toString()
 }
 
-NumericData.getBitsLength = function getBitsLength (length) {
-  return 10 * Math.floor(length / 3) + ((length % 3) ? ((length % 3) * 3 + 1) : 0)
+NumericData.getBitsLength = function getBitsLength(length) {
+  return 10 * Math.floor(length / 3) + (length % 3 ? (length % 3) * 3 + 1 : 0)
 }
 
-NumericData.prototype.getLength = function getLength () {
+NumericData.prototype.getLength = function getLength() {
   return this.data.length
 }
 
-NumericData.prototype.getBitsLength = function getBitsLength () {
+NumericData.prototype.getBitsLength = function getBitsLength() {
   return NumericData.getBitsLength(this.data.length)
 }
 
-NumericData.prototype.write = function write (bitBuffer) {
-  var i, group, value
+NumericData.prototype.write = function write(bitBuffer) {
+  let i
+  let group
+  let value
 
   // The input data string is divided into groups of three digits,
   // and each group is converted to its 10-bit binary equivalent.
@@ -90,7 +92,7 @@ NumericData.prototype.write = function write (bitBuffer) {
 
   // If the number of input digits is not an exact multiple of three,
   // the final one or two digits are converted to 4 or 7 bits respectively.
-  var remainingNum = this.data.length - i
+  const remainingNum = this.data.length - i
   if (remainingNum > 0) {
     group = this.data.substr(i)
     value = parseInt(group, 10)
@@ -99,38 +101,79 @@ NumericData.prototype.write = function write (bitBuffer) {
   }
 }
 
-var ALPHA_NUM_CHARS = [
-  '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
-  'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
-  'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
-  ' ', '$', '%', '*', '+', '-', '.', '/', ':'
+const ALPHA_NUM_CHARS = [
+  '0',
+  '1',
+  '2',
+  '3',
+  '4',
+  '5',
+  '6',
+  '7',
+  '8',
+  '9',
+  'A',
+  'B',
+  'C',
+  'D',
+  'E',
+  'F',
+  'G',
+  'H',
+  'I',
+  'J',
+  'K',
+  'L',
+  'M',
+  'N',
+  'O',
+  'P',
+  'Q',
+  'R',
+  'S',
+  'T',
+  'U',
+  'V',
+  'W',
+  'X',
+  'Y',
+  'Z',
+  ' ',
+  '$',
+  '%',
+  '*',
+  '+',
+  '-',
+  '.',
+  '/',
+  ':'
 ]
 
-function AlphanumericData (data) {
+function AlphanumericData(data) {
   this.mode = Mode.ALPHANUMERIC
   this.data = data
 }
 
-AlphanumericData.getBitsLength = function getBitsLength (length) {
+AlphanumericData.getBitsLength = function getBitsLength(length) {
   return 11 * Math.floor(length / 2) + 6 * (length % 2)
 }
 
-AlphanumericData.prototype.getLength = function getLength () {
+AlphanumericData.prototype.getLength = function getLength() {
   return this.data.length
 }
 
-AlphanumericData.prototype.getBitsLength = function getBitsLength () {
+AlphanumericData.prototype.getBitsLength = function getBitsLength() {
   return AlphanumericData.getBitsLength(this.data.length)
 }
 
-AlphanumericData.prototype.write = function write (bitBuffer) {
-  var i
+AlphanumericData.prototype.write = function write(bitBuffer) {
+  let i
 
   // Input data characters are divided into groups of two characters
   // and encoded as 11-bit binary codes.
   for (i = 0; i + 2 <= this.data.length; i += 2) {
     // The character value of the first character is multiplied by 45
-    var value = ALPHA_NUM_CHARS.indexOf(this.data[i]) * 45
+    let value = ALPHA_NUM_CHARS.indexOf(this.data[i]) * 45
 
     // The character value of the second digit is added to the product
     value += ALPHA_NUM_CHARS.indexOf(this.data[i + 1])
@@ -146,25 +189,25 @@ AlphanumericData.prototype.write = function write (bitBuffer) {
   }
 }
 
-function ByteData (data) {
+function ByteData(data) {
   this.mode = Mode.BYTE
   this.data = Buffer.from(data)
 }
 
-ByteData.getBitsLength = function getBitsLength (length) {
+ByteData.getBitsLength = function getBitsLength(length) {
   return length * 8
 }
 
-ByteData.prototype.getLength = function getLength () {
+ByteData.prototype.getLength = function getLength() {
   return this.data.length
 }
 
-ByteData.prototype.getBitsLength = function getBitsLength () {
+ByteData.prototype.getBitsLength = function getBitsLength() {
   return ByteData.getBitsLength(this.data.length)
 }
 
-ByteData.prototype.write = function (bitBuffer) {
-  for (var i = 0, l = this.data.length; i < l; i++) {
+ByteData.prototype.write = function(bitBuffer) {
+  for (let i = 0, l = this.data.length; i < l; i++) {
     bitBuffer.put(this.data[i], 8)
   }
 }
@@ -174,7 +217,7 @@ ByteData.prototype.write = function (bitBuffer) {
  * @param  {String} str Input string
  * @return {Number}     Number of byte
  */
-function getStringByteLength (str) {
+function getStringByteLength(str) {
   return unescape(encodeURIComponent(str)).length
 }
 
@@ -186,15 +229,15 @@ function getStringByteLength (str) {
  * @param  {String} str  String to process
  * @return {Array}       Array of object with segments data
  */
-function getSegments (regex, mode, str) {
-  var segments = []
-  var result
+function getSegments(regex, mode, str) {
+  const segments = []
+  let result
 
   while ((result = regex.exec(str)) !== null) {
     segments.push({
       data: result[0],
       index: result.index,
-      mode: mode,
+      mode,
       length: result[0].length
     })
   }
@@ -209,11 +252,11 @@ function getSegments (regex, mode, str) {
  * @param  {String} dataStr Input string
  * @return {Array}          Array of object with segments data
  */
-function getSegmentsFromString (dataStr) {
-  var numSegs = getSegments(Regex.NUMERIC, Mode.NUMERIC, dataStr)
-  var alphaNumSegs = getSegments(Regex.ALPHANUMERIC, Mode.ALPHANUMERIC, dataStr)
-  var byteSegs
-  var kanjiSegs
+function getSegmentsFromString(dataStr) {
+  const numSegs = getSegments(Regex.NUMERIC, Mode.NUMERIC, dataStr)
+  const alphaNumSegs = getSegments(Regex.ALPHANUMERIC, Mode.ALPHANUMERIC, dataStr)
+  let byteSegs
+  let kanjiSegs
 
   if (Utils.isKanjiModeEnabled()) {
     byteSegs = getSegments(Regex.BYTE, Mode.BYTE, dataStr)
@@ -223,13 +266,13 @@ function getSegmentsFromString (dataStr) {
     kanjiSegs = []
   }
 
-  var segs = numSegs.concat(alphaNumSegs, byteSegs, kanjiSegs)
+  const segs = numSegs.concat(alphaNumSegs, byteSegs, kanjiSegs)
 
   return segs
-    .sort(function (s1, s2) {
+    .sort((s1, s2) => {
       return s1.index - s2.index
     })
-    .map(function (obj) {
+    .map((obj) => {
       return {
         data: obj.data,
         mode: obj.mode,
@@ -246,7 +289,7 @@ function getSegmentsFromString (dataStr) {
  * @param  {Mode} mode     Segment mode
  * @return {Number}        Bit length
  */
-function getSegmentBitsLength (length, mode) {
+function getSegmentBitsLength(length, mode) {
   switch (mode) {
     case Mode.NUMERIC:
       return NumericData.getBitsLength(length)
@@ -265,9 +308,9 @@ function getSegmentBitsLength (length, mode) {
  * @param  {Array} segs Array of object with segments data
  * @return {Array}      Array of object with segments data
  */
-function mergeSegments (segs) {
-  return segs.reduce(function (acc, curr) {
-    var prevSeg = acc.length - 1 >= 0 ? acc[acc.length - 1] : null
+function mergeSegments(segs) {
+  return segs.reduce((acc, curr) => {
+    const prevSeg = acc.length - 1 >= 0 ? acc[acc.length - 1] : null
     if (prevSeg && prevSeg.mode === curr.mode) {
       acc[acc.length - 1].data += curr.data
       return acc
@@ -294,32 +337,30 @@ function mergeSegments (segs) {
  * @param  {Array} segs Array of object with segments data
  * @return {Array}      Array of object with segments data
  */
-function buildNodes (segs) {
-  var nodes = []
-  for (var i = 0; i < segs.length; i++) {
-    var seg = segs[i]
+function buildNodes(segs) {
+  const nodes = []
+  for (let i = 0; i < segs.length; i++) {
+    const seg = segs[i]
 
     switch (seg.mode) {
       case Mode.NUMERIC:
-        nodes.push([seg,
+        nodes.push([
+          seg,
           { data: seg.data, mode: Mode.ALPHANUMERIC, length: seg.length },
           { data: seg.data, mode: Mode.BYTE, length: seg.length }
         ])
         break
       case Mode.ALPHANUMERIC:
-        nodes.push([seg,
-          { data: seg.data, mode: Mode.BYTE, length: seg.length }
-        ])
+        nodes.push([seg, { data: seg.data, mode: Mode.BYTE, length: seg.length }])
         break
       case Mode.KANJI:
-        nodes.push([seg,
+        nodes.push([
+          seg,
           { data: seg.data, mode: Mode.BYTE, length: getStringByteLength(seg.data) }
         ])
         break
       case Mode.BYTE:
-        nodes.push([
-          { data: seg.data, mode: Mode.BYTE, length: getStringByteLength(seg.data) }
-        ])
+        nodes.push([{ data: seg.data, mode: Mode.BYTE, length: getStringByteLength(seg.data) }])
     }
   }
 
@@ -338,25 +379,25 @@ function buildNodes (segs) {
  * @param  {Number} version QR Code version
  * @return {Object}         Graph of all possible segments
  */
-function buildGraph (nodes, version) {
-  var table = {}
-  var graph = {'start': {}}
-  var prevNodeIds = ['start']
+function buildGraph(nodes, version) {
+  const table = {}
+  const graph = { start: {} }
+  let prevNodeIds = ['start']
 
-  for (var i = 0; i < nodes.length; i++) {
-    var nodeGroup = nodes[i]
-    var currentNodeIds = []
+  for (let i = 0; i < nodes.length; i++) {
+    const nodeGroup = nodes[i]
+    const currentNodeIds = []
 
-    for (var j = 0; j < nodeGroup.length; j++) {
-      var node = nodeGroup[j]
-      var key = '' + i + j
+    for (let j = 0; j < nodeGroup.length; j++) {
+      const node = nodeGroup[j]
+      const key = `${i}${j}`
 
       currentNodeIds.push(key)
-      table[key] = { node: node, lastCount: 0 }
+      table[key] = { node, lastCount: 0 }
       graph[key] = {}
 
       for (var n = 0; n < prevNodeIds.length; n++) {
-        var prevNodeId = prevNodeIds[n]
+        const prevNodeId = prevNodeIds[n]
 
         if (table[prevNodeId] && table[prevNodeId].node.mode === node.mode) {
           graph[prevNodeId][key] =
@@ -367,8 +408,10 @@ function buildGraph (nodes, version) {
         } else {
           if (table[prevNodeId]) table[prevNodeId].lastCount = node.length
 
-          graph[prevNodeId][key] = getSegmentBitsLength(node.length, node.mode) +
-            4 + Mode.getCharCountIndicator(node.mode, version) // switch cost
+          graph[prevNodeId][key] =
+            getSegmentBitsLength(node.length, node.mode) +
+            4 +
+            Mode.getCharCountIndicator(node.mode, version) // switch cost
         }
       }
     }
@@ -377,10 +420,10 @@ function buildGraph (nodes, version) {
   }
 
   for (n = 0; n < prevNodeIds.length; n++) {
-    graph[prevNodeIds[n]]['end'] = 0
+    graph[prevNodeIds[n]].end = 0
   }
 
-  return { map: graph, table: table }
+  return { map: graph, table }
 }
 
 /**
@@ -391,17 +434,20 @@ function buildGraph (nodes, version) {
  * @param  {Mode | String} modesHint Data mode
  * @return {Segment}                 Segment
  */
-function buildSingleSegment (data, modesHint) {
-  var mode
-  var bestMode = Mode.getBestModeForData(data)
+function buildSingleSegment(data, modesHint) {
+  let mode
+  const bestMode = Mode.getBestModeForData(data)
 
   mode = Mode.from(modesHint, bestMode)
 
   // Make sure data can be encoded
   if (mode !== Mode.BYTE && mode.bit < bestMode.bit) {
-    throw new Error('"' + data + '"' +
-      ' cannot be encoded with mode ' + Mode.toString(mode) +
-      '.\n Suggested mode is: ' + Mode.toString(bestMode))
+    throw new Error(
+      `"${data}"` +
+        ` cannot be encoded with mode ${Mode.toString(mode)}.\n Suggested mode is: ${Mode.toString(
+          bestMode
+        )}`
+    )
   }
 
   // Use Mode.BYTE if Kanji support is disabled
@@ -439,8 +485,8 @@ function buildSingleSegment (data, modesHint) {
  * @param  {Array} array Array of objects with segments data
  * @return {Array}       Array of Segments
  */
-exports.fromArray = function fromArray (array) {
-  return array.reduce(function (acc, seg) {
+exports.fromArray = function fromArray(array) {
+  return array.reduce((acc, seg) => {
     if (typeof seg === 'string') {
       acc.push(buildSingleSegment(seg, null))
     } else if (seg.data) {
@@ -459,15 +505,15 @@ exports.fromArray = function fromArray (array) {
  * @param  {Number} version QR Code version
  * @return {Array}          Array of segments
  */
-exports.fromString = function fromString (data, version) {
-  var segs = getSegmentsFromString(data, Utils.isKanjiModeEnabled())
+exports.fromString = function fromString(data, version) {
+  const segs = getSegmentsFromString(data, Utils.isKanjiModeEnabled())
 
-  var nodes = buildNodes(segs)
-  var graph = buildGraph(nodes, version)
-  var path = dijkstra.find_path(graph.map, 'start', 'end')
+  const nodes = buildNodes(segs)
+  const graph = buildGraph(nodes, version)
+  const path = dijkstra.find_path(graph.map, 'start', 'end')
 
-  var optimizedSegs = []
-  for (var i = 1; i < path.length - 1; i++) {
+  const optimizedSegs = []
+  for (let i = 1; i < path.length - 1; i++) {
     optimizedSegs.push(graph.table[path[i]].node)
   }
 
@@ -484,8 +530,6 @@ exports.fromString = function fromString (data, version) {
  * @param  {string} data Input string
  * @return {Array}       Array of segments
  */
-exports.rawSplit = function rawSplit (data) {
-  return exports.fromArray(
-    getSegmentsFromString(data, Utils.isKanjiModeEnabled())
-  )
+exports.rawSplit = function rawSplit(data) {
+  return exports.fromArray(getSegmentsFromString(data, Utils.isKanjiModeEnabled()))
 }

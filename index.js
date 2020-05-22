@@ -1,2 +1,5 @@
-var tencentCloudTools = require('./sdk/index')
+'use strict'
+
+const tencentCloudTools = require('./sdk/index')
+
 module.exports = tencentCloudTools

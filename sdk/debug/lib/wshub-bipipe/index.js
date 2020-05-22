@@ -1,11 +1,12 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var eos = require("end-of-stream");
+'use strict';
+Object.defineProperty(exports, '__esModule', { value: true });
+const eos = require('end-of-stream');
+
 function pipe(stream1, stream2, cb) {
     stream1.pipe(stream2);
     stream2.pipe(stream1);
-    var closed = false;
-    var cleanup = function () {
+    let closed = false;
+    const cleanup = function () {
         if (closed) {
             return;
         }

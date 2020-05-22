@@ -1,3 +1,5 @@
+'use strict'
+
 const { BindRole } = require('../sdk/cam/index').BindRole
 
 class Role {

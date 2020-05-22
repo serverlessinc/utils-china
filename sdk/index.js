@@ -1,3 +1,5 @@
+'use strict'
+
 module.exports = {
   Cam: require('./cam/index'),
   Login: require('./login/index'),

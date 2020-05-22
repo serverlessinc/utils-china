@@ -1,3 +1,5 @@
+'use strict'
+
 const Others = require('../sdk/others')
 
 class OthersAction {

@@ -1,3 +1,5 @@
+'use strict'
+
 class IsInChina {
   inChina() {
     let result

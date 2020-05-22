@@ -1,3 +1,5 @@
+'use strict'
+
 const protobuf = require('protobufjs')
 const Sign = require('./sign')
 const assert = require('assert')
@@ -16,33 +18,33 @@ class Cls {
     assert(options, 'Options should not is empty')
     assert(options.region, 'Options region should not is empty')
     this.auth = new Sign(this.secretId, this.secretKey)
-    this.host = options.region + '.cls.myqcloud.com'
+    this.host = `${options.region}.cls.myqcloud.com`
   }
 
   doRequest(method, path, headers = {}, params = {}, data, cb) {
     method = method.toLocaleLowerCase()
 
     const sign = this.auth.sign(method, path, params, headers)
-    headers['host'] = this.host
-    headers['Authorization'] = sign
+    headers.host = this.host
+    headers.Authorization = sign
 
     if (this.options.token) {
       headers['x-cls-Token'] = this.options.token
     }
     if (Object.keys(params).length) {
-      path = path + '?' + querystring.stringify(params)
+      path = `${path}?${querystring.stringify(params)}`
     }
 
     const opt = {
-      method: method,
-      headers: headers,
+      method,
+      headers,
       hostname: this.host,
-      path: path
+      path
     }
 
-    const clientObject = http.request(opt, function(res) {
+    const clientObject = http.request(opt, (res) => {
       let body = ''
-      res.on('data', function(chunk) {
+      res.on('data', (chunk) => {
         body += chunk
       })
       res.on('end', () => {
@@ -50,7 +52,7 @@ class Cls {
       })
     })
 
-    clientObject.on('error', function(e) {
+    clientObject.on('error', (e) => {
       cb(e, null, null)
     })
 
@@ -78,12 +80,12 @@ class Cls {
     }
     const self = this
     return new Promise((resolve, reject) => {
-      protobuf.load(__dirname + '/logs.proto', function(err, root) {
+      protobuf.load(`${__dirname}/logs.proto`, (err, root) => {
         if (err) {
           reject(err)
         }
         const pbLogGroup = root.lookupType('cls.LogGroupList')
-        var errMsg = pbLogGroup.verify(message)
+        const errMsg = pbLogGroup.verify(message)
         if (errMsg) {
           reject(errMsg)
         }
@@ -91,7 +93,7 @@ class Cls {
         const log = pbLogGroup.create(message)
         const buffer = pbLogGroup.encode(log).finish()
         const params = {
-          topic_id: topic_id
+          topic_id
         }
         const headers = {
           'Content-Type': 'application/x-protobuf'

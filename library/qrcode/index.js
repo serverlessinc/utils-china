@@ -1,6 +1,8 @@
-var canPromise = require('./can-promise')
-var Index = require('./core/qrcode')
-var TerminalRenderer = require('./renderer/terminal')
+'use strict'
+
+const canPromise = require('./can-promise')
+const Index = require('./core/qrcode')
+const TerminalRenderer = require('./renderer/terminal')
 
 function checkParams(text, opts, cb) {
   if (typeof text === 'undefined') {
@@ -22,8 +24,8 @@ function checkParams(text, opts, cb) {
   }
 
   return {
-    opts: opts,
-    cb: cb
+    opts,
+    cb
   }
 }
 
@@ -36,10 +38,10 @@ function getStringRendererFromType(type) {
 
 function render(renderFunc, text, params) {
   if (!params.cb) {
-    return new Promise(function(resolve, reject) {
+    return new Promise((resolve, reject) => {
       try {
-        var data = Index.create(text, params.opts)
-        return renderFunc(data, params.opts, function(err, data) {
+        const data = Index.create(text, params.opts)
+        return renderFunc(data, params.opts, (err, data) => {
           return err ? reject(err) : resolve(data)
         })
       } catch (e) {
@@ -49,7 +51,7 @@ function render(renderFunc, text, params) {
   }
 
   try {
-    var data = Index.create(text, params.opts)
+    const data = Index.create(text, params.opts)
     return renderFunc(data, params.opts, params.cb)
   } catch (e) {
     params.cb(e)
@@ -57,7 +59,7 @@ function render(renderFunc, text, params) {
 }
 
 exports.toString = function toString(text, opts, cb) {
-  var params = checkParams(text, opts, cb)
-  var renderer = getStringRendererFromType(params.opts.type)
+  const params = checkParams(text, opts, cb)
+  const renderer = getStringRendererFromType(params.opts.type)
   return render(renderer.render, text, params)
 }

@@ -1,4 +1,7 @@
+'use strict'
+
 const tencentCloudTools = require('../../serverless-tencent-tools')
+
 const scfRealTimeLogs = tencentCloudTools.Logs.ScfRealTimeLogs
 const region = 'ap-guangzhou'
 const auth = {

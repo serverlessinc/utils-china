@@ -1,3 +1,5 @@
+'use strict'
+
 /*
  * Copyright (c) 2018 THL A29 Limited, a Tencent company. All Rights Reserved.
  *
@@ -14,151 +16,148 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-const models = require("./models");
+const models = require('./models')
 const AbstractClient = require('../../common/abstract_client')
-const ListInstancesResponse = models.ListInstancesResponse;
-const GetUploadUrlsResponse = models.GetUploadUrlsResponse;
-const RunFinishComponentRequest = models.RunFinishComponentRequest;
-const GetComponentAndVersionsRequest = models.GetComponentAndVersionsRequest;
-const PostPublishComponentResponse = models.PostPublishComponentResponse;
-const RunComponentResponse = models.RunComponentResponse;
-const GetComponentAndVersionsResponse = models.GetComponentAndVersionsResponse;
-const GetInstanceRequest = models.GetInstanceRequest;
-const SaveInstanceResponse = models.SaveInstanceResponse;
-const GetComponentVersionRequest = models.GetComponentVersionRequest;
-const PrePublishComponentRequest = models.PrePublishComponentRequest;
-const GetInstanceResponse = models.GetInstanceResponse;
-const GetComponentVersionResponse = models.GetComponentVersionResponse;
-const GetUploadUrlsRequest = models.GetUploadUrlsRequest;
-const RunComponentRequest = models.RunComponentRequest;
-const RunFinishComponentResponse = models.RunFinishComponentResponse;
-const PrePublishComponentResponse = models.PrePublishComponentResponse;
-const PostPublishComponentRequest = models.PostPublishComponentRequest;
-const SaveInstanceRequest = models.SaveInstanceRequest;
-const ListInstancesRequest = models.ListInstancesRequest;
 
+const ListInstancesResponse = models.ListInstancesResponse
+const GetUploadUrlsResponse = models.GetUploadUrlsResponse
+const RunFinishComponentRequest = models.RunFinishComponentRequest
+const GetComponentAndVersionsRequest = models.GetComponentAndVersionsRequest
+const PostPublishComponentResponse = models.PostPublishComponentResponse
+const RunComponentResponse = models.RunComponentResponse
+const GetComponentAndVersionsResponse = models.GetComponentAndVersionsResponse
+const GetInstanceRequest = models.GetInstanceRequest
+const SaveInstanceResponse = models.SaveInstanceResponse
+const GetComponentVersionRequest = models.GetComponentVersionRequest
+const PrePublishComponentRequest = models.PrePublishComponentRequest
+const GetInstanceResponse = models.GetInstanceResponse
+const GetComponentVersionResponse = models.GetComponentVersionResponse
+const GetUploadUrlsRequest = models.GetUploadUrlsRequest
+const RunComponentRequest = models.RunComponentRequest
+const RunFinishComponentResponse = models.RunFinishComponentResponse
+const PrePublishComponentResponse = models.PrePublishComponentResponse
+const PostPublishComponentRequest = models.PostPublishComponentRequest
+const SaveInstanceRequest = models.SaveInstanceRequest
+const ListInstancesRequest = models.ListInstancesRequest
 
 /**
  * sls client
  * @class
  */
 class SlsClient extends AbstractClient {
+  constructor(credential, region, profile) {
+    super('sls.tencentcloudapi.com', '2020-02-05', credential, region, profile)
+  }
 
-    constructor(credential, region, profile) {
-        super("sls.tencentcloudapi.com", "2020-02-05", credential, region, profile);
-    }
-    
-    /**
-     * 预发布一个指定name和version的Component
-     * @param {PrePublishComponentRequest} req
-     * @param {function(string, PrePublishComponentResponse):void} cb
-     * @public
-     */
-    PrePublishComponent(req, cb) {
-        let resp = new PrePublishComponentResponse();
-        this.request("PrePublishComponent", req, resp, cb);
-    }
+  /**
+   * 预发布一个指定name和version的Component
+   * @param {PrePublishComponentRequest} req
+   * @param {function(string, PrePublishComponentResponse):void} cb
+   * @public
+   */
+  PrePublishComponent(req, cb) {
+    const resp = new PrePublishComponentResponse()
+    this.request('PrePublishComponent', req, resp, cb)
+  }
 
-    /**
-     * 获取指定name和版本的Component信息
-     * @param {GetComponentVersionRequest} req
-     * @param {function(string, GetComponentVersionResponse):void} cb
-     * @public
-     */
-    GetComponentVersion(req, cb) {
-        let resp = new GetComponentVersionResponse();
-        this.request("GetComponentVersion", req, resp, cb);
-    }
+  /**
+   * 获取指定name和版本的Component信息
+   * @param {GetComponentVersionRequest} req
+   * @param {function(string, GetComponentVersionResponse):void} cb
+   * @public
+   */
+  GetComponentVersion(req, cb) {
+    const resp = new GetComponentVersionResponse()
+    this.request('GetComponentVersion', req, resp, cb)
+  }
 
-    /**
+  /**
      *  用户获取一个已部署Component的Instance
 
      * @param {GetInstanceRequest} req
      * @param {function(string, GetInstanceResponse):void} cb
      * @public
      */
-    GetInstance(req, cb) {
-        let resp = new GetInstanceResponse();
-        this.request("GetInstance", req, resp, cb);
-    }
+  GetInstance(req, cb) {
+    const resp = new GetInstanceResponse()
+    this.request('GetInstance', req, resp, cb)
+  }
 
-    /**
-     * 用户获取Component Instance的预签名URL链接
-     * @param {GetUploadUrlsRequest} req
-     * @param {function(string, GetUploadUrlsResponse):void} cb
-     * @public
-     */
-    GetUploadUrls(req, cb) {
-        let resp = new GetUploadUrlsResponse();
-        this.request("GetUploadUrls", req, resp, cb);
-    }
+  /**
+   * 用户获取Component Instance的预签名URL链接
+   * @param {GetUploadUrlsRequest} req
+   * @param {function(string, GetUploadUrlsResponse):void} cb
+   * @public
+   */
+  GetUploadUrls(req, cb) {
+    const resp = new GetUploadUrlsResponse()
+    this.request('GetUploadUrls', req, resp, cb)
+  }
 
-    /**
-     *  用户保存一个已部署Component的Instance
-     * @param {SaveInstanceRequest} req
-     * @param {function(string, SaveInstanceResponse):void} cb
-     * @public
-     */
-    SaveInstance(req, cb) {
-        let resp = new SaveInstanceResponse();
-        this.request("SaveInstance", req, resp, cb);
-    }
+  /**
+   *  用户保存一个已部署Component的Instance
+   * @param {SaveInstanceRequest} req
+   * @param {function(string, SaveInstanceResponse):void} cb
+   * @public
+   */
+  SaveInstance(req, cb) {
+    const resp = new SaveInstanceResponse()
+    this.request('SaveInstance', req, resp, cb)
+  }
 
-    /**
-     * 运行一个Component
-     * @param {RunComponentRequest} req
-     * @param {function(string, RunComponentResponse):void} cb
-     * @public
-     */
-    RunComponent(req, cb) {
-        let resp = new RunComponentResponse();
-        this.request("RunComponent", req, resp, cb);
-    }
+  /**
+   * 运行一个Component
+   * @param {RunComponentRequest} req
+   * @param {function(string, RunComponentResponse):void} cb
+   * @public
+   */
+  RunComponent(req, cb) {
+    const resp = new RunComponentResponse()
+    this.request('RunComponent', req, resp, cb)
+  }
 
-    /**
-     * 用户获取一个已部署Component的Instance列表
-     * @param {ListInstancesRequest} req
-     * @param {function(string, ListInstancesResponse):void} cb
-     * @public
-     */
-    ListInstances(req, cb) {
-        let resp = new ListInstancesResponse();
-        this.request("ListInstances", req, resp, cb);
-    }
+  /**
+   * 用户获取一个已部署Component的Instance列表
+   * @param {ListInstancesRequest} req
+   * @param {function(string, ListInstancesResponse):void} cb
+   * @public
+   */
+  ListInstances(req, cb) {
+    const resp = new ListInstancesResponse()
+    this.request('ListInstances', req, resp, cb)
+  }
 
-    /**
-     * 发布一个指定name和version的Component
-     * @param {PostPublishComponentRequest} req
-     * @param {function(string, PostPublishComponentResponse):void} cb
-     * @public
-     */
-    PostPublishComponent(req, cb) {
-        let resp = new PostPublishComponentResponse();
-        this.request("PostPublishComponent", req, resp, cb);
-    }
+  /**
+   * 发布一个指定name和version的Component
+   * @param {PostPublishComponentRequest} req
+   * @param {function(string, PostPublishComponentResponse):void} cb
+   * @public
+   */
+  PostPublishComponent(req, cb) {
+    const resp = new PostPublishComponentResponse()
+    this.request('PostPublishComponent', req, resp, cb)
+  }
 
-    /**
-     * 运行完成Component，更新Component Instance信息
-     * @param {RunFinishComponentRequest} req
-     * @param {function(string, RunFinishComponentResponse):void} cb
-     * @public
-     */
-    RunFinishComponent(req, cb) {
-        let resp = new RunFinishComponentResponse();
-        this.request("RunFinishComponent", req, resp, cb);
-    }
+  /**
+   * 运行完成Component，更新Component Instance信息
+   * @param {RunFinishComponentRequest} req
+   * @param {function(string, RunFinishComponentResponse):void} cb
+   * @public
+   */
+  RunFinishComponent(req, cb) {
+    const resp = new RunFinishComponentResponse()
+    this.request('RunFinishComponent', req, resp, cb)
+  }
 
-    /**
-     * 该接口获取指定Component的所有版本信息
-     * @param {GetComponentAndVersionsRequest} req
-     * @param {function(string, GetComponentAndVersionsResponse):void} cb
-     * @public
-     */
-    GetComponentAndVersions(req, cb) {
-        let resp = new GetComponentAndVersionsResponse();
-        this.request("GetComponentAndVersions", req, resp, cb);
-    }
-
-
+  /**
+   * 该接口获取指定Component的所有版本信息
+   * @param {GetComponentAndVersionsRequest} req
+   * @param {function(string, GetComponentAndVersionsResponse):void} cb
+   * @public
+   */
+  GetComponentAndVersions(req, cb) {
+    const resp = new GetComponentAndVersionsResponse()
+    this.request('GetComponentAndVersions', req, resp, cb)
+  }
 }
-module.exports = SlsClient;
+module.exports = SlsClient

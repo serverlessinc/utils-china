@@ -1,8 +1,11 @@
+'use strict'
+
 const util = require('util')
 const http = require('http')
 const os = require('os')
 const uuidv4 = require('../../library/uuid')
 const QRCode = require('../../library/qrcode/index')
+
 const apiBaseUrl = 'scfdev.tencentserverless.com'
 const apiShortUrl = '/login/url'
 const refreshTokenUrl = '/login/info'
@@ -20,10 +23,10 @@ class Login {
       port: '80',
       path: util.format('%s?os=%s&uuid=%s', apiShortUrl, os.type(), uuid)
     }
-    return new Promise(function(resolve, reject) {
-      const req = http.get(options, function(res) {
+    return new Promise((resolve, reject) => {
+      const req = http.get(options, (res) => {
         res.setEncoding('utf8')
-        res.on('data', function(chunk) {
+        res.on('data', (chunk) => {
           try {
             resolve(JSON.parse(chunk))
           } catch (e) {
@@ -31,7 +34,7 @@ class Login {
           }
         })
       })
-      req.on('error', function(e) {
+      req.on('error', (e) => {
         reject(e.message)
       })
       req.end()
@@ -45,12 +48,12 @@ class Login {
         port: '80',
         path: url
       }
-      const req = http.get(options, function(res) {
+      const req = http.get(options, (res) => {
         res.setEncoding('utf8')
-        res.on('data', function(chunk) {
+        res.on('data', (chunk) => {
           try {
             const responseData = JSON.parse(chunk)
-            if (responseData['success']) {
+            if (responseData.success) {
               done(responseData)
             } else {
               done(false)
@@ -61,7 +64,7 @@ class Login {
           }
         })
       })
-      req.on('error', function(e) {
+      req.on('error', (e) => {
         done(false)
         return
       })
@@ -76,12 +79,12 @@ class Login {
         port: '80',
         path: `${refreshTokenUrl}?uuid=${uuid}&os=${os.type()}&expired=${expired}&signature=${signature}&appid=${appid}`
       }
-      const req = http.get(options, function(res) {
+      const req = http.get(options, (res) => {
         res.setEncoding('utf8')
-        res.on('data', function(chunk) {
+        res.on('data', (chunk) => {
           try {
             const responseData = JSON.parse(chunk)
-            if (responseData['success']) {
+            if (responseData.success) {
               done(responseData)
             } else {
               done(false)
@@ -92,7 +95,7 @@ class Login {
           }
         })
       })
-      req.on('error', function(e) {
+      req.on('error', (e) => {
         done(false)
         return
       })
@@ -105,7 +108,7 @@ class Login {
       const uuid = uuidv4()
       const apiUrl = await this.getShortUrl(uuid)
 
-      QRCode.toString(apiUrl.short_url, { type: 'terminal' }, function(err, url) {
+      QRCode.toString(apiUrl.short_url, { type: 'terminal' }, (err, url) => {
         console.log(url)
       })
 
@@ -137,7 +140,7 @@ class Login {
         appid: loginData.appid,
         signature: loginData.signature,
         expired: loginData.expired,
-        uuid: uuid
+        uuid
       }
       console.log('Login successful for TencentCloud. ')
       return configure
@@ -153,7 +156,7 @@ class Login {
       const apiUrl = await this.getShortUrl(uuid)
       return {
         login_status_url: apiUrl.login_status_url,
-        uuid: uuid,
+        uuid,
         url: apiUrl.long_url,
         short_url: apiUrl.short_url
       }

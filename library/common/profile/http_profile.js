@@ -1,3 +1,5 @@
+'use strict'
+
 /**
  * http可选参数类
  * @class

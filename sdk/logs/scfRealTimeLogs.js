@@ -1,5 +1,8 @@
+'use strict'
+
 const { GetUserInformationResponse, UserInformationClient } = require('../cam/index')
 const { scf, common } = require('../../library')
+
 const ScfModels = scf.v20180416.Models
 const ScfClient = scf.v20180416.Client
 const { Credential, ClientProfile, HttpProfile } = common
@@ -20,9 +23,9 @@ class ScfRealTimeLogs {
     httpProfile.reqTimeout = 60
     const clientProfile = new ClientProfile('HmacSHA256', httpProfile)
     return {
-      cred: cred,
+      cred,
       region: region || 'ap-guangzhou',
-      clientProfile: clientProfile
+      clientProfile
     }
   }
 
@@ -45,7 +48,7 @@ class ScfRealTimeLogs {
     keys.sort()
     for (const k in keys) {
       const tempStr = keys[k] == 'Signature' ? encodeURIComponent(params[keys[k]]) : params[keys[k]]
-      strParam += '&' + keys[k] + '=' + tempStr
+      strParam += `&${keys[k]}=${tempStr}`
     }
     return strParam
   }
@@ -66,18 +69,12 @@ class ScfRealTimeLogs {
     keys.sort()
     for (const k in keys) {
       const tempStr = keys[k] == 'Signature' ? encodeURIComponent(params[keys[k]]) : params[keys[k]]
-      strParam += '&' + keys[k] + '=' + tempStr
+      strParam += `&${keys[k]}=${tempStr}`
     }
 
-    return (
-      baseUrl +
-      '?' +
-      strParam.slice(1) +
-      '&Timeout=' +
-      timeout +
-      '&AppidSignature=' +
-      encodeURIComponent(this.getAppid(auth))
-    )
+    return `${baseUrl}?${strParam.slice(1)}&Timeout=${timeout}&AppidSignature=${encodeURIComponent(
+      this.getAppid(auth)
+    )}`
   }
 }
 

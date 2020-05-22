@@ -1,3 +1,5 @@
+'use strict'
+
 const Login = require('../sdk/login')
 
 class doLogin {

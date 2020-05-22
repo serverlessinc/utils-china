@@ -1,3 +1,5 @@
+'use strict'
+
 const { default: connect } = require('./wshub-client')
 const { default: createLogger } = require('./wshub-logger')
 
@@ -13,15 +15,15 @@ const Client = function(options) {
     logRemotePort = 3332,
     timeout
   } = options
-  //日志类型，verbose或者info，测试阶段建议verbose
+  // 日志类型，verbose或者info，测试阶段建议verbose
   this.logger = createLogger(logType)
-  //映射的本地端口，默认9222
+  // 映射的本地端口，默认9222
   this.localPort = localPort
-  //远端调试端口，默认9000
+  // 远端调试端口，默认9000
   this.debugRemotePort = debugRemotePort
-  //远端日志端口，默认3222
+  // 远端日志端口，默认3222
   this.logRemotePort = logRemotePort
-  //连接wshub的超时时间
+  // 连接wshub的超时时间
   this.timeout = timeout
   this.Url = Url
   this.Token = Token

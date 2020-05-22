@@ -1,6 +1,9 @@
+'use strict'
+
 const assert = require('assert')
 const util = require('util')
 const { monitor, common } = require('../../library')
+
 const ClientProfile = common.ClientProfile
 const HttpProfile = common.HttpProfile
 const Credential = common.Credential
@@ -26,9 +29,9 @@ class SlsMonitor {
     const clientProfile = new ClientProfile('HmacSHA256', httpProfile)
     assert(options.region, 'Region should not is empty')
     return {
-      cred: cred,
+      cred,
       region: options.region,
-      clientProfile: clientProfile
+      clientProfile
     }
   }
 
@@ -44,19 +47,20 @@ class SlsMonitor {
     return handler(params)
   }
 
-
   async putMonitorData(metrics, instance, announceIp, timestamp) {
-      assert(instance, 'instance should not is empty')
+    assert(instance, 'instance should not is empty')
 
-      const req = new Models.PutMonitorDataRequest()
-      req.Metrics = metrics
-      req.AnnounceInstance = instance
-      if (announceIp)
-          req.AnnounceIp = announceIp
-      if (timestamp)
-          req.AnnounceTimestamp = timestamp
+    const req = new Models.PutMonitorDataRequest()
+    req.Metrics = metrics
+    req.AnnounceInstance = instance
+    if (announceIp) {
+      req.AnnounceIp = announceIp
+    }
+    if (timestamp) {
+      req.AnnounceTimestamp = timestamp
+    }
 
-      return this._call('PutMonitorData', req)
+    return this._call('PutMonitorData', req)
   }
 
   async getScfMetrics(region, rangeTime, period, funcName, ns, version) {
@@ -83,7 +87,7 @@ class SlsMonitor {
     }
 
     const requestHandlers = []
-    for (var i = 0; i < metrics.length; i++) {
+    for (let i = 0; i < metrics.length; i++) {
       const req = new Models.GetMonitorDataRequest()
       req.Namespace = 'qce/scf_v2'
       req.MetricName = metrics[i]
@@ -113,7 +117,7 @@ class SlsMonitor {
     return new Promise((resolve, reject) => {
       Promise.all(requestHandlers)
         .then((results) => {
-          for (var i = 0; i < results.length; i++) {
+          for (let i = 0; i < results.length; i++) {
             const response = results[i]
             const metric = {
               type: response.MetricName,

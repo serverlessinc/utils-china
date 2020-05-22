@@ -1,3 +1,5 @@
+'use strict'
+
 const { Capi } = require('@tencent-sdk/capi')
 
 const ApiRequest = function(auth, func, Region, debugOptions) {

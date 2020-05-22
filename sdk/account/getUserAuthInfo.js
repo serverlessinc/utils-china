@@ -1,3 +1,5 @@
+'use strict'
+
 const http = require('http')
 const os = require('os')
 
@@ -25,15 +27,15 @@ class GetUserAuthInfo {
       }
     }
 
-    return new Promise(function(resolve, reject) {
-      const req = http.request(options, function(res) {
+    return new Promise((resolve, reject) => {
+      const req = http.request(options, (res) => {
         res.setEncoding('utf8')
-        res.on('data', function(chunk) {
+        res.on('data', (chunk) => {
           resolve(JSON.parse(chunk))
         })
       })
 
-      req.on('error', function(e) {
+      req.on('error', (e) => {
         reject(e.message)
       })
 

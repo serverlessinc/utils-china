@@ -1,6 +1,9 @@
+'use strict'
+
 const util = require('util')
 const assert = require('assert')
 const { sls, common } = require('../../library')
+
 const ClientProfile = common.ClientProfile
 const HttpProfile = common.HttpProfile
 const Credential = common.Credential
@@ -29,9 +32,9 @@ class Serverless {
     const clientProfile = new ClientProfile('HmacSHA256', httpProfile)
     assert(options.region, 'Region should not is empty')
     return {
-      cred: cred,
+      cred,
       region: options.region,
-      clientProfile: clientProfile
+      clientProfile
     }
   }
 

@@ -1,3 +1,5 @@
+'use strict'
+
 // const request = require('request');
 const QueryString = require('querystring')
 const https = require('https')
@@ -37,11 +39,11 @@ class HttpConnection {
 
     opt.method = method
     if (method === 'GET') {
-      reqUrl += '?' + httpBody
+      reqUrl += `?${httpBody}`
     } else {
-      opt['headers'] = opt['headers'] || {}
-      opt['headers']['Content-Type'] = 'application/json'
-      opt['headers']['Content-Length'] = Buffer.byteLength(httpBody)
+      opt.headers = opt.headers || {}
+      opt.headers['Content-Type'] = 'application/json'
+      opt.headers['Content-Length'] = Buffer.byteLength(httpBody)
     }
 
     const urlObj = url.parse(reqUrl)
@@ -55,13 +57,13 @@ class HttpConnection {
         break
     }
 
-    opt.hostname = urlObj.hostname;
-    opt.path = urlObj.path;
-    opt.protocol = urlObj.protocol;
+    opt.hostname = urlObj.hostname
+    opt.path = urlObj.path
+    opt.protocol = urlObj.protocol
 
-    const clientObject = httpClient.request(opt, function(res) {
+    const clientObject = httpClient.request(opt, (res) => {
       let body = ''
-      res.on('data', function(chunk) {
+      res.on('data', (chunk) => {
         body += chunk
       })
       res.on('end', () => {
@@ -69,7 +71,7 @@ class HttpConnection {
       })
     })
 
-    clientObject.on('error', function(e) {
+    clientObject.on('error', (e) => {
       callback(e, null, null)
     })
 

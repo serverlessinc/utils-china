@@ -1,3 +1,5 @@
+'use strict'
+
 /*
  * Copyright (c) 2018 THL A29 Limited, a Tencent company. All Rights Reserved.
  *
@@ -16,6 +18,7 @@
  */
 const models = require('./models')
 const AbstractClient = require('../../common/abstract_client')
+
 const GetUserResponse = models.GetUserResponse
 const DeleteUserRequest = models.DeleteUserRequest
 const DetachGroupPolicyRequest = models.DetachGroupPolicyRequest

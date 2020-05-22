@@ -1,6 +1,7 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var stream_1 = require("stream");
+'use strict';
+Object.defineProperty(exports, '__esModule', { value: true });
+const stream_1 = require('stream');
+
 function isDuplex(obj) {
     return obj instanceof stream_1.Duplex;
 }
@@ -10,7 +11,7 @@ function isPort(port) {
 }
 exports.isPort = isPort;
 function isArrayOfString(array) {
-    return Array.isArray(array) && array.every(function (v) { return typeof v === 'string'; });
+    return Array.isArray(array) && array.every((v) => { return typeof v === 'string'; });
 }
 function isPtyOptions(pty) {
     return typeof pty === 'object' &&

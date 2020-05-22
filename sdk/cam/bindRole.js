@@ -1,3 +1,5 @@
+'use strict'
+
 const { CamClient } = require('../../library/tencent-cloud/client')
 const { GetUserInformation } = require('./userInformation')
 const http = require('http')
@@ -21,8 +23,8 @@ class BindRole {
 
   async getOrUpdateBindRoleState(user, action, role) {
     const data = {
-      user: user,
-      role: role
+      user,
+      role
     }
     const requestData = JSON.stringify(data)
 
@@ -37,19 +39,19 @@ class BindRole {
       }
     }
 
-    return new Promise(function(resolve, reject) {
-      const req = http.request(options, function(res) {
+    return new Promise((resolve, reject) => {
+      const req = http.request(options, (res) => {
         res.setEncoding('utf8')
         let rawData = ''
-        res.on('data', function(chunk) {
+        res.on('data', (chunk) => {
           rawData += chunk
         })
-        res.on('end', function() {
+        res.on('end', () => {
           resolve(JSON.parse(rawData))
         })
       })
 
-      req.on('error', function(e) {
+      req.on('error', (e) => {
         reject(e.message)
       })
 

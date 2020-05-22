@@ -1,3 +1,5 @@
+'use strict'
+
 /**
  * Alignment pattern are fixed reference pattern in defined positions
  * in a matrix symbology, which enables the decode software to re-synchronise
@@ -8,7 +10,7 @@
  * and their number depends on the symbol version.
  */
 
-var getSymbolSize = require('./utils').getSymbolSize
+const getSymbolSize = require('./utils').getSymbolSize
 
 /**
  * Calculate the row/column coordinates of the center module of each alignment pattern
@@ -24,15 +26,15 @@ var getSymbolSize = require('./utils').getSymbolSize
  * @param  {Number} version QR Code version
  * @return {Array}          Array of coordinate
  */
-exports.getRowColCoords = function getRowColCoords (version) {
+exports.getRowColCoords = function getRowColCoords(version) {
   if (version === 1) return []
 
-  var posCount = Math.floor(version / 7) + 2
-  var size = getSymbolSize(version)
-  var intervals = size === 145 ? 26 : Math.ceil((size - 13) / (2 * posCount - 2)) * 2
-  var positions = [size - 7] // Last coord is always (size - 7)
+  const posCount = Math.floor(version / 7) + 2
+  const size = getSymbolSize(version)
+  const intervals = size === 145 ? 26 : Math.ceil((size - 13) / (2 * posCount - 2)) * 2
+  const positions = [size - 7] // Last coord is always (size - 7)
 
-  for (var i = 1; i < posCount - 1; i++) {
+  for (let i = 1; i < posCount - 1; i++) {
     positions[i] = positions[i - 1] - intervals
   }
 
@@ -61,17 +63,20 @@ exports.getRowColCoords = function getRowColCoords (version) {
  * @param  {Number} version QR Code version
  * @return {Array}          Array of coordinates
  */
-exports.getPositions = function getPositions (version) {
-  var coords = []
-  var pos = exports.getRowColCoords(version)
-  var posLength = pos.length
+exports.getPositions = function getPositions(version) {
+  const coords = []
+  const pos = exports.getRowColCoords(version)
+  const posLength = pos.length
 
-  for (var i = 0; i < posLength; i++) {
-    for (var j = 0; j < posLength; j++) {
+  for (let i = 0; i < posLength; i++) {
+    for (let j = 0; j < posLength; j++) {
       // Skip if position is occupied by finder patterns
-      if ((i === 0 && j === 0) ||             // top-left
-          (i === 0 && j === posLength - 1) || // bottom-left
-          (i === posLength - 1 && j === 0)) { // top-right
+      if (
+        (i === 0 && j === 0) || // top-left
+        (i === 0 && j === posLength - 1) || // bottom-left
+        (i === posLength - 1 && j === 0)
+      ) {
+        // top-right
         continue
       }
 

@@ -1,3 +1,5 @@
+'use strict'
+
 const ApiRequest = require('./lib/apiRequest')
 const WshubClient = require('./lib/client')
 

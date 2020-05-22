@@ -1,3 +1,5 @@
+'use strict'
+
 module.exports = {
   sls: require('./sls'),
   cam: require('./cam'),

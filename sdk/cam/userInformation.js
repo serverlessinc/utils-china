@@ -1,8 +1,11 @@
+'use strict'
+
 const util = require('util')
 
 const { common } = require('../../library')
 const AbstractModel = require('../../library/common/abstract_model')
 const AbstractClient = require('../../library/common/abstract_client')
+
 const CamCredential = common.Credential
 const { ClientProfile, HttpProfile } = common
 

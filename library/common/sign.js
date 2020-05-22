@@ -1,3 +1,5 @@
+'use strict'
+
 const TencentCloudSDKHttpException = require('./exception/tencent_cloud_sdk_exception')
 const crypto = require('crypto')
 

@@ -1,3 +1,5 @@
+'use strict'
+
 const util = require('util')
 const querystring = require('querystring')
 const crypto = require('crypto')

@@ -1,21 +1,21 @@
-"use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt (value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
+'use strict';
+const __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt (value) { return value instanceof P ? value : new P(((resolve) => { resolve(value); })); }
+    return new (P || (P = Promise))(((resolve, reject) => {
         function fulfilled (value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected (value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function rejected (value) { try { step(generator.throw(value)); } catch (e) { reject(e); } }
         function step (result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
+    }));
 };
-var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function () { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function () { return this; }), g;
+const __generator = (this && this.__generator) || function (thisArg, body) {
+    let _ = { label: 0, sent () { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }; let f; let y; let t; let g;
+    return g = { next: verb(0), 'throw': verb(1), 'return': verb(2) }, typeof Symbol === 'function' && (g[Symbol.iterator] = function () { return this; }), g;
     function verb (n) { return function (v) { return step([n, v]); }; }
     function step (op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+        if (f) throw new TypeError('Generator is already executing.');
+        while (_) {try {
+            if (f = 1, y && (t = op[0] & 2 ? y.return : op[0] ? y.throw || ((t = y.return) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
             if (y = 0, t) op = [op[0] & 2, t.value];
             switch (op[0]) {
                 case 0: case 1: t = op; break;
@@ -31,29 +31,30 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                     _.trys.pop(); continue;
             }
             op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }}
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __spreadArrays = (this && this.__spreadArrays) || function () {
+const __spreadArrays = (this && this.__spreadArrays) || function () {
     for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
     for (var r = Array(s), k = 0, i = 0; i < il; i++)
-        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
-            r[k] = a[j];
+        {for (let a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
+            {r[k] = a[j];}}
     return r;
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-var socketIo = require("socket.io-client");
-var socketIoStream = require("socket.io-stream");
-var net_1 = require("net");
-var wshub_bipipe_1 = require("../wshub-bipipe");
-var wshub_proxy_1 = require("../wshub-proxy");
-var wshub_types_1 = require("../wshub-types");
+Object.defineProperty(exports, '__esModule', { value: true });
+const socketIo = require('socket.io-client');
+const socketIoStream = require('socket.io-stream');
+const net_1 = require('net');
+const wshub_bipipe_1 = require('../wshub-bipipe');
+const wshub_proxy_1 = require('../wshub-proxy');
+const wshub_types_1 = require('../wshub-types');
+
 function normalizeListenArgs (portOrPath) {
-    var port = Number(portOrPath);
+    const port = Number(portOrPath);
     return port >= 0 ? [port, '127.0.0.1'] : [portOrPath];
 }
-var Client = /** @class */ (function () {
+const Client = /** @class */ (function () {
     function Client (socket, streamSocket, logger) {
         this.socket = socket;
         this.streamSocket = streamSocket;
@@ -61,28 +62,28 @@ var Client = /** @class */ (function () {
     }
     Client.prototype.forward = function (clientPort, serverPort) {
         return __awaiter(this, void 0, void 0, function () {
-            var sendStream, targetName, tcpServer;
-            var _this = this;
+            let sendStream; let targetName; let tcpServer;
+            const _this = this;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         sendStream = function (local, streamName) {
-                            var stream = socketIoStream.createStream();
-                            wshub_bipipe_1.default(local, stream, function () {
-                                _this.logger.verbose(streamName + " closed");
+                            const stream = socketIoStream.createStream();
+                            wshub_bipipe_1.default(local, stream, () => {
+                                _this.logger.verbose(`${streamName  } closed`);
                             });
-                            _this.logger.verbose(streamName + " sending to wshub");
-                            return new Promise(function (resolve) {
-                                _this.streamSocket.emit('forward', stream, serverPort, function (err) {
+                            _this.logger.verbose(`${streamName  } sending to wshub`);
+                            return new Promise(((resolve) => {
+                                _this.streamSocket.emit('forward', stream, serverPort, (err) => {
                                     if (err) {
-                                        _this.logger.error(streamName + " sending failed for '" + err + "'");
+                                        _this.logger.error(`${streamName  } sending failed for '${  err  }'`);
                                     }
                                     else {
-                                        _this.logger.verbose(streamName + " sent to wshub successfully");
+                                        _this.logger.verbose(`${streamName  } sent to wshub successfully`);
                                     }
                                     resolve();
                                 });
-                            });
+                            }));
                         };
                         targetName = wshub_types_1.isPort(serverPort) ? serverPort : serverPort.command;
                         if (!wshub_types_1.isPort(serverPort)) {
@@ -91,37 +92,37 @@ var Client = /** @class */ (function () {
                             }
                             serverPort.controlStream = socketIoStream.createStream({ objectMode: true });
                         }
-                        if (!(typeof clientPort === 'object')) return [3 /*break*/, 2];
-                        return [4 /*yield*/, sendStream(clientPort, "stream -> :" + targetName)];
+                        if (!(typeof clientPort === 'object')) return [3 /* break*/, 2];
+                        return [4 /* yield*/, sendStream(clientPort, `stream -> :${  targetName}`)];
                     case 1:
                         _a.sent();
-                        return [2 /*return*/, serverPort];
+                        return [2 /* return*/, serverPort];
                     case 2:
-                        tcpServer = net_1.createServer(function (local) {
+                        tcpServer = net_1.createServer((local) => {
                             local.unref();
-                            sendStream(local, ":" + clientPort + " -> :" + targetName);
+                            sendStream(local, `:${  clientPort  } -> :${  targetName}`);
                         });
-                        this.socket.on('disconnect', function () { return tcpServer.close(); });
+                        this.socket.on('disconnect', () => { return tcpServer.close(); });
                         tcpServer.unref();
-                        tcpServer.on('error', function (e) { return _this.logger.error("tcp server error " + e); });
-                        return [2 /*return*/, new Promise(function (resolve) {
+                        tcpServer.on('error', (e) => { return _this.logger.error(`tcp server error ${  e}`); });
+                        return [2 /* return*/, new Promise(((resolve) => {
                             tcpServer.listen.apply(tcpServer, __spreadArrays(normalizeListenArgs(clientPort), [function () {
                                 resolve(tcpServer.address());
                             }]));
-                        })];
+                        }))];
                 }
             });
         });
     };
     Client.prototype.backward = function (clientPort, serverPort) {
-        var _this = this;
-        var streamName = ":" + clientPort + " <- :" + serverPort;
-        this.streamSocket.emit('backward', clientPort, serverPort, function (err) {
+        const _this = this;
+        const streamName = `:${  clientPort  } <- :${  serverPort}`;
+        this.streamSocket.emit('backward', clientPort, serverPort, (err) => {
             if (err) {
-                _this.logger.error("sending " + streamName + " request failed for '" + err + "'");
+                _this.logger.error(`sending ${  streamName  } request failed for '${  err  }'`);
             }
             else {
-                _this.logger.verbose(streamName + " request sent to wshub successfully");
+                _this.logger.verbose(`${streamName  } request sent to wshub successfully`);
             }
         });
     };
@@ -139,51 +140,51 @@ var Client = /** @class */ (function () {
     return Client;
 }());
 function connect (options) {
-    var url = options.url, token = options.token, logger = options.logger, _a = options.timeout, timeout = _a === void 0 ? -1 : _a;
-    var agent = wshub_proxy_1.default();
-    var socket = socketIo.connect(url, { query: { token: token }, agent: agent });
-    var streamSocket = socketIoStream(socket);
+    const url = options.url; const token = options.token; const logger = options.logger; const _a = options.timeout; const timeout = _a === void 0 ? -1 : _a;
+    const agent = wshub_proxy_1.default();
+    const socket = socketIo.connect(url, { query: { token }, agent });
+    const streamSocket = socketIoStream(socket);
     streamSocket
-        .on('forward', function (remote, clientPort, serverPort) {
-            var streamName = ":" + clientPort + " <- :" + serverPort;
-            var target = net_1.createConnection(clientPort).unref();
+        .on('forward', (remote, clientPort, serverPort) => {
+            const streamName = `:${  clientPort  } <- :${  serverPort}`;
+            const target = net_1.createConnection(clientPort).unref();
             target
-                .once('connect', function () {
-                    logger.verbose(streamName + " connected");
-                    wshub_bipipe_1.default(remote, target, function () {
-                        logger.verbose(streamName + " closed");
+                .once('connect', () => {
+                    logger.verbose(`${streamName  } connected`);
+                    wshub_bipipe_1.default(remote, target, () => {
+                        logger.verbose(`${streamName  } closed`);
                     });
                 })
-                .on('error', function (err) {
-                    logger.error(streamName + " error '" + err + "'");
+                .on('error', (err) => {
+                    logger.error(`${streamName  } error '${  err  }'`);
                     remote.end();
                 });
         })
-        .on('error', function () { return socket.disconnect(); });
+        .on('error', () => { return socket.disconnect(); });
     socket
-        .on('disconnect', function (reason) {
-            logger.info("disconnected for " + reason);
+        .on('disconnect', (reason) => {
+            logger.info(`disconnected for ${  reason}`);
             socket.disconnect();
         });
-    return new Promise(function (resolve, reject0) {
-        var reject = function () {
-            var args = [];
-            for (var _i = 0; _i < arguments.length; _i++) {
+    return new Promise(((resolve, reject0) => {
+        const reject = function () {
+            const args = [];
+            for (let _i = 0; _i < arguments.length; _i++) {
                 args[_i] = arguments[_i];
             }
             socket.disconnect();
             reject0.apply(void 0, args);
         };
-        var handle;
+        let handle;
         if (timeout > 0) {
-            handle = setTimeout(function () {
+            handle = setTimeout(() => {
                 reject(new Error('connection timeout'));
             }, timeout);
         }
-        socket.on('connect', function () {
+        socket.on('connect', () => {
             logger.info('client connected');
         });
-        socket.on('ready', function () {
+        socket.on('ready', () => {
             logger.info('server connected');
             if (handle) {
                 clearTimeout(handle);
@@ -193,6 +194,6 @@ function connect (options) {
         socket.on('connect_error', reject);
         socket.on('error', reject);
         socket.on('disconnect', reject);
-    });
+    }));
 }
 exports.default = connect;
