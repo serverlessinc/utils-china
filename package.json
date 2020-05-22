@@ -18,7 +18,7 @@
   "author": "Tencent Cloud, Inc.",
   "license": "MIT",
   "dependencies": {
-    "@tencent-sdk/capi": "^0.2.15-alpha.0",
+    "@tencent-sdk/capi": "0.2.15-alpha.0",
     "dijkstrajs": "^1.0.1",
     "dot-qs": "0.2.0",
     "duplexify": "^4.1.1",
