@@ -12,9 +12,12 @@
   ],
   "repository": "serverlessinc/utils-china",
   "scripts": {
-    "lint": "eslint --ignore-path .gitignore .",
+    "lint": "eslint .",
+    "lint:updated": "pipe-git-updated --ext=js -- eslint --ignore-path .gitignore",
     "prettier-check": "prettier -c --ignore-path .gitignore \"**/*.{css,html,js,json,md,yaml,yml}\"",
-    "prettify": "prettier --write --ignore-path .gitignore \"**/*.{css,html,js,json,md,yaml,yml}\""
+    "prettier-check:updated": "pipe-git-updated --ext=css --ext=html --ext=js --ext=json --ext=md --ext=yaml --ext=yml -- prettier -c",
+    "prettify": "prettier --write --ignore-path .gitignore \"**/*.{css,html,js,json,md,yaml,yml}\"",
+    "prettify:updated": "pipe-git-updated --ext=css --ext=html --ext=js --ext=json --ext=md --ext=yaml --ext=yml -- prettier --write"
   },
   "author": "Tencent Cloud, Inc.",
   "license": "MIT",
@@ -49,6 +52,7 @@
     "babel-eslint": "9.0.0",
     "eslint": "^7.0.0",
     "eslint-plugin-import": "^2.20.2",
+    "git-list-updated": "^1.2.1",
     "husky": "^4.2.5",
     "lint-staged": "^10.2.6",
     "prettier": "^2.0.5"
