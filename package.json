@@ -9,10 +9,12 @@
     "Tencent Cloud",
     "Serverless Framework",
     "Cloud function"
-	],
-	"repository": "serverlessinc/utils-china",
+  ],
+  "repository": "serverlessinc/utils-china",
   "scripts": {
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "prettier-check": "prettier -c --ignore-path .gitignore \"**/*.{css,html,js,json,md,yaml,yml}\"",
+    "prettify": "prettier --write --ignore-path .gitignore \"**/*.{css,html,js,json,md,yaml,yml}\""
   },
   "author": "Tencent Cloud, Inc.",
   "license": "MIT",
@@ -34,13 +36,13 @@
     "babel-eslint": "9.0.0",
     "eslint": "^7.0.0",
     "eslint-plugin-import": "^2.20.2",
-    "prettier": "^1.19.1"
+    "prettier": "^2.0.5"
   },
   "eslintConfig": {
     "extends": "@serverless/eslint-config/node",
     "root": true,
     "rules": {
-			"no-console": "off",
+      "no-console": "off",
       "no-underscore-dangle": "off"
     }
   },
