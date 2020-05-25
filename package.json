@@ -12,7 +12,7 @@
   ],
   "repository": "serverlessinc/utils-china",
   "scripts": {
-    "lint": "eslint .",
+    "lint": "eslint --ignore-path .gitignore .",
     "prettier-check": "prettier -c --ignore-path .gitignore \"**/*.{css,html,js,json,md,yaml,yml}\"",
     "prettify": "prettier --write --ignore-path .gitignore \"**/*.{css,html,js,json,md,yaml,yml}\""
   },
