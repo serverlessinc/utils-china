@@ -9,7 +9,8 @@
     "Tencent Cloud",
     "Serverless Framework",
     "Cloud function"
-  ],
+	],
+	"repository": "serverlessinc/utils-china",
   "scripts": {
     "lint": "eslint ."
   },
@@ -43,12 +44,5 @@
       "no-underscore-dangle": "off"
     }
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/serverless/utils-china.git"
-  },
-  "bugs": {
-    "url": "https://github.com/serverless/utils-china/issues"
-  },
-  "homepage": "https://github.com/serverless/utils-china#readme"
+  "homepage": "https://github.com/serverlessinc/utils-china#readme"
 }
