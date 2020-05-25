@@ -18,6 +18,19 @@
   },
   "author": "Tencent Cloud, Inc.",
   "license": "MIT",
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint"
+    ],
+    "*.{css,html,js,json,md,yaml,yml}": [
+      "prettier -c"
+    ]
+  },
   "dependencies": {
     "@tencent-sdk/capi": "0.2.15-alpha.0",
     "dijkstrajs": "^1.0.1",
@@ -36,6 +49,8 @@
     "babel-eslint": "9.0.0",
     "eslint": "^7.0.0",
     "eslint-plugin-import": "^2.20.2",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.6",
     "prettier": "^2.0.5"
   },
   "eslintConfig": {
