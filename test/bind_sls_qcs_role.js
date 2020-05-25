@@ -1,15 +1,15 @@
-'use strict'
+'use strict';
 
-const { BindRole } = require('../sdk/cam/index').BindRole
+const { BindRole } = require('../sdk/cam/index').BindRole;
 
 class Role {
   async bindSLSQCSRole() {
     await new BindRole({
       SecretId: '',
-      SecretKey: ''
-    }).bindSLSQcsRole()
+      SecretKey: '',
+    }).bindSLSQcsRole();
   }
 }
 
-const role = new Role()
-role.bindSLSQCSRole()
+const role = new Role();
+role.bindSLSQCSRole();

@@ -1,6 +1,6 @@
-'use strict'
+'use strict';
 
-const ECLevel = require('./error-correction-level')
+const ECLevel = require('./error-correction-level');
 
 const EC_BLOCKS_TABLE = [
   // L  M  Q  H
@@ -163,8 +163,8 @@ const EC_BLOCKS_TABLE = [
   25,
   49,
   68,
-  81
-]
+  81,
+];
 
 const EC_CODEWORDS_TABLE = [
   // L  M  Q  H
@@ -327,8 +327,8 @@ const EC_CODEWORDS_TABLE = [
   750,
   1372,
   2040,
-  2430
-]
+  2430,
+];
 
 /**
  * Returns the number of error correction block that the QR Code should contain
@@ -341,17 +341,17 @@ const EC_CODEWORDS_TABLE = [
 exports.getBlocksCount = function getBlocksCount(version, errorCorrectionLevel) {
   switch (errorCorrectionLevel) {
     case ECLevel.L:
-      return EC_BLOCKS_TABLE[(version - 1) * 4 + 0]
+      return EC_BLOCKS_TABLE[(version - 1) * 4 + 0];
     case ECLevel.M:
-      return EC_BLOCKS_TABLE[(version - 1) * 4 + 1]
+      return EC_BLOCKS_TABLE[(version - 1) * 4 + 1];
     case ECLevel.Q:
-      return EC_BLOCKS_TABLE[(version - 1) * 4 + 2]
+      return EC_BLOCKS_TABLE[(version - 1) * 4 + 2];
     case ECLevel.H:
-      return EC_BLOCKS_TABLE[(version - 1) * 4 + 3]
+      return EC_BLOCKS_TABLE[(version - 1) * 4 + 3];
     default:
-      return undefined
+      return undefined;
   }
-}
+};
 
 /**
  * Returns the number of error correction codewords to use for the specified
@@ -364,14 +364,14 @@ exports.getBlocksCount = function getBlocksCount(version, errorCorrectionLevel) 
 exports.getTotalCodewordsCount = function getTotalCodewordsCount(version, errorCorrectionLevel) {
   switch (errorCorrectionLevel) {
     case ECLevel.L:
-      return EC_CODEWORDS_TABLE[(version - 1) * 4 + 0]
+      return EC_CODEWORDS_TABLE[(version - 1) * 4 + 0];
     case ECLevel.M:
-      return EC_CODEWORDS_TABLE[(version - 1) * 4 + 1]
+      return EC_CODEWORDS_TABLE[(version - 1) * 4 + 1];
     case ECLevel.Q:
-      return EC_CODEWORDS_TABLE[(version - 1) * 4 + 2]
+      return EC_CODEWORDS_TABLE[(version - 1) * 4 + 2];
     case ECLevel.H:
-      return EC_CODEWORDS_TABLE[(version - 1) * 4 + 3]
+      return EC_CODEWORDS_TABLE[(version - 1) * 4 + 3];
     default:
-      return undefined
+      return undefined;
   }
-}
+};

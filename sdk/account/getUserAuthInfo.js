@@ -1,7 +1,7 @@
-'use strict'
+'use strict';
 
-const http = require('http')
-const os = require('os')
+const http = require('http');
+const os = require('os');
 
 class GetUserAuthInfo {
   async isAuth(ownerUin, inputs = {}) {
@@ -13,9 +13,9 @@ class GetUserAuthInfo {
       client: inputs.client,
       remark: inputs.remark,
       pid: process.pid,
-      project: inputs.project
-    }
-    const requestData = JSON.stringify(data)
+      project: inputs.project,
+    };
+    const requestData = JSON.stringify(data);
 
     const options = {
       host: 'service-ocnymoks-1258344699.gz.apigw.tencentcs.com',
@@ -23,30 +23,30 @@ class GetUserAuthInfo {
       path: '/release/getUserAuthInfo',
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
-      }
-    }
+        'Content-Type': 'application/json',
+      },
+    };
 
     return new Promise((resolve, reject) => {
       const req = http.request(options, (res) => {
-        res.setEncoding('utf8')
+        res.setEncoding('utf8');
         res.on('data', (chunk) => {
-          resolve(JSON.parse(chunk))
-        })
-      })
+          resolve(JSON.parse(chunk));
+        });
+      });
 
       req.on('error', (e) => {
-        reject(e.message)
-      })
+        reject(e.message);
+      });
 
       // write data to request body
-      req.write(requestData)
+      req.write(requestData);
 
-      req.end()
-    })
+      req.end();
+    });
   }
 }
 
 module.exports = {
-  GetUserAuthInfo
-}
+  GetUserAuthInfo,
+};

@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 /*
  * Copyright (c) 2018 THL A29 Limited, a Tencent company. All Rights Reserved.
@@ -16,19 +16,19 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-const models = require('./models')
-const AbstractClient = require('../../common/abstract_client')
+const models = require('./models');
+const AbstractClient = require('../../common/abstract_client');
 
-const ListInstancesResponse = models.ListInstancesResponse
-const GetUploadUrlsResponse = models.GetUploadUrlsResponse
-const PostPublishComponentResponse = models.PostPublishComponentResponse
-const RunComponentResponse = models.RunComponentResponse
-const GetComponentAndVersionsResponse = models.GetComponentAndVersionsResponse
-const SaveInstanceResponse = models.SaveInstanceResponse
-const GetInstanceResponse = models.GetInstanceResponse
-const GetComponentVersionResponse = models.GetComponentVersionResponse
-const RunFinishComponentResponse = models.RunFinishComponentResponse
-const PrePublishComponentResponse = models.PrePublishComponentResponse
+const ListInstancesResponse = models.ListInstancesResponse;
+const GetUploadUrlsResponse = models.GetUploadUrlsResponse;
+const PostPublishComponentResponse = models.PostPublishComponentResponse;
+const RunComponentResponse = models.RunComponentResponse;
+const GetComponentAndVersionsResponse = models.GetComponentAndVersionsResponse;
+const SaveInstanceResponse = models.SaveInstanceResponse;
+const GetInstanceResponse = models.GetInstanceResponse;
+const GetComponentVersionResponse = models.GetComponentVersionResponse;
+const RunFinishComponentResponse = models.RunFinishComponentResponse;
+const PrePublishComponentResponse = models.PrePublishComponentResponse;
 
 /**
  * sls client
@@ -36,7 +36,7 @@ const PrePublishComponentResponse = models.PrePublishComponentResponse
  */
 class SlsClient extends AbstractClient {
   constructor(credential, region, profile) {
-    super('sls.tencentcloudapi.com', '2020-02-05', credential, region, profile)
+    super('sls.tencentcloudapi.com', '2020-02-05', credential, region, profile);
   }
 
   /**
@@ -46,8 +46,8 @@ class SlsClient extends AbstractClient {
    * @public
    */
   PrePublishComponent(req, cb) {
-    const resp = new PrePublishComponentResponse()
-    this.request('PrePublishComponent', req, resp, cb)
+    const resp = new PrePublishComponentResponse();
+    this.request('PrePublishComponent', req, resp, cb);
   }
 
   /**
@@ -57,8 +57,8 @@ class SlsClient extends AbstractClient {
    * @public
    */
   GetComponentVersion(req, cb) {
-    const resp = new GetComponentVersionResponse()
-    this.request('GetComponentVersion', req, resp, cb)
+    const resp = new GetComponentVersionResponse();
+    this.request('GetComponentVersion', req, resp, cb);
   }
 
   /**
@@ -69,8 +69,8 @@ class SlsClient extends AbstractClient {
      * @public
      */
   GetInstance(req, cb) {
-    const resp = new GetInstanceResponse()
-    this.request('GetInstance', req, resp, cb)
+    const resp = new GetInstanceResponse();
+    this.request('GetInstance', req, resp, cb);
   }
 
   /**
@@ -80,8 +80,8 @@ class SlsClient extends AbstractClient {
    * @public
    */
   GetUploadUrls(req, cb) {
-    const resp = new GetUploadUrlsResponse()
-    this.request('GetUploadUrls', req, resp, cb)
+    const resp = new GetUploadUrlsResponse();
+    this.request('GetUploadUrls', req, resp, cb);
   }
 
   /**
@@ -91,8 +91,8 @@ class SlsClient extends AbstractClient {
    * @public
    */
   SaveInstance(req, cb) {
-    const resp = new SaveInstanceResponse()
-    this.request('SaveInstance', req, resp, cb)
+    const resp = new SaveInstanceResponse();
+    this.request('SaveInstance', req, resp, cb);
   }
 
   /**
@@ -102,8 +102,8 @@ class SlsClient extends AbstractClient {
    * @public
    */
   RunComponent(req, cb) {
-    const resp = new RunComponentResponse()
-    this.request('RunComponent', req, resp, cb)
+    const resp = new RunComponentResponse();
+    this.request('RunComponent', req, resp, cb);
   }
 
   /**
@@ -113,8 +113,8 @@ class SlsClient extends AbstractClient {
    * @public
    */
   ListInstances(req, cb) {
-    const resp = new ListInstancesResponse()
-    this.request('ListInstances', req, resp, cb)
+    const resp = new ListInstancesResponse();
+    this.request('ListInstances', req, resp, cb);
   }
 
   /**
@@ -124,8 +124,8 @@ class SlsClient extends AbstractClient {
    * @public
    */
   PostPublishComponent(req, cb) {
-    const resp = new PostPublishComponentResponse()
-    this.request('PostPublishComponent', req, resp, cb)
+    const resp = new PostPublishComponentResponse();
+    this.request('PostPublishComponent', req, resp, cb);
   }
 
   /**
@@ -135,8 +135,8 @@ class SlsClient extends AbstractClient {
    * @public
    */
   RunFinishComponent(req, cb) {
-    const resp = new RunFinishComponentResponse()
-    this.request('RunFinishComponent', req, resp, cb)
+    const resp = new RunFinishComponentResponse();
+    this.request('RunFinishComponent', req, resp, cb);
   }
 
   /**
@@ -146,8 +146,8 @@ class SlsClient extends AbstractClient {
    * @public
    */
   GetComponentAndVersions(req, cb) {
-    const resp = new GetComponentAndVersionsResponse()
-    this.request('GetComponentAndVersions', req, resp, cb)
+    const resp = new GetComponentAndVersionsResponse();
+    this.request('GetComponentAndVersions', req, resp, cb);
   }
 }
-module.exports = SlsClient
+module.exports = SlsClient;

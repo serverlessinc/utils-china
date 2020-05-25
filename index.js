@@ -1,5 +1,5 @@
-'use strict'
+'use strict';
 
-const tencentCloudTools = require('./sdk/index')
+const tencentCloudTools = require('./sdk/index');
 
-module.exports = tencentCloudTools
+module.exports = tencentCloudTools;

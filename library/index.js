@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 module.exports = {
   sls: require('./sls'),
@@ -6,5 +6,5 @@ module.exports = {
   scf: require('./scf'),
   common: require('./common'),
   uuid: require('./uuid'),
-  monitor: require('./monitor')
-}
+  monitor: require('./monitor'),
+};

@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 /**
  * @inner
@@ -14,7 +14,7 @@ class AbstractModel {
    * @return {string}
    */
   toJsonString() {
-    return JSON.stringify(this)
+    return JSON.stringify(this);
   }
 
   /**
@@ -22,8 +22,8 @@ class AbstractModel {
    * @param  {string} dataString
    */
   fromJsonString(dataString) {
-    const params = JSON.parse(dataString)
-    this.deserialize(params)
+    const params = JSON.parse(dataString);
+    this.deserialize(params);
   }
 }
-module.exports = AbstractModel
+module.exports = AbstractModel;

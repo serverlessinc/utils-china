@@ -1,6 +1,6 @@
-'use strict'
+'use strict';
 
 module.exports = {
   Client: require('./monitor_client'),
-  Models: require('./models')
-}
+  Models: require('./models'),
+};

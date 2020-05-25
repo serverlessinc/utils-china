@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 /*
  * Copyright (c) 2018 THL A29 Limited, a Tencent company. All Rights Reserved.
@@ -16,52 +16,52 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-const models = require('./models')
-const AbstractClient = require('../../common/abstract_client')
+const models = require('./models');
+const AbstractClient = require('../../common/abstract_client');
 
-const GetUserResponse = models.GetUserResponse
-const DescribeRoleListResponse = models.DescribeRoleListResponse
-const CreatePolicyResponse = models.CreatePolicyResponse
-const AttachRolePolicyResponse = models.AttachRolePolicyResponse
-const AttachGroupPolicyResponse = models.AttachGroupPolicyResponse
-const ListUsersResponse = models.ListUsersResponse
-const UpdateRoleDescriptionResponse = models.UpdateRoleDescriptionResponse
-const ListGroupsResponse = models.ListGroupsResponse
-const DeleteRoleResponse = models.DeleteRoleResponse
-const ListGroupsForUserResponse = models.ListGroupsForUserResponse
-const ListPoliciesResponse = models.ListPoliciesResponse
-const ListAttachedRolePoliciesResponse = models.ListAttachedRolePoliciesResponse
-const DeleteUserResponse = models.DeleteUserResponse
-const GetCustomMFATokenInfoResponse = models.GetCustomMFATokenInfoResponse
-const UpdateAssumeRolePolicyResponse = models.UpdateAssumeRolePolicyResponse
-const ListAttachedUserPoliciesResponse = models.ListAttachedUserPoliciesResponse
-const CreateSAMLProviderResponse = models.CreateSAMLProviderResponse
-const UpdateSAMLProviderResponse = models.UpdateSAMLProviderResponse
-const ConsumeCustomMFATokenResponse = models.ConsumeCustomMFATokenResponse
-const ListAttachedGroupPoliciesResponse = models.ListAttachedGroupPoliciesResponse
-const DeletePolicyResponse = models.DeletePolicyResponse
-const GetGroupResponse = models.GetGroupResponse
-const DeleteSAMLProviderResponse = models.DeleteSAMLProviderResponse
-const UpdateUserResponse = models.UpdateUserResponse
-const AddUserToGroupResponse = models.AddUserToGroupResponse
-const UpdatePolicyResponse = models.UpdatePolicyResponse
-const UpdateGroupResponse = models.UpdateGroupResponse
-const DetachGroupPolicyResponse = models.DetachGroupPolicyResponse
-const SetFlagResponse = models.SetFlagResponse
-const CreateRoleResponse = models.CreateRoleResponse
-const GetSAMLProviderResponse = models.GetSAMLProviderResponse
-const RemoveUserFromGroupResponse = models.RemoveUserFromGroupResponse
-const DetachRolePolicyResponse = models.DetachRolePolicyResponse
-const ListSAMLProvidersResponse = models.ListSAMLProvidersResponse
-const DetachUserPolicyResponse = models.DetachUserPolicyResponse
-const GetRoleResponse = models.GetRoleResponse
-const GetPolicyResponse = models.GetPolicyResponse
-const DeleteGroupResponse = models.DeleteGroupResponse
-const ListUsersForGroupResponse = models.ListUsersForGroupResponse
-const AddUserResponse = models.AddUserResponse
-const ListEntitiesForPolicyResponse = models.ListEntitiesForPolicyResponse
-const AttachUserPolicyResponse = models.AttachUserPolicyResponse
-const CreateGroupResponse = models.CreateGroupResponse
+const GetUserResponse = models.GetUserResponse;
+const DescribeRoleListResponse = models.DescribeRoleListResponse;
+const CreatePolicyResponse = models.CreatePolicyResponse;
+const AttachRolePolicyResponse = models.AttachRolePolicyResponse;
+const AttachGroupPolicyResponse = models.AttachGroupPolicyResponse;
+const ListUsersResponse = models.ListUsersResponse;
+const UpdateRoleDescriptionResponse = models.UpdateRoleDescriptionResponse;
+const ListGroupsResponse = models.ListGroupsResponse;
+const DeleteRoleResponse = models.DeleteRoleResponse;
+const ListGroupsForUserResponse = models.ListGroupsForUserResponse;
+const ListPoliciesResponse = models.ListPoliciesResponse;
+const ListAttachedRolePoliciesResponse = models.ListAttachedRolePoliciesResponse;
+const DeleteUserResponse = models.DeleteUserResponse;
+const GetCustomMFATokenInfoResponse = models.GetCustomMFATokenInfoResponse;
+const UpdateAssumeRolePolicyResponse = models.UpdateAssumeRolePolicyResponse;
+const ListAttachedUserPoliciesResponse = models.ListAttachedUserPoliciesResponse;
+const CreateSAMLProviderResponse = models.CreateSAMLProviderResponse;
+const UpdateSAMLProviderResponse = models.UpdateSAMLProviderResponse;
+const ConsumeCustomMFATokenResponse = models.ConsumeCustomMFATokenResponse;
+const ListAttachedGroupPoliciesResponse = models.ListAttachedGroupPoliciesResponse;
+const DeletePolicyResponse = models.DeletePolicyResponse;
+const GetGroupResponse = models.GetGroupResponse;
+const DeleteSAMLProviderResponse = models.DeleteSAMLProviderResponse;
+const UpdateUserResponse = models.UpdateUserResponse;
+const AddUserToGroupResponse = models.AddUserToGroupResponse;
+const UpdatePolicyResponse = models.UpdatePolicyResponse;
+const UpdateGroupResponse = models.UpdateGroupResponse;
+const DetachGroupPolicyResponse = models.DetachGroupPolicyResponse;
+const SetFlagResponse = models.SetFlagResponse;
+const CreateRoleResponse = models.CreateRoleResponse;
+const GetSAMLProviderResponse = models.GetSAMLProviderResponse;
+const RemoveUserFromGroupResponse = models.RemoveUserFromGroupResponse;
+const DetachRolePolicyResponse = models.DetachRolePolicyResponse;
+const ListSAMLProvidersResponse = models.ListSAMLProvidersResponse;
+const DetachUserPolicyResponse = models.DetachUserPolicyResponse;
+const GetRoleResponse = models.GetRoleResponse;
+const GetPolicyResponse = models.GetPolicyResponse;
+const DeleteGroupResponse = models.DeleteGroupResponse;
+const ListUsersForGroupResponse = models.ListUsersForGroupResponse;
+const AddUserResponse = models.AddUserResponse;
+const ListEntitiesForPolicyResponse = models.ListEntitiesForPolicyResponse;
+const AttachUserPolicyResponse = models.AttachUserPolicyResponse;
+const CreateGroupResponse = models.CreateGroupResponse;
 
 /**
  * cam client
@@ -69,7 +69,7 @@ const CreateGroupResponse = models.CreateGroupResponse
  */
 class CamClient extends AbstractClient {
   constructor(credential, region, profile) {
-    super('cam.tencentcloudapi.com', '2019-01-16', credential, region, profile)
+    super('cam.tencentcloudapi.com', '2019-01-16', credential, region, profile);
   }
 
   /**
@@ -79,8 +79,8 @@ class CamClient extends AbstractClient {
    * @public
    */
   AddUser(req, cb) {
-    const resp = new AddUserResponse()
-    this.request('AddUser', req, resp, cb)
+    const resp = new AddUserResponse();
+    this.request('AddUser', req, resp, cb);
   }
 
   /**
@@ -90,8 +90,8 @@ class CamClient extends AbstractClient {
    * @public
    */
   GetSAMLProvider(req, cb) {
-    const resp = new GetSAMLProviderResponse()
-    this.request('GetSAMLProvider', req, resp, cb)
+    const resp = new GetSAMLProviderResponse();
+    this.request('GetSAMLProvider', req, resp, cb);
   }
 
   /**
@@ -101,8 +101,8 @@ class CamClient extends AbstractClient {
    * @public
    */
   ListSAMLProviders(req, cb) {
-    const resp = new ListSAMLProvidersResponse()
-    this.request('ListSAMLProviders', req, resp, cb)
+    const resp = new ListSAMLProvidersResponse();
+    this.request('ListSAMLProviders', req, resp, cb);
   }
 
   /**
@@ -112,8 +112,8 @@ class CamClient extends AbstractClient {
    * @public
    */
   CreateRole(req, cb) {
-    const resp = new CreateRoleResponse()
-    this.request('CreateRole', req, resp, cb)
+    const resp = new CreateRoleResponse();
+    this.request('CreateRole', req, resp, cb);
   }
 
   /**
@@ -123,8 +123,8 @@ class CamClient extends AbstractClient {
    * @public
    */
   ListUsers(req, cb) {
-    const resp = new ListUsersResponse()
-    this.request('ListUsers', req, resp, cb)
+    const resp = new ListUsersResponse();
+    this.request('ListUsers', req, resp, cb);
   }
 
   /**
@@ -134,8 +134,8 @@ class CamClient extends AbstractClient {
    * @public
    */
   ListAttachedRolePolicies(req, cb) {
-    const resp = new ListAttachedRolePoliciesResponse()
-    this.request('ListAttachedRolePolicies', req, resp, cb)
+    const resp = new ListAttachedRolePoliciesResponse();
+    this.request('ListAttachedRolePolicies', req, resp, cb);
   }
 
   /**
@@ -145,8 +145,8 @@ class CamClient extends AbstractClient {
    * @public
    */
   DeletePolicy(req, cb) {
-    const resp = new DeletePolicyResponse()
-    this.request('DeletePolicy', req, resp, cb)
+    const resp = new DeletePolicyResponse();
+    this.request('DeletePolicy', req, resp, cb);
   }
 
   /**
@@ -156,8 +156,8 @@ class CamClient extends AbstractClient {
    * @public
    */
   CreateGroup(req, cb) {
-    const resp = new CreateGroupResponse()
-    this.request('CreateGroup', req, resp, cb)
+    const resp = new CreateGroupResponse();
+    this.request('CreateGroup', req, resp, cb);
   }
 
   /**
@@ -167,8 +167,8 @@ class CamClient extends AbstractClient {
    * @public
    */
   DetachRolePolicy(req, cb) {
-    const resp = new DetachRolePolicyResponse()
-    this.request('DetachRolePolicy', req, resp, cb)
+    const resp = new DetachRolePolicyResponse();
+    this.request('DetachRolePolicy', req, resp, cb);
   }
 
   /**
@@ -178,8 +178,8 @@ class CamClient extends AbstractClient {
    * @public
    */
   DescribeRoleList(req, cb) {
-    const resp = new DescribeRoleListResponse()
-    this.request('DescribeRoleList', req, resp, cb)
+    const resp = new DescribeRoleListResponse();
+    this.request('DescribeRoleList', req, resp, cb);
   }
 
   /**
@@ -189,8 +189,8 @@ class CamClient extends AbstractClient {
    * @public
    */
   CreateSAMLProvider(req, cb) {
-    const resp = new CreateSAMLProviderResponse()
-    this.request('CreateSAMLProvider', req, resp, cb)
+    const resp = new CreateSAMLProviderResponse();
+    this.request('CreateSAMLProvider', req, resp, cb);
   }
 
   /**
@@ -200,8 +200,8 @@ class CamClient extends AbstractClient {
    * @public
    */
   DeleteSAMLProvider(req, cb) {
-    const resp = new DeleteSAMLProviderResponse()
-    this.request('DeleteSAMLProvider', req, resp, cb)
+    const resp = new DeleteSAMLProviderResponse();
+    this.request('DeleteSAMLProvider', req, resp, cb);
   }
 
   /**
@@ -211,8 +211,8 @@ class CamClient extends AbstractClient {
    * @public
    */
   UpdateUser(req, cb) {
-    const resp = new UpdateUserResponse()
-    this.request('UpdateUser', req, resp, cb)
+    const resp = new UpdateUserResponse();
+    this.request('UpdateUser', req, resp, cb);
   }
 
   /**
@@ -222,8 +222,8 @@ class CamClient extends AbstractClient {
    * @public
    */
   GetPolicy(req, cb) {
-    const resp = new GetPolicyResponse()
-    this.request('GetPolicy', req, resp, cb)
+    const resp = new GetPolicyResponse();
+    this.request('GetPolicy', req, resp, cb);
   }
 
   /**
@@ -233,8 +233,8 @@ class CamClient extends AbstractClient {
    * @public
    */
   SetFlag(req, cb) {
-    const resp = new SetFlagResponse()
-    this.request('SetFlag', req, resp, cb)
+    const resp = new SetFlagResponse();
+    this.request('SetFlag', req, resp, cb);
   }
 
   /**
@@ -244,8 +244,8 @@ class CamClient extends AbstractClient {
    * @public
    */
   GetCustomMFATokenInfo(req, cb) {
-    const resp = new GetCustomMFATokenInfoResponse()
-    this.request('GetCustomMFATokenInfo', req, resp, cb)
+    const resp = new GetCustomMFATokenInfoResponse();
+    this.request('GetCustomMFATokenInfo', req, resp, cb);
   }
 
   /**
@@ -255,8 +255,8 @@ class CamClient extends AbstractClient {
    * @public
    */
   DeleteGroup(req, cb) {
-    const resp = new DeleteGroupResponse()
-    this.request('DeleteGroup', req, resp, cb)
+    const resp = new DeleteGroupResponse();
+    this.request('DeleteGroup', req, resp, cb);
   }
 
   /**
@@ -266,8 +266,8 @@ class CamClient extends AbstractClient {
    * @public
    */
   DeleteRole(req, cb) {
-    const resp = new DeleteRoleResponse()
-    this.request('DeleteRole', req, resp, cb)
+    const resp = new DeleteRoleResponse();
+    this.request('DeleteRole', req, resp, cb);
   }
 
   /**
@@ -277,8 +277,8 @@ class CamClient extends AbstractClient {
    * @public
    */
   GetUser(req, cb) {
-    const resp = new GetUserResponse()
-    this.request('GetUser', req, resp, cb)
+    const resp = new GetUserResponse();
+    this.request('GetUser', req, resp, cb);
   }
 
   /**
@@ -288,8 +288,8 @@ class CamClient extends AbstractClient {
    * @public
    */
   UpdateGroup(req, cb) {
-    const resp = new UpdateGroupResponse()
-    this.request('UpdateGroup', req, resp, cb)
+    const resp = new UpdateGroupResponse();
+    this.request('UpdateGroup', req, resp, cb);
   }
 
   /**
@@ -299,8 +299,8 @@ class CamClient extends AbstractClient {
    * @public
    */
   ListAttachedGroupPolicies(req, cb) {
-    const resp = new ListAttachedGroupPoliciesResponse()
-    this.request('ListAttachedGroupPolicies', req, resp, cb)
+    const resp = new ListAttachedGroupPoliciesResponse();
+    this.request('ListAttachedGroupPolicies', req, resp, cb);
   }
 
   /**
@@ -310,8 +310,8 @@ class CamClient extends AbstractClient {
    * @public
    */
   ConsumeCustomMFAToken(req, cb) {
-    const resp = new ConsumeCustomMFATokenResponse()
-    this.request('ConsumeCustomMFAToken', req, resp, cb)
+    const resp = new ConsumeCustomMFATokenResponse();
+    this.request('ConsumeCustomMFAToken', req, resp, cb);
   }
 
   /**
@@ -321,8 +321,8 @@ class CamClient extends AbstractClient {
    * @public
    */
   GetGroup(req, cb) {
-    const resp = new GetGroupResponse()
-    this.request('GetGroup', req, resp, cb)
+    const resp = new GetGroupResponse();
+    this.request('GetGroup', req, resp, cb);
   }
 
   /**
@@ -332,8 +332,8 @@ class CamClient extends AbstractClient {
    * @public
    */
   ListGroups(req, cb) {
-    const resp = new ListGroupsResponse()
-    this.request('ListGroups', req, resp, cb)
+    const resp = new ListGroupsResponse();
+    this.request('ListGroups', req, resp, cb);
   }
 
   /**
@@ -343,8 +343,8 @@ class CamClient extends AbstractClient {
    * @public
    */
   AddUserToGroup(req, cb) {
-    const resp = new AddUserToGroupResponse()
-    this.request('AddUserToGroup', req, resp, cb)
+    const resp = new AddUserToGroupResponse();
+    this.request('AddUserToGroup', req, resp, cb);
   }
 
   /**
@@ -354,8 +354,8 @@ class CamClient extends AbstractClient {
    * @public
    */
   AttachRolePolicy(req, cb) {
-    const resp = new AttachRolePolicyResponse()
-    this.request('AttachRolePolicy', req, resp, cb)
+    const resp = new AttachRolePolicyResponse();
+    this.request('AttachRolePolicy', req, resp, cb);
   }
 
   /**
@@ -365,8 +365,8 @@ class CamClient extends AbstractClient {
    * @public
    */
   UpdatePolicy(req, cb) {
-    const resp = new UpdatePolicyResponse()
-    this.request('UpdatePolicy', req, resp, cb)
+    const resp = new UpdatePolicyResponse();
+    this.request('UpdatePolicy', req, resp, cb);
   }
 
   /**
@@ -376,8 +376,8 @@ class CamClient extends AbstractClient {
    * @public
    */
   UpdateSAMLProvider(req, cb) {
-    const resp = new UpdateSAMLProviderResponse()
-    this.request('UpdateSAMLProvider', req, resp, cb)
+    const resp = new UpdateSAMLProviderResponse();
+    this.request('UpdateSAMLProvider', req, resp, cb);
   }
 
   /**
@@ -387,8 +387,8 @@ class CamClient extends AbstractClient {
    * @public
    */
   GetRole(req, cb) {
-    const resp = new GetRoleResponse()
-    this.request('GetRole', req, resp, cb)
+    const resp = new GetRoleResponse();
+    this.request('GetRole', req, resp, cb);
   }
 
   /**
@@ -398,8 +398,8 @@ class CamClient extends AbstractClient {
    * @public
    */
   UpdateRoleDescription(req, cb) {
-    const resp = new UpdateRoleDescriptionResponse()
-    this.request('UpdateRoleDescription', req, resp, cb)
+    const resp = new UpdateRoleDescriptionResponse();
+    this.request('UpdateRoleDescription', req, resp, cb);
   }
 
   /**
@@ -409,8 +409,8 @@ class CamClient extends AbstractClient {
    * @public
    */
   ListAttachedUserPolicies(req, cb) {
-    const resp = new ListAttachedUserPoliciesResponse()
-    this.request('ListAttachedUserPolicies', req, resp, cb)
+    const resp = new ListAttachedUserPoliciesResponse();
+    this.request('ListAttachedUserPolicies', req, resp, cb);
   }
 
   /**
@@ -420,8 +420,8 @@ class CamClient extends AbstractClient {
    * @public
    */
   DeleteUser(req, cb) {
-    const resp = new DeleteUserResponse()
-    this.request('DeleteUser', req, resp, cb)
+    const resp = new DeleteUserResponse();
+    this.request('DeleteUser', req, resp, cb);
   }
 
   /**
@@ -431,8 +431,8 @@ class CamClient extends AbstractClient {
    * @public
    */
   DetachGroupPolicy(req, cb) {
-    const resp = new DetachGroupPolicyResponse()
-    this.request('DetachGroupPolicy', req, resp, cb)
+    const resp = new DetachGroupPolicyResponse();
+    this.request('DetachGroupPolicy', req, resp, cb);
   }
 
   /**
@@ -442,8 +442,8 @@ class CamClient extends AbstractClient {
    * @public
    */
   RemoveUserFromGroup(req, cb) {
-    const resp = new RemoveUserFromGroupResponse()
-    this.request('RemoveUserFromGroup', req, resp, cb)
+    const resp = new RemoveUserFromGroupResponse();
+    this.request('RemoveUserFromGroup', req, resp, cb);
   }
 
   /**
@@ -453,8 +453,8 @@ class CamClient extends AbstractClient {
    * @public
    */
   ListPolicies(req, cb) {
-    const resp = new ListPoliciesResponse()
-    this.request('ListPolicies', req, resp, cb)
+    const resp = new ListPoliciesResponse();
+    this.request('ListPolicies', req, resp, cb);
   }
 
   /**
@@ -464,8 +464,8 @@ class CamClient extends AbstractClient {
    * @public
    */
   ListUsersForGroup(req, cb) {
-    const resp = new ListUsersForGroupResponse()
-    this.request('ListUsersForGroup', req, resp, cb)
+    const resp = new ListUsersForGroupResponse();
+    this.request('ListUsersForGroup', req, resp, cb);
   }
 
   /**
@@ -475,8 +475,8 @@ class CamClient extends AbstractClient {
    * @public
    */
   AttachUserPolicy(req, cb) {
-    const resp = new AttachUserPolicyResponse()
-    this.request('AttachUserPolicy', req, resp, cb)
+    const resp = new AttachUserPolicyResponse();
+    this.request('AttachUserPolicy', req, resp, cb);
   }
 
   /**
@@ -486,8 +486,8 @@ class CamClient extends AbstractClient {
    * @public
    */
   ListEntitiesForPolicy(req, cb) {
-    const resp = new ListEntitiesForPolicyResponse()
-    this.request('ListEntitiesForPolicy', req, resp, cb)
+    const resp = new ListEntitiesForPolicyResponse();
+    this.request('ListEntitiesForPolicy', req, resp, cb);
   }
 
   /**
@@ -497,8 +497,8 @@ class CamClient extends AbstractClient {
    * @public
    */
   AttachGroupPolicy(req, cb) {
-    const resp = new AttachGroupPolicyResponse()
-    this.request('AttachGroupPolicy', req, resp, cb)
+    const resp = new AttachGroupPolicyResponse();
+    this.request('AttachGroupPolicy', req, resp, cb);
   }
 
   /**
@@ -508,8 +508,8 @@ class CamClient extends AbstractClient {
    * @public
    */
   UpdateAssumeRolePolicy(req, cb) {
-    const resp = new UpdateAssumeRolePolicyResponse()
-    this.request('UpdateAssumeRolePolicy', req, resp, cb)
+    const resp = new UpdateAssumeRolePolicyResponse();
+    this.request('UpdateAssumeRolePolicy', req, resp, cb);
   }
 
   /**
@@ -519,8 +519,8 @@ class CamClient extends AbstractClient {
    * @public
    */
   CreatePolicy(req, cb) {
-    const resp = new CreatePolicyResponse()
-    this.request('CreatePolicy', req, resp, cb)
+    const resp = new CreatePolicyResponse();
+    this.request('CreatePolicy', req, resp, cb);
   }
 
   /**
@@ -530,8 +530,8 @@ class CamClient extends AbstractClient {
    * @public
    */
   DetachUserPolicy(req, cb) {
-    const resp = new DetachUserPolicyResponse()
-    this.request('DetachUserPolicy', req, resp, cb)
+    const resp = new DetachUserPolicyResponse();
+    this.request('DetachUserPolicy', req, resp, cb);
   }
 
   /**
@@ -541,8 +541,8 @@ class CamClient extends AbstractClient {
    * @public
    */
   ListGroupsForUser(req, cb) {
-    const resp = new ListGroupsForUserResponse()
-    this.request('ListGroupsForUser', req, resp, cb)
+    const resp = new ListGroupsForUserResponse();
+    this.request('ListGroupsForUser', req, resp, cb);
   }
 }
-module.exports = CamClient
+module.exports = CamClient;

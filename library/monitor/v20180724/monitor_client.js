@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 /*
  * Copyright (c) 2018 THL A29 Limited, a Tencent company. All Rights Reserved.
@@ -16,25 +16,25 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-const models = require('./models')
-const AbstractClient = require('../../common/abstract_client')
+const models = require('./models');
+const AbstractClient = require('../../common/abstract_client');
 
-const DeletePolicyGroupResponse = models.DeletePolicyGroupResponse
-const DescribePolicyGroupListResponse = models.DescribePolicyGroupListResponse
-const DescribePolicyConditionListResponse = models.DescribePolicyConditionListResponse
-const PutMonitorDataResponse = models.PutMonitorDataResponse
-const DescribePolicyGroupInfoResponse = models.DescribePolicyGroupInfoResponse
-const DescribeBasicAlarmListResponse = models.DescribeBasicAlarmListResponse
-const UnBindingPolicyObjectResponse = models.UnBindingPolicyObjectResponse
-const GetMonitorDataResponse = models.GetMonitorDataResponse
-const DescribeBindingPolicyObjectListResponse = models.DescribeBindingPolicyObjectListResponse
-const CreatePolicyGroupResponse = models.CreatePolicyGroupResponse
-const DescribeBaseMetricsResponse = models.DescribeBaseMetricsResponse
-const DescribeAccidentEventListResponse = models.DescribeAccidentEventListResponse
-const DescribeProductEventListResponse = models.DescribeProductEventListResponse
-const UnBindingAllPolicyObjectResponse = models.UnBindingAllPolicyObjectResponse
-const ModifyAlarmReceiversResponse = models.ModifyAlarmReceiversResponse
-const BindingPolicyObjectResponse = models.BindingPolicyObjectResponse
+const DeletePolicyGroupResponse = models.DeletePolicyGroupResponse;
+const DescribePolicyGroupListResponse = models.DescribePolicyGroupListResponse;
+const DescribePolicyConditionListResponse = models.DescribePolicyConditionListResponse;
+const PutMonitorDataResponse = models.PutMonitorDataResponse;
+const DescribePolicyGroupInfoResponse = models.DescribePolicyGroupInfoResponse;
+const DescribeBasicAlarmListResponse = models.DescribeBasicAlarmListResponse;
+const UnBindingPolicyObjectResponse = models.UnBindingPolicyObjectResponse;
+const GetMonitorDataResponse = models.GetMonitorDataResponse;
+const DescribeBindingPolicyObjectListResponse = models.DescribeBindingPolicyObjectListResponse;
+const CreatePolicyGroupResponse = models.CreatePolicyGroupResponse;
+const DescribeBaseMetricsResponse = models.DescribeBaseMetricsResponse;
+const DescribeAccidentEventListResponse = models.DescribeAccidentEventListResponse;
+const DescribeProductEventListResponse = models.DescribeProductEventListResponse;
+const UnBindingAllPolicyObjectResponse = models.UnBindingAllPolicyObjectResponse;
+const ModifyAlarmReceiversResponse = models.ModifyAlarmReceiversResponse;
+const BindingPolicyObjectResponse = models.BindingPolicyObjectResponse;
 
 /**
  * monitor client
@@ -42,7 +42,7 @@ const BindingPolicyObjectResponse = models.BindingPolicyObjectResponse
  */
 class MonitorClient extends AbstractClient {
   constructor(credential, region, profile) {
-    super('monitor.tencentcloudapi.com', '2018-07-24', credential, region, profile)
+    super('monitor.tencentcloudapi.com', '2018-07-24', credential, region, profile);
   }
 
   /**
@@ -52,8 +52,8 @@ class MonitorClient extends AbstractClient {
    * @public
    */
   DescribeProductEventList(req, cb) {
-    const resp = new DescribeProductEventListResponse()
-    this.request('DescribeProductEventList', req, resp, cb)
+    const resp = new DescribeProductEventListResponse();
+    this.request('DescribeProductEventList', req, resp, cb);
   }
 
   /**
@@ -63,8 +63,8 @@ class MonitorClient extends AbstractClient {
    * @public
    */
   DescribeAccidentEventList(req, cb) {
-    const resp = new DescribeAccidentEventListResponse()
-    this.request('DescribeAccidentEventList', req, resp, cb)
+    const resp = new DescribeAccidentEventListResponse();
+    this.request('DescribeAccidentEventList', req, resp, cb);
   }
 
   /**
@@ -74,8 +74,8 @@ class MonitorClient extends AbstractClient {
    * @public
    */
   UnBindingPolicyObject(req, cb) {
-    const resp = new UnBindingPolicyObjectResponse()
-    this.request('UnBindingPolicyObject', req, resp, cb)
+    const resp = new UnBindingPolicyObjectResponse();
+    this.request('UnBindingPolicyObject', req, resp, cb);
   }
 
   /**
@@ -85,8 +85,8 @@ class MonitorClient extends AbstractClient {
    * @public
    */
   BindingPolicyObject(req, cb) {
-    const resp = new BindingPolicyObjectResponse()
-    this.request('BindingPolicyObject', req, resp, cb)
+    const resp = new BindingPolicyObjectResponse();
+    this.request('BindingPolicyObject', req, resp, cb);
   }
 
   /**
@@ -96,8 +96,8 @@ class MonitorClient extends AbstractClient {
    * @public
    */
   ModifyAlarmReceivers(req, cb) {
-    const resp = new ModifyAlarmReceiversResponse()
-    this.request('ModifyAlarmReceivers', req, resp, cb)
+    const resp = new ModifyAlarmReceiversResponse();
+    this.request('ModifyAlarmReceivers', req, resp, cb);
   }
 
   /**
@@ -107,8 +107,8 @@ class MonitorClient extends AbstractClient {
    * @public
    */
   DescribeBindingPolicyObjectList(req, cb) {
-    const resp = new DescribeBindingPolicyObjectListResponse()
-    this.request('DescribeBindingPolicyObjectList', req, resp, cb)
+    const resp = new DescribeBindingPolicyObjectListResponse();
+    this.request('DescribeBindingPolicyObjectList', req, resp, cb);
   }
 
   /**
@@ -118,8 +118,8 @@ class MonitorClient extends AbstractClient {
    * @public
    */
   DeletePolicyGroup(req, cb) {
-    const resp = new DeletePolicyGroupResponse()
-    this.request('DeletePolicyGroup', req, resp, cb)
+    const resp = new DeletePolicyGroupResponse();
+    this.request('DeletePolicyGroup', req, resp, cb);
   }
 
   /**
@@ -129,8 +129,8 @@ class MonitorClient extends AbstractClient {
    * @public
    */
   DescribeBaseMetrics(req, cb) {
-    const resp = new DescribeBaseMetricsResponse()
-    this.request('DescribeBaseMetrics', req, resp, cb)
+    const resp = new DescribeBaseMetricsResponse();
+    this.request('DescribeBaseMetrics', req, resp, cb);
   }
 
   /**
@@ -140,8 +140,8 @@ class MonitorClient extends AbstractClient {
    * @public
    */
   DescribePolicyGroupInfo(req, cb) {
-    const resp = new DescribePolicyGroupInfoResponse()
-    this.request('DescribePolicyGroupInfo', req, resp, cb)
+    const resp = new DescribePolicyGroupInfoResponse();
+    this.request('DescribePolicyGroupInfo', req, resp, cb);
   }
 
   /**
@@ -151,8 +151,8 @@ class MonitorClient extends AbstractClient {
    * @public
    */
   DescribePolicyGroupList(req, cb) {
-    const resp = new DescribePolicyGroupListResponse()
-    this.request('DescribePolicyGroupList', req, resp, cb)
+    const resp = new DescribePolicyGroupListResponse();
+    this.request('DescribePolicyGroupList', req, resp, cb);
   }
 
   /**
@@ -162,8 +162,8 @@ class MonitorClient extends AbstractClient {
    * @public
    */
   DescribeBasicAlarmList(req, cb) {
-    const resp = new DescribeBasicAlarmListResponse()
-    this.request('DescribeBasicAlarmList', req, resp, cb)
+    const resp = new DescribeBasicAlarmListResponse();
+    this.request('DescribeBasicAlarmList', req, resp, cb);
   }
 
   /**
@@ -175,8 +175,8 @@ class MonitorClient extends AbstractClient {
      * @public
      */
   GetMonitorData(req, cb) {
-    const resp = new GetMonitorDataResponse()
-    this.request('GetMonitorData', req, resp, cb)
+    const resp = new GetMonitorDataResponse();
+    this.request('GetMonitorData', req, resp, cb);
   }
 
   /**
@@ -192,8 +192,8 @@ class MonitorClient extends AbstractClient {
      * @public
      */
   PutMonitorData(req, cb) {
-    const resp = new PutMonitorDataResponse()
-    this.request('PutMonitorData', req, resp, cb)
+    const resp = new PutMonitorDataResponse();
+    this.request('PutMonitorData', req, resp, cb);
   }
 
   /**
@@ -203,8 +203,8 @@ class MonitorClient extends AbstractClient {
    * @public
    */
   CreatePolicyGroup(req, cb) {
-    const resp = new CreatePolicyGroupResponse()
-    this.request('CreatePolicyGroup', req, resp, cb)
+    const resp = new CreatePolicyGroupResponse();
+    this.request('CreatePolicyGroup', req, resp, cb);
   }
 
   /**
@@ -214,8 +214,8 @@ class MonitorClient extends AbstractClient {
    * @public
    */
   UnBindingAllPolicyObject(req, cb) {
-    const resp = new UnBindingAllPolicyObjectResponse()
-    this.request('UnBindingAllPolicyObject', req, resp, cb)
+    const resp = new UnBindingAllPolicyObjectResponse();
+    this.request('UnBindingAllPolicyObject', req, resp, cb);
   }
 
   /**
@@ -225,8 +225,8 @@ class MonitorClient extends AbstractClient {
    * @public
    */
   DescribePolicyConditionList(req, cb) {
-    const resp = new DescribePolicyConditionListResponse()
-    this.request('DescribePolicyConditionList', req, resp, cb)
+    const resp = new DescribePolicyConditionListResponse();
+    this.request('DescribePolicyConditionList', req, resp, cb);
   }
 }
-module.exports = MonitorClient
+module.exports = MonitorClient;

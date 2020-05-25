@@ -1,5 +1,5 @@
-'use strict'
+'use strict';
 
 module.exports = {
-  IsInChina: require('./isInChina')
-}
+  IsInChina: require('./isInChina'),
+};

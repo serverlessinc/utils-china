@@ -1,5 +1,5 @@
-'use strict'
+'use strict';
 
 module.exports = {
-  GetUserAuthInfo: require('./getUserAuthInfo').GetUserAuthInfo
-}
+  GetUserAuthInfo: require('./getUserAuthInfo').GetUserAuthInfo,
+};

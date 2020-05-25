@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 /*
  * Copyright (c) 2018 THL A29 Limited, a Tencent company. All Rights Reserved.
@@ -16,7 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-const AbstractModel = require('../../common/abstract_model')
+const AbstractModel = require('../../common/abstract_model');
 
 /**
  * ListInstances返回参数结构体
@@ -24,19 +24,19 @@ const AbstractModel = require('../../common/abstract_model')
  */
 class ListInstancesResponse extends AbstractModel {
   constructor() {
-    super()
+    super();
 
     /**
      * JSON stringified object containing response payload.
      * @type {string || null}
      */
-    this.Body = null
+    this.Body = null;
 
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      * @type {string || null}
      */
-    this.RequestId = null
+    this.RequestId = null;
   }
 
   /**
@@ -44,10 +44,10 @@ class ListInstancesResponse extends AbstractModel {
    */
   deserialize(params) {
     if (!params) {
-      return
+      return;
     }
-    this.Body = 'Body' in params ? params.Body : null
-    this.RequestId = 'RequestId' in params ? params.RequestId : null
+    this.Body = 'Body' in params ? params.Body : null;
+    this.RequestId = 'RequestId' in params ? params.RequestId : null;
   }
 }
 
@@ -57,19 +57,19 @@ class ListInstancesResponse extends AbstractModel {
  */
 class GetUploadUrlsResponse extends AbstractModel {
   constructor() {
-    super()
+    super();
 
     /**
      * JSON stringified object containing response payload.
      * @type {string || null}
      */
-    this.Body = null
+    this.Body = null;
 
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      * @type {string || null}
      */
-    this.RequestId = null
+    this.RequestId = null;
   }
 
   /**
@@ -77,10 +77,10 @@ class GetUploadUrlsResponse extends AbstractModel {
    */
   deserialize(params) {
     if (!params) {
-      return
+      return;
     }
-    this.Body = 'Body' in params ? params.Body : null
-    this.RequestId = 'RequestId' in params ? params.RequestId : null
+    this.Body = 'Body' in params ? params.Body : null;
+    this.RequestId = 'RequestId' in params ? params.RequestId : null;
   }
 }
 
@@ -90,31 +90,31 @@ class GetUploadUrlsResponse extends AbstractModel {
  */
 class RunFinishComponentRequest extends AbstractModel {
   constructor() {
-    super()
+    super();
 
     /**
      * JSON stringified object
      * @type {string || null}
      */
-    this.Body = null
+    this.Body = null;
 
     /**
      * App Name
      * @type {string || null}
      */
-    this.AppName = null
+    this.AppName = null;
 
     /**
      * Stage Name
      * @type {string || null}
      */
-    this.StageName = null
+    this.StageName = null;
 
     /**
      * Instance Name
      * @type {string || null}
      */
-    this.InstanceName = null
+    this.InstanceName = null;
   }
 
   /**
@@ -122,12 +122,12 @@ class RunFinishComponentRequest extends AbstractModel {
    */
   deserialize(params) {
     if (!params) {
-      return
+      return;
     }
-    this.Body = 'Body' in params ? params.Body : null
-    this.AppName = 'AppName' in params ? params.AppName : null
-    this.StageName = 'StageName' in params ? params.StageName : null
-    this.InstanceName = 'InstanceName' in params ? params.InstanceName : null
+    this.Body = 'Body' in params ? params.Body : null;
+    this.AppName = 'AppName' in params ? params.AppName : null;
+    this.StageName = 'StageName' in params ? params.StageName : null;
+    this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
   }
 }
 
@@ -137,13 +137,13 @@ class RunFinishComponentRequest extends AbstractModel {
  */
 class GetComponentAndVersionsRequest extends AbstractModel {
   constructor() {
-    super()
+    super();
 
     /**
      * Component Name
      * @type {string || null}
      */
-    this.ComponentName = null
+    this.ComponentName = null;
   }
 
   /**
@@ -151,9 +151,9 @@ class GetComponentAndVersionsRequest extends AbstractModel {
    */
   deserialize(params) {
     if (!params) {
-      return
+      return;
     }
-    this.ComponentName = 'ComponentName' in params ? params.ComponentName : null
+    this.ComponentName = 'ComponentName' in params ? params.ComponentName : null;
   }
 }
 
@@ -163,19 +163,19 @@ class GetComponentAndVersionsRequest extends AbstractModel {
  */
 class PostPublishComponentResponse extends AbstractModel {
   constructor() {
-    super()
+    super();
 
     /**
      * JSON stringified object containing response payload.
      * @type {string || null}
      */
-    this.Body = null
+    this.Body = null;
 
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      * @type {string || null}
      */
-    this.RequestId = null
+    this.RequestId = null;
   }
 
   /**
@@ -183,10 +183,10 @@ class PostPublishComponentResponse extends AbstractModel {
    */
   deserialize(params) {
     if (!params) {
-      return
+      return;
     }
-    this.Body = 'Body' in params ? params.Body : null
-    this.RequestId = 'RequestId' in params ? params.RequestId : null
+    this.Body = 'Body' in params ? params.Body : null;
+    this.RequestId = 'RequestId' in params ? params.RequestId : null;
   }
 }
 
@@ -196,19 +196,19 @@ class PostPublishComponentResponse extends AbstractModel {
  */
 class RunComponentResponse extends AbstractModel {
   constructor() {
-    super()
+    super();
 
     /**
      * JSON stringified object containing response payload.
      * @type {string || null}
      */
-    this.Body = null
+    this.Body = null;
 
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      * @type {string || null}
      */
-    this.RequestId = null
+    this.RequestId = null;
   }
 
   /**
@@ -216,10 +216,10 @@ class RunComponentResponse extends AbstractModel {
    */
   deserialize(params) {
     if (!params) {
-      return
+      return;
     }
-    this.Body = 'Body' in params ? params.Body : null
-    this.RequestId = 'RequestId' in params ? params.RequestId : null
+    this.Body = 'Body' in params ? params.Body : null;
+    this.RequestId = 'RequestId' in params ? params.RequestId : null;
   }
 }
 
@@ -229,19 +229,19 @@ class RunComponentResponse extends AbstractModel {
  */
 class GetComponentAndVersionsResponse extends AbstractModel {
   constructor() {
-    super()
+    super();
 
     /**
      * JSON stringified object containing response payload
      * @type {string || null}
      */
-    this.Body = null
+    this.Body = null;
 
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      * @type {string || null}
      */
-    this.RequestId = null
+    this.RequestId = null;
   }
 
   /**
@@ -249,10 +249,10 @@ class GetComponentAndVersionsResponse extends AbstractModel {
    */
   deserialize(params) {
     if (!params) {
-      return
+      return;
     }
-    this.Body = 'Body' in params ? params.Body : null
-    this.RequestId = 'RequestId' in params ? params.RequestId : null
+    this.Body = 'Body' in params ? params.Body : null;
+    this.RequestId = 'RequestId' in params ? params.RequestId : null;
   }
 }
 
@@ -262,31 +262,31 @@ class GetComponentAndVersionsResponse extends AbstractModel {
  */
 class GetInstanceRequest extends AbstractModel {
   constructor() {
-    super()
+    super();
 
     /**
      * JSON stringified object
      * @type {string || null}
      */
-    this.Body = null
+    this.Body = null;
 
     /**
      * App Name
      * @type {string || null}
      */
-    this.AppName = null
+    this.AppName = null;
 
     /**
      * Stage Name
      * @type {string || null}
      */
-    this.StageName = null
+    this.StageName = null;
 
     /**
      * Instance Name
      * @type {string || null}
      */
-    this.InstanceName = null
+    this.InstanceName = null;
   }
 
   /**
@@ -294,12 +294,12 @@ class GetInstanceRequest extends AbstractModel {
    */
   deserialize(params) {
     if (!params) {
-      return
+      return;
     }
-    this.Body = 'Body' in params ? params.Body : null
-    this.AppName = 'AppName' in params ? params.AppName : null
-    this.StageName = 'StageName' in params ? params.StageName : null
-    this.InstanceName = 'InstanceName' in params ? params.InstanceName : null
+    this.Body = 'Body' in params ? params.Body : null;
+    this.AppName = 'AppName' in params ? params.AppName : null;
+    this.StageName = 'StageName' in params ? params.StageName : null;
+    this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
   }
 }
 
@@ -309,19 +309,19 @@ class GetInstanceRequest extends AbstractModel {
  */
 class SaveInstanceResponse extends AbstractModel {
   constructor() {
-    super()
+    super();
 
     /**
      * JSON stringified object containing response payload.
      * @type {string || null}
      */
-    this.Body = null
+    this.Body = null;
 
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      * @type {string || null}
      */
-    this.RequestId = null
+    this.RequestId = null;
   }
 
   /**
@@ -329,10 +329,10 @@ class SaveInstanceResponse extends AbstractModel {
    */
   deserialize(params) {
     if (!params) {
-      return
+      return;
     }
-    this.Body = 'Body' in params ? params.Body : null
-    this.RequestId = 'RequestId' in params ? params.RequestId : null
+    this.Body = 'Body' in params ? params.Body : null;
+    this.RequestId = 'RequestId' in params ? params.RequestId : null;
   }
 }
 
@@ -342,19 +342,19 @@ class SaveInstanceResponse extends AbstractModel {
  */
 class GetComponentVersionRequest extends AbstractModel {
   constructor() {
-    super()
+    super();
 
     /**
      * Component Name
      * @type {string || null}
      */
-    this.ComponentName = null
+    this.ComponentName = null;
 
     /**
      * Component Version
      * @type {string || null}
      */
-    this.ComponentVersion = null
+    this.ComponentVersion = null;
   }
 
   /**
@@ -362,10 +362,10 @@ class GetComponentVersionRequest extends AbstractModel {
    */
   deserialize(params) {
     if (!params) {
-      return
+      return;
     }
-    this.ComponentName = 'ComponentName' in params ? params.ComponentName : null
-    this.ComponentVersion = 'ComponentVersion' in params ? params.ComponentVersion : null
+    this.ComponentName = 'ComponentName' in params ? params.ComponentName : null;
+    this.ComponentVersion = 'ComponentVersion' in params ? params.ComponentVersion : null;
   }
 }
 
@@ -375,25 +375,25 @@ class GetComponentVersionRequest extends AbstractModel {
  */
 class PrePublishComponentRequest extends AbstractModel {
   constructor() {
-    super()
+    super();
 
     /**
      * JSON stringified object
      * @type {string || null}
      */
-    this.Body = null
+    this.Body = null;
 
     /**
      * Component Name
      * @type {string || null}
      */
-    this.ComponentName = null
+    this.ComponentName = null;
 
     /**
      * Component Version
      * @type {string || null}
      */
-    this.ComponentVersion = null
+    this.ComponentVersion = null;
   }
 
   /**
@@ -401,11 +401,11 @@ class PrePublishComponentRequest extends AbstractModel {
    */
   deserialize(params) {
     if (!params) {
-      return
+      return;
     }
-    this.Body = 'Body' in params ? params.Body : null
-    this.ComponentName = 'ComponentName' in params ? params.ComponentName : null
-    this.ComponentVersion = 'ComponentVersion' in params ? params.ComponentVersion : null
+    this.Body = 'Body' in params ? params.Body : null;
+    this.ComponentName = 'ComponentName' in params ? params.ComponentName : null;
+    this.ComponentVersion = 'ComponentVersion' in params ? params.ComponentVersion : null;
   }
 }
 
@@ -415,19 +415,19 @@ class PrePublishComponentRequest extends AbstractModel {
  */
 class GetInstanceResponse extends AbstractModel {
   constructor() {
-    super()
+    super();
 
     /**
      * JSON stringified object containing response payload.
      * @type {string || null}
      */
-    this.Body = null
+    this.Body = null;
 
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      * @type {string || null}
      */
-    this.RequestId = null
+    this.RequestId = null;
   }
 
   /**
@@ -435,10 +435,10 @@ class GetInstanceResponse extends AbstractModel {
    */
   deserialize(params) {
     if (!params) {
-      return
+      return;
     }
-    this.Body = 'Body' in params ? params.Body : null
-    this.RequestId = 'RequestId' in params ? params.RequestId : null
+    this.Body = 'Body' in params ? params.Body : null;
+    this.RequestId = 'RequestId' in params ? params.RequestId : null;
   }
 }
 
@@ -448,19 +448,19 @@ class GetInstanceResponse extends AbstractModel {
  */
 class GetComponentVersionResponse extends AbstractModel {
   constructor() {
-    super()
+    super();
 
     /**
      * JSON stringified object containing response payload
      * @type {string || null}
      */
-    this.Body = null
+    this.Body = null;
 
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      * @type {string || null}
      */
-    this.RequestId = null
+    this.RequestId = null;
   }
 
   /**
@@ -468,10 +468,10 @@ class GetComponentVersionResponse extends AbstractModel {
    */
   deserialize(params) {
     if (!params) {
-      return
+      return;
     }
-    this.Body = 'Body' in params ? params.Body : null
-    this.RequestId = 'RequestId' in params ? params.RequestId : null
+    this.Body = 'Body' in params ? params.Body : null;
+    this.RequestId = 'RequestId' in params ? params.RequestId : null;
   }
 }
 
@@ -481,13 +481,13 @@ class GetComponentVersionResponse extends AbstractModel {
  */
 class GetUploadUrlsRequest extends AbstractModel {
   constructor() {
-    super()
+    super();
 
     /**
      * JSON stringified object
      * @type {string || null}
      */
-    this.Body = null
+    this.Body = null;
   }
 
   /**
@@ -495,9 +495,9 @@ class GetUploadUrlsRequest extends AbstractModel {
    */
   deserialize(params) {
     if (!params) {
-      return
+      return;
     }
-    this.Body = 'Body' in params ? params.Body : null
+    this.Body = 'Body' in params ? params.Body : null;
   }
 }
 
@@ -507,31 +507,31 @@ class GetUploadUrlsRequest extends AbstractModel {
  */
 class RunComponentRequest extends AbstractModel {
   constructor() {
-    super()
+    super();
 
     /**
      * JSON stringified object
      * @type {string || null}
      */
-    this.Body = null
+    this.Body = null;
 
     /**
      * App Name
      * @type {string || null}
      */
-    this.AppName = null
+    this.AppName = null;
 
     /**
      * Stage Name
      * @type {string || null}
      */
-    this.StageName = null
+    this.StageName = null;
 
     /**
      * Instance Name
      * @type {string || null}
      */
-    this.InstanceName = null
+    this.InstanceName = null;
   }
 
   /**
@@ -539,12 +539,12 @@ class RunComponentRequest extends AbstractModel {
    */
   deserialize(params) {
     if (!params) {
-      return
+      return;
     }
-    this.Body = 'Body' in params ? params.Body : null
-    this.AppName = 'AppName' in params ? params.AppName : null
-    this.StageName = 'StageName' in params ? params.StageName : null
-    this.InstanceName = 'InstanceName' in params ? params.InstanceName : null
+    this.Body = 'Body' in params ? params.Body : null;
+    this.AppName = 'AppName' in params ? params.AppName : null;
+    this.StageName = 'StageName' in params ? params.StageName : null;
+    this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
   }
 }
 
@@ -554,37 +554,37 @@ class RunComponentRequest extends AbstractModel {
  */
 class RunFinishComponentResponse extends AbstractModel {
   constructor() {
-    super()
+    super();
 
     /**
      * JSON stringified object containing response payload.
      * @type {string || null}
      */
-    this.Body = null
+    this.Body = null;
 
     /**
      * App Name
      * @type {string || null}
      */
-    this.AppName = null
+    this.AppName = null;
 
     /**
      * Stage Name
      * @type {string || null}
      */
-    this.StageName = null
+    this.StageName = null;
 
     /**
      * Instance Name
      * @type {string || null}
      */
-    this.InstanceName = null
+    this.InstanceName = null;
 
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      * @type {string || null}
      */
-    this.RequestId = null
+    this.RequestId = null;
   }
 
   /**
@@ -592,13 +592,13 @@ class RunFinishComponentResponse extends AbstractModel {
    */
   deserialize(params) {
     if (!params) {
-      return
+      return;
     }
-    this.Body = 'Body' in params ? params.Body : null
-    this.AppName = 'AppName' in params ? params.AppName : null
-    this.StageName = 'StageName' in params ? params.StageName : null
-    this.InstanceName = 'InstanceName' in params ? params.InstanceName : null
-    this.RequestId = 'RequestId' in params ? params.RequestId : null
+    this.Body = 'Body' in params ? params.Body : null;
+    this.AppName = 'AppName' in params ? params.AppName : null;
+    this.StageName = 'StageName' in params ? params.StageName : null;
+    this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+    this.RequestId = 'RequestId' in params ? params.RequestId : null;
   }
 }
 
@@ -608,19 +608,19 @@ class RunFinishComponentResponse extends AbstractModel {
  */
 class PrePublishComponentResponse extends AbstractModel {
   constructor() {
-    super()
+    super();
 
     /**
      * JSON stringified object containing response payload.
      * @type {string || null}
      */
-    this.Body = null
+    this.Body = null;
 
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      * @type {string || null}
      */
-    this.RequestId = null
+    this.RequestId = null;
   }
 
   /**
@@ -628,10 +628,10 @@ class PrePublishComponentResponse extends AbstractModel {
    */
   deserialize(params) {
     if (!params) {
-      return
+      return;
     }
-    this.Body = 'Body' in params ? params.Body : null
-    this.RequestId = 'RequestId' in params ? params.RequestId : null
+    this.Body = 'Body' in params ? params.Body : null;
+    this.RequestId = 'RequestId' in params ? params.RequestId : null;
   }
 }
 
@@ -641,25 +641,25 @@ class PrePublishComponentResponse extends AbstractModel {
  */
 class PostPublishComponentRequest extends AbstractModel {
   constructor() {
-    super()
+    super();
 
     /**
      * JSON stringified object
      * @type {string || null}
      */
-    this.Body = null
+    this.Body = null;
 
     /**
      * Component Name
      * @type {string || null}
      */
-    this.ComponentName = null
+    this.ComponentName = null;
 
     /**
      * Component Version
      * @type {string || null}
      */
-    this.ComponentVersion = null
+    this.ComponentVersion = null;
   }
 
   /**
@@ -667,11 +667,11 @@ class PostPublishComponentRequest extends AbstractModel {
    */
   deserialize(params) {
     if (!params) {
-      return
+      return;
     }
-    this.Body = 'Body' in params ? params.Body : null
-    this.ComponentName = 'ComponentName' in params ? params.ComponentName : null
-    this.ComponentVersion = 'ComponentVersion' in params ? params.ComponentVersion : null
+    this.Body = 'Body' in params ? params.Body : null;
+    this.ComponentName = 'ComponentName' in params ? params.ComponentName : null;
+    this.ComponentVersion = 'ComponentVersion' in params ? params.ComponentVersion : null;
   }
 }
 
@@ -681,31 +681,31 @@ class PostPublishComponentRequest extends AbstractModel {
  */
 class SaveInstanceRequest extends AbstractModel {
   constructor() {
-    super()
+    super();
 
     /**
      * JSON stringified object
      * @type {string || null}
      */
-    this.Body = null
+    this.Body = null;
 
     /**
      * App Name
      * @type {string || null}
      */
-    this.AppName = null
+    this.AppName = null;
 
     /**
      * Stage  Name
      * @type {string || null}
      */
-    this.StageName = null
+    this.StageName = null;
 
     /**
      * Instance Name
      * @type {string || null}
      */
-    this.InstanceName = null
+    this.InstanceName = null;
   }
 
   /**
@@ -713,12 +713,12 @@ class SaveInstanceRequest extends AbstractModel {
    */
   deserialize(params) {
     if (!params) {
-      return
+      return;
     }
-    this.Body = 'Body' in params ? params.Body : null
-    this.AppName = 'AppName' in params ? params.AppName : null
-    this.StageName = 'StageName' in params ? params.StageName : null
-    this.InstanceName = 'InstanceName' in params ? params.InstanceName : null
+    this.Body = 'Body' in params ? params.Body : null;
+    this.AppName = 'AppName' in params ? params.AppName : null;
+    this.StageName = 'StageName' in params ? params.StageName : null;
+    this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
   }
 }
 
@@ -728,25 +728,25 @@ class SaveInstanceRequest extends AbstractModel {
  */
 class ListInstancesRequest extends AbstractModel {
   constructor() {
-    super()
+    super();
 
     /**
      * JSON stringified object
      * @type {string || null}
      */
-    this.Body = null
+    this.Body = null;
 
     /**
      * App Name
      * @type {string || null}
      */
-    this.AppName = null
+    this.AppName = null;
 
     /**
      * Stage Name
      * @type {string || null}
      */
-    this.StageName = null
+    this.StageName = null;
   }
 
   /**
@@ -754,11 +754,11 @@ class ListInstancesRequest extends AbstractModel {
    */
   deserialize(params) {
     if (!params) {
-      return
+      return;
     }
-    this.Body = 'Body' in params ? params.Body : null
-    this.AppName = 'AppName' in params ? params.AppName : null
-    this.StageName = 'StageName' in params ? params.StageName : null
+    this.Body = 'Body' in params ? params.Body : null;
+    this.AppName = 'AppName' in params ? params.AppName : null;
+    this.StageName = 'StageName' in params ? params.StageName : null;
   }
 }
 
@@ -782,5 +782,5 @@ module.exports = {
   PrePublishComponentResponse,
   PostPublishComponentRequest,
   SaveInstanceRequest,
-  ListInstancesRequest
-}
+  ListInstancesRequest,
+};

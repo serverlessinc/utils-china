@@ -1,44 +1,44 @@
-'use strict'
+'use strict';
 
-const util = require('util')
-const http = require('http')
-const os = require('os')
-const uuidv4 = require('../../library/uuid')
-const QRCode = require('../../library/qrcode/index')
+const util = require('util');
+const http = require('http');
+const os = require('os');
+const uuidv4 = require('../../library/uuid');
+const QRCode = require('../../library/qrcode/index');
 
-const apiBaseUrl = 'scfdev.tencentserverless.com'
-const apiShortUrl = '/login/url'
-const refreshTokenUrl = '/login/info'
+const apiBaseUrl = 'scfdev.tencentserverless.com';
+const apiShortUrl = '/login/url';
+const refreshTokenUrl = '/login/info';
 
 class Login {
   sleep(ms) {
     return new Promise((resolve) => {
-      setTimeout(resolve, ms)
-    })
+      setTimeout(resolve, ms);
+    });
   }
 
   async getShortUrl(uuid) {
     const options = {
       host: apiBaseUrl,
       port: '80',
-      path: util.format('%s?os=%s&uuid=%s', apiShortUrl, os.type(), uuid)
-    }
+      path: util.format('%s?os=%s&uuid=%s', apiShortUrl, os.type(), uuid),
+    };
     return new Promise((resolve, reject) => {
       const req = http.get(options, (res) => {
-        res.setEncoding('utf8')
+        res.setEncoding('utf8');
         res.on('data', (chunk) => {
           try {
-            resolve(JSON.parse(chunk))
+            resolve(JSON.parse(chunk));
           } catch (e) {
-            reject(e.message)
+            reject(e.message);
           }
-        })
-      })
+        });
+      });
       req.on('error', (e) => {
-        reject(e.message)
-      })
-      req.end()
-    })
+        reject(e.message);
+      });
+      req.end();
+    });
   }
 
   async checkStatus(uuid, url) {
@@ -46,30 +46,30 @@ class Login {
       const options = {
         host: apiBaseUrl,
         port: '80',
-        path: url
-      }
+        path: url,
+      };
       const req = http.get(options, (res) => {
-        res.setEncoding('utf8')
+        res.setEncoding('utf8');
         res.on('data', (chunk) => {
           try {
-            const responseData = JSON.parse(chunk)
+            const responseData = JSON.parse(chunk);
             if (responseData.success) {
-              done(responseData)
+              done(responseData);
             } else {
-              done(false)
+              done(false);
             }
           } catch (e) {
-            done(false)
-            return
+            done(false);
+            return;
           }
-        })
-      })
+        });
+      });
       req.on('error', () => {
-        done(false)
-        return
-      })
-      req.end()
-    })
+        done(false);
+        return;
+      });
+      req.end();
+    });
   }
 
   async flush(uuid, expired, signature, appid) {
@@ -77,61 +77,61 @@ class Login {
       const options = {
         host: apiBaseUrl,
         port: '80',
-        path: `${refreshTokenUrl}?uuid=${uuid}&os=${os.type()}&expired=${expired}&signature=${signature}&appid=${appid}`
-      }
+        path: `${refreshTokenUrl}?uuid=${uuid}&os=${os.type()}&expired=${expired}&signature=${signature}&appid=${appid}`,
+      };
       const req = http.get(options, (res) => {
-        res.setEncoding('utf8')
+        res.setEncoding('utf8');
         res.on('data', (chunk) => {
           try {
-            const responseData = JSON.parse(chunk)
+            const responseData = JSON.parse(chunk);
             if (responseData.success) {
-              done(responseData)
+              done(responseData);
             } else {
-              done(false)
+              done(false);
             }
           } catch (e) {
-            done(false)
-            return
+            done(false);
+            return;
           }
-        })
-      })
+        });
+      });
       req.on('error', () => {
-        done(false)
-        return
-      })
-      req.end()
-    })
+        done(false);
+        return;
+      });
+      req.end();
+    });
   }
 
   async login() {
     try {
-      const uuid = uuidv4()
-      const apiUrl = await this.getShortUrl(uuid)
+      const uuid = uuidv4();
+      const apiUrl = await this.getShortUrl(uuid);
 
       QRCode.toString(apiUrl.short_url, { type: 'terminal' }, (err, url) => {
-        console.log(url)
-      })
+        console.log(url);
+      });
 
-      console.log('Please scan QR code login from wechat. ')
-      console.log('Wait login...')
+      console.log('Please scan QR code login from wechat. ');
+      console.log('Wait login...');
       // wait 3s start check login status
-      await this.sleep(3000)
+      await this.sleep(3000);
 
-      let loginFlag = false
-      let timeout = 600
-      let loginData
+      let loginFlag = false;
+      let timeout = 600;
+      let loginData;
       while (timeout > 0) {
-        loginData = await this.checkStatus(uuid, apiUrl.login_status_url)
+        loginData = await this.checkStatus(uuid, apiUrl.login_status_url);
         if (loginData !== false) {
-          loginFlag = true
-          break
+          loginFlag = true;
+          break;
         }
-        timeout--
-        await this.sleep(1000)
+        timeout--;
+        await this.sleep(1000);
       }
       if (loginFlag === false && timeout === 0) {
-        console.log('Login timeout. Please login again! ')
-        process.exit(0)
+        console.log('Login timeout. Please login again! ');
+        process.exit(0);
       }
       const configure = {
         secret_id: loginData.secret_id,
@@ -140,32 +140,32 @@ class Login {
         appid: loginData.appid,
         signature: loginData.signature,
         expired: loginData.expired,
-        uuid
-      }
-      console.log('Login successful for TencentCloud. ')
-      return configure
+        uuid,
+      };
+      console.log('Login successful for TencentCloud. ');
+      return configure;
     } catch (e) {
-      console.log(e)
+      console.log(e);
     }
-		process.exit(0)
-		return null
+    process.exit(0);
+    return null;
   }
 
   async loginUrl() {
     try {
-      const uuid = uuidv4()
-      const apiUrl = await this.getShortUrl(uuid)
+      const uuid = uuidv4();
+      const apiUrl = await this.getShortUrl(uuid);
       return {
         login_status_url: apiUrl.login_status_url,
         uuid,
         url: apiUrl.long_url,
-        short_url: apiUrl.short_url
-      }
+        short_url: apiUrl.short_url,
+      };
     } catch (e) {
-      console.log(e)
-		}
-		return null
+      console.log(e);
+    }
+    return null;
   }
 }
 
-module.exports = Login
+module.exports = Login;

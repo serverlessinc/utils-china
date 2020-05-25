@@ -1,9 +1,9 @@
-'use strict'
+'use strict';
 
 // var BufferUtil = require('../utils/buffer')
 
-const EXP_TABLE = Buffer.alloc(512)
-const LOG_TABLE = Buffer.alloc(256)
+const EXP_TABLE = Buffer.alloc(512);
+const LOG_TABLE = Buffer.alloc(256);
 /**
  * Precompute the log and anti-log tables for faster computation later
  *
@@ -12,19 +12,19 @@ const LOG_TABLE = Buffer.alloc(256)
  *
  * ref {@link https://en.wikiversity.org/wiki/Reed%E2%80%93Solomon_codes_for_coders#Introduction_to_mathematical_fields}
  */
-;(function initTables() {
-  let x = 1
+(function initTables() {
+  let x = 1;
   for (let i = 0; i < 255; i++) {
-    EXP_TABLE[i] = x
-    LOG_TABLE[x] = i
+    EXP_TABLE[i] = x;
+    LOG_TABLE[x] = i;
 
-    x <<= 1 // multiply by 2
+    x <<= 1; // multiply by 2
 
     // The QR code specification says to use byte-wise modulo 100011101 arithmetic.
     // This means that when a number is 256 or larger, it should be XORed with 0x11D.
     if (x & 0x100) {
       // similar to x >= 256, but a lot faster (because 0x100 == 256)
-      x ^= 0x11d
+      x ^= 0x11d;
     }
   }
 
@@ -33,9 +33,9 @@ const LOG_TABLE = Buffer.alloc(256)
   // two GF numbers, no more).
   // @see {@link mul}
   for (let i = 255; i < 512; i++) {
-    EXP_TABLE[i] = EXP_TABLE[i - 255]
+    EXP_TABLE[i] = EXP_TABLE[i - 255];
   }
-})()
+})();
 
 /**
  * Returns log value of n inside Galois Field
@@ -44,9 +44,9 @@ const LOG_TABLE = Buffer.alloc(256)
  * @return {Number}
  */
 exports.log = function log(n) {
-  if (n < 1) throw new Error(`log(${n})`)
-  return LOG_TABLE[n]
-}
+  if (n < 1) throw new Error(`log(${n})`);
+  return LOG_TABLE[n];
+};
 
 /**
  * Returns anti-log value of n inside Galois Field
@@ -55,8 +55,8 @@ exports.log = function log(n) {
  * @return {Number}
  */
 exports.exp = function exp(n) {
-  return EXP_TABLE[n]
-}
+  return EXP_TABLE[n];
+};
 
 /**
  * Multiplies two number inside Galois Field
@@ -66,9 +66,9 @@ exports.exp = function exp(n) {
  * @return {Number}
  */
 exports.mul = function mul(x, y) {
-  if (x === 0 || y === 0) return 0
+  if (x === 0 || y === 0) return 0;
 
   // should be EXP_TABLE[(LOG_TABLE[x] + LOG_TABLE[y]) % 255] if EXP_TABLE wasn't oversized
   // @see {@link initTables}
-  return EXP_TABLE[LOG_TABLE[x] + LOG_TABLE[y]]
-}
+  return EXP_TABLE[LOG_TABLE[x] + LOG_TABLE[y]];
+};

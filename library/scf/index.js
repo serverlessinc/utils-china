@@ -1,5 +1,5 @@
-'use strict'
+'use strict';
 
 module.exports = {
-  v20180416: require('./v20180416')
-}
+  v20180416: require('./v20180416'),
+};
