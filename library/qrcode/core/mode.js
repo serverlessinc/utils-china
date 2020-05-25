@@ -79,7 +79,7 @@ exports.MIXED = {
 exports.getCharCountIndicator = function getCharCountIndicator(mode, version) {
   if (!mode.ccBits) throw new Error(`Invalid mode: ${mode}`)
 
-  if (!Utils.VersionIsValid(version)) {
+  if (!Utils.versionIsValid(version)) {
     throw new Error(`Invalid version: ${version}`)
   }
 

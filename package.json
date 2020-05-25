@@ -34,10 +34,14 @@
     "eslint": "^7.0.0",
     "eslint-plugin-import": "^2.20.2",
     "prettier": "^1.19.1"
-	},
-	"eslintConfig": {
+  },
+  "eslintConfig": {
     "extends": "@serverless/eslint-config/node",
-    "root": true
+    "root": true,
+    "rules": {
+			"no-console": "off",
+      "no-underscore-dangle": "off"
+    }
   },
   "repository": {
     "type": "git",

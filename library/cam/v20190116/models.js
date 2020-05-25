@@ -196,10 +196,10 @@ class DescribeRoleListResponse extends AbstractModel {
     }
 
     if (params.List) {
-      this.List = new Array()
-      for (const z in params.List) {
+      this.List = []
+      for (const param of Object.values(params.List)) {
         const obj = new RoleInfo()
-        obj.deserialize(params.List[z])
+        obj.deserialize(param)
         this.List.push(obj)
       }
     }
@@ -436,10 +436,10 @@ class ListUsersResponse extends AbstractModel {
     }
 
     if (params.Data) {
-      this.Data = new Array()
-      for (const z in params.Data) {
+      this.Data = []
+      for (const param of Object.values(params.Data)) {
         const obj = new SubAccountInfo()
-        obj.deserialize(params.Data[z])
+        obj.deserialize(param)
         this.Data.push(obj)
       }
     }
@@ -543,10 +543,10 @@ class ListGroupsResponse extends AbstractModel {
     this.TotalNum = 'TotalNum' in params ? params.TotalNum : null
 
     if (params.GroupInfo) {
-      this.GroupInfo = new Array()
-      for (const z in params.GroupInfo) {
+      this.GroupInfo = []
+      for (const param of Object.values(params.GroupInfo)) {
         const obj = new GroupInfo()
-        obj.deserialize(params.GroupInfo[z])
+        obj.deserialize(param)
         this.GroupInfo.push(obj)
       }
     }
@@ -670,10 +670,6 @@ class DeleteRoleResponse extends AbstractModel {
  * @class
  */
 class ListSAMLProvidersRequest extends AbstractModel {
-  constructor() {
-    super()
-  }
-
   /**
    * @private
    */
@@ -842,10 +838,10 @@ class ListGroupsForUserResponse extends AbstractModel {
     this.TotalNum = 'TotalNum' in params ? params.TotalNum : null
 
     if (params.GroupInfo) {
-      this.GroupInfo = new Array()
-      for (const z in params.GroupInfo) {
+      this.GroupInfo = []
+      for (const param of Object.values(params.GroupInfo)) {
         const obj = new GroupInfo()
-        obj.deserialize(params.GroupInfo[z])
+        obj.deserialize(param)
         this.GroupInfo.push(obj)
       }
     }
@@ -917,10 +913,10 @@ class RemoveUserFromGroupRequest extends AbstractModel {
     }
 
     if (params.Info) {
-      this.Info = new Array()
-      for (const z in params.Info) {
+      this.Info = []
+      for (const param of Object.values(params.Info)) {
         const obj = new GroupIdOfUidInfo()
-        obj.deserialize(params.Info[z])
+        obj.deserialize(param)
         this.Info.push(obj)
       }
     }
@@ -980,10 +976,10 @@ IsAttached: 当需要查询标记实体是否已经关联策略时不为null。0
     this.TotalNum = 'TotalNum' in params ? params.TotalNum : null
 
     if (params.List) {
-      this.List = new Array()
-      for (const z in params.List) {
+      this.List = []
+      for (const param of Object.values(params.List)) {
         const obj = new StrategyInfo()
-        obj.deserialize(params.List[z])
+        obj.deserialize(param)
         this.List.push(obj)
       }
     }
@@ -1257,10 +1253,10 @@ class ListAttachedRolePoliciesResponse extends AbstractModel {
     }
 
     if (params.List) {
-      this.List = new Array()
-      for (const z in params.List) {
+      this.List = []
+      for (const param of Object.values(params.List)) {
         const obj = new AttachedPolicyOfRole()
-        obj.deserialize(params.List[z])
+        obj.deserialize(param)
         this.List.push(obj)
       }
     }
@@ -1767,10 +1763,10 @@ class ListAttachedUserPoliciesResponse extends AbstractModel {
     this.TotalNum = 'TotalNum' in params ? params.TotalNum : null
 
     if (params.List) {
-      this.List = new Array()
-      for (const z in params.List) {
+      this.List = []
+      for (const param of Object.values(params.List)) {
         const obj = new AttachPolicyInfo()
-        obj.deserialize(params.List[z])
+        obj.deserialize(param)
         this.List.push(obj)
       }
     }
@@ -2335,10 +2331,10 @@ class ListAttachedGroupPoliciesResponse extends AbstractModel {
     this.TotalNum = 'TotalNum' in params ? params.TotalNum : null
 
     if (params.List) {
-      this.List = new Array()
-      for (const z in params.List) {
+      this.List = []
+      for (const param of Object.values(params.List)) {
         const obj = new AttachPolicyInfo()
-        obj.deserialize(params.List[z])
+        obj.deserialize(param)
         this.List.push(obj)
       }
     }
@@ -2532,10 +2528,10 @@ class GetGroupResponse extends AbstractModel {
     this.CreateTime = 'CreateTime' in params ? params.CreateTime : null
 
     if (params.UserInfo) {
-      this.UserInfo = new Array()
-      for (const z in params.UserInfo) {
+      this.UserInfo = []
+      for (const param of Object.values(params.UserInfo)) {
         const obj = new GroupMemberInfo()
-        obj.deserialize(params.UserInfo[z])
+        obj.deserialize(param)
         this.UserInfo.push(obj)
       }
     }
@@ -3136,10 +3132,10 @@ class AddUserToGroupRequest extends AbstractModel {
     }
 
     if (params.Info) {
-      this.Info = new Array()
-      for (const z in params.Info) {
+      this.Info = []
+      for (const param of Object.values(params.Info)) {
         const obj = new GroupIdOfUidInfo()
-        obj.deserialize(params.Info[z])
+        obj.deserialize(param)
         this.Info.push(obj)
       }
     }
@@ -3298,10 +3294,10 @@ class ListSAMLProvidersResponse extends AbstractModel {
     this.TotalCount = 'TotalCount' in params ? params.TotalCount : null
 
     if (params.SAMLProviderSet) {
-      this.SAMLProviderSet = new Array()
-      for (const z in params.SAMLProviderSet) {
+      this.SAMLProviderSet = []
+      for (const param of Object.values(params.SAMLProviderSet)) {
         const obj = new SAMLProviderInfo()
-        obj.deserialize(params.SAMLProviderSet[z])
+        obj.deserialize(param)
         this.SAMLProviderSet.push(obj)
       }
     }
@@ -3686,10 +3682,10 @@ class ListUsersForGroupResponse extends AbstractModel {
     this.TotalNum = 'TotalNum' in params ? params.TotalNum : null
 
     if (params.UserInfo) {
-      this.UserInfo = new Array()
-      for (const z in params.UserInfo) {
+      this.UserInfo = []
+      for (const param of Object.values(params.UserInfo)) {
         const obj = new GroupMemberInfo()
-        obj.deserialize(params.UserInfo[z])
+        obj.deserialize(param)
         this.UserInfo.push(obj)
       }
     }
@@ -3804,10 +3800,10 @@ class ListEntitiesForPolicyResponse extends AbstractModel {
     this.TotalNum = 'TotalNum' in params ? params.TotalNum : null
 
     if (params.List) {
-      this.List = new Array()
-      for (const z in params.List) {
+      this.List = []
+      for (const param of Object.values(params.List)) {
         const obj = new AttachEntityOfPolicy()
-        obj.deserialize(params.List[z])
+        obj.deserialize(param)
         this.List.push(obj)
       }
     }
@@ -3820,10 +3816,6 @@ class ListEntitiesForPolicyResponse extends AbstractModel {
  * @class
  */
 class ListUsersRequest extends AbstractModel {
-  constructor() {
-    super()
-  }
-
   /**
    * @private
    */

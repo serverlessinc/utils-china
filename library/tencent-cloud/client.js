@@ -64,7 +64,7 @@ class TencentCloudClient {
 
     const hmac = crypto.createHmac('sha1', this.credentials.SecretKey || '')
     param.Signature = hmac
-      .update(new Buffer.from(`${defaults.method.toUpperCase() + host + path}?${qstr}`, 'utf8'))
+      .update(Buffer.from(`${defaults.method.toUpperCase() + host + path}?${qstr}`, 'utf8'))
       .digest('base64')
 
     return qs.stringify(param)

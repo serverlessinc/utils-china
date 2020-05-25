@@ -8,13 +8,13 @@ const querystring = require('querystring')
 const http = require('http')
 
 class Cls {
-  constructor({ appid, secret_id, secret_key, options }) {
+  constructor({ appid, secret_id: secretId, secret_key: secretKey, options }) {
     this.appid = appid
-    this.secretKey = secret_key
-    this.secretId = secret_id
+    this.secretKey = secretKey
+    this.secretId = secretId
     this.options = options
-    assert(secret_key, 'secret_key should not is empty')
-    assert(secret_id, 'secret_id should not is empty')
+    assert(secretKey, 'secret_key should not is empty')
+    assert(secretId, 'secret_id should not is empty')
     assert(options, 'Options should not is empty')
     assert(options.region, 'Options region should not is empty')
     this.auth = new Sign(this.secretId, this.secretKey)
@@ -63,13 +63,13 @@ class Cls {
     clientObject.end()
   }
 
-  structuredLog(topic_id, logs, timestamp, filename, source) {
+  structuredLog(topicId, logs, timestamp, filename, source) {
     const message = {
       logGroupList: [
         {
           logs: [
             {
-              time: timestamp || parseInt(new Date().getTime() / 1000),
+              time: timestamp || Math.round(new Date().getTime() / 1000),
               contents: logs
             }
           ],
@@ -93,7 +93,7 @@ class Cls {
         const log = pbLogGroup.create(message)
         const buffer = pbLogGroup.encode(log).finish()
         const params = {
-          topic_id
+          topic_id: topicId
         }
         const headers = {
           'Content-Type': 'application/x-protobuf'
@@ -107,14 +107,14 @@ class Cls {
           if (
             body &&
             res.headers['content-type'] &&
-            res.headers['content-type'].toLocaleLowerCase() == 'application/json'
+            res.headers['content-type'].toLocaleLowerCase() === 'application/json'
           ) {
             response = JSON.parse(body)
           } else {
             response = body
           }
 
-          if (res.statusCode != 200) {
+          if (res.statusCode !== 200) {
             if (response && response.errorcode) {
               reject(response.errormessage)
             } else {

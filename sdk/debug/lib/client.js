@@ -1,7 +1,7 @@
 'use strict'
 
 const { default: connect } = require('./wshub-client')
-const { default: createLogger } = require('./wshub-logger')
+const { default1: createLogger } = require('./wshub-logger')
 
 const duplex = require('duplexify')
 
@@ -67,6 +67,7 @@ Client.prototype.close = async function() {
   if (this.client) {
     return this.client.close()
   }
+  return null
 }
 
 module.exports = Client

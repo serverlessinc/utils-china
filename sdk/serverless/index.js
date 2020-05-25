@@ -10,23 +10,22 @@ const Credential = common.Credential
 const SlsClient = sls.v20200205.Client
 const SlsModels = sls.v20200205.Models
 const HttpConnection = common.HttpConnection
-const { BindRole } = require('../cam')
 const TencentCloudSDKHttpException = require('../../library/common/exception/tencent_cloud_sdk_exception')
 
 class Serverless {
-  constructor({ appid, secret_id, secret_key, options }) {
+  constructor({ appid, secret_id: secretId, secret_key: secretKey, options }) {
     this.appid = appid
-    this.secretKey = secret_key
-    this.secretId = secret_id
+    this.secretKey = secretKey
+    this.secretId = secretId
     this.options = options
     assert(options, 'Options should not is empty')
-    this._slsClient = Serverless.createClient(secret_id, secret_key, options)
+    this._slsClient = Serverless.createClient(secretId, secretKey, options)
   }
 
-  static getCredential(secret_id, secret_key, options) {
+  static getCredential(secretId, secretKey, options) {
     const cred = options.token
-      ? new Credential(secret_id, secret_key, options.token)
-      : new Credential(secret_id, secret_key)
+      ? new Credential(secretId, secretKey, options.token)
+      : new Credential(secretId, secretKey)
     const httpProfile = new HttpProfile()
     httpProfile.reqTimeout = 30
     const clientProfile = new ClientProfile('HmacSHA256', httpProfile)
@@ -38,8 +37,8 @@ class Serverless {
     }
   }
 
-  static createClient(secret_id, secret_key, options) {
-    const info = Serverless.getCredential(secret_id, secret_key, options)
+  static createClient(secretId, secretKey, options) {
+    const info = Serverless.getCredential(secretId, secretKey, options)
     const scfCli = new SlsClient(info.cred, info.region, info.clientProfile)
     scfCli.sdkVersion = 'ServerlessFramework'
     return scfCli
@@ -145,7 +144,8 @@ class Serverless {
     return await this._call('PostPublishComponent', req)
   }
 
-  async getInstance({ orgName, orgUid, appName, stageName, instanceName }) {
+  async getInstance(instance) {
+		const { appName, stageName, instanceName } = instance;
     assert(appName, 'The request is missing a required parameter appName')
     assert(stageName, 'The request is missing a required parameter stageName')
     assert(instanceName, 'The request is missing a required parameter instanceName')
@@ -154,11 +154,12 @@ class Serverless {
     req.AppName = appName
     req.StageName = stageName
     req.InstanceName = instanceName
-    req.Body = JSON.stringify(arguments[0])
+    req.Body = JSON.stringify(instance)
     return this._call('GetInstance', req)
   }
 
-  async saveInstance({ instance }) {
+  async saveInstance(instanceData) {
+		const { instance } = instanceData
     assert(instance, 'The request is missing a required parameter instance')
     assert(instance.appName, 'The request is missing a required parameter instance.appName')
     assert(instance.stageName, 'The request is missing a required parameter instance.stageName')
@@ -171,26 +172,28 @@ class Serverless {
     req.AppName = instance.appName
     req.StageName = instance.stageName
     req.InstanceName = instance.instanceName
-    req.Body = JSON.stringify(arguments[0])
+    req.Body = JSON.stringify(instanceData)
     return this._call('SaveInstance', req)
   }
 
-  async listInstances({ orgName, orgUid }) {
-    const req = new SlsModels.ListInstancesRequest()
-    req.Body = JSON.stringify(arguments[0])
+  async listInstances(data) {
+		    const req = new SlsModels.ListInstancesRequest()
+    req.Body = JSON.stringify(data)
     return this._call('ListInstances', req)
   }
 
-  async getUploadUrls({ orgName, orgUid }) {
+  async getUploadUrls(data) {
+		const { orgName, orgUid } = data
     assert(orgName, 'The request is missing a required parameter orgName')
     assert(orgUid, 'The request is missing a required parameter orgUid')
 
     const req = new SlsModels.GetUploadUrlsRequest()
-    req.Body = JSON.stringify(arguments[0])
+    req.Body = JSON.stringify(data)
     return this._call('GetUploadUrls', req)
   }
 
-  async runComponent({ instance, method, credentials, options, size }) {
+  async runComponent(data) {
+		const { instance, method } = data;
     assert(instance, 'The request is missing a required parameter instance')
     assert(method, 'The request is missing a required parameter method')
     assert(instance.appName, 'The request is missing a required parameter instance.appName')
@@ -207,11 +210,12 @@ class Serverless {
     req.AppName = instance.appName
     req.StageName = instance.stageName
     req.InstanceName = instance.instanceName
-    req.Body = JSON.stringify(arguments[0])
+    req.Body = JSON.stringify(data)
     return this._call('RunComponent', req)
   }
 
-  async runFinishComponent({ instance, method }) {
+  async runFinishComponent(data) {
+		const { instance, method } = data;
     assert(instance, 'The request is missing a required parameter instance')
     assert(method, 'The request is missing a required parameter method')
     assert(instance.appName, 'The request is missing a required parameter instance.appName')
@@ -228,7 +232,7 @@ class Serverless {
     req.AppName = instance.appName
     req.StageName = instance.stageName
     req.InstanceName = instance.instanceName
-    req.Body = JSON.stringify(arguments[0])
+    req.Body = JSON.stringify(data)
     return await this._call('RunFinishComponent', req)
   }
 
@@ -238,7 +242,7 @@ class Serverless {
   //         ComponentVersion: version
   //     }
   //     const req = new SlsModels.UnpublishComponentVersionRequest();
-  //     req.from_json_string(JSON.stringify(componentVersion));
+  //     req.fromJsonString(JSON.stringify(componentVersion));
   //     return await this._call('UnpublishComponentVersion', req);
   // }
 
@@ -263,7 +267,7 @@ class Serverless {
   //     }
 
   //     const req = new SlsModels.PublishComponentVersionRequest()
-  //     req.from_json_string(JSON.stringify(pubComVersionRequest));
+  //     req.fromJsonString(JSON.stringify(pubComVersionRequest));
   //     return await this._call('PublishComponentVersion', req);
   // }
 
@@ -273,7 +277,7 @@ class Serverless {
   //         ComponentVersion: version
   //     }
   //     const req = new SlsModels.FetchComponentMetadataRequest();
-  //     req.from_json_string(JSON.stringify(componentVersion));
+  //     req.fromJsonString(JSON.stringify(componentVersion));
   //     return await this._call('FetchComponentMetadata', req);
   // }
 }

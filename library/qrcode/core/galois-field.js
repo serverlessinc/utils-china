@@ -14,7 +14,7 @@ const LOG_TABLE = Buffer.alloc(256)
  */
 ;(function initTables() {
   let x = 1
-  for (var i = 0; i < 255; i++) {
+  for (let i = 0; i < 255; i++) {
     EXP_TABLE[i] = x
     LOG_TABLE[x] = i
 
@@ -32,7 +32,7 @@ const LOG_TABLE = Buffer.alloc(256)
   // stay inside the bounds (because we will mainly use this table for the multiplication of
   // two GF numbers, no more).
   // @see {@link mul}
-  for (i = 255; i < 512; i++) {
+  for (let i = 255; i < 512; i++) {
     EXP_TABLE[i] = EXP_TABLE[i - 255]
   }
 })()

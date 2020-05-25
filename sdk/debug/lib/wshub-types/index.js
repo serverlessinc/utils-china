@@ -1,9 +1,9 @@
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
-const stream_1 = require('stream');
+const stream1 = require('stream');
 
 function isDuplex(obj) {
-    return obj instanceof stream_1.Duplex;
+    return obj instanceof stream1.Duplex;
 }
 exports.isDuplex = isDuplex;
 function isPort(port) {

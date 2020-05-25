@@ -1,6 +1,5 @@
 'use strict'
 
-const Credential = require('./credential')
 const sdkVersion = require('./sdk_version')
 const ClientProfile = require('./profile/client_profile')
 const Sign = require('./sign')
@@ -121,14 +120,14 @@ class AbstractClient {
    */
   mergeData(data, prefix = '') {
     const ret = {}
-    for (const k in data) {
-      if (data[k] === null) {
+    for (const [key, value] of Object.entries(data)) {
+      if (value === null) {
         continue
       }
-      if (data[k] instanceof Array || data[k] instanceof Object) {
-        Object.assign(ret, this.mergeData(data[k], `${prefix + k}.`))
+      if (value instanceof Array || value instanceof Object) {
+        Object.assign(ret, this.mergeData(value, `${prefix + key}.`))
       } else {
-        ret[prefix + k] = data[k]
+        ret[prefix + key] = value
       }
     }
     return ret
@@ -172,9 +171,9 @@ class AbstractClient {
     let strParam = ''
     const keys = Object.keys(params)
     keys.sort()
-    for (const k in keys) {
+    for (const key of Object.values(keys)) {
       // k = k.replace(/_/g, '.');
-      strParam += `&${keys[k]}=${params[keys[k]]}`
+      strParam += `&${key}=${params[key]}`
     }
     const strSign = `${this.profile.httpProfile.reqMethod.toLocaleUpperCase() +
       this.getEndpoint() +

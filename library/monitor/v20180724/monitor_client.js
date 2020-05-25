@@ -19,84 +19,21 @@
 const models = require('./models')
 const AbstractClient = require('../../common/abstract_client')
 
-const DescribePolicyConditionListConfigManual = models.DescribePolicyConditionListConfigManual
-const UnBindingPolicyObjectRequest = models.UnBindingPolicyObjectRequest
-const DescribePolicyConditionListRequest = models.DescribePolicyConditionListRequest
 const DeletePolicyGroupResponse = models.DeletePolicyGroupResponse
-const DescribeAccidentEventListAlarms = models.DescribeAccidentEventListAlarms
-const CreatePolicyGroupEventCondition = models.CreatePolicyGroupEventCondition
-const DescribeProductEventListRequest = models.DescribeProductEventListRequest
-const Instance = models.Instance
-const DescribeProductEventListEvents = models.DescribeProductEventListEvents
-const BindingPolicyObjectDimension = models.BindingPolicyObjectDimension
-const DescribePolicyConditionListMetric = models.DescribePolicyConditionListMetric
-const CreatePolicyGroupRequest = models.CreatePolicyGroupRequest
-const CreatePolicyGroupCondition = models.CreatePolicyGroupCondition
-const DescribePolicyGroupInfoReceiverInfo = models.DescribePolicyGroupInfoReceiverInfo
-const BindingPolicyObjectRequest = models.BindingPolicyObjectRequest
-const DescribeProductEventListEventsGroupInfo = models.DescribeProductEventListEventsGroupInfo
-const PutMonitorDataRequest = models.PutMonitorDataRequest
-const DescribePolicyConditionListConfigManualPeriod =
-  models.DescribePolicyConditionListConfigManualPeriod
-const DescribePolicyConditionListEventMetric = models.DescribePolicyConditionListEventMetric
-const DescribePolicyConditionListCondition = models.DescribePolicyConditionListCondition
-const DescribeBasicAlarmListRequest = models.DescribeBasicAlarmListRequest
 const DescribePolicyGroupListResponse = models.DescribePolicyGroupListResponse
-const DescribePolicyGroupInfoRequest = models.DescribePolicyGroupInfoRequest
-const DimensionsDesc = models.DimensionsDesc
-const DescribePolicyGroupListGroup = models.DescribePolicyGroupListGroup
-const DescribeBasicAlarmListAlarms = models.DescribeBasicAlarmListAlarms
-const GetMonitorDataRequest = models.GetMonitorDataRequest
-const PeriodsSt = models.PeriodsSt
-const DescribeAccidentEventListRequest = models.DescribeAccidentEventListRequest
-const DescribeProductEventListOverView = models.DescribeProductEventListOverView
-const MetricObjectMeaning = models.MetricObjectMeaning
-const MetricDatum = models.MetricDatum
-const DeletePolicyGroupRequest = models.DeletePolicyGroupRequest
-const DescribePolicyGroupInfoCallback = models.DescribePolicyGroupInfoCallback
-const DescribeBindingPolicyObjectListInstanceGroup =
-  models.DescribeBindingPolicyObjectListInstanceGroup
 const DescribePolicyConditionListResponse = models.DescribePolicyConditionListResponse
-const DescribePolicyConditionListConfigManualCalcType =
-  models.DescribePolicyConditionListConfigManualCalcType
-const UnBindingAllPolicyObjectRequest = models.UnBindingAllPolicyObjectRequest
 const PutMonitorDataResponse = models.PutMonitorDataResponse
-const ReceiverInfo = models.ReceiverInfo
-const ModifyAlarmReceiversRequest = models.ModifyAlarmReceiversRequest
-const DescribeProductEventListDimensions = models.DescribeProductEventListDimensions
 const DescribePolicyGroupInfoResponse = models.DescribePolicyGroupInfoResponse
 const DescribeBasicAlarmListResponse = models.DescribeBasicAlarmListResponse
-const DescribeBindingPolicyObjectListDimension = models.DescribeBindingPolicyObjectListDimension
-const DescribePolicyGroupInfoCondition = models.DescribePolicyGroupInfoCondition
 const UnBindingPolicyObjectResponse = models.UnBindingPolicyObjectResponse
 const GetMonitorDataResponse = models.GetMonitorDataResponse
-const MetricSet = models.MetricSet
 const DescribeBindingPolicyObjectListResponse = models.DescribeBindingPolicyObjectListResponse
-const DescribePolicyGroupInfoConditionTpl = models.DescribePolicyGroupInfoConditionTpl
-const DescribeBindingPolicyObjectListRequest = models.DescribeBindingPolicyObjectListRequest
 const CreatePolicyGroupResponse = models.CreatePolicyGroupResponse
-const InstanceGroup = models.InstanceGroup
-const DescribePolicyGroupInfoEventCondition = models.DescribePolicyGroupInfoEventCondition
 const DescribeBaseMetricsResponse = models.DescribeBaseMetricsResponse
-const DescribePolicyConditionListConfigManualPeriodNum =
-  models.DescribePolicyConditionListConfigManualPeriodNum
-const DescribeBindingPolicyObjectListInstance = models.DescribeBindingPolicyObjectListInstance
-const DescribePolicyConditionListConfigManualContinueTime =
-  models.DescribePolicyConditionListConfigManualContinueTime
-const DescribePolicyGroupListRequest = models.DescribePolicyGroupListRequest
 const DescribeAccidentEventListResponse = models.DescribeAccidentEventListResponse
 const DescribeProductEventListResponse = models.DescribeProductEventListResponse
-const DescribeBaseMetricsRequest = models.DescribeBaseMetricsRequest
-const Dimension = models.Dimension
-const DataPoint = models.DataPoint
 const UnBindingAllPolicyObjectResponse = models.UnBindingAllPolicyObjectResponse
-const DescribePolicyConditionListConfigManualStatType =
-  models.DescribePolicyConditionListConfigManualStatType
-const DescribeProductEventListEventsDimensions = models.DescribeProductEventListEventsDimensions
-const DescribePolicyConditionListConfigManualCalcValue =
-  models.DescribePolicyConditionListConfigManualCalcValue
 const ModifyAlarmReceiversResponse = models.ModifyAlarmReceiversResponse
-const DescribePolicyGroupListGroupInstanceGroup = models.DescribePolicyGroupListGroupInstanceGroup
 const BindingPolicyObjectResponse = models.BindingPolicyObjectResponse
 
 /**

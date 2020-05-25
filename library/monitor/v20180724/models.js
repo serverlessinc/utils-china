@@ -456,10 +456,10 @@ class DescribeProductEventListRequest extends AbstractModel {
     this.InstanceId = 'InstanceId' in params ? params.InstanceId : null
 
     if (params.Dimensions) {
-      this.Dimensions = new Array()
-      for (const z in params.Dimensions) {
+      this.Dimensions = []
+      for (const param of Object.values(params.Dimensions)) {
         const obj = new DescribeProductEventListDimensions()
-        obj.deserialize(params.Dimensions[z])
+        obj.deserialize(param)
         this.Dimensions.push(obj)
       }
     }
@@ -500,10 +500,10 @@ class Instance extends AbstractModel {
     }
 
     if (params.Dimensions) {
-      this.Dimensions = new Array()
-      for (const z in params.Dimensions) {
+      this.Dimensions = []
+      for (const param of Object.values(params.Dimensions)) {
         const obj = new Dimension()
-        obj.deserialize(params.Dimensions[z])
+        obj.deserialize(param)
         this.Dimensions.push(obj)
       }
     }
@@ -684,29 +684,29 @@ class DescribeProductEventListEvents extends AbstractModel {
     this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null
 
     if (params.Dimensions) {
-      this.Dimensions = new Array()
-      for (const z in params.Dimensions) {
+      this.Dimensions = []
+      for (const param of Object.values(params.Dimensions)) {
         const obj = new DescribeProductEventListEventsDimensions()
-        obj.deserialize(params.Dimensions[z])
+        obj.deserialize(param)
         this.Dimensions.push(obj)
       }
     }
 
     if (params.AdditionMsg) {
-      this.AdditionMsg = new Array()
-      for (const z in params.AdditionMsg) {
+      this.AdditionMsg = []
+      for (const param of Object.values(params.AdditionMsg)) {
         const obj = new DescribeProductEventListEventsDimensions()
-        obj.deserialize(params.AdditionMsg[z])
+        obj.deserialize(param)
         this.AdditionMsg.push(obj)
       }
     }
     this.IsAlarmConfig = 'IsAlarmConfig' in params ? params.IsAlarmConfig : null
 
     if (params.GroupInfo) {
-      this.GroupInfo = new Array()
-      for (const z in params.GroupInfo) {
+      this.GroupInfo = []
+      for (const param of Object.values(params.GroupInfo)) {
         const obj = new DescribeProductEventListEventsGroupInfo()
-        obj.deserialize(params.GroupInfo[z])
+        obj.deserialize(param)
         this.GroupInfo.push(obj)
       }
     }
@@ -912,19 +912,19 @@ class CreatePolicyGroupRequest extends AbstractModel {
     this.InsertTime = 'InsertTime' in params ? params.InsertTime : null
 
     if (params.Conditions) {
-      this.Conditions = new Array()
-      for (const z in params.Conditions) {
+      this.Conditions = []
+      for (const param of Object.values(params.Conditions)) {
         const obj = new CreatePolicyGroupCondition()
-        obj.deserialize(params.Conditions[z])
+        obj.deserialize(param)
         this.Conditions.push(obj)
       }
     }
 
     if (params.EventConditions) {
-      this.EventConditions = new Array()
-      for (const z in params.EventConditions) {
+      this.EventConditions = []
+      for (const param of Object.values(params.EventConditions)) {
         const obj = new CreatePolicyGroupEventCondition()
-        obj.deserialize(params.EventConditions[z])
+        obj.deserialize(param)
         this.EventConditions.push(obj)
       }
     }
@@ -1164,10 +1164,10 @@ class BindingPolicyObjectRequest extends AbstractModel {
     this.InstanceGroupId = 'InstanceGroupId' in params ? params.InstanceGroupId : null
 
     if (params.Dimensions) {
-      this.Dimensions = new Array()
-      for (const z in params.Dimensions) {
+      this.Dimensions = []
+      for (const param of Object.values(params.Dimensions)) {
         const obj = new BindingPolicyObjectDimension()
-        obj.deserialize(params.Dimensions[z])
+        obj.deserialize(param)
         this.Dimensions.push(obj)
       }
     }
@@ -1251,10 +1251,10 @@ class PutMonitorDataRequest extends AbstractModel {
     }
 
     if (params.Metrics) {
-      this.Metrics = new Array()
-      for (const z in params.Metrics) {
+      this.Metrics = []
+      for (const param of Object.values(params.Metrics)) {
         const obj = new MetricDatum()
-        obj.deserialize(params.Metrics[z])
+        obj.deserialize(param)
         this.Metrics.push(obj)
       }
     }
@@ -1423,10 +1423,10 @@ class DescribePolicyConditionListCondition extends AbstractModel {
     this.PolicyViewName = 'PolicyViewName' in params ? params.PolicyViewName : null
 
     if (params.EventMetrics) {
-      this.EventMetrics = new Array()
-      for (const z in params.EventMetrics) {
+      this.EventMetrics = []
+      for (const param of Object.values(params.EventMetrics)) {
         const obj = new DescribePolicyConditionListEventMetric()
-        obj.deserialize(params.EventMetrics[z])
+        obj.deserialize(param)
         this.EventMetrics.push(obj)
       }
     }
@@ -1434,10 +1434,10 @@ class DescribePolicyConditionListCondition extends AbstractModel {
       'IsSupportMultiRegion' in params ? params.IsSupportMultiRegion : null
 
     if (params.Metrics) {
-      this.Metrics = new Array()
-      for (const z in params.Metrics) {
+      this.Metrics = []
+      for (const param of Object.values(params.Metrics)) {
         const obj = new DescribePolicyConditionListMetric()
-        obj.deserialize(params.Metrics[z])
+        obj.deserialize(param)
         this.Metrics.push(obj)
       }
     }
@@ -1581,10 +1581,10 @@ class DescribePolicyGroupListResponse extends AbstractModel {
     }
 
     if (params.GroupList) {
-      this.GroupList = new Array()
-      for (const z in params.GroupList) {
+      this.GroupList = []
+      for (const param of Object.values(params.GroupList)) {
         const obj = new DescribePolicyGroupListGroup()
-        obj.deserialize(params.GroupList[z])
+        obj.deserialize(param)
         this.GroupList.push(obj)
       }
     }
@@ -1810,28 +1810,28 @@ class DescribePolicyGroupListGroup extends AbstractModel {
     this.ProjectId = 'ProjectId' in params ? params.ProjectId : null
 
     if (params.Conditions) {
-      this.Conditions = new Array()
-      for (const z in params.Conditions) {
+      this.Conditions = []
+      for (const param of Object.values(params.Conditions)) {
         const obj = new DescribePolicyGroupInfoCondition()
-        obj.deserialize(params.Conditions[z])
+        obj.deserialize(param)
         this.Conditions.push(obj)
       }
     }
 
     if (params.EventConditions) {
-      this.EventConditions = new Array()
-      for (const z in params.EventConditions) {
+      this.EventConditions = []
+      for (const param of Object.values(params.EventConditions)) {
         const obj = new DescribePolicyGroupInfoEventCondition()
-        obj.deserialize(params.EventConditions[z])
+        obj.deserialize(param)
         this.EventConditions.push(obj)
       }
     }
 
     if (params.ReceiverInfos) {
-      this.ReceiverInfos = new Array()
-      for (const z in params.ReceiverInfos) {
+      this.ReceiverInfos = []
+      for (const param of Object.values(params.ReceiverInfos)) {
         const obj = new DescribePolicyGroupInfoReceiverInfo()
-        obj.deserialize(params.ReceiverInfos[z])
+        obj.deserialize(param)
         this.ReceiverInfos.push(obj)
       }
     }
@@ -2043,10 +2043,10 @@ class DescribeBasicAlarmListAlarms extends AbstractModel {
     this.NotifyWay = 'NotifyWay' in params ? params.NotifyWay : null
 
     if (params.InstanceGroup) {
-      this.InstanceGroup = new Array()
-      for (const z in params.InstanceGroup) {
+      this.InstanceGroup = []
+      for (const param of Object.values(params.InstanceGroup)) {
         const obj = new InstanceGroup()
-        obj.deserialize(params.InstanceGroup[z])
+        obj.deserialize(param)
         this.InstanceGroup.push(obj)
       }
     }
@@ -2109,10 +2109,10 @@ class GetMonitorDataRequest extends AbstractModel {
     this.MetricName = 'MetricName' in params ? params.MetricName : null
 
     if (params.Instances) {
-      this.Instances = new Array()
-      for (const z in params.Instances) {
+      this.Instances = []
+      for (const param of Object.values(params.Instances)) {
         const obj = new Instance()
-        obj.deserialize(params.Instances[z])
+        obj.deserialize(param)
         this.Instances.push(obj)
       }
     }
@@ -2554,10 +2554,10 @@ class DescribePolicyConditionListResponse extends AbstractModel {
     }
 
     if (params.Conditions) {
-      this.Conditions = new Array()
-      for (const z in params.Conditions) {
+      this.Conditions = []
+      for (const param of Object.values(params.Conditions)) {
         const obj = new DescribePolicyConditionListCondition()
-        obj.deserialize(params.Conditions[z])
+        obj.deserialize(param)
         this.Conditions.push(obj)
       }
     }
@@ -2813,10 +2813,10 @@ class ModifyAlarmReceiversRequest extends AbstractModel {
     this.Module = 'Module' in params ? params.Module : null
 
     if (params.ReceiverInfos) {
-      this.ReceiverInfos = new Array()
-      for (const z in params.ReceiverInfos) {
+      this.ReceiverInfos = []
+      for (const param of Object.values(params.ReceiverInfos)) {
         const obj = new ReceiverInfo()
-        obj.deserialize(params.ReceiverInfos[z])
+        obj.deserialize(param)
         this.ReceiverInfos.push(obj)
       }
     }
@@ -2998,28 +2998,28 @@ class DescribePolicyGroupInfoResponse extends AbstractModel {
     this.DimensionGroup = 'DimensionGroup' in params ? params.DimensionGroup : null
 
     if (params.ConditionsConfig) {
-      this.ConditionsConfig = new Array()
-      for (const z in params.ConditionsConfig) {
+      this.ConditionsConfig = []
+      for (const param of Object.values(params.ConditionsConfig)) {
         const obj = new DescribePolicyGroupInfoCondition()
-        obj.deserialize(params.ConditionsConfig[z])
+        obj.deserialize(param)
         this.ConditionsConfig.push(obj)
       }
     }
 
     if (params.EventConfig) {
-      this.EventConfig = new Array()
-      for (const z in params.EventConfig) {
+      this.EventConfig = []
+      for (const param of Object.values(params.EventConfig)) {
         const obj = new DescribePolicyGroupInfoEventCondition()
-        obj.deserialize(params.EventConfig[z])
+        obj.deserialize(param)
         this.EventConfig.push(obj)
       }
     }
 
     if (params.ReceiverInfos) {
-      this.ReceiverInfos = new Array()
-      for (const z in params.ReceiverInfos) {
+      this.ReceiverInfos = []
+      for (const param of Object.values(params.ReceiverInfos)) {
         const obj = new DescribePolicyGroupInfoReceiverInfo()
-        obj.deserialize(params.ReceiverInfos[z])
+        obj.deserialize(param)
         this.ReceiverInfos.push(obj)
       }
     }
@@ -3079,10 +3079,10 @@ class DescribeBasicAlarmListResponse extends AbstractModel {
     }
 
     if (params.Alarms) {
-      this.Alarms = new Array()
-      for (const z in params.Alarms) {
+      this.Alarms = []
+      for (const param of Object.values(params.Alarms)) {
         const obj = new DescribeBasicAlarmListAlarms()
-        obj.deserialize(params.Alarms[z])
+        obj.deserialize(param)
         this.Alarms.push(obj)
       }
     }
@@ -3309,10 +3309,10 @@ class GetMonitorDataResponse extends AbstractModel {
     this.MetricName = 'MetricName' in params ? params.MetricName : null
 
     if (params.DataPoints) {
-      this.DataPoints = new Array()
-      for (const z in params.DataPoints) {
+      this.DataPoints = []
+      for (const param of Object.values(params.DataPoints)) {
         const obj = new DataPoint()
-        obj.deserialize(params.DataPoints[z])
+        obj.deserialize(param)
         this.DataPoints.push(obj)
       }
     }
@@ -3393,10 +3393,10 @@ class MetricSet extends AbstractModel {
     this.Period = 'Period' in params ? params.Period : null
 
     if (params.Periods) {
-      this.Periods = new Array()
-      for (const z in params.Periods) {
+      this.Periods = []
+      for (const param of Object.values(params.Periods)) {
         const obj = new PeriodsSt()
-        obj.deserialize(params.Periods[z])
+        obj.deserialize(param)
         this.Periods.push(obj)
       }
     }
@@ -3408,10 +3408,10 @@ class MetricSet extends AbstractModel {
     }
 
     if (params.Dimensions) {
-      this.Dimensions = new Array()
-      for (const z in params.Dimensions) {
+      this.Dimensions = []
+      for (const param of Object.values(params.Dimensions)) {
         const obj = new DimensionsDesc()
-        obj.deserialize(params.Dimensions[z])
+        obj.deserialize(param)
         this.Dimensions.push(obj)
       }
     }
@@ -3468,10 +3468,10 @@ class DescribeBindingPolicyObjectListResponse extends AbstractModel {
     }
 
     if (params.List) {
-      this.List = new Array()
-      for (const z in params.List) {
+      this.List = []
+      for (const param of Object.values(params.List)) {
         const obj = new DescribeBindingPolicyObjectListInstance()
-        obj.deserialize(params.List[z])
+        obj.deserialize(param)
         this.List.push(obj)
       }
     }
@@ -3617,10 +3617,10 @@ class DescribeBindingPolicyObjectListRequest extends AbstractModel {
     this.Offset = 'Offset' in params ? params.Offset : null
 
     if (params.Dimensions) {
-      this.Dimensions = new Array()
-      for (const z in params.Dimensions) {
+      this.Dimensions = []
+      for (const param of Object.values(params.Dimensions)) {
         const obj = new DescribeBindingPolicyObjectListDimension()
-        obj.deserialize(params.Dimensions[z])
+        obj.deserialize(param)
         this.Dimensions.push(obj)
       }
     }
@@ -3779,10 +3779,10 @@ class DescribeBaseMetricsResponse extends AbstractModel {
     }
 
     if (params.MetricSet) {
-      this.MetricSet = new Array()
-      for (const z in params.MetricSet) {
+      this.MetricSet = []
+      for (const param of Object.values(params.MetricSet)) {
         const obj = new MetricSet()
-        obj.deserialize(params.MetricSet[z])
+        obj.deserialize(param)
         this.MetricSet.push(obj)
       }
     }
@@ -4077,10 +4077,10 @@ class DescribeAccidentEventListResponse extends AbstractModel {
     }
 
     if (params.Alarms) {
-      this.Alarms = new Array()
-      for (const z in params.Alarms) {
+      this.Alarms = []
+      for (const param of Object.values(params.Alarms)) {
         const obj = new DescribeAccidentEventListAlarms()
-        obj.deserialize(params.Alarms[z])
+        obj.deserialize(param)
         this.Alarms.push(obj)
       }
     }
@@ -4133,10 +4133,10 @@ class DescribeProductEventListResponse extends AbstractModel {
     }
 
     if (params.Events) {
-      this.Events = new Array()
-      for (const z in params.Events) {
+      this.Events = []
+      for (const param of Object.values(params.Events)) {
         const obj = new DescribeProductEventListEvents()
-        obj.deserialize(params.Events[z])
+        obj.deserialize(param)
         this.Events.push(obj)
       }
     }
@@ -4253,10 +4253,10 @@ class DataPoint extends AbstractModel {
     }
 
     if (params.Dimensions) {
-      this.Dimensions = new Array()
-      for (const z in params.Dimensions) {
+      this.Dimensions = []
+      for (const param of Object.values(params.Dimensions)) {
         const obj = new Dimension()
-        obj.deserialize(params.Dimensions[z])
+        obj.deserialize(param)
         this.Dimensions.push(obj)
       }
     }

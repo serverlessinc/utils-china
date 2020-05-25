@@ -2,13 +2,13 @@
 
 const Login = require('../sdk/login')
 
-class doLogin {
+class DoLogin {
   async login() {
     const login = new Login()
-    const tencent_credentials = await login.login()
-    console.log(tencent_credentials)
+    const tencentCredentials = await login.login()
+    console.log(tencentCredentials)
   }
 }
 
-const tencentLogin = new doLogin()
+const tencentLogin = new DoLogin()
 tencentLogin.login()

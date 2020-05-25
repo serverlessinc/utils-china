@@ -104,9 +104,9 @@ const toString = {}.toString
 exports.isArray =
   Array.isArray ||
   function(arr) {
-    return toString.call(arr) == '[object Array]'
+    return toString.call(arr) === '[object Array]'
   }
 
-exports.VersionIsValid = function(version) {
+exports.versionIsValid = function(version) {
   return !isNaN(version) && version >= 1 && version <= 40
 }

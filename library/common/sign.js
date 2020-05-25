@@ -3,6 +3,8 @@
 const TencentCloudSDKHttpException = require('./exception/tencent_cloud_sdk_exception')
 const crypto = require('crypto')
 
+const objhasOwnProperty = Object.prototype.hasOwnProperty
+
 /**
  * @inner
  */
@@ -13,7 +15,7 @@ class Sign {
       HmacSHA256: 'sha256'
     }
 
-    if (!signMethodMap.hasOwnProperty(signMethod)) {
+    if (!objhasOwnProperty.call(signMethodMap, signMethod)) {
       throw new TencentCloudSDKHttpException(
         'signMethod invalid, signMethod only support (HmacSHA1, HmacSHA256)'
       )

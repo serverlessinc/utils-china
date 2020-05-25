@@ -33,6 +33,8 @@ function getStringRendererFromType(type) {
   switch (type) {
     case 'terminal':
       return TerminalRenderer
+    default:
+      return null
   }
 }
 
@@ -41,8 +43,8 @@ function render(renderFunc, text, params) {
     return new Promise((resolve, reject) => {
       try {
         const data = Index.create(text, params.opts)
-        return renderFunc(data, params.opts, (err, data) => {
-          return err ? reject(err) : resolve(data)
+        renderFunc(data, params.opts, (err, renderData) => {
+          return err ? reject(err) : resolve(renderData)
         })
       } catch (e) {
         reject(e)
@@ -56,6 +58,7 @@ function render(renderFunc, text, params) {
   } catch (e) {
     params.cb(e)
   }
+  return null
 }
 
 exports.toString = function toString(text, opts, cb) {

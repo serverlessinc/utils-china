@@ -57,7 +57,7 @@ function getBestVersionForMixedData(segments, errorCorrectionLevel) {
  * @return {Number}                     QR Code version number
  */
 exports.from = function from(value, defaultValue) {
-  if (Utils.VersionIsValid(value)) {
+  if (Utils.versionIsValid(value)) {
     return parseInt(value, 10)
   }
 
@@ -74,7 +74,7 @@ exports.from = function from(value, defaultValue) {
  * @return {Number}                      Quantity of storable data
  */
 exports.getCapacity = function getCapacity(version, errorCorrectionLevel, mode) {
-  if (!Utils.VersionIsValid(version)) {
+  if (!Utils.versionIsValid(version)) {
     throw new Error('Invalid QR Code version')
   }
 
@@ -152,7 +152,7 @@ exports.getBestVersionForData = function getBestVersionForData(data, errorCorrec
  * @return {Number}         Encoded version info bits
  */
 exports.getEncodedBits = function getEncodedBits(version) {
-  if (!Utils.VersionIsValid(version) || version < 7) {
+  if (!Utils.versionIsValid(version) || version < 7) {
     throw new Error('Invalid QR Code version')
   }
 

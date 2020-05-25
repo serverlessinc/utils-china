@@ -40,23 +40,23 @@ class UserInformationClient extends AbstractClient {
 
 class GetUserInformation {
   async getUserInformation(credentials) {
-    const secret_id = credentials.SecretId
-    const secret_key = credentials.SecretKey
+    const secretId = credentials.SecretId
+    const secretKey = credentials.SecretKey
     const cred = credentials.token
-      ? new CamCredential(secret_id, secret_key, credentials.token)
-      : new CamCredential(secret_id, secret_key)
+      ? new CamCredential(secretId, secretKey, credentials.token)
+      : new CamCredential(secretId, secretKey)
     const httpProfile = new HttpProfile()
     httpProfile.reqTimeout = 30
     const clientProfile = new ClientProfile('HmacSHA256', httpProfile)
     const cam = new UserInformationClient(cred, 'ap-guangzhou', clientProfile)
     const req = new GetUserInformationResponse()
     const body = {}
-    req.from_json_string(JSON.stringify(body))
+    req.fromJsonString(JSON.stringify(body))
     const handler = util.promisify(cam.GetUserAppId.bind(cam))
     try {
       return handler(req)
     } catch (e) {
-      throw 'Get Appid failed! '
+      throw new Error('Get Appid failed!')
     }
   }
 }

@@ -73,7 +73,7 @@ class BindRole {
       const attachRole = {}
 
       if (haveRole && !haveRole.error && haveRole.message) {
-        for (const item in haveRole.message) {
+        for (const item of Object.keys(haveRole.message)) {
           const roleName = item
           const rolePolicy = haveRole.message[roleName]
           if (rolePolicy.policy && rolePolicy.policy.length > 0) {
@@ -107,7 +107,9 @@ class BindRole {
         }
         await this.getOrUpdateBindRoleState(AppId, 'report', JSON.stringify(attachRole))
       }
-    } catch (e) {}
+    } catch (e) {
+      // Ignore
+    }
   }
 }
 

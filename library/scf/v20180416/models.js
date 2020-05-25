@@ -168,10 +168,10 @@ class CreateFunctionRequest extends AbstractModel {
     this.CodeSource = 'CodeSource' in params ? params.CodeSource : null
 
     if (params.Layers) {
-      this.Layers = new Array()
-      for (const z in params.Layers) {
+      this.Layers = []
+      for (const param of Object.values(params.Layers)) {
         const obj = new LayerVersionSimple()
-        obj.deserialize(params.Layers[z])
+        obj.deserialize(param)
         this.Layers.push(obj)
       }
     }
@@ -321,10 +321,10 @@ class ListLayerVersionsResponse extends AbstractModel {
     }
 
     if (params.LayerVersions) {
-      this.LayerVersions = new Array()
-      for (const z in params.LayerVersions) {
+      this.LayerVersions = []
+      for (const param of Object.values(params.LayerVersions)) {
         const obj = new LayerVersionInfo()
-        obj.deserialize(params.LayerVersions[z])
+        obj.deserialize(param)
         this.LayerVersions.push(obj)
       }
     }
@@ -429,10 +429,10 @@ class ListVersionByFunctionResponse extends AbstractModel {
     this.FunctionVersion = 'FunctionVersion' in params ? params.FunctionVersion : null
 
     if (params.Versions) {
-      this.Versions = new Array()
-      for (const z in params.Versions) {
+      this.Versions = []
+      for (const param of Object.values(params.Versions)) {
         const obj = new FunctionVersion()
-        obj.deserialize(params.Versions[z])
+        obj.deserialize(param)
         this.Versions.push(obj)
       }
     }
@@ -577,10 +577,10 @@ class ListLayersResponse extends AbstractModel {
     }
 
     if (params.Layers) {
-      this.Layers = new Array()
-      for (const z in params.Layers) {
+      this.Layers = []
+      for (const param of Object.values(params.Layers)) {
         const obj = new LayerVersionInfo()
-        obj.deserialize(params.Layers[z])
+        obj.deserialize(param)
         this.Layers.push(obj)
       }
     }
@@ -613,10 +613,10 @@ class Environment extends AbstractModel {
     }
 
     if (params.Variables) {
-      this.Variables = new Array()
-      for (const z in params.Variables) {
+      this.Variables = []
+      for (const param of Object.values(params.Variables)) {
         const obj = new Variable()
-        obj.deserialize(params.Variables[z])
+        obj.deserialize(param)
         this.Variables.push(obj)
       }
     }
@@ -838,7 +838,7 @@ class CreateNamespaceResponse extends AbstractModel {
  * 函数列表
  * @class
  */
-class Function extends AbstractModel {
+class FunctionClass extends AbstractModel {
   constructor() {
     super()
 
@@ -927,10 +927,10 @@ class Function extends AbstractModel {
     this.Description = 'Description' in params ? params.Description : null
 
     if (params.Tags) {
-      this.Tags = new Array()
-      for (const z in params.Tags) {
+      this.Tags = []
+      for (const param of Object.values(params.Tags)) {
         const obj = new Tag()
-        obj.deserialize(params.Tags[z])
+        obj.deserialize(param)
         this.Tags.push(obj)
       }
     }
@@ -1176,10 +1176,10 @@ class UpdateFunctionConfigurationRequest extends AbstractModel {
     this.L5Enable = 'L5Enable' in params ? params.L5Enable : null
 
     if (params.Layers) {
-      this.Layers = new Array()
-      for (const z in params.Layers) {
+      this.Layers = []
+      for (const param of Object.values(params.Layers)) {
         const obj = new LayerVersionSimple()
-        obj.deserialize(params.Layers[z])
+        obj.deserialize(param)
         this.Layers.push(obj)
       }
     }
@@ -1307,7 +1307,7 @@ class ListFunctionsResponse extends AbstractModel {
 
     /**
      * 函数列表
-     * @type {Array.<Function> || null}
+     * @type {Array.<FunctionClass> || null}
      */
     this.Functions = null
 
@@ -1333,10 +1333,10 @@ class ListFunctionsResponse extends AbstractModel {
     }
 
     if (params.Functions) {
-      this.Functions = new Array()
-      for (const z in params.Functions) {
-        const obj = new Function()
-        obj.deserialize(params.Functions[z])
+      this.Functions = []
+      for (const param of Object.values(params.Functions)) {
+        const obj = new FunctionClass()
+        obj.deserialize(param)
         this.Functions.push(obj)
       }
     }
@@ -2427,10 +2427,10 @@ class GetFunctionResponse extends AbstractModel {
     this.Description = 'Description' in params ? params.Description : null
 
     if (params.Triggers) {
-      this.Triggers = new Array()
-      for (const z in params.Triggers) {
+      this.Triggers = []
+      for (const param of Object.values(params.Triggers)) {
         const obj = new Trigger()
-        obj.deserialize(params.Triggers[z])
+        obj.deserialize(param)
         this.Triggers.push(obj)
       }
     }
@@ -2467,10 +2467,10 @@ class GetFunctionResponse extends AbstractModel {
     this.FunctionId = 'FunctionId' in params ? params.FunctionId : null
 
     if (params.Tags) {
-      this.Tags = new Array()
-      for (const z in params.Tags) {
+      this.Tags = []
+      for (const param of Object.values(params.Tags)) {
         const obj = new Tag()
-        obj.deserialize(params.Tags[z])
+        obj.deserialize(param)
         this.Tags.push(obj)
       }
     }
@@ -2490,10 +2490,10 @@ class GetFunctionResponse extends AbstractModel {
     this.L5Enable = 'L5Enable' in params ? params.L5Enable : null
 
     if (params.Layers) {
-      this.Layers = new Array()
-      for (const z in params.Layers) {
+      this.Layers = []
+      for (const param of Object.values(params.Layers)) {
         const obj = new LayerVersionInfo()
-        obj.deserialize(params.Layers[z])
+        obj.deserialize(param)
         this.Layers.push(obj)
       }
     }
@@ -2558,10 +2558,10 @@ class GetFunctionLogsResponse extends AbstractModel {
     this.TotalCount = 'TotalCount' in params ? params.TotalCount : null
 
     if (params.Data) {
-      this.Data = new Array()
-      for (const z in params.Data) {
+      this.Data = []
+      for (const param of Object.values(params.Data)) {
         const obj = new FunctionLog()
-        obj.deserialize(params.Data[z])
+        obj.deserialize(param)
         this.Data.push(obj)
       }
     }
@@ -2651,10 +2651,10 @@ class ListFunctionsRequest extends AbstractModel {
     this.Description = 'Description' in params ? params.Description : null
 
     if (params.Filters) {
-      this.Filters = new Array()
-      for (const z in params.Filters) {
+      this.Filters = []
+      for (const param of Object.values(params.Filters)) {
         const obj = new Filter()
-        obj.deserialize(params.Filters[z])
+        obj.deserialize(param)
         this.Filters.push(obj)
       }
     }
@@ -3350,10 +3350,10 @@ class ListNamespacesResponse extends AbstractModel {
     }
 
     if (params.Namespaces) {
-      this.Namespaces = new Array()
-      for (const z in params.Namespaces) {
+      this.Namespaces = []
+      for (const param of Object.values(params.Namespaces)) {
         const obj = new Namespace()
-        obj.deserialize(params.Namespaces[z])
+        obj.deserialize(param)
         this.Namespaces.push(obj)
       }
     }
@@ -3754,7 +3754,7 @@ module.exports = {
   DeleteLayerVersionResponse,
   InvokeResponse,
   CreateNamespaceResponse,
-  Function,
+  FunctionClass: Function,
   DeadLetterConfig,
   InvokeRequest,
   UpdateFunctionConfigurationRequest,

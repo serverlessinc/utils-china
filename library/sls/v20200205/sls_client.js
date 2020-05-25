@@ -21,24 +21,14 @@ const AbstractClient = require('../../common/abstract_client')
 
 const ListInstancesResponse = models.ListInstancesResponse
 const GetUploadUrlsResponse = models.GetUploadUrlsResponse
-const RunFinishComponentRequest = models.RunFinishComponentRequest
-const GetComponentAndVersionsRequest = models.GetComponentAndVersionsRequest
 const PostPublishComponentResponse = models.PostPublishComponentResponse
 const RunComponentResponse = models.RunComponentResponse
 const GetComponentAndVersionsResponse = models.GetComponentAndVersionsResponse
-const GetInstanceRequest = models.GetInstanceRequest
 const SaveInstanceResponse = models.SaveInstanceResponse
-const GetComponentVersionRequest = models.GetComponentVersionRequest
-const PrePublishComponentRequest = models.PrePublishComponentRequest
 const GetInstanceResponse = models.GetInstanceResponse
 const GetComponentVersionResponse = models.GetComponentVersionResponse
-const GetUploadUrlsRequest = models.GetUploadUrlsRequest
-const RunComponentRequest = models.RunComponentRequest
 const RunFinishComponentResponse = models.RunFinishComponentResponse
 const PrePublishComponentResponse = models.PrePublishComponentResponse
-const PostPublishComponentRequest = models.PostPublishComponentRequest
-const SaveInstanceRequest = models.SaveInstanceRequest
-const ListInstancesRequest = models.ListInstancesRequest
 
 /**
  * sls client

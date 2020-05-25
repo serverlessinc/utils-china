@@ -45,9 +45,7 @@ KanjiData.prototype.write = function(bitBuffer) {
       // Subtract 0xC140 from Shift JIS value
       value -= 0xc140
     } else {
-      throw new Error(
-        `Invalid SJIS character: ${this.data[i]}\n` + 'Make sure your charset is UTF-8'
-      )
+      throw new Error(`Invalid SJIS character: ${this.data[i]}\nMake sure your charset is UTF-8`)
     }
 
     // Multiply most significant byte of result by 0xC0
@@ -299,6 +297,8 @@ function getSegmentBitsLength(length, mode) {
       return KanjiData.getBitsLength(length)
     case Mode.BYTE:
       return ByteData.getBitsLength(length)
+    default:
+      return null
   }
 }
 
@@ -361,6 +361,8 @@ function buildNodes(segs) {
         break
       case Mode.BYTE:
         nodes.push([{ data: seg.data, mode: Mode.BYTE, length: getStringByteLength(seg.data) }])
+        break
+      default:
     }
   }
 
@@ -396,7 +398,7 @@ function buildGraph(nodes, version) {
       table[key] = { node, lastCount: 0 }
       graph[key] = {}
 
-      for (var n = 0; n < prevNodeIds.length; n++) {
+      for (let n = 0; n < prevNodeIds.length; n++) {
         const prevNodeId = prevNodeIds[n]
 
         if (table[prevNodeId] && table[prevNodeId].node.mode === node.mode) {
@@ -419,7 +421,7 @@ function buildGraph(nodes, version) {
     prevNodeIds = currentNodeIds
   }
 
-  for (n = 0; n < prevNodeIds.length; n++) {
+  for (let n = 0; n < prevNodeIds.length; n++) {
     graph[prevNodeIds[n]].end = 0
   }
 
@@ -467,6 +469,8 @@ function buildSingleSegment(data, modesHint) {
 
     case Mode.BYTE:
       return new ByteData(data)
+    default:
+      return null
   }
 }
 

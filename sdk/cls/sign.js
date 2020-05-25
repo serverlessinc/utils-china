@@ -24,22 +24,22 @@ class ClsSign {
         .digest('hex')
     }
 
-    const header_keys = Object.keys(headers).sort()
+    const headerKeys = Object.keys(headers).sort()
     const orderHeaders = []
-    for (const key of header_keys) {
+    for (const key of headerKeys) {
       orderHeaders.push(
         util.format('%s=%s', key.toLocaleLowerCase(), querystring.escape(headers[key]))
       )
     }
 
-    const param_keys = Object.keys(params).sort()
+    const paramKeys = Object.keys(params).sort()
     const orderParams = []
-    for (const key of param_keys) {
+    for (const key of paramKeys) {
       orderParams.push(
         util.format('%s=%s', key.toLocaleLowerCase(), querystring.escape(params[key]))
       )
     }
-    const sign_raw_string = util.format(
+    const signRawString = util.format(
       '%s\n%s\n%s\n%s\n',
       method.toLocaleLowerCase(),
       path,
@@ -47,28 +47,28 @@ class ClsSign {
       orderHeaders.join('&')
     )
 
-    const timestamp = parseInt(new Date().getTime() / 1000)
-    const sign_time = util.format('%s;%s', timestamp - 10, timestamp + 30 * 60)
+    const timestamp = Math.round(new Date().getTime() / 1000)
+    const signTime = util.format('%s;%s', timestamp - 10, timestamp + 30 * 60)
 
-    const sign_string = util.format('sha1\n%s\n%s\n', sign_time, encrypt('sha1', sign_raw_string))
+    const signString = util.format('sha1\n%s\n%s\n', signTime, encrypt('sha1', signRawString))
 
-    const sign_value = hmacSha1(sign_string, hmacSha1(sign_time, this.secretKey))
+    const signValue = hmacSha1(signString, hmacSha1(signTime, this.secretKey))
 
-    const tmp_header_keys = header_keys.map((item) => {
+    const tmpHeaderKeys = headerKeys.map((item) => {
       return item.toLocaleLowerCase()
     })
-    const tmp_param_keys = param_keys.map((item) => {
+    const tmpParamKeys = paramKeys.map((item) => {
       return item.toLocaleLowerCase()
     })
 
     return util.format(
       'q-sign-algorithm=sha1&q-ak=%s&q-sign-time=%s&q-key-time=%s&q-header-list=%s&q-url-param-list=%s&q-signature=%s',
       this.secretId,
-      sign_time,
-      sign_time,
-      tmp_header_keys.join(';'),
-      tmp_param_keys.join(';'),
-      sign_value
+      signTime,
+      signTime,
+      tmpHeaderKeys.join(';'),
+      tmpParamKeys.join(';'),
+      signValue
     )
   }
 }

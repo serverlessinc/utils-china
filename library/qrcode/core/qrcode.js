@@ -375,7 +375,7 @@ function setupData(matrix, data) {
       col--
     }
 
-    while (true) {
+    do {
       for (let c = 0; c < 2; c++) {
         if (!matrix.isReserved(row, col - c)) {
           let dark = false
@@ -395,13 +395,9 @@ function setupData(matrix, data) {
       }
 
       row += inc
-
-      if (row < 0 || size <= row) {
-        row -= inc
-        inc = -inc
-        break
-      }
-    }
+    } while (row >= 0 && size > row)
+    row -= inc
+    inc = -inc
   }
 }
 

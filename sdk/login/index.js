@@ -64,7 +64,7 @@ class Login {
           }
         })
       })
-      req.on('error', (e) => {
+      req.on('error', () => {
         done(false)
         return
       })
@@ -95,7 +95,7 @@ class Login {
           }
         })
       })
-      req.on('error', (e) => {
+      req.on('error', () => {
         done(false)
         return
       })
@@ -122,14 +122,14 @@ class Login {
       let loginData
       while (timeout > 0) {
         loginData = await this.checkStatus(uuid, apiUrl.login_status_url)
-        if (loginData != false) {
+        if (loginData !== false) {
           loginFlag = true
           break
         }
         timeout--
         await this.sleep(1000)
       }
-      if (loginFlag == false && timeout == 0) {
+      if (loginFlag === false && timeout === 0) {
         console.log('Login timeout. Please login again! ')
         process.exit(0)
       }
@@ -147,7 +147,8 @@ class Login {
     } catch (e) {
       console.log(e)
     }
-    process.exit(0)
+		process.exit(0)
+		return null
   }
 
   async loginUrl() {
@@ -162,7 +163,8 @@ class Login {
       }
     } catch (e) {
       console.log(e)
-    }
+		}
+		return null
   }
 }
 
