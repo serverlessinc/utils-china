@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = {
   Cam: require('./cam/index'),
   Login: require('./login/index'),
@@ -7,5 +9,5 @@ module.exports = {
   Others: require('./others/index'),
   Serverless: require('./serverless'),
   SlsMonitor: require('./monitor'),
-  Cls: require('./cls')
-}
+  Cls: require('./cls'),
+};

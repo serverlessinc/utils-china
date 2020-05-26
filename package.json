@@ -2,7 +2,6 @@
   "name": "@serverless/utils-china",
   "description": "Tencent Cloud Tools For Serverless Framewoek",
   "version": "0.1.12",
-  "main": "./index.js",
   "publishConfig": {
     "access": "public"
   },
@@ -11,14 +10,32 @@
     "Serverless Framework",
     "Cloud function"
   ],
+  "repository": "serverlessinc/utils-china",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint . --fix --cache"
+    "lint": "eslint .",
+    "lint:updated": "pipe-git-updated --ext=js -- eslint --ignore-path .gitignore",
+    "prettier-check": "prettier -c --ignore-path .gitignore \"**/*.{css,html,js,json,md,yaml,yml}\"",
+    "prettier-check:updated": "pipe-git-updated --ext=css --ext=html --ext=js --ext=json --ext=md --ext=yaml --ext=yml -- prettier -c",
+    "prettify": "prettier --write --ignore-path .gitignore \"**/*.{css,html,js,json,md,yaml,yml}\"",
+    "prettify:updated": "pipe-git-updated --ext=css --ext=html --ext=js --ext=json --ext=md --ext=yaml --ext=yml -- prettier --write"
   },
   "author": "Tencent Cloud, Inc.",
   "license": "MIT",
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint"
+    ],
+    "*.{css,html,js,json,md,yaml,yml}": [
+      "prettier -c"
+    ]
+  },
   "dependencies": {
-    "@tencent-sdk/capi": "^0.2.15-alpha.0",
+    "@tencent-sdk/capi": "0.2.15-alpha.0",
     "dijkstrajs": "^1.0.1",
     "dot-qs": "0.2.0",
     "duplexify": "^4.1.1",
@@ -31,19 +48,22 @@
     "winston": "^3.2.1"
   },
   "devDependencies": {
+    "@serverless/eslint-config": "^2.1.0",
     "babel-eslint": "9.0.0",
-    "eslint": "5.6.0",
-    "eslint-config-prettier": "^3.6.0",
-    "eslint-plugin-import": "^2.18.0",
-    "eslint-plugin-prettier": "^3.0.1",
-    "prettier": "^1.18.2"
+    "eslint": "^7.0.0",
+    "eslint-plugin-import": "^2.20.2",
+    "git-list-updated": "^1.2.1",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.6",
+    "prettier": "^2.0.5"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/serverless/utils-china.git"
+  "eslintConfig": {
+    "extends": "@serverless/eslint-config/node",
+    "root": true,
+    "rules": {
+      "no-console": "off",
+      "no-underscore-dangle": "off"
+    }
   },
-  "bugs": {
-    "url": "https://github.com/serverless/utils-china/issues"
-  },
-  "homepage": "https://github.com/serverless/utils-china#readme"
+  "homepage": "https://github.com/serverlessinc/utils-china#readme"
 }

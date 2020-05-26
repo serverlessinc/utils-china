@@ -1,6 +1,8 @@
-var Utils = require('./utils')
+'use strict';
+
+const Utils = require('./utils');
 // var VersionCheck = require('./version-check')
-var Regex = require('./regex')
+const Regex = require('./regex');
 
 /**
  * Numeric mode encodes data from the decimal digit set (0 - 9)
@@ -12,8 +14,8 @@ var Regex = require('./regex')
 exports.NUMERIC = {
   id: 'Numeric',
   bit: 1 << 0,
-  ccBits: [10, 12, 14]
-}
+  ccBits: [10, 12, 14],
+};
 
 /**
  * Alphanumeric mode encodes data from a set of 45 characters,
@@ -27,8 +29,8 @@ exports.NUMERIC = {
 exports.ALPHANUMERIC = {
   id: 'Alphanumeric',
   bit: 1 << 1,
-  ccBits: [9, 11, 13]
-}
+  ccBits: [9, 11, 13],
+};
 
 /**
  * In byte mode, data is encoded at 8 bits per character.
@@ -38,8 +40,8 @@ exports.ALPHANUMERIC = {
 exports.BYTE = {
   id: 'Byte',
   bit: 1 << 2,
-  ccBits: [8, 16, 16]
-}
+  ccBits: [8, 16, 16],
+};
 
 /**
  * The Kanji mode efficiently encodes Kanji characters in accordance with
@@ -53,8 +55,8 @@ exports.BYTE = {
 exports.KANJI = {
   id: 'Kanji',
   bit: 1 << 3,
-  ccBits: [8, 10, 12]
-}
+  ccBits: [8, 10, 12],
+};
 
 /**
  * Mixed mode will contain a sequences of data in a combination of any of
@@ -63,8 +65,8 @@ exports.KANJI = {
  * @type {Object}
  */
 exports.MIXED = {
-  bit: -1
-}
+  bit: -1,
+};
 
 /**
  * Returns the number of bits needed to store the data length
@@ -74,17 +76,17 @@ exports.MIXED = {
  * @param  {Number} version QR Code version
  * @return {Number}         Number of bits
  */
-exports.getCharCountIndicator = function getCharCountIndicator (mode, version) {
-  if (!mode.ccBits) throw new Error('Invalid mode: ' + mode)
+exports.getCharCountIndicator = function getCharCountIndicator(mode, version) {
+  if (!mode.ccBits) throw new Error(`Invalid mode: ${mode}`);
 
-  if (!Utils.VersionIsValid(version)) {
-    throw new Error('Invalid version: ' + version)
+  if (!Utils.versionIsValid(version)) {
+    throw new Error(`Invalid version: ${version}`);
   }
 
-  if (version >= 1 && version < 10) return mode.ccBits[0]
-  else if (version < 27) return mode.ccBits[1]
-  return mode.ccBits[2]
-}
+  if (version >= 1 && version < 10) return mode.ccBits[0];
+  else if (version < 27) return mode.ccBits[1];
+  return mode.ccBits[2];
+};
 
 /**
  * Returns the most efficient mode to store the specified data
@@ -92,12 +94,12 @@ exports.getCharCountIndicator = function getCharCountIndicator (mode, version) {
  * @param  {String} dataStr Input data string
  * @return {Mode}           Best mode
  */
-exports.getBestModeForData = function getBestModeForData (dataStr) {
-  if (Regex.testNumeric(dataStr)) return exports.NUMERIC
-  else if (Regex.testAlphanumeric(dataStr)) return exports.ALPHANUMERIC
-  else if (Regex.testKanji(dataStr)) return exports.KANJI
-  else return exports.BYTE
-}
+exports.getBestModeForData = function getBestModeForData(dataStr) {
+  if (Regex.testNumeric(dataStr)) return exports.NUMERIC;
+  else if (Regex.testAlphanumeric(dataStr)) return exports.ALPHANUMERIC;
+  else if (Regex.testKanji(dataStr)) return exports.KANJI;
+  return exports.BYTE;
+};
 
 /**
  * Return mode name as string
@@ -105,10 +107,10 @@ exports.getBestModeForData = function getBestModeForData (dataStr) {
  * @param {Mode} mode Mode object
  * @returns {String}  Mode name
  */
-exports.toString = function toString (mode) {
-  if (mode && mode.id) return mode.id
-  throw new Error('Invalid mode')
-}
+exports.toString = function toString(mode) {
+  if (mode && mode.id) return mode.id;
+  throw new Error('Invalid mode');
+};
 
 /**
  * Check if input param is a valid mode object
@@ -116,9 +118,9 @@ exports.toString = function toString (mode) {
  * @param   {Mode}    mode Mode object
  * @returns {Boolean} True if valid mode, false otherwise
  */
-exports.isValid = function isValid (mode) {
-  return mode && mode.bit && mode.ccBits
-}
+exports.isValid = function isValid(mode) {
+  return mode && mode.bit && mode.ccBits;
+};
 
 /**
  * Get mode object from its name
@@ -126,24 +128,24 @@ exports.isValid = function isValid (mode) {
  * @param   {String} string Mode name
  * @returns {Mode}          Mode object
  */
-function fromString (string) {
+function fromString(string) {
   if (typeof string !== 'string') {
-    throw new Error('Param is not a string')
+    throw new Error('Param is not a string');
   }
 
-  var lcStr = string.toLowerCase()
+  const lcStr = string.toLowerCase();
 
   switch (lcStr) {
     case 'numeric':
-      return exports.NUMERIC
+      return exports.NUMERIC;
     case 'alphanumeric':
-      return exports.ALPHANUMERIC
+      return exports.ALPHANUMERIC;
     case 'kanji':
-      return exports.KANJI
+      return exports.KANJI;
     case 'byte':
-      return exports.BYTE
+      return exports.BYTE;
     default:
-      throw new Error('Unknown mode: ' + string)
+      throw new Error(`Unknown mode: ${string}`);
   }
 }
 
@@ -155,14 +157,14 @@ function fromString (string) {
  * @param  {Mode}        defaultValue Fallback value
  * @return {Mode}                     Encoding mode
  */
-exports.from = function from (value, defaultValue) {
+exports.from = function from(value, defaultValue) {
   if (exports.isValid(value)) {
-    return value
+    return value;
   }
 
   try {
-    return fromString(value)
+    return fromString(value);
   } catch (e) {
-    return defaultValue
+    return defaultValue;
   }
-}
+};

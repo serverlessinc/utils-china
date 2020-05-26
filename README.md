@@ -21,32 +21,32 @@
 基本使用方法(开启调试和实时日志)：
 
 ```javascript
-const tencentCloudTools = require('../../serverless-tencent-tools')
-const Sdk = tencentCloudTools.Debug
-const region = 'ap-aaaaa'
+const tencentCloudTools = require('../../serverless-tencent-tools');
+const Sdk = tencentCloudTools.Debug;
+const region = 'ap-aaaaa';
 const auth = {
   SecretId: '****',
-  SecretKey: '*****'
-}
+  SecretKey: '*****',
+};
 const func = {
-  functionName: 'course'
-}
-const sdk = new Sdk(auth, func, region)
+  functionName: 'course',
+};
+const sdk = new Sdk(auth, func, region);
 // 开启调试和实时日志
-await sdk.remoteDebug()
+await sdk.remoteDebug();
 
 // 开启调试的标准接口（推荐使用）
 try {
   await sdk.standardRemoteDebug({
     logger: console.log,
-    stdout: process.stdout
-  })
-} catch(e){
-  console.error(e)
+    stdout: process.stdout,
+  });
+} catch (e) {
+  console.error(e);
 }
 
 // 调试后结束
-await sdk.stop()
+await sdk.stop();
 ```
 
 输出结果：无
@@ -84,17 +84,17 @@ func 参数描述：
 基本使用方法(getAddr)：
 
 ```javascript
-const tencentCloudTools = require('../../serverless-tencent-tools')
-const scfRealTimeLogs = tencentCloudTools.Logs.ScfRealTimeLogs
-const region = 'ap-aaaaa'
+const tencentCloudTools = require('../../serverless-tencent-tools');
+const scfRealTimeLogs = tencentCloudTools.Logs.ScfRealTimeLogs;
+const region = 'ap-aaaaa';
 const auth = {
   SecretId: '****',
-  SecretKey: '*****'
-}
+  SecretKey: '*****',
+};
 const func = {
-  functionName: 'course'
-}
-console.log(scfRealTimeLogs.getAddr(auth, func, region))
+  functionName: 'course',
+};
+console.log(scfRealTimeLogs.getAddr(auth, func, region));
 ```
 
 输出结果：
@@ -139,21 +139,21 @@ func 参数描述：
 基本使用方法(getUserInformation)：
 
 ```javascript
-const { GetUserInformation } = require('../sdk/cam/index')
+const { GetUserInformation } = require('../sdk/cam/index');
 
 class UserInformation {
   async getUserInformation() {
-    const userInformation = new GetUserInformation()
+    const userInformation = new GetUserInformation();
     const auth = {
       SecretId: '****',
-      SecretKey: '****'
-    }
-    console.log(await userInformation.getUserInformation(auth))
+      SecretKey: '****',
+    };
+    console.log(await userInformation.getUserInformation(auth));
   }
 }
 
-const getUserInformation = new UserInformation()
-getUserInformation.getUserInformation()
+const getUserInformation = new UserInformation();
+getUserInformation.getUserInformation();
 ```
 
 输出结果：
@@ -191,18 +191,18 @@ GetUserInformationResponse {
 基本使用方法（login）:
 
 ```javascript
-const Login = require('../sdk/login')
+const Login = require('../sdk/login');
 
 class doLogin {
   async login() {
-    const login = new Login()
-    const tencent_credentials = await login.login()
-    console.log(tencent_credentials)
+    const login = new Login();
+    const tencent_credentials = await login.login();
+    console.log(tencent_credentials);
   }
 }
 
-const tencentLogin = new doLogin()
-tencentLogin.login()
+const tencentLogin = new doLogin();
+tencentLogin.login();
 ```
 
 输出结果：
@@ -240,22 +240,22 @@ Login successful for TencentCloud.
 基本使用方法(flush)：
 
 ```javascript
-const Login = require('../sdk/login')
+const Login = require('../sdk/login');
 
 class doLogin {
   async flush() {
-    const login = new Login()
-    const uuid = '*********'
-    const expired = 1576744591
-    const signature = '*********'
-    const appid = 1253970226
-    const tencent_credentials = await login.flush(uuid, expired, signature, appid)
-    console.log(tencent_credentials)
+    const login = new Login();
+    const uuid = '*********';
+    const expired = 1576744591;
+    const signature = '*********';
+    const appid = 1253970226;
+    const tencent_credentials = await login.flush(uuid, expired, signature, appid);
+    console.log(tencent_credentials);
   }
 }
 
-const tencentLogin = new doLogin()
-tencentLogin.flush()
+const tencentLogin = new doLogin();
+tencentLogin.flush();
 ```
 
 输出结果：
@@ -299,17 +299,17 @@ tencentLogin.flush()
 基本使用方法(loginUrl)：
 
 ```javascript
-const Login = require('../sdk/login')
+const Login = require('../sdk/login');
 
 class doLogin {
   async getUrl() {
-    const login = new Login()
-    console.log(await login.loginUrl())
+    const login = new Login();
+    console.log(await login.loginUrl());
   }
 }
 
-const tencentLogin = new doLogin()
-tencentLogin.getUrl()
+const tencentLogin = new doLogin();
+tencentLogin.getUrl();
 ```
 
 输出结果：
@@ -337,20 +337,20 @@ tencentLogin.getUrl()
 基本使用方法(checkStatus)：
 
 ```javascript
-const Login = require('../sdk/login')
+const Login = require('../sdk/login');
 
 class doLogin {
   async getResult() {
-    const login = new Login()
-    const uuid = '***********'
+    const login = new Login();
+    const uuid = '***********';
     const login_status_url =
-      '/login/status?uuid=**********&os=Darwin&expired=1576752024&signature=*********'
-    console.log(await login.checkStatus(uuid, login_status_url))
+      '/login/status?uuid=**********&os=Darwin&expired=1576752024&signature=*********';
+    console.log(await login.checkStatus(uuid, login_status_url));
   }
 }
 
-const tencentLogin = new doLogin()
-tencentLogin.getResult()
+const tencentLogin = new doLogin();
+tencentLogin.getResult();
 ```
 
 输出结果：
@@ -386,18 +386,18 @@ tencentLogin.getResult()
 基本使用方法(GetUserAuthInfo)：
 
 ```javascript
-const { GetUserAuthInfo } = require('../sdk/account/index')
+const { GetUserAuthInfo } = require('../sdk/account/index');
 
 class UserAuthInfo {
   async getUserAuth() {
-    const getUserAuthInfo = new GetUserAuthInfo()
-    const uin = 123456787890
-    console.log(await getUserAuthInfo.isAuth(uin))
+    const getUserAuthInfo = new GetUserAuthInfo();
+    const uin = 123456787890;
+    console.log(await getUserAuthInfo.isAuth(uin));
   }
 }
 
-const userAuthInfo = new UserAuthInfo()
-userAuthInfo.getUserAuth()
+const userAuthInfo = new UserAuthInfo();
+userAuthInfo.getUserAuth();
 ```
 
 输出结果：
@@ -430,24 +430,24 @@ userAuthInfo.getUserAuth()
 基本使用方法(IsInChina)：
 
 ```javascript
-const Others = require('../sdk/others')
+const Others = require('../sdk/others');
 
 class OthersAction {
   async getIsInChina() {
-    const isInChina = new Others.IsInChina()
-    const inChina = await isInChina.inChina()
-    console.log(inChina)
+    const isInChina = new Others.IsInChina();
+    const inChina = await isInChina.inChina();
+    console.log(inChina);
   }
 }
 
-new OthersAction().getIsInChina()
+new OthersAction().getIsInChina();
 ```
 
 输出结果：
 
 ```javascript
 {
-  IsInChina: true
+  IsInChina: true;
 }
 ```
 
@@ -462,7 +462,7 @@ new OthersAction().getIsInChina()
 serverless api
 
 ```javascript
-const { Serverless } = require('serverless-tencent-tools')
+const { Serverless } = require('serverless-tencent-tools');
 
 const sls = new Serverless({
   appid: app_id,
@@ -470,22 +470,22 @@ const sls = new Serverless({
   secret_key: secret_key,
   options: {
     region: 'ap-guangzhou',
-    token: 'xxxxxx'
-  }
-})
+    token: 'xxxxxx',
+  },
+});
 
-let ret = await sls.getComponentAndVersions('Component name')
-console.log(ret)
+let ret = await sls.getComponentAndVersions('Component name');
+console.log(ret);
 
 // the getComponentAndVersions/getComponentVersion is public
-ret = await Serverless.getComponentAndVersions('name', { region: 'ap-guangzhou' } /*optional*/)
-console.log(ret)
+ret = await Serverless.getComponentAndVersions('name', { region: 'ap-guangzhou' } /*optional*/);
+console.log(ret);
 ret = await Serverless.getComponentVersion(
   'name',
   'version',
   { region: 'ap-guangzhou' } /*optional*/
-)
-console.log(ret)
+);
+console.log(ret);
 ```
 
 ### Scf 监控接口
@@ -524,7 +524,7 @@ const metrics = [
   ]
   try {
     await slsClient.putMonitorData(
-      metrics, 
+      metrics,
       'instance',
       'announceIp', /*optional*/
       'timestamp' /*optional*/
@@ -535,6 +535,7 @@ const metrics = [
 ```
 
 ### Cls 日志服务接口
+
 ```
   const { Cls } = require('./sdk');
   // log array
@@ -559,10 +560,10 @@ const metrics = [
 
     // deliver log set to cls, if success return empty string
     const ret = await clsClient.structuredLog(
-      'topic_id', 
-      logs, 
+      'topic_id',
+      logs,
       'timestamp', /*optional default current timestamp*/
-      'filename', /*optional default value 'default'*/ 
+      'filename', /*optional default value 'default'*/
       'source' /*optional default value ''*/
       )
   } catch (e) {

@@ -1,15 +1,17 @@
-const { GetUserInformation } = require('../sdk/cam/index')
+'use strict';
+
+const { GetUserInformation } = require('../sdk/cam/index');
 
 class UserInformation {
   async getUserInformation() {
-    const userInformation = new GetUserInformation()
+    const userInformation = new GetUserInformation();
     const auth = {
       SecretId: '',
-      SecretKey: ''
-    }
-    console.log(await userInformation.getUserInformation(auth))
+      SecretKey: '',
+    };
+    console.log(await userInformation.getUserInformation(auth));
   }
 }
 
-const getUserInformation = new UserInformation()
-getUserInformation.getUserInformation()
+const getUserInformation = new UserInformation();
+getUserInformation.getUserInformation();

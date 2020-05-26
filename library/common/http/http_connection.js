@@ -1,8 +1,10 @@
+'use strict';
+
 // const request = require('request');
-const QueryString = require('querystring')
-const https = require('https')
-const http = require('http')
-const url = require('url')
+const QueryString = require('querystring');
+const https = require('https');
+const http = require('http');
+const url = require('url');
 
 /**
  * @inner
@@ -31,51 +33,51 @@ class HttpConnection {
     // })
 
     // node http[s] raw module send request
-    let httpClient
-    const httpBody = QueryString.stringify(data)
-    opt = opt || {}
+    let httpClient;
+    const httpBody = QueryString.stringify(data);
+    opt = opt || {};
 
-    opt.method = method
+    opt.method = method;
     if (method === 'GET') {
-      reqUrl += '?' + httpBody
+      reqUrl += `?${httpBody}`;
     } else {
-      opt['headers'] = opt['headers'] || {}
-      opt['headers']['Content-Type'] = 'application/json'
-      opt['headers']['Content-Length'] = Buffer.byteLength(httpBody)
+      opt.headers = opt.headers || {};
+      opt.headers['Content-Type'] = 'application/json';
+      opt.headers['Content-Length'] = Buffer.byteLength(httpBody);
     }
 
-    const urlObj = url.parse(reqUrl)
+    const urlObj = url.parse(reqUrl);
     switch (urlObj.protocol.toLocaleLowerCase()) {
       case 'https:':
-        httpClient = https
-        break
+        httpClient = https;
+        break;
       case 'http:':
       default:
-        httpClient = http
-        break
+        httpClient = http;
+        break;
     }
 
     opt.hostname = urlObj.hostname;
     opt.path = urlObj.path;
     opt.protocol = urlObj.protocol;
 
-    const clientObject = httpClient.request(opt, function(res) {
-      let body = ''
-      res.on('data', function(chunk) {
-        body += chunk
-      })
+    const clientObject = httpClient.request(opt, (res) => {
+      let body = '';
+      res.on('data', (chunk) => {
+        body += chunk;
+      });
       res.on('end', () => {
-        callback(null, res, body)
-      })
-    })
+        callback(null, res, body);
+      });
+    });
 
-    clientObject.on('error', function(e) {
-      callback(e, null, null)
-    })
+    clientObject.on('error', (e) => {
+      callback(e, null, null);
+    });
 
-    clientObject.write(httpBody)
+    clientObject.write(httpBody);
 
-    clientObject.end()
+    clientObject.end();
   }
 }
-module.exports = HttpConnection
+module.exports = HttpConnection;

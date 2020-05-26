@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = {
-  ScfRealTimeLogs: require('./scfRealTimeLogs')
-}
+  ScfRealTimeLogs: require('./scfRealTimeLogs'),
+};

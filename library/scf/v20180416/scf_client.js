@@ -1,3 +1,5 @@
+'use strict';
+
 /*
  * Copyright (c) 2018 THL A29 Limited, a Tencent company. All Rights Reserved.
  *
@@ -14,75 +16,32 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-const models = require('./models')
-const AbstractClient = require('../../common/abstract_client')
-const CreateFunctionRequest = models.CreateFunctionRequest
-const AccessInfo = models.AccessInfo
-const LayerVersionInfo = models.LayerVersionInfo
-const ListLayerVersionsResponse = models.ListLayerVersionsResponse
-const DeleteFunctionRequest = models.DeleteFunctionRequest
-const CopyFunctionResponse = models.CopyFunctionResponse
-const ListVersionByFunctionResponse = models.ListVersionByFunctionResponse
-const Namespace = models.Namespace
-const GetFunctionRequest = models.GetFunctionRequest
-const ListLayersResponse = models.ListLayersResponse
-const Environment = models.Environment
-const ListNamespacesRequest = models.ListNamespacesRequest
-const FunctionVersion = models.FunctionVersion
-const GetFunctionAddressRequest = models.GetFunctionAddressRequest
-const DeleteLayerVersionResponse = models.DeleteLayerVersionResponse
-const InvokeResponse = models.InvokeResponse
-const CreateNamespaceResponse = models.CreateNamespaceResponse
-const Function = models.Function
-const DeadLetterConfig = models.DeadLetterConfig
-const InvokeRequest = models.InvokeRequest
-const UpdateFunctionConfigurationRequest = models.UpdateFunctionConfigurationRequest
-const VpcConfig = models.VpcConfig
-const ListVersionByFunctionRequest = models.ListVersionByFunctionRequest
-const PublicNetConfigOut = models.PublicNetConfigOut
-const ListFunctionsResponse = models.ListFunctionsResponse
-const UpdateNamespaceResponse = models.UpdateNamespaceResponse
-const ListLayerVersionsRequest = models.ListLayerVersionsRequest
-const CreateTriggerResponse = models.CreateTriggerResponse
-const PublishLayerVersionRequest = models.PublishLayerVersionRequest
-const CreateNamespaceRequest = models.CreateNamespaceRequest
-const DeleteNamespaceRequest = models.DeleteNamespaceRequest
-const ListLayersRequest = models.ListLayersRequest
-const Result = models.Result
-const CopyFunctionRequest = models.CopyFunctionRequest
-const Tag = models.Tag
-const DeleteNamespaceResponse = models.DeleteNamespaceResponse
-const UpdateFunctionConfigurationResponse = models.UpdateFunctionConfigurationResponse
-const PublishLayerVersionResponse = models.PublishLayerVersionResponse
-const PublishVersionResponse = models.PublishVersionResponse
-const DeleteLayerVersionRequest = models.DeleteLayerVersionRequest
-const CreateFunctionResponse = models.CreateFunctionResponse
-const LayerVersionSimple = models.LayerVersionSimple
-const Trigger = models.Trigger
-const EipOutConfig = models.EipOutConfig
-const Variable = models.Variable
-const GetFunctionResponse = models.GetFunctionResponse
-const GetFunctionLogsResponse = models.GetFunctionLogsResponse
-const ListFunctionsRequest = models.ListFunctionsRequest
-const DeleteTriggerResponse = models.DeleteTriggerResponse
-const Filter = models.Filter
-const DeleteTriggerRequest = models.DeleteTriggerRequest
-const Code = models.Code
-const UpdateFunctionCodeRequest = models.UpdateFunctionCodeRequest
-const GetFunctionLogsRequest = models.GetFunctionLogsRequest
-const CreateTriggerRequest = models.CreateTriggerRequest
-const UpdateNamespaceRequest = models.UpdateNamespaceRequest
-const GetFunctionAddressResponse = models.GetFunctionAddressResponse
-const GetLayerVersionRequest = models.GetLayerVersionRequest
-const DeleteFunctionResponse = models.DeleteFunctionResponse
-const ListNamespacesResponse = models.ListNamespacesResponse
-const EipConfigOut = models.EipConfigOut
-const PublishVersionRequest = models.PublishVersionRequest
-const FunctionLog = models.FunctionLog
-const LogSearchContext = models.LogSearchContext
-const GetLayerVersionResponse = models.GetLayerVersionResponse
-const UpdateFunctionCodeResponse = models.UpdateFunctionCodeResponse
-const LogFilter = models.LogFilter
+const models = require('./models');
+const AbstractClient = require('../../common/abstract_client');
+
+const ListLayerVersionsResponse = models.ListLayerVersionsResponse;
+const CopyFunctionResponse = models.CopyFunctionResponse;
+const ListVersionByFunctionResponse = models.ListVersionByFunctionResponse;
+const ListLayersResponse = models.ListLayersResponse;
+const DeleteLayerVersionResponse = models.DeleteLayerVersionResponse;
+const InvokeResponse = models.InvokeResponse;
+const CreateNamespaceResponse = models.CreateNamespaceResponse;
+const ListFunctionsResponse = models.ListFunctionsResponse;
+const UpdateNamespaceResponse = models.UpdateNamespaceResponse;
+const CreateTriggerResponse = models.CreateTriggerResponse;
+const DeleteNamespaceResponse = models.DeleteNamespaceResponse;
+const UpdateFunctionConfigurationResponse = models.UpdateFunctionConfigurationResponse;
+const PublishLayerVersionResponse = models.PublishLayerVersionResponse;
+const PublishVersionResponse = models.PublishVersionResponse;
+const CreateFunctionResponse = models.CreateFunctionResponse;
+const GetFunctionResponse = models.GetFunctionResponse;
+const GetFunctionLogsResponse = models.GetFunctionLogsResponse;
+const DeleteTriggerResponse = models.DeleteTriggerResponse;
+const GetFunctionAddressResponse = models.GetFunctionAddressResponse;
+const DeleteFunctionResponse = models.DeleteFunctionResponse;
+const ListNamespacesResponse = models.ListNamespacesResponse;
+const GetLayerVersionResponse = models.GetLayerVersionResponse;
+const UpdateFunctionCodeResponse = models.UpdateFunctionCodeResponse;
 
 /**
  * scf client
@@ -90,7 +49,7 @@ const LogFilter = models.LogFilter
  */
 class ScfClient extends AbstractClient {
   constructor(credential, region, profile) {
-    super('scf.tencentcloudapi.com', '2018-04-16', credential, region, profile)
+    super('scf.tencentcloudapi.com', '2018-04-16', credential, region, profile);
   }
 
   /**
@@ -100,8 +59,8 @@ class ScfClient extends AbstractClient {
    * @public
    */
   DeleteFunction(req, cb) {
-    const resp = new DeleteFunctionResponse()
-    this.request('DeleteFunction', req, resp, cb)
+    const resp = new DeleteFunctionResponse();
+    this.request('DeleteFunction', req, resp, cb);
   }
 
   /**
@@ -111,8 +70,8 @@ class ScfClient extends AbstractClient {
    * @public
    */
   GetLayerVersion(req, cb) {
-    const resp = new GetLayerVersionResponse()
-    this.request('GetLayerVersion', req, resp, cb)
+    const resp = new GetLayerVersionResponse();
+    this.request('GetLayerVersion', req, resp, cb);
   }
 
   /**
@@ -122,8 +81,8 @@ class ScfClient extends AbstractClient {
    * @public
    */
   CreateTrigger(req, cb) {
-    const resp = new CreateTriggerResponse()
-    this.request('CreateTrigger', req, resp, cb)
+    const resp = new CreateTriggerResponse();
+    this.request('CreateTrigger', req, resp, cb);
   }
 
   /**
@@ -133,8 +92,8 @@ class ScfClient extends AbstractClient {
    * @public
    */
   CreateNamespace(req, cb) {
-    const resp = new CreateNamespaceResponse()
-    this.request('CreateNamespace', req, resp, cb)
+    const resp = new CreateNamespaceResponse();
+    this.request('CreateNamespace', req, resp, cb);
   }
 
   /**
@@ -150,8 +109,8 @@ class ScfClient extends AbstractClient {
      * @public
      */
   CopyFunction(req, cb) {
-    const resp = new CopyFunctionResponse()
-    this.request('CopyFunction', req, resp, cb)
+    const resp = new CopyFunctionResponse();
+    this.request('CopyFunction', req, resp, cb);
   }
 
   /**
@@ -161,8 +120,8 @@ class ScfClient extends AbstractClient {
    * @public
    */
   DeleteTrigger(req, cb) {
-    const resp = new DeleteTriggerResponse()
-    this.request('DeleteTrigger', req, resp, cb)
+    const resp = new DeleteTriggerResponse();
+    this.request('DeleteTrigger', req, resp, cb);
   }
 
   /**
@@ -172,8 +131,8 @@ class ScfClient extends AbstractClient {
    * @public
    */
   GetFunctionLogs(req, cb) {
-    const resp = new GetFunctionLogsResponse()
-    this.request('GetFunctionLogs', req, resp, cb)
+    const resp = new GetFunctionLogsResponse();
+    this.request('GetFunctionLogs', req, resp, cb);
   }
 
   /**
@@ -183,8 +142,8 @@ class ScfClient extends AbstractClient {
    * @public
    */
   UpdateNamespace(req, cb) {
-    const resp = new UpdateNamespaceResponse()
-    this.request('UpdateNamespace', req, resp, cb)
+    const resp = new UpdateNamespaceResponse();
+    this.request('UpdateNamespace', req, resp, cb);
   }
 
   /**
@@ -194,8 +153,8 @@ class ScfClient extends AbstractClient {
    * @public
    */
   Invoke(req, cb) {
-    const resp = new InvokeResponse()
-    this.request('Invoke', req, resp, cb)
+    const resp = new InvokeResponse();
+    this.request('Invoke', req, resp, cb);
   }
 
   /**
@@ -205,8 +164,8 @@ class ScfClient extends AbstractClient {
    * @public
    */
   PublishVersion(req, cb) {
-    const resp = new PublishVersionResponse()
-    this.request('PublishVersion', req, resp, cb)
+    const resp = new PublishVersionResponse();
+    this.request('PublishVersion', req, resp, cb);
   }
 
   /**
@@ -216,8 +175,8 @@ class ScfClient extends AbstractClient {
    * @public
    */
   DeleteLayerVersion(req, cb) {
-    const resp = new DeleteLayerVersionResponse()
-    this.request('DeleteLayerVersion', req, resp, cb)
+    const resp = new DeleteLayerVersionResponse();
+    this.request('DeleteLayerVersion', req, resp, cb);
   }
 
   /**
@@ -227,8 +186,8 @@ class ScfClient extends AbstractClient {
    * @public
    */
   GetFunction(req, cb) {
-    const resp = new GetFunctionResponse()
-    this.request('GetFunction', req, resp, cb)
+    const resp = new GetFunctionResponse();
+    this.request('GetFunction', req, resp, cb);
   }
 
   /**
@@ -238,8 +197,8 @@ class ScfClient extends AbstractClient {
    * @public
    */
   DeleteNamespace(req, cb) {
-    const resp = new DeleteNamespaceResponse()
-    this.request('DeleteNamespace', req, resp, cb)
+    const resp = new DeleteNamespaceResponse();
+    this.request('DeleteNamespace', req, resp, cb);
   }
 
   /**
@@ -249,8 +208,8 @@ class ScfClient extends AbstractClient {
    * @public
    */
   ListVersionByFunction(req, cb) {
-    const resp = new ListVersionByFunctionResponse()
-    this.request('ListVersionByFunction', req, resp, cb)
+    const resp = new ListVersionByFunctionResponse();
+    this.request('ListVersionByFunction', req, resp, cb);
   }
 
   /**
@@ -260,8 +219,8 @@ class ScfClient extends AbstractClient {
    * @public
    */
   ListLayers(req, cb) {
-    const resp = new ListLayersResponse()
-    this.request('ListLayers', req, resp, cb)
+    const resp = new ListLayersResponse();
+    this.request('ListLayers', req, resp, cb);
   }
 
   /**
@@ -271,8 +230,8 @@ class ScfClient extends AbstractClient {
    * @public
    */
   ListLayerVersions(req, cb) {
-    const resp = new ListLayerVersionsResponse()
-    this.request('ListLayerVersions', req, resp, cb)
+    const resp = new ListLayerVersionsResponse();
+    this.request('ListLayerVersions', req, resp, cb);
   }
 
   /**
@@ -282,8 +241,8 @@ class ScfClient extends AbstractClient {
    * @public
    */
   ListFunctions(req, cb) {
-    const resp = new ListFunctionsResponse()
-    this.request('ListFunctions', req, resp, cb)
+    const resp = new ListFunctionsResponse();
+    this.request('ListFunctions', req, resp, cb);
   }
 
   /**
@@ -293,8 +252,8 @@ class ScfClient extends AbstractClient {
    * @public
    */
   UpdateFunctionConfiguration(req, cb) {
-    const resp = new UpdateFunctionConfigurationResponse()
-    this.request('UpdateFunctionConfiguration', req, resp, cb)
+    const resp = new UpdateFunctionConfigurationResponse();
+    this.request('UpdateFunctionConfiguration', req, resp, cb);
   }
 
   /**
@@ -304,8 +263,8 @@ class ScfClient extends AbstractClient {
    * @public
    */
   PublishLayerVersion(req, cb) {
-    const resp = new PublishLayerVersionResponse()
-    this.request('PublishLayerVersion', req, resp, cb)
+    const resp = new PublishLayerVersionResponse();
+    this.request('PublishLayerVersion', req, resp, cb);
   }
 
   /**
@@ -315,8 +274,8 @@ class ScfClient extends AbstractClient {
    * @public
    */
   GetFunctionAddress(req, cb) {
-    const resp = new GetFunctionAddressResponse()
-    this.request('GetFunctionAddress', req, resp, cb)
+    const resp = new GetFunctionAddressResponse();
+    this.request('GetFunctionAddress', req, resp, cb);
   }
 
   /**
@@ -326,8 +285,8 @@ class ScfClient extends AbstractClient {
    * @public
    */
   CreateFunction(req, cb) {
-    const resp = new CreateFunctionResponse()
-    this.request('CreateFunction', req, resp, cb)
+    const resp = new CreateFunctionResponse();
+    this.request('CreateFunction', req, resp, cb);
   }
 
   /**
@@ -337,8 +296,8 @@ class ScfClient extends AbstractClient {
    * @public
    */
   ListNamespaces(req, cb) {
-    const resp = new ListNamespacesResponse()
-    this.request('ListNamespaces', req, resp, cb)
+    const resp = new ListNamespacesResponse();
+    this.request('ListNamespaces', req, resp, cb);
   }
 
   /**
@@ -348,8 +307,8 @@ class ScfClient extends AbstractClient {
    * @public
    */
   UpdateFunctionCode(req, cb) {
-    const resp = new UpdateFunctionCodeResponse()
-    this.request('UpdateFunctionCode', req, resp, cb)
+    const resp = new UpdateFunctionCodeResponse();
+    this.request('UpdateFunctionCode', req, resp, cb);
   }
 }
-module.exports = ScfClient
+module.exports = ScfClient;

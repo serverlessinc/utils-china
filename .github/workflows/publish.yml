@@ -1,0 +1,35 @@
+# Version tags only
+
+name: Publish
+
+on:
+  push:
+    tags:
+      - v[0-9]+.[0-9]+.[0-9]+
+
+jobs:
+  publishNewVersion:
+    name: Publish new version
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Install Node.js and npm
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+          registry-url: https://registry.npmjs.org
+
+      - name: Publish new version
+        run: |
+          # Ensure new line after eventual existing .npmignore rules (which may miss EOL at EOF)
+          echo $'' >> .npmignore
+          # Ensure to not publish .github folder
+          echo $'/.github' >> .npmignore
+          npm publish
+        # Note: Setting NODE_AUTH_TOKEN as job|workspace wide env var won't work
+        #       as it appears actions/setup-node sets own value
+        env:
+          # serverless-main npm user auth token
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

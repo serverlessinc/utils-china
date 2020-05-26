@@ -1,41 +1,44 @@
-const util = require('util')
-const http = require('http')
-const os = require('os')
-const uuidv4 = require('../../library/uuid')
-const QRCode = require('../../library/qrcode/index')
-const apiBaseUrl = 'scfdev.tencentserverless.com'
-const apiShortUrl = '/login/url'
-const refreshTokenUrl = '/login/info'
+'use strict';
+
+const util = require('util');
+const http = require('http');
+const os = require('os');
+const uuidv4 = require('../../library/uuid');
+const QRCode = require('../../library/qrcode/index');
+
+const apiBaseUrl = 'scfdev.tencentserverless.com';
+const apiShortUrl = '/login/url';
+const refreshTokenUrl = '/login/info';
 
 class Login {
   sleep(ms) {
     return new Promise((resolve) => {
-      setTimeout(resolve, ms)
-    })
+      setTimeout(resolve, ms);
+    });
   }
 
   async getShortUrl(uuid) {
     const options = {
       host: apiBaseUrl,
       port: '80',
-      path: util.format('%s?os=%s&uuid=%s', apiShortUrl, os.type(), uuid)
-    }
-    return new Promise(function(resolve, reject) {
-      const req = http.get(options, function(res) {
-        res.setEncoding('utf8')
-        res.on('data', function(chunk) {
+      path: util.format('%s?os=%s&uuid=%s', apiShortUrl, os.type(), uuid),
+    };
+    return new Promise((resolve, reject) => {
+      const req = http.get(options, (res) => {
+        res.setEncoding('utf8');
+        res.on('data', (chunk) => {
           try {
-            resolve(JSON.parse(chunk))
+            resolve(JSON.parse(chunk));
           } catch (e) {
-            reject(e.message)
+            reject(e.message);
           }
-        })
-      })
-      req.on('error', function(e) {
-        reject(e.message)
-      })
-      req.end()
-    })
+        });
+      });
+      req.on('error', (e) => {
+        reject(e.message);
+      });
+      req.end();
+    });
   }
 
   async checkStatus(uuid, url) {
@@ -43,30 +46,30 @@ class Login {
       const options = {
         host: apiBaseUrl,
         port: '80',
-        path: url
-      }
-      const req = http.get(options, function(res) {
-        res.setEncoding('utf8')
-        res.on('data', function(chunk) {
+        path: url,
+      };
+      const req = http.get(options, (res) => {
+        res.setEncoding('utf8');
+        res.on('data', (chunk) => {
           try {
-            const responseData = JSON.parse(chunk)
-            if (responseData['success']) {
-              done(responseData)
+            const responseData = JSON.parse(chunk);
+            if (responseData.success) {
+              done(responseData);
             } else {
-              done(false)
+              done(false);
             }
           } catch (e) {
-            done(false)
-            return
+            done(false);
+            return;
           }
-        })
-      })
-      req.on('error', function(e) {
-        done(false)
-        return
-      })
-      req.end()
-    })
+        });
+      });
+      req.on('error', () => {
+        done(false);
+        return;
+      });
+      req.end();
+    });
   }
 
   async flush(uuid, expired, signature, appid) {
@@ -74,61 +77,61 @@ class Login {
       const options = {
         host: apiBaseUrl,
         port: '80',
-        path: `${refreshTokenUrl}?uuid=${uuid}&os=${os.type()}&expired=${expired}&signature=${signature}&appid=${appid}`
-      }
-      const req = http.get(options, function(res) {
-        res.setEncoding('utf8')
-        res.on('data', function(chunk) {
+        path: `${refreshTokenUrl}?uuid=${uuid}&os=${os.type()}&expired=${expired}&signature=${signature}&appid=${appid}`,
+      };
+      const req = http.get(options, (res) => {
+        res.setEncoding('utf8');
+        res.on('data', (chunk) => {
           try {
-            const responseData = JSON.parse(chunk)
-            if (responseData['success']) {
-              done(responseData)
+            const responseData = JSON.parse(chunk);
+            if (responseData.success) {
+              done(responseData);
             } else {
-              done(false)
+              done(false);
             }
           } catch (e) {
-            done(false)
-            return
+            done(false);
+            return;
           }
-        })
-      })
-      req.on('error', function(e) {
-        done(false)
-        return
-      })
-      req.end()
-    })
+        });
+      });
+      req.on('error', () => {
+        done(false);
+        return;
+      });
+      req.end();
+    });
   }
 
   async login() {
     try {
-      const uuid = uuidv4()
-      const apiUrl = await this.getShortUrl(uuid)
+      const uuid = uuidv4();
+      const apiUrl = await this.getShortUrl(uuid);
 
-      QRCode.toString(apiUrl.short_url, { type: 'terminal' }, function(err, url) {
-        console.log(url)
-      })
+      QRCode.toString(apiUrl.short_url, { type: 'terminal' }, (err, url) => {
+        console.log(url);
+      });
 
-      console.log('Please scan QR code login from wechat. ')
-      console.log('Wait login...')
+      console.log('Please scan QR code login from wechat. ');
+      console.log('Wait login...');
       // wait 3s start check login status
-      await this.sleep(3000)
+      await this.sleep(3000);
 
-      let loginFlag = false
-      let timeout = 600
-      let loginData
+      let loginFlag = false;
+      let timeout = 600;
+      let loginData;
       while (timeout > 0) {
-        loginData = await this.checkStatus(uuid, apiUrl.login_status_url)
-        if (loginData != false) {
-          loginFlag = true
-          break
+        loginData = await this.checkStatus(uuid, apiUrl.login_status_url);
+        if (loginData !== false) {
+          loginFlag = true;
+          break;
         }
-        timeout--
-        await this.sleep(1000)
+        timeout--;
+        await this.sleep(1000);
       }
-      if (loginFlag == false && timeout == 0) {
-        console.log('Login timeout. Please login again! ')
-        process.exit(0)
+      if (loginFlag === false && timeout === 0) {
+        console.log('Login timeout. Please login again! ');
+        process.exit(0);
       }
       const configure = {
         secret_id: loginData.secret_id,
@@ -137,30 +140,32 @@ class Login {
         appid: loginData.appid,
         signature: loginData.signature,
         expired: loginData.expired,
-        uuid: uuid
-      }
-      console.log('Login successful for TencentCloud. ')
-      return configure
+        uuid,
+      };
+      console.log('Login successful for TencentCloud. ');
+      return configure;
     } catch (e) {
-      console.log(e)
+      console.log(e);
     }
-    process.exit(0)
+    process.exit(0);
+    return null;
   }
 
   async loginUrl() {
     try {
-      const uuid = uuidv4()
-      const apiUrl = await this.getShortUrl(uuid)
+      const uuid = uuidv4();
+      const apiUrl = await this.getShortUrl(uuid);
       return {
         login_status_url: apiUrl.login_status_url,
-        uuid: uuid,
+        uuid,
         url: apiUrl.long_url,
-        short_url: apiUrl.short_url
-      }
+        short_url: apiUrl.short_url,
+      };
     } catch (e) {
-      console.log(e)
+      console.log(e);
     }
+    return null;
   }
 }
 
-module.exports = Login
+module.exports = Login;

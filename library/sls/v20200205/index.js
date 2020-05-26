@@ -1,4 +1,6 @@
+'use strict';
+
 module.exports = {
-    Client: require("./sls_client"),
-    Models: require("./models"),
+  Client: require('./sls_client'),
+  Models: require('./models'),
 };

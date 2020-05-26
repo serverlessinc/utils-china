@@ -1,21 +1,23 @@
+'use strict';
+
 class IsInChina {
   inChina() {
-    let result
+    let result;
     if (
       process.env.SERVERLESS_PLATFORM_VENDOR === 'tencent' ||
       process.env.SLS_GEO_LOCATION === 'cn'
     ) {
-      result = true
+      result = true;
     } else if (process.env.SERVERLESS_PLATFORM_VENDOR === 'aws') {
-      result = false
+      result = false;
     } else {
       result = new Intl.DateTimeFormat('en', { timeZoneName: 'long' })
         .format()
-        .includes('China Standard Time')
+        .includes('China Standard Time');
     }
 
-    return { IsInChina: result }
+    return { IsInChina: result };
   }
 }
 
-module.exports = IsInChina
+module.exports = IsInChina;
