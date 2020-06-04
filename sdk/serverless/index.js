@@ -210,6 +210,12 @@ class Serverless {
     req.AppName = instance.appName;
     req.StageName = instance.stageName;
     req.InstanceName = instance.instanceName;
+    if (instance.channel) {
+      req.Channel = instance.channel;
+    }
+    if (instance.roleName) {
+      req.RoleName = instance.roleName;
+    }
     req.Body = JSON.stringify(data);
     return this._call('RunComponent', req);
   }
