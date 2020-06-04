@@ -532,6 +532,18 @@ class RunComponentRequest extends AbstractModel {
      * @type {string || null}
      */
     this.InstanceName = null;
+
+    /**
+     * Channel URL
+     * @type {string || null}
+     */
+    this.Channel = null;
+
+    /**
+     * Role Name
+     * @type {string || null}
+     */
+    this.RoleName = null;
   }
 
   /**
@@ -545,6 +557,8 @@ class RunComponentRequest extends AbstractModel {
     this.AppName = 'AppName' in params ? params.AppName : null;
     this.StageName = 'StageName' in params ? params.StageName : null;
     this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+    this.Channel = 'Channel' in params ? params.Channel : null;
+    this.RoleName = 'RoleName' in params ? params.RoleName : null;
   }
 }
 
