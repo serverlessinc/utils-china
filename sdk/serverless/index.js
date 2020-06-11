@@ -242,6 +242,14 @@ class Serverless {
     return await this._call('RunFinishComponent', req);
   }
 
+  async sendCoupon(types) {
+    assert(types, 'The request is missing a required parameter types');
+    assert(Array.isArray(types), 'The request is parameter types must is array');
+    const req = new SlsModels.SendCouponRequest();
+    req.Type = types;
+    return await this._call('SendCoupon', req);
+  }
+
   // async unpublishComponentVersion(name, version) {
   //     const componentVersion = {
   //         Name: name,

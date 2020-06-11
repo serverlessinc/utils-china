@@ -776,6 +776,73 @@ class ListInstancesRequest extends AbstractModel {
   }
 }
 
+/**
+ * SendCoupon返回参数结构体
+ * @class
+ */
+class SendCouponResponse extends AbstractModel {
+  constructor() {
+    super();
+
+    /**
+         * 错误描述
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+    this.Msg = null;
+
+    /**
+     * 错误代码,为0成功
+     * @type {number || null}
+     */
+    this.ReturnCode = null;
+
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * @type {string || null}
+     */
+    this.RequestId = null;
+  }
+
+  /**
+   * @private
+   */
+  deserialize(params) {
+    if (!params) {
+      return;
+    }
+    this.Msg = 'Msg' in params ? params.Msg : null;
+    this.ReturnCode = 'ReturnCode' in params ? params.ReturnCode : null;
+    this.RequestId = 'RequestId' in params ? params.RequestId : null;
+  }
+}
+
+/**
+ * SendCoupon请求参数结构体
+ * @class
+ */
+class SendCouponRequest extends AbstractModel {
+  constructor() {
+    super();
+
+    /**
+     * 发送代金券类型(活动tag)
+     * @type {Array.<string> || null}
+     */
+    this.Type = null;
+  }
+
+  /**
+   * @private
+   */
+  deserialize(params) {
+    if (!params) {
+      return;
+    }
+    this.Type = 'Type' in params ? params.Type : null;
+  }
+}
+
 module.exports = {
   ListInstancesResponse,
   GetUploadUrlsResponse,
@@ -797,4 +864,6 @@ module.exports = {
   PostPublishComponentRequest,
   SaveInstanceRequest,
   ListInstancesRequest,
+  SendCouponRequest,
+  SendCouponResponse,
 };
