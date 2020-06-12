@@ -1,9 +1,7 @@
 'use strict';
 const util = require('util');
 const Duplex = require('stream').Duplex;
-const bind = require('component-bind');
 const uuid = require('./uuid');
-const debug = require('debug')('socket.io-stream:iostream');
 
 module.exports = IOStream;
 
@@ -50,17 +48,13 @@ function IOStream(options) {
  * @api public
  */
 IOStream.prototype.destroy = function () {
-  debug('destroy');
-
   if (this.destroyed) {
-    debug('already destroyed');
     return;
   }
 
   this.readable = this.writable = false;
 
   if (this.socket) {
-    debug('clean up');
     this.socket.cleanup(this.id);
     this.socket = null;
   }
@@ -166,7 +160,7 @@ IOStream.prototype._onwrite = function (chunk, encoding, callback) {
 IOStream.prototype._end = function () {
   if (this.pushBuffer.length) {
     // end after flushing buffer.
-    this.pushBuffer.push(bind(this, '_done'));
+    this.pushBuffer.push(this._done.bind(this));
   } else {
     this._done();
   }
@@ -195,7 +189,6 @@ IOStream.prototype._done = function () {
  * @api private
  */
 IOStream.prototype._onfinish = function () {
-  debug('_onfinish');
   // Local socket just finished
   // send 'end' event to remote
   if (this.socket) {
@@ -206,11 +199,8 @@ IOStream.prototype._onfinish = function () {
   this._writableState.ended = true;
 
   if (!this.readable || this._readableState.ended) {
-    debug('_onfinish: ended, destroy %s', this._readableState);
     return this.destroy();
   }
-
-  debug('_onfinish: not ended');
 
   if (!this.allowHalfOpen) {
     this.push(null);
@@ -230,16 +220,12 @@ IOStream.prototype._onfinish = function () {
  * @api private
  */
 IOStream.prototype._onend = function () {
-  debug('_onend');
   this.readable = false;
   this._readableState.ended = true;
 
   if (!this.writable || this._writableState.finished) {
-    debug('_onend: %s', this._writableState);
     return this.destroy();
   }
-
-  debug('_onend: not finished');
 
   if (!this.allowHalfOpen) {
     this.end();

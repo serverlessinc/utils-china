@@ -1,15 +1,28 @@
 'use strict';
 const util = require('util');
 const EventEmitter = require('events').EventEmitter;
-const bind = require('component-bind');
 const parser = require('./parser');
-const debug = require('debug')('socket.io-stream:socket');
 
 const emit = EventEmitter.prototype.emit;
 const on = EventEmitter.prototype.on;
 const slice = Array.prototype.slice;
 
 exports = module.exports = Socket;
+
+/**
+ * Bind `obj` to `fn`.
+ *
+ * @param {Object} obj
+ * @param {Function|String} fn or string
+ * @return {Function}
+ */
+function bind(obj, fn, ...args) {
+  if (typeof fn === 'string') fn = obj[fn];
+  if (typeof fn !== 'function') throw new Error('bind() requires a function');
+  return function (..._args) {
+    return fn.apply(obj, args.concat(slice.call(_args)));
+  };
+}
 
 /**
  * Base event name for messaging.
@@ -94,8 +107,6 @@ Socket.prototype.on = function (type, listener) {
  * @api private
  */
 Socket.prototype._stream = function (type) {
-  debug('sending new streams');
-
   const self = this;
   let args = slice.call(arguments, 1);
   const ack = args[args.length - 1];
@@ -165,7 +176,6 @@ Socket.prototype._onstream = function (type, listener) {
   }
 
   function onstream() {
-    debug('new streams');
     const self = this;
     let args = slice.call(arguments);
     const ack = args[args.length - 1];
@@ -188,19 +198,13 @@ Socket.prototype._onstream = function (type, listener) {
 };
 
 Socket.prototype._onread = function (id, size) {
-  debug('read: "%s"', id);
-
   const stream = this.streams[id];
   if (stream) {
     stream._onread(size);
-  } else {
-    debug('ignore invalid stream id');
   }
 };
 
 Socket.prototype._onwrite = function (id, chunk, encoding, callback) {
-  debug('write: "%s"', id);
-
   const stream = this.streams[id];
   if (!stream) {
     callback(`invalid stream id: ${id}`);
@@ -215,11 +219,8 @@ Socket.prototype._onwrite = function (id, chunk, encoding, callback) {
 };
 
 Socket.prototype._onend = function (id) {
-  debug('end: "%s"', id);
-
   const stream = this.streams[id];
   if (!stream) {
-    debug('ignore non-existent stream id: "%s"', id);
     return;
   }
 
@@ -227,11 +228,8 @@ Socket.prototype._onend = function (id) {
 };
 
 Socket.prototype._onerror = function (id, message) {
-  debug('error: "%s", "%s"', id, message);
-
   const stream = this.streams[id];
   if (!stream) {
-    debug('invalid stream id: "%s"', id);
     return;
   }
 
