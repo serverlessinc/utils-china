@@ -29,6 +29,7 @@ const GetInstanceResponse = models.GetInstanceResponse;
 const GetComponentVersionResponse = models.GetComponentVersionResponse;
 const RunFinishComponentResponse = models.RunFinishComponentResponse;
 const PrePublishComponentResponse = models.PrePublishComponentResponse;
+const SendCouponResponse = models.SendCouponResponse;
 
 /**
  * sls client
@@ -148,6 +149,17 @@ class SlsClient extends AbstractClient {
   GetComponentAndVersions(req, cb) {
     const resp = new GetComponentAndVersionsResponse();
     this.request('GetComponentAndVersions', req, resp, cb);
+  }
+
+  /**
+   * 发送代金券
+   * @param {SendCouponRequest} req
+   * @param {function(string, SendCouponResponse):void} cb
+   * @public
+   */
+  SendCoupon(req, cb) {
+    const resp = new SendCouponResponse();
+    this.request('SendCoupon', req, resp, cb);
   }
 }
 module.exports = SlsClient;

@@ -486,6 +486,17 @@ ret = await Serverless.getComponentVersion(
   { region: 'ap-guangzhou' } /*optional*/
 );
 console.log(ret);
+
+// send coupon
+// now only support chars 'cos-2020-06'
+let ret = await sls.sendCoupon(['cos-2020-06']);
+console.log(ret);
+// request success ReturnCode=0
+// SendCouponResponse {
+//   Msg: 'account already sent coupon',
+//   ReturnCode: 400,
+//   RequestId: 'c360feb7-cdc7-409f-ac60-d01f185c3b65'
+// }
 ```
 
 ### Scf 监控接口
