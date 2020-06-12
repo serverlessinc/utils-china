@@ -149,7 +149,7 @@ const __spreadArrays =
   };
 Object.defineProperty(exports, '__esModule', { value: true });
 const socketIo = require('socket.io-client');
-const socketIoStream = require('socket.io-stream');
+const socketIoStream = require('../wshub-socket.io-stream');
 const net1 = require('net');
 const wshubBipipe1 = require('../wshub-bipipe');
 const wshubProxy1 = require('../wshub-proxy');
