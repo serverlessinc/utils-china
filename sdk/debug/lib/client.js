@@ -1,7 +1,7 @@
 'use strict';
 
 const { default: connect } = require('./wshub-client');
-const { default1: createLogger } = require('./wshub-logger');
+const { default: createLogger } = require('./wshub-logger');
 
 const duplex = require('duplexify');
 
