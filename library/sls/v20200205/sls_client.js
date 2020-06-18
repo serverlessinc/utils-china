@@ -30,6 +30,10 @@ const GetComponentVersionResponse = models.GetComponentVersionResponse;
 const RunFinishComponentResponse = models.RunFinishComponentResponse;
 const PrePublishComponentResponse = models.PrePublishComponentResponse;
 const SendCouponResponse = models.SendCouponResponse;
+const ListPackagesResponse = models.ListPackagesResponse;
+const GetPackageResponse = models.GetPackageResponse;
+const PreparePublishPackageResponse = models.PreparePublishPackageResponse;
+const PostPublishPackageResponse = models.PostPublishPackageResponse;
 
 /**
  * sls client
@@ -160,6 +164,50 @@ class SlsClient extends AbstractClient {
   SendCoupon(req, cb) {
     const resp = new SendCouponResponse();
     this.request('SendCoupon', req, resp, cb);
+  }
+
+  /**
+   * 获取Package的列表信息
+   * @param {ListPackagesRequest} req
+   * @param {function(string, ListPackagesResponse):void} cb
+   * @public
+   */
+  ListPackages(req, cb) {
+    const resp = new ListPackagesResponse();
+    this.request('ListPackages', req, resp, cb);
+  }
+
+  /**
+   * 获取Package的详细信息
+   * @param {GetPackageRequest} req
+   * @param {function(string, GetPackageResponse):void} cb
+   * @public
+   */
+  GetPackage(req, cb) {
+    const resp = new GetPackageResponse();
+    this.request('GetPackage', req, resp, cb);
+  }
+
+  /**
+   * 预发布一个指定name和version的Package
+   * @param {PreparePublishPackageRequest} req
+   * @param {function(string, PreparePublishPackageResponse):void} cb
+   * @public
+   */
+  PreparePublishPackage(req, cb) {
+    const resp = new PreparePublishPackageResponse();
+    this.request('PreparePublishPackage', req, resp, cb);
+  }
+
+  /**
+   * 发布一个指定name和version的Package
+   * @param {PostPublishPackageRequest} req
+   * @param {function(string, PostPublishPackageResponse):void} cb
+   * @public
+   */
+  PostPublishPackage(req, cb) {
+    const resp = new PostPublishPackageResponse();
+    this.request('PostPublishPackage', req, resp, cb);
   }
 }
 module.exports = SlsClient;

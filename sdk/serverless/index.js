@@ -250,6 +250,40 @@ class Serverless {
     return await this._call('SendCoupon', req);
   }
 
+  static async listPackages(body) {
+    assert(body, 'The request is missing a required parameter');
+    const params = {
+      Body: body,
+    };
+
+    return Serverless.doRequest('ListPackages', params);
+  }
+
+  static async getPackage(name, version) {
+    assert(name, 'The request is missing a required parameter name');
+    assert(version, 'The request is missing a required parameter version');
+    const params = {
+      PackageName: name,
+      PackageVersion: version,
+    };
+
+    return Serverless.doRequest('GetPackage', params);
+  }
+
+  async preparePublishPackage(body) {
+    assert(body, 'The request is missing a required parameter');
+    const req = new SlsModels.PreparePublishPackageRequest();
+    req.Body = body;
+    return await this._call('PreparePublishPackage', req);
+  }
+
+  async postPublishPackage(body) {
+    assert(body, 'The request is missing a required parameter');
+    const req = new SlsModels.PostPublishPackageRequest();
+    req.Body = body;
+    return await this._call('PostPublishPackage', req);
+  }
+
   // async unpublishComponentVersion(name, version) {
   //     const componentVersion = {
   //         Name: name,

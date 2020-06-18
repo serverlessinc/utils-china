@@ -843,6 +843,249 @@ class SendCouponRequest extends AbstractModel {
   }
 }
 
+/**
+ * GetPackage返回参数结构体
+ * @class
+ */
+class GetPackageResponse extends AbstractModel {
+  constructor() {
+    super();
+
+    /**
+     * JSON stringified object containing response payload
+     * @type {string || null}
+     */
+    this.Body = null;
+
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * @type {string || null}
+     */
+    this.RequestId = null;
+  }
+
+  /**
+   * @private
+   */
+  deserialize(params) {
+    if (!params) {
+      return;
+    }
+    this.Body = 'Body' in params ? params.Body : null;
+    this.RequestId = 'RequestId' in params ? params.RequestId : null;
+  }
+}
+
+/**
+ * GetPackage请求参数结构体
+ * @class
+ */
+class GetPackageRequest extends AbstractModel {
+  constructor() {
+    super();
+
+    /**
+     * Package Name
+     * @type {string || null}
+     */
+    this.PackageName = null;
+
+    /**
+     * Package Version
+     * @type {string || null}
+     */
+    this.PackageVersion = null;
+  }
+
+  /**
+   * @private
+   */
+  deserialize(params) {
+    if (!params) {
+      return;
+    }
+    this.PackageName = 'PackageName' in params ? params.PackageName : null;
+    this.PackageVersion = 'PackageVersion' in params ? params.PackageVersion : null;
+  }
+}
+
+/**
+ * ListPackages返回参数结构体
+ * @class
+ */
+class ListPackagesResponse extends AbstractModel {
+  constructor() {
+    super();
+
+    /**
+     * JSON stringified object containing response payload.
+     * @type {string || null}
+     */
+    this.Body = null;
+
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * @type {string || null}
+     */
+    this.RequestId = null;
+  }
+
+  /**
+   * @private
+   */
+  deserialize(params) {
+    if (!params) {
+      return;
+    }
+    this.Body = 'Body' in params ? params.Body : null;
+    this.RequestId = 'RequestId' in params ? params.RequestId : null;
+  }
+}
+
+/**
+ * ListPackages请求参数结构体
+ * @class
+ */
+class ListPackagesRequest extends AbstractModel {
+  constructor() {
+    super();
+
+    /**
+     * JSON stringified object
+     * @type {string || null}
+     */
+    this.Body = null;
+  }
+
+  /**
+   * @private
+   */
+  deserialize(params) {
+    if (!params) {
+      return;
+    }
+    this.Body = 'Body' in params ? params.Body : null;
+  }
+}
+
+/**
+ * PreparePublishPackage请求参数结构体
+ * @class
+ */
+class PreparePublishPackageRequest extends AbstractModel {
+  constructor() {
+    super();
+
+    /**
+     * JSON stringified object
+     * @type {string || null}
+     */
+    this.Body = null;
+  }
+
+  /**
+   * @private
+   */
+  deserialize(params) {
+    if (!params) {
+      return;
+    }
+    this.Body = 'Body' in params ? params.Body : null;
+  }
+}
+
+/**
+ * PreparePublishPackage返回参数结构体
+ * @class
+ */
+class PreparePublishPackageResponse extends AbstractModel {
+  constructor() {
+    super();
+
+    /**
+     * JSON stringified object containing response payload.
+     * @type {string || null}
+     */
+    this.Body = null;
+
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * @type {string || null}
+     */
+    this.RequestId = null;
+  }
+
+  /**
+   * @private
+   */
+  deserialize(params) {
+    if (!params) {
+      return;
+    }
+    this.Body = 'Body' in params ? params.Body : null;
+    this.RequestId = 'RequestId' in params ? params.RequestId : null;
+  }
+}
+
+/**
+ * PostPublishPackage请求参数结构体
+ * @class
+ */
+class PostPublishPackageRequest extends AbstractModel {
+  constructor() {
+    super();
+
+    /**
+     * JSON stringified object
+     * @type {string || null}
+     */
+    this.Body = null;
+  }
+
+  /**
+   * @private
+   */
+  deserialize(params) {
+    if (!params) {
+      return;
+    }
+    this.Body = 'Body' in params ? params.Body : null;
+  }
+}
+
+/**
+ * PostPublishPackage返回参数结构体
+ * @class
+ */
+class PostPublishPackageResponse extends AbstractModel {
+  constructor() {
+    super();
+
+    /**
+     * JSON stringified object containing response payload.
+     * @type {string || null}
+     */
+    this.Body = null;
+
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * @type {string || null}
+     */
+    this.RequestId = null;
+  }
+
+  /**
+   * @private
+   */
+  deserialize(params) {
+    if (!params) {
+      return;
+    }
+    this.Body = 'Body' in params ? params.Body : null;
+    this.RequestId = 'RequestId' in params ? params.RequestId : null;
+  }
+}
+
 module.exports = {
   ListInstancesResponse,
   GetUploadUrlsResponse,
@@ -866,4 +1109,12 @@ module.exports = {
   ListInstancesRequest,
   SendCouponRequest,
   SendCouponResponse,
+  GetPackageResponse,
+  GetPackageRequest,
+  ListPackagesResponse,
+  ListPackagesRequest,
+  PreparePublishPackageRequest,
+  PreparePublishPackageResponse,
+  PostPublishPackageRequest,
+  PostPublishPackageResponse,
 };
