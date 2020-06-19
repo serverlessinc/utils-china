@@ -264,10 +264,9 @@ class Serverless {
 
   static async getPackage(name, version, options = {}) {
     assert(name, 'The request is missing a required parameter name');
-    assert(version, 'The request is missing a required parameter version');
     const params = {
       PackageName: name,
-      PackageVersion: version,
+      PackageVersion: version || '',
       Region: options.region ? options.region : 'ap-guangzhou',
     };
 
