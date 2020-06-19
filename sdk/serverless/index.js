@@ -60,7 +60,9 @@ class Serverless {
 
   static async doRequest(action, params) {
     const proxyOrigin =
-      'https://service-cqwfbiyw-1300862921.gz.apigw.tencentcs.com/release/listcompversion';
+      params.Region === 'ap-shanghai'
+        ? 'https://service-k6qwj4qx-1300862921.sh.apigw.tencentcs.com/release/listcompversion-dev'
+        : 'https://service-cqwfbiyw-1300862921.gz.apigw.tencentcs.com/release/listcompversion';
 
     const optional = {
       timeout: 30 * 1000,
