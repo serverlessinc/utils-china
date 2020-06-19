@@ -255,7 +255,7 @@ class Serverless {
   static async listPackages(body, options = {}) {
     assert(body, 'The request is missing a required parameter');
     const params = {
-      Body: body,
+      Body: JSON.stringify(body),
       Region: options.region ? options.region : 'ap-guangzhou',
     };
 
@@ -276,14 +276,14 @@ class Serverless {
   async preparePublishPackage(body) {
     assert(body, 'The request is missing a required parameter');
     const req = new SlsModels.PreparePublishPackageRequest();
-    req.Body = body;
+    req.Body = JSON.stringify(body);
     return await this._call('PreparePublishPackage', req);
   }
 
   async postPublishPackage(body) {
     assert(body, 'The request is missing a required parameter');
     const req = new SlsModels.PostPublishPackageRequest();
-    req.Body = body;
+    req.Body = JSON.stringify(body);
     return await this._call('PostPublishPackage', req);
   }
 
