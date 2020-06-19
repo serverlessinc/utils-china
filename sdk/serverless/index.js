@@ -250,21 +250,23 @@ class Serverless {
     return await this._call('SendCoupon', req);
   }
 
-  static async listPackages(body) {
+  static async listPackages(body, options = {}) {
     assert(body, 'The request is missing a required parameter');
     const params = {
       Body: body,
+      Region: options.region ? options.region : 'ap-guangzhou',
     };
 
     return Serverless.doRequest('ListPackages', params);
   }
 
-  static async getPackage(name, version) {
+  static async getPackage(name, version, options = {}) {
     assert(name, 'The request is missing a required parameter name');
     assert(version, 'The request is missing a required parameter version');
     const params = {
       PackageName: name,
       PackageVersion: version,
+      Region: options.region ? options.region : 'ap-guangzhou',
     };
 
     return Serverless.doRequest('GetPackage', params);

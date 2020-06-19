@@ -502,8 +502,11 @@ ret = await sls.postPublishPackage('JSON stringified object');
 ret = await sls.preparePublishPackage('JSON stringified object');
 
 // public
-ret = await Serverless.getPackage('name', '0.01');
-ret = await Serverless.listPackages('JSON stringified object');
+ret = await Serverless.getPackage('name', '0.01', { region: 'ap-shanghai' } /*optional*/);
+ret = await Serverless.listPackages(
+  'JSON stringified object',
+  { region: 'ap-shanghai' } /*optional*/
+);
 ```
 
 ### Scf 监控接口
