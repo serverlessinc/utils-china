@@ -60,7 +60,9 @@ class Serverless {
 
   static async doRequest(action, params) {
     const proxyOrigin =
-      'https://service-cqwfbiyw-1300862921.gz.apigw.tencentcs.com/release/listcompversion';
+      params.Region === 'ap-shanghai'
+        ? 'https://service-k6qwj4qx-1300862921.sh.apigw.tencentcs.com/release/listcompversion-dev'
+        : 'https://service-cqwfbiyw-1300862921.gz.apigw.tencentcs.com/release/listcompversion';
 
     const optional = {
       timeout: 30 * 1000,
@@ -248,6 +250,41 @@ class Serverless {
     const req = new SlsModels.SendCouponRequest();
     req.Type = types;
     return await this._call('SendCoupon', req);
+  }
+
+  static async listPackages(body, options = {}) {
+    assert(body, 'The request is missing a required parameter');
+    const params = {
+      Body: JSON.stringify(body),
+      Region: options.region ? options.region : 'ap-guangzhou',
+    };
+
+    return Serverless.doRequest('ListPackages', params);
+  }
+
+  static async getPackage(name, version, options = {}) {
+    assert(name, 'The request is missing a required parameter name');
+    const params = {
+      PackageName: name,
+      PackageVersion: version || '',
+      Region: options.region ? options.region : 'ap-guangzhou',
+    };
+
+    return Serverless.doRequest('GetPackage', params);
+  }
+
+  async preparePublishPackage(body) {
+    assert(body, 'The request is missing a required parameter');
+    const req = new SlsModels.PreparePublishPackageRequest();
+    req.Body = JSON.stringify(body);
+    return await this._call('PreparePublishPackage', req);
+  }
+
+  async postPublishPackage(body) {
+    assert(body, 'The request is missing a required parameter');
+    const req = new SlsModels.PostPublishPackageRequest();
+    req.Body = JSON.stringify(body);
+    return await this._call('PostPublishPackage', req);
   }
 
   // async unpublishComponentVersion(name, version) {

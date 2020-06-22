@@ -60,6 +60,7 @@ class HttpConnection {
     opt.hostname = urlObj.hostname;
     opt.path = urlObj.path;
     opt.protocol = urlObj.protocol;
+    opt.timeout = opt.timeout || 30000;
 
     const clientObject = httpClient.request(opt, (res) => {
       let body = '';
@@ -73,6 +74,11 @@ class HttpConnection {
 
     clientObject.on('error', (e) => {
       callback(e, null, null);
+    });
+
+    clientObject.on('timeout', () => {
+      callback(new Error(`timeout ${opt.timeout}ms, ${reqUrl}`), null, null);
+      clientObject.abort();
     });
 
     clientObject.write(httpBody);
