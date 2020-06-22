@@ -35,7 +35,7 @@
     ]
   },
   "dependencies": {
-    "@tencent-sdk/capi": "0.2.15-alpha.0",
+    "@tencent-sdk/capi": "^0.2.17",
     "dijkstrajs": "^1.0.1",
     "dot-qs": "0.2.0",
     "duplexify": "^4.1.1",
@@ -44,7 +44,7 @@
     "object-assign": "^4.1.1",
     "protobufjs": "^6.9.0",
     "socket.io-client": "^2.3.0",
-    "winston": "^3.2.1"
+    "winston": "3.2.1"
   },
   "devDependencies": {
     "@serverless/eslint-config": "^2.1.0",
