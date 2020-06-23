@@ -2,6 +2,7 @@
 
 const TencentCloudSDKHttpException = require('./exception/tencent_cloud_sdk_exception');
 const crypto = require('crypto');
+const assert = require('assert');
 
 const objhasOwnProperty = Object.prototype.hasOwnProperty;
 
@@ -20,7 +21,8 @@ class Sign {
         'signMethod invalid, signMethod only support (HmacSHA1, HmacSHA256)'
       );
     }
-    const hmac = crypto.createHmac(signMethodMap[signMethod], secretKey || '');
+    assert(secretKey, 'secretKey is required');
+    const hmac = crypto.createHmac(signMethodMap[signMethod], secretKey);
     return hmac.update(Buffer.from(signStr, 'utf8')).digest('base64');
   }
 }
