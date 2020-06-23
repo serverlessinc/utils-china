@@ -5,6 +5,7 @@ const qs = require('querystring');
 const dotQs = require('dot-qs');
 const crypto = require('crypto');
 const https = require('https');
+const assert = require('assert');
 
 const defaults = {
   signatureMethod: 'HmacSHA1',
@@ -62,7 +63,8 @@ class TencentCloudClient {
 
     qstr = qstr.slice(1);
 
-    const hmac = crypto.createHmac('sha1', this.credentials.SecretKey || '');
+    assert(this.credentials.SecretKey, 'SecretKey is required');
+    const hmac = crypto.createHmac('sha1', this.credentials.SecretKey);
     param.Signature = hmac
       .update(Buffer.from(`${defaults.method.toUpperCase() + host + path}?${qstr}`, 'utf8'))
       .digest('base64');
