@@ -7,8 +7,8 @@ const ApiRequest = function (auth, func, Region, debugOptions) {
   const Token = auth.Token || auth.token;
   const body = {
     FunctionName: func.functionName || func.FunctionName,
-    Namespace: func.nameSpace || func.Namespace || 'default',
-    Qualifier: func.Qualifier || func.qualifier || '$LATEST',
+    Namespace: func.namespace || func.Namespace || 'default',
+    Qualifier: func.qualifier || func.Qualifier || '$LATEST',
   };
   if (!SecretId || !SecretKey) {
     throw Error('The SecretId or SecretKey does not exist.');
