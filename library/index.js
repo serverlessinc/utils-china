@@ -7,4 +7,5 @@ module.exports = {
   common: require('./common'),
   uuid: require('./uuid'),
   monitor: require('./monitor'),
+  coding: require('./coding'),
 };

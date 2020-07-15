@@ -10,4 +10,6 @@ module.exports = {
   Serverless: require('./serverless'),
   SlsMonitor: require('./monitor'),
   Cls: require('./cls'),
+  Coding: require('../library/coding'),
+  Common: require('../library/common'),
 };
