@@ -21,10 +21,11 @@ class BindRole {
     });
   }
 
-  async getOrUpdateBindRoleState(user, action, role) {
+  async getOrUpdateBindRoleState(user, action, role, error) {
     const data = {
       user,
       role,
+      error,
     };
     const requestData = JSON.stringify(data);
 
@@ -69,43 +70,86 @@ class BindRole {
       const { AppId } = await userInformation.getUserInformation(this.credentials);
 
       const haveRole = await this.getOrUpdateBindRoleState(AppId, 'search');
-
       const attachRole = {};
 
+      let changeFlag = false;
       if (haveRole && !haveRole.error && haveRole.message) {
+        // 创建role，可以失败
+        const camClient = new CamClient(this.credentials);
+
+        const errorMsg = {};
         for (const item of Object.keys(haveRole.message)) {
           const roleName = item;
           const rolePolicy = haveRole.message[roleName];
           if (rolePolicy.policy && rolePolicy.policy.length > 0) {
             const tempList = [];
+            changeFlag = true;
 
-            // 创建role，可以失败
-            const camClient = new CamClient(this.credentials);
-
-            await camClient.request({
-              Action: 'CreateRole',
-              Version: '2019-01-16',
-              RoleName: roleName,
-              PolicyDocument: rolePolicy.policyDocument,
-            });
+            try {
+              const response = await camClient.request({
+                Action: 'CreateRole',
+                Version: '2019-01-16',
+                RoleName: roleName,
+                PolicyDocument: rolePolicy.policyDocument,
+              });
+              if (response.Response.Error) {
+                errorMsg[roleName] = {
+                  msg: `${response.Response.Error.Code}:${response.Response.Error.Message}`,
+                };
+              }
+            } catch (e) {
+              errorMsg[roleName] = {
+                msg: e.toString(),
+              };
+            }
 
             // 绑定策略
             for (let i = 0; i < rolePolicy.policy.length; i++) {
-              const result = await camClient.request({
-                Action: 'AttachRolePolicy',
-                Version: '2019-01-16',
-                AttachRoleName: roleName,
-                PolicyId: rolePolicy.policy[i],
-              });
-              if (!JSON.stringify(result).includes('Error')) {
-                tempList.push(rolePolicy.policy[i]);
+              try {
+                const result = await camClient.request({
+                  Action: 'AttachRolePolicy',
+                  Version: '2019-01-16',
+                  AttachRoleName: roleName,
+                  PolicyId: rolePolicy.policy[i],
+                });
+                if (result.Response.Error) {
+                  if (!errorMsg[roleName]) {
+                    errorMsg[roleName] = {};
+                  }
+                  errorMsg[roleName][rolePolicy.policy[i]] = {
+                    msg: `${result.Response.Error.Code}:${result.Response.Error.Message}`,
+                  };
+                }
+                if (!JSON.stringify(result).includes('Error')) {
+                  tempList.push(rolePolicy.policy[i]);
+                }
+                await this.sleep(450);
+              } catch (e) {
+                if (!errorMsg[roleName]) {
+                  errorMsg[roleName] = {};
+                }
+                errorMsg[roleName][rolePolicy.policy[i]] = {
+                  msg: e.toString(),
+                };
               }
-              await this.sleep(450);
             }
             attachRole[roleName] = tempList;
           }
         }
-        await this.getOrUpdateBindRoleState(AppId, 'report', JSON.stringify(attachRole));
+        if (Object.keys(errorMsg).length) {
+          await this.getOrUpdateBindRoleState(
+            AppId,
+            'report',
+            JSON.stringify(attachRole),
+            JSON.stringify(errorMsg)
+          );
+        } else {
+          await this.getOrUpdateBindRoleState(AppId, 'report', JSON.stringify(attachRole));
+        }
+        // wait for cam server take effect
+        if (changeFlag) {
+          await this.sleep(3000);
+        }
       }
     } catch (e) {
       // Ignore
