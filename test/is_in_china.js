@@ -8,6 +8,12 @@ class OthersAction {
     const inChina = await isInChina.inChina();
     console.log(inChina);
   }
+
+  checkEnv() {
+    const envChceker = new Others.Environment();
+    console.log(envChceker.useGlobalStore());
+  }
 }
 
+new OthersAction().checkEnv();
 new OthersAction().getIsInChina();
