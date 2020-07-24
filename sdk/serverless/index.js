@@ -40,7 +40,7 @@ class Serverless {
   static createClient(secretId, secretKey, options) {
     const info = Serverless.getCredential(secretId, secretKey, options);
     const scfCli = new SlsClient(info.cred, info.region, info.clientProfile);
-    scfCli.sdkVersion = 'ServerlessFramework';
+    scfCli.sdkVersion = options.sdkAgent || 'ServerlessFramework';
     return scfCli;
   }
 
