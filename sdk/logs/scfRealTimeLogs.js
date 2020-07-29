@@ -58,7 +58,7 @@ class ScfRealTimeLogs {
     const req = new ScfModels.GetFunctionLogsRequest();
     const body = {
       FunctionName: func.functionName,
-      Namespace: func.nameSpace || 'default',
+      Namespace: func.namespace || 'default',
       Qualifier: func.qualifier || '$LATEST',
     };
     req.fromJsonString(JSON.stringify(body));
