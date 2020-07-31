@@ -30,7 +30,7 @@ RemoteDebug.prototype.remoteDebug = async function (cliCallback) {
         'Please open chorme, and visit chrome://inspect, click [Open dedicated DevTools for Node] to debug your code.'
       );
     } catch (e) {
-      cliCallback('Debug init error. Please confirm if the local port 9222 is used', {
+      cliCallback(`Debug init error: ${e.message}`, {
         type: 'error',
       });
     }
