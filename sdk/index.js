@@ -12,4 +12,5 @@ module.exports = {
   Cls: require('./cls'),
   Coding: require('../library/coding'),
   Common: require('../library/common'),
+  Ci: require('./ci'),
 };
