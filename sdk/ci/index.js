@@ -185,7 +185,7 @@ class Ci {
     req.Description = description || '';
     req.CreateSvnLayout = options.createSvnLayout || false;
     req.Invisible = options.Invisible || false;
-    req.Label = options.Label || 'TCB';
+    req.Label = options.Label || 'SLS';
 
     return new Promise((resolve, reject) => {
       // eslint-disable-next-line
@@ -242,13 +242,13 @@ class Ci {
     req.AutoCancelSameRevision = true;
     req.AutoCancelSameMergeRequest = true;
     req.TriggerRemind = 'ALWAYS';
-    req.JobFromType = 'CODING';
-    // req.JobFromType = 'SLS'
+    req.JobFromType = 'SERVERLESS';
     if (depotId) {
       req.DepotType = 'CODING';
       req.DepotId = depotId;
     } else {
-      req.DepotType = 'None';
+      req.DepotType = 'NONE';
+      req.DepotId = 0;
     }
 
     req.EnvList = [];
