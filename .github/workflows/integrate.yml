@@ -30,7 +30,7 @@ jobs:
       - name: Resolve last validated commit hash (for `git diff` purposes)
         run: |
           curl -f "$GET_LAST_VALIDATED_COMMIT_HASH_URL" -o /home/runner/last-validated-commit-hash || :
-          curl -v -X PUT -H "User-Agent:" -H "Accept:" -H "Content-Type:" -d "$GITHUB_SHA" "$PUT_LAST_VALIDATED_COMMIT_HASH_URL"
+          curl -X PUT -H "User-Agent:" -H "Accept:" -H "Content-Type:" -d "$GITHUB_SHA" "$PUT_LAST_VALIDATED_COMMIT_HASH_URL"
       - name: Tag if new version
         run: |
           LAST_VALIDATED_COMMIT_HASH=`cat /home/runner/last-validated-commit-hash` || :
