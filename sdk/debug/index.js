@@ -30,7 +30,7 @@ RemoteDebug.prototype.remoteDebug = async function (cliCallback) {
         'Please open chorme, and visit chrome://inspect, click [Open dedicated DevTools for Node] to debug your code.'
       );
     } catch (e) {
-      cliCallback(`Debug init error: ${e.message}`, {
+      cliCallback(`Debug init error: ${e.message || JSON.stringify(e)}`, {
         type: 'error',
       });
     }
