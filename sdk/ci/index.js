@@ -35,7 +35,7 @@ class JenkinsFileSteps {
     const size = this.shells.length;
     let result = util.format('%ssteps {\n', this.tab);
     for (let i = 0; i < size; i++) {
-      result += util.format('%s  sh "%s"\n', this.tab, this.shells[i]);
+      result += util.format('%s  sh \'%s\'\n', this.tab, this.shells[i]);
     }
     if (this.script) {
       result += util.format('%s  script {\n %s \n}\n', this.tab, this.script);
@@ -212,7 +212,24 @@ class Ci {
     steps.addShell('date');
     steps.addShell('echo TENCENT_SECRET_ID=$TENCENT_SECRET_ID > .env');
     steps.addShell('echo TENCENT_SECRET_KEY=$TENCENT_SECRET_KEY >> .env');
-    steps.addShell('ls -la');
+    steps.addShell("''cat > npm.sh << EOF\r\n#! /bin/bash\r\n\
+    rootPath=\\\\`pwd\\\\`\r\n\
+    function read_dir(){\r\n\
+      for file in \\\\`ls \\\\$1\\\\`\r\n\
+      do\r\n\
+      if [ -d \\\\$1'/'\\\\$file ]; then\r\n\
+        read_dir \\\\$1'/'\\\\$file\r\n\
+      else\r\n\
+        if [ \\\\$file = 'package.json' ]; then\r\n\
+          cd \\\\$1\r\n\
+          npm install\r\n\
+          cd \\\\$rootPath\r\n\
+        fi\r\n\
+      fi\r\n\
+      done\r\n\
+    }\r\n\
+    read_dir \\\\$1\r\nEOF''");
+    steps.addShell('cat npm.sh && ls -la');
 
     stage = stages.addStage('安装Serverless');
     steps = stage.addSteps();
@@ -229,7 +246,8 @@ class Ci {
 
     stage = stages.addStage('Serverless Deploy');
     steps = stage.addSteps();
-    steps.addShell('serverless --debug');
+    steps.addShell('chmod +x ./npm.sh && ./npm.sh `pwd`');
+    steps.addShell('serverless deploy');
 
     const req = new Models.CreateCodingCIJobRequest();
     req.ProjectId = projectId;
