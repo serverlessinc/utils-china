@@ -18,6 +18,8 @@ class Environment {
       'GITHUB_SHA',
       'GITHUB_WORKFLOW',
       'GITHUB_EVENT_NAME',
+      // user custom setting
+      'GLOBAL_ACCELERATOR_NA',
     ];
     const len = envs.length;
     for (let i = 0; i < len; i++) {
