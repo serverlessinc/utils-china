@@ -594,6 +594,44 @@ const metrics = [
 
 参考地址: https://cloud.tencent.com/document/product/248/31649
 
+### Coding CI 接口
+
+```
+  const { Ci } = require('./sdk');
+
+  const ciClient = new Ci({
+    secret_id: '',
+    secret_key: '',
+    options: {
+      region: 'ap-shanghai', // now only support shanghai
+    }}
+  );
+
+  let result = await ciClient.createProject({
+     name: 'ci project',
+     alias: 'serverless cicd',
+     description: 'serverless cicd project'
+  })
+
+  result = await ciClient.createCodingCIJob('job name', result.ProjectId, depot_id, {
+    TENCENT_SECRET_ID: '',
+    TENCENT_SECRET_KEY: '',
+  });
+
+  // start ci build job
+  result = await ciClient.triggerCodingCIJobBuild(result.Data.Id, {
+    'CODE_URL_COS': 'code url',
+  });
+
+  result = await ciClient.describeCodingCIBuildStatus(result.Data.Build.Id);
+  let stages = JSON.parse(result.Data.StageJsonString);
+  console.log(stages);
+
+  // get build all log
+  result = await ciClient.describeCodingCIBuildLog(result.Data.Build.Id, offset);
+  console.log(result.Data.Log)
+```
+
 （\* 该接口目前为 1.0 版本，后期会增加其复杂度，但是接口规范不会变。）
 
 ## License
