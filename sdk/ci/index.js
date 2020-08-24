@@ -213,6 +213,8 @@ class Ci {
     steps.addShell('echo TENCENT_SECRET_ID=$TENCENT_SECRET_ID > .env');
     steps.addShell('echo TENCENT_SECRET_KEY=$TENCENT_SECRET_KEY >> .env');
     steps.addShell('echo TENCENT_TOKEN=$TENCENT_TOKEN >> .env');
+    steps.addShell('echo SERVERLESS_PLATFORM_VENDOR=tencent >> .env');
+    steps.addShell('echo SERVERLESS_PLATFORM_STAGE=$SERVERLESS_PLATFORM_STAGE >> .env');
 
     const npmshell =
       "''cat > npm.sh << EOF\r\n#! /bin/bash\r\n" +
