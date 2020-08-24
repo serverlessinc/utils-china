@@ -212,6 +212,7 @@ class Ci {
     steps.addShell('date');
     steps.addShell('echo TENCENT_SECRET_ID=$TENCENT_SECRET_ID > .env');
     steps.addShell('echo TENCENT_SECRET_KEY=$TENCENT_SECRET_KEY >> .env');
+    steps.addShell('echo TENCENT_TOKEN=$TENCENT_TOKEN >> .env');
 
     const npmshell =
       "''cat > npm.sh << EOF\r\n#! /bin/bash\r\n" +
