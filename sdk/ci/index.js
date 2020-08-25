@@ -255,7 +255,7 @@ class Ci {
     stage = stages.addStage('Serverless Deploy');
     steps = stage.addSteps();
     steps.addShell('chmod +x ./npm.sh && ./npm.sh `pwd`');
-    steps.addShell('serverless deploy');
+    steps.addShell('serverless deploy --debug');
 
     const req = new Models.CreateCodingCIJobRequest();
     req.ProjectId = projectId;
