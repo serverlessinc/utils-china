@@ -1,6 +1,6 @@
 'use strict';
 
-const uuidv4 = require('uuid').v4;
+// const uuidv4 = require('uuid').v4;
 const { formatTime } = require('./utils');
 
 const mergeObj = (baseObj, targetObj) => {
@@ -22,24 +22,28 @@ const LOG_LEVELS = {
 
 const createLog = (options) => {
   const defaultLog = {
-    '@Timestamp': formatTime(Date.now(), 'YYYY-MM-DD HH:mm:ss'),
     'LogLevel': 'DEBUG',
-    'TraceId': uuidv4(),
+    '@Timestamp': formatTime(Date.now(), 'YYYY-MM-DD HH:mm:ss'),
+    'RequestId': '',
     'Module': '',
-    'LogContent': '',
+    'Platform': 'tencent|serverless',
+    'ErrorCode': 'InternalError',
+    'SubErrorCode': '',
+    'ErrorStackTrace': '',
     'CodeLine': '',
-    'Env': 'dev',
+    'LogContent': '',
+    'UserId': '',
+    'InstanceInfo': {
+      ComponentName: '',
+      ComponentVersion: '',
+    },
+    'ActionName': '',
+    'CostTime': 0.0,
     'Region': '',
-    'Action': '',
-    'InstanceId': '',
     'Caller': '',
     'Callee': '',
     'CalleeEndpoint': '',
     'CalleeAction': '',
-    'ErrorCode': 'InternalError',
-    'SubErrorCode': '',
-    'CostTime': 0.0,
-    'UserId': '',
   };
   return mergeObj(defaultLog, options);
 };
