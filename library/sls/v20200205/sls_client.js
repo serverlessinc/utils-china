@@ -34,6 +34,8 @@ const ListPackagesResponse = models.ListPackagesResponse;
 const GetPackageResponse = models.GetPackageResponse;
 const PreparePublishPackageResponse = models.PreparePublishPackageResponse;
 const PostPublishPackageResponse = models.PostPublishPackageResponse;
+const SetParameterResponse = models.SetParameterResponse;
+const ListParametersResponse = models.ListParametersResponse;
 
 /**
  * sls client
@@ -208,6 +210,26 @@ class SlsClient extends AbstractClient {
   PostPublishPackage(req, cb) {
     const resp = new PostPublishPackageResponse();
     this.request('PostPublishPackage', req, resp, cb);
+  }
+  /**
+   * 获取parameter列表
+   * @param {ListParametersRequest} req
+   * @param {function(string, ListParametersResponse):void} cb
+   * @public
+   */
+  ListParameters(req, cb) {
+    const resp = new ListParametersResponse();
+    this.request('ListParameters', req, resp, cb);
+  }
+  /**
+   * 设置Parameter
+   * @param {SetParameterRequest} req
+   * @param {function(string, SetParameterResponse):void} cb
+   * @public
+   */
+  SetParameter(req, cb) {
+    const resp = new SetParameterResponse();
+    this.request('SetParameter', req, resp, cb);
   }
 }
 module.exports = SlsClient;
