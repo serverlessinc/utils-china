@@ -287,6 +287,31 @@ class Serverless {
     return await this._call('PostPublishPackage', req);
   }
 
+  async paramSet(body) {
+    const { instance } = body;
+    assert(instance, 'The request is missing a required parameter instance');
+    assert(instance.appName, 'The request is missing a required parameter instance.appName');
+    assert(instance.stageName, 'The request is missing a required parameter instance.stageName');
+
+    const req = new SlsModels.SetParameterRequest();
+    req.AppName = instance.appName;
+    req.StageName = instance.stageName;
+    req.Body = JSON.stringify(body);
+    return await this._call('SetParameter', req);
+  }
+
+  async paramList(body) {
+    const { instance } = body;
+    assert(instance, 'The request is missing a required parameter instance');
+    assert(instance.appName, 'The request is missing a required parameter instance.appName');
+    assert(instance.stageName, 'The request is missing a required parameter instance.stageName');
+
+    const req = new SlsModels.ListParametersRequest();
+    req.AppName = instance.appName;
+    req.StageName = instance.stageName;
+    req.Body = JSON.stringify(body);
+    return await this._call('ListParameters', req);
+  }
   // async unpublishComponentVersion(name, version) {
   //     const componentVersion = {
   //         Name: name,
