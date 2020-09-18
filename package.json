@@ -46,7 +46,7 @@
     "winston": "3.2.1"
   },
   "devDependencies": {
-    "@serverless/eslint-config": "^2.1.0",
+    "@serverless/eslint-config": "^3.0.0",
     "@ygkit/secure": "^0.0.3",
     "babel-eslint": "9.0.0",
     "eslint": "^7.0.0",
