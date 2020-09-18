@@ -1,6 +1,6 @@
 'use strict';
 
-const assign = require('object-assign');
+const assign = Object.assign;
 const qs = require('querystring');
 const dotQs = require('dot-qs');
 const crypto = require('crypto');
