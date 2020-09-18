@@ -51,8 +51,8 @@ jobs:
       - name: Validate ESLint rules
         run: npm run lint:updated
 
-  nodejs8Support:
-    name: 'Node.js v8 support'
+  nodejsSupport:
+    name: 'Node.js support'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -80,5 +80,5 @@ jobs:
         run: |
           npm update --no-save
 
-      - name: Node.js v8 support check
+      - name: Node.js support check
         run: node index.js
