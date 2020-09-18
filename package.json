@@ -60,8 +60,7 @@
     "extends": "@serverless/eslint-config/node",
     "root": true,
     "rules": {
-      "no-console": "off",
-      "no-underscore-dangle": "off"
+      "no-console": "off"
     }
   },
   "homepage": "https://github.com/serverlessinc/utils-china#readme"
