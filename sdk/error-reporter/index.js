@@ -1,52 +1,44 @@
 'use strict';
 
-const { Client } = require('@elastic/elasticsearch');
+const kafka = require('kafka-node');
+
 const { LOG_LEVELS, createLog } = require('./logger');
-const { formatTime } = require('./utils');
-const uuidv4 = require('uuid').v4;
 
 class ErrorReporter {
-  constructor({ node, username, password }) {
-    this.logName = 'ServelessFramework';
-    this.type = 'sls-log';
-    this.client = new Client({
-      node,
-      auth: {
-        username,
-        password,
-      },
-    });
+  constructor(host, topic, baseOptions = {}) {
+    const client = new kafka.KafkaClient({ kafkaHost: host });
+    this.producer = new kafka.Producer(client);
+    this.topic = topic;
+    this.baseOptions = baseOptions;
   }
 
-  report(options = {}) {
+  async report(options = {}) {
     if (!LOG_LEVELS[options.LogLevel]) {
       return false;
     }
-    const log = createLog(options);
-    const logName = `${this.logName}-${formatTime()}`;
-    const logId = uuidv4();
-    return this.update({
-      index: logName,
-      id: logId,
-      type: this.type,
-      body: log,
-    }).catch((e) => {
-      console.log(e);
-    });
+    const log = createLog(this.baseOptions, options);
+    return this.update(log);
   }
 
-  async update({ index, id, type, body }) {
-    const data = {
-      doc: body,
-      doc_as_upsert: true,
-    };
-    const res = await this.client.update({
-      id,
-      index,
-      type,
-      body: data,
+  async update(body) {
+    const payloads = [
+      {
+        topic: this.topic,
+        messages: JSON.stringify(body),
+      },
+    ];
+
+    const result = await new Promise((res, rej) => {
+      this.producer.on('ready', () => {
+        this.producer.send(payloads, (err, data) => {
+          if (err) {
+            rej(err);
+          }
+          res(data);
+        });
+      });
     });
-    return res;
+    return result;
   }
 }
 

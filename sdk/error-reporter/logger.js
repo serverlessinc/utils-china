@@ -20,11 +20,11 @@ const LOG_LEVELS = {
   FATAL: 'FATAL',
 };
 
-const createLog = (options) => {
+const createLog = (baseOptions, options) => {
   const defaultLog = {
     'LogLevel': 'DEBUG',
     '@Timestamp': formatTime(Date.now(), 'YYYY-MM-DD HH:mm:ss'),
-    'RequestId': '',
+    'TraceId': '',
     'Module': '',
     'Platform': 'tencent|serverless',
     'ErrorCode': 'InternalError',
@@ -33,9 +33,14 @@ const createLog = (options) => {
     'CodeLine': '',
     'LogContent': '',
     'UserId': '',
-    'InstanceInfo': {
+    'ComponentInfo': {
       ComponentName: '',
       ComponentVersion: '',
+    },
+    'InstanceInfo': {
+      OrgId: '',
+      AppId: '',
+      InstanceId: '',
     },
     'ActionName': '',
     'CostTime': 0.0,
@@ -45,7 +50,7 @@ const createLog = (options) => {
     'CalleeEndpoint': '',
     'CalleeAction': '',
   };
-  return mergeObj(defaultLog, options);
+  return mergeObj(defaultLog, mergeObj(baseOptions, options));
 };
 
 module.exports = {

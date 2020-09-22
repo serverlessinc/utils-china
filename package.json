@@ -35,7 +35,6 @@
     ]
   },
   "dependencies": {
-    "@elastic/elasticsearch": "^7.9.0",
     "@tencent-sdk/capi": "^0.2.17",
     "dayjs": "^1.8.35",
     "dijkstrajs": "^1.0.1",
@@ -43,10 +42,10 @@
     "duplexify": "^4.1.1",
     "end-of-stream": "^1.4.4",
     "https-proxy-agent": "^5.0.0",
+    "kafka-node": "^5.0.0",
     "object-assign": "^4.1.1",
     "protobufjs": "^6.9.0",
     "socket.io-client": "^2.3.0",
-    "uuid": "^8.3.0",
     "winston": "3.2.1"
   },
   "devDependencies": {
