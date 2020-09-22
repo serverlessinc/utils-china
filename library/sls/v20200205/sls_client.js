@@ -36,6 +36,9 @@ const PreparePublishPackageResponse = models.PreparePublishPackageResponse;
 const PostPublishPackageResponse = models.PostPublishPackageResponse;
 const SetParameterResponse = models.SetParameterResponse;
 const ListParametersResponse = models.ListParametersResponse;
+const DeployApplicationResponse = models.DeployApplicationResponse;
+const GetApplicationStatusResponse = models.GetApplicationStatusResponse;
+const GetDeploymentStatusResponse = models.GetDeploymentStatusResponse;
 
 /**
  * sls client
@@ -230,6 +233,38 @@ class SlsClient extends AbstractClient {
   SetParameter(req, cb) {
     const resp = new SetParameterResponse();
     this.request('SetParameter', req, resp, cb);
+  }
+  /**
+   * 获取应用状态
+   * @param {GetApplicationStatusRequest} req
+   * @param {function(string, GetApplicationStatusResponse):void} cb
+   * @public
+   */
+  GetApplicationStatus(req, cb) {
+    const resp = new GetApplicationStatusResponse();
+    this.request('GetApplicationStatus', req, resp, cb);
+  }
+
+  /**
+   * 获取应用部署状态
+   * @param {GetDeploymentStatusRequest} req
+   * @param {function(string, GetDeploymentStatusResponse):void} cb
+   * @public
+   */
+  GetDeploymentStatus(req, cb) {
+    const resp = new GetDeploymentStatusResponse();
+    this.request('GetDeploymentStatus', req, resp, cb);
+  }
+
+  /**
+   * 部署应用
+   * @param {DeployApplicationRequest} req
+   * @param {function(string, DeployApplicationResponse):void} cb
+   * @public
+   */
+  DeployApplication(req, cb) {
+    const resp = new DeployApplicationResponse();
+    this.request('DeployApplication', req, resp, cb);
   }
 }
 module.exports = SlsClient;
