@@ -312,6 +312,26 @@ class Serverless {
     req.Body = JSON.stringify(body);
     return await this._call('ListParameters', req);
   }
+
+  async getApplicationStatus(body) {
+    const req = new SlsModels.GetApplicationStatusRequest();
+    req.Body = body;
+    return await this._call('GetApplicationStatus', req);
+  }
+
+  async getDeploymentStatus(id, body) {
+    const req = new SlsModels.GetDeploymentStatusRequest();
+    req.Body = body;
+    req.JobBuildId = id;
+    return await this._call('GetDeploymentStatus', req);
+  }
+
+  async deployApplication(body) {
+    const req = new SlsModels.DeployApplicationRequest();
+    req.Body = body;
+    return await this._call('DeployApplication', req);
+  }
+
   // async unpublishComponentVersion(name, version) {
   //     const componentVersion = {
   //         Name: name,
