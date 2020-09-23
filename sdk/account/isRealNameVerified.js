@@ -2,7 +2,7 @@
 
 const { Capi } = require('@tencent-sdk/capi');
 
-async function isRealnameAuth({ secretId, secretKey, token }) {
+async function isRealNameVerified({ secretId, secretKey, token }) {
   const client = new Capi({
     debug: true,
     host: 'account.tencentcloudapi.com',
@@ -26,4 +26,4 @@ async function isRealnameAuth({ secretId, secretKey, token }) {
   return false;
 }
 
-module.exports = isRealnameAuth;
+module.exports = isRealNameVerified;

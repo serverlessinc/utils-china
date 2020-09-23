@@ -388,10 +388,10 @@ tencentLogin.getResult();
 
 ```javascript
 const {
-  Account: { isRealnameAuth },
+  Account: { isRealNameVerified },
 } = require('@serverless/utils-china');
 
-const isAuth = await isRealnameAuth(secretId, secretKey);
+const isVerified = await isRealNameVerified(secretId, secretKey);
 ```
 
 输出结果：

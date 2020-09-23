@@ -2,5 +2,5 @@
 
 module.exports = {
   GetUserAuthInfo: require('./getUserAuthInfo').GetUserAuthInfo,
-  isRealnameAuth: require('./isRealnameAuth'),
+  isRealNameVerified: require('./isRealNameVerified'),
 };
