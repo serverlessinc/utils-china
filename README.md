@@ -384,14 +384,14 @@ tencentLogin.getResult();
 
 通过此接口，可以判断用户是否在腾讯云实名认证
 
-基本使用方法(isRealnameAuth)：
+基本使用方法(isRealNameVerified)：
 
 ```javascript
 const {
   Account: { isRealNameVerified },
 } = require('@serverless/utils-china');
 
-const isVerified = await isRealNameVerified(secretId, secretKey);
+const isVerified = await isRealNameVerified({ secretId, secretKey });
 ```
 
 输出结果：
