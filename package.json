@@ -1,7 +1,7 @@
 {
   "name": "@serverless/utils-china",
   "description": "Tencent Cloud Tools For Serverless Framewoek",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "publishConfig": {
     "access": "public"
   },
@@ -35,7 +35,7 @@
     ]
   },
   "dependencies": {
-    "@tencent-sdk/capi": "^0.2.17",
+    "@tencent-sdk/capi": "^1.1.2",
     "dijkstrajs": "^1.0.1",
     "dot-qs": "0.2.0",
     "duplexify": "^4.1.1",
@@ -49,6 +49,7 @@
     "@serverless/eslint-config": "^3.0.0",
     "@ygkit/secure": "^0.0.3",
     "babel-eslint": "9.0.0",
+    "dotenv": "^8.2.0",
     "eslint": "^7.0.0",
     "eslint-plugin-import": "^2.20.2",
     "git-list-updated": "^1.2.1",
