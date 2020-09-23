@@ -21,8 +21,7 @@
 基本使用方法(开启调试和实时日志)：
 
 ```javascript
-const tencentCloudTools = require('../../serverless-tencent-tools');
-const Sdk = tencentCloudTools.Debug;
+const { Debug } = require('@serverless/utils-china');
 const region = 'ap-aaaaa';
 const auth = {
   SecretId: '****',
@@ -31,7 +30,7 @@ const auth = {
 const func = {
   functionName: 'course',
 };
-const sdk = new Sdk(auth, func, region);
+const sdk = new Debug(auth, func, region);
 // 开启调试和实时日志
 await sdk.remoteDebug();
 
@@ -84,8 +83,8 @@ func 参数描述：
 基本使用方法(getAddr)：
 
 ```javascript
-const tencentCloudTools = require('../../serverless-tencent-tools');
-const scfRealTimeLogs = tencentCloudTools.Logs.ScfRealTimeLogs;
+const { Logs } = require('@serverless/utils-china');
+const scfRealTimeLogs = Logs.ScfRealTimeLogs;
 const region = 'ap-aaaaa';
 const auth = {
   SecretId: '****',
@@ -139,7 +138,9 @@ func 参数描述：
 基本使用方法(getUserInformation)：
 
 ```javascript
-const { GetUserInformation } = require('../sdk/cam/index');
+const {
+  Cam: { GetUserInformation },
+} = require('@serverless/utils-china');
 
 class UserInformation {
   async getUserInformation() {
@@ -191,7 +192,7 @@ GetUserInformationResponse {
 基本使用方法（login）:
 
 ```javascript
-const Login = require('../sdk/login');
+const { Login } = require('@serverless/utils-china');
 
 class doLogin {
   async login() {
@@ -240,7 +241,7 @@ Login successful for TencentCloud.
 基本使用方法(flush)：
 
 ```javascript
-const Login = require('../sdk/login');
+const { Login } = require('@serverless/utils-china');
 
 class doLogin {
   async flush() {
@@ -299,7 +300,7 @@ tencentLogin.flush();
 基本使用方法(loginUrl)：
 
 ```javascript
-const Login = require('../sdk/login');
+const { Login } = require('@serverless/utils-china');
 
 class doLogin {
   async getUrl() {
@@ -337,7 +338,7 @@ tencentLogin.getUrl();
 基本使用方法(checkStatus)：
 
 ```javascript
-const Login = require('../sdk/login');
+const { Login } = require('@serverless/utils-china');
 
 class doLogin {
   async getResult() {
@@ -383,45 +384,29 @@ tencentLogin.getResult();
 
 通过此接口，可以判断用户是否在腾讯云实名认证
 
-基本使用方法(GetUserAuthInfo)：
+基本使用方法(isRealNameVerified)：
 
 ```javascript
-const { GetUserAuthInfo } = require('../sdk/account/index');
+const {
+  Account: { isRealNameVerified },
+} = require('@serverless/utils-china');
 
-class UserAuthInfo {
-  async getUserAuth() {
-    const getUserAuthInfo = new GetUserAuthInfo();
-    const uin = 123456787890;
-    console.log(await getUserAuthInfo.isAuth(uin));
-  }
-}
-
-const userAuthInfo = new UserAuthInfo();
-userAuthInfo.getUserAuth();
+const isVerified = await isRealNameVerified({ secretId, secretKey });
 ```
 
 输出结果：
 
 ```
-{
-  RequestId: '434cde3a-3112-11ea-8e4f-0242cb007104',
-  Error: false,
-  Message: { Authentication: '0' }
-}
-
+true or false
 ```
 
 输入参数：
 
-| 参数 | 必须 | 默认 | 描述                 |
-| ---- | ---- | ---- | -------------------- |
-| uin  | 是   | -    | 用户的 uin（主 uin） |
-
-输出参数：
-
-| 参数           | 描述                       |
-| -------------- | -------------------------- |
-| Authentication | 0 表示未认证，1 表示已认证 |
+| 参数      | 必须 | 默认 | 描述                                                                |
+| --------- | ---- | ---- | ------------------------------------------------------------------- |
+| secretId  | 是   | -    | tencent secret id                                                   |
+| secretKey | 是   | -    | tencent secret key                                                  |
+| token     | 否   | -    | tencent auth token, 当使用临时 secretId 和 secretKey 时，此参数必须 |
 
 ### 判断中国用户
 
@@ -430,7 +415,7 @@ userAuthInfo.getUserAuth();
 基本使用方法(IsInChina)：
 
 ```javascript
-const Others = require('../sdk/others');
+const { Others } = require('@serverless/utils-china');
 
 class OthersAction {
   async getIsInChina() {
@@ -462,7 +447,7 @@ new OthersAction().getIsInChina();
 serverless api
 
 ```javascript
-const { Serverless } = require('serverless-tencent-tools');
+const { Serverless } = require('@serverless/utils-china');
 
 const sls = new Serverless({
   appid: app_id,
@@ -511,8 +496,8 @@ ret = await Serverless.listPackages(
 
 ### Scf 监控接口
 
-```
-const { SlsMonitor } = require('./sdk')
+```javascript
+const { SlsMonitor } = require('@serverless/utils-china');
 
 const slsClient = new SlsMonitor({
   appid: app_id,
@@ -520,116 +505,122 @@ const slsClient = new SlsMonitor({
   secret_key: secret_key,
   options: {
     region: 'ap-guangzhou',
-    token: 'xxxxxx'
-  }
-})
+    token: 'xxxxxx',
+  },
+});
 
 const rangeTime = {
-    rangeStart: 'begin Time', //  format string `2020-04-14T16:19:41+08:00`
-    rangeEnd: 'end Time' // format string `2020-04-15T16:19:41+08:00`
-}
-const period = 3600
-const ret = await slsClient.getScfMetrics('ap-guangzhou', rangeTime, period, 'funcName', 'default', '$latest')
-console.log(ret)
+  rangeStart: 'begin Time', //  format string `2020-04-14T16:19:41+08:00`
+  rangeEnd: 'end Time', // format string `2020-04-15T16:19:41+08:00`
+};
+const period = 3600;
+const ret = await slsClient.getScfMetrics(
+  'ap-guangzhou',
+  rangeTime,
+  period,
+  'funcName',
+  'default',
+  '$latest'
+);
+console.log(ret);
 
 // report custom monitor metrics
 const metrics = [
-    {
-      MetricName: 'metric_name',
-      Value: 1
-    },
-    {
-      MetricName: 'metric_name',
-      Value: 1
-    }
-  ]
-  try {
-    await slsClient.putMonitorData(
-      metrics,
-      'instance',
-      'announceIp', /*optional*/
-      'timestamp' /*optional*/
-      )
-  } catch (e) {
-    console.log(e)
-  }
+  {
+    MetricName: 'metric_name',
+    Value: 1,
+  },
+  {
+    MetricName: 'metric_name',
+    Value: 1,
+  },
+];
+try {
+  await slsClient.putMonitorData(
+    metrics,
+    'instance',
+    'announceIp' /*optional*/,
+    'timestamp' /*optional*/
+  );
+} catch (e) {
+  console.log(e);
+}
 ```
 
 ### Cls 日志服务接口
 
-```
-  const { Cls } = require('./sdk');
-  // log array
-  const logs = [
-      {
-          "key": "err_msg",
-          "value": "error message"
-      },
-      // more...
-  ]
-  const cred = {
-    secret_id: '',
-    secret_key: '',
-    options: {
-        region: 'ap-shanghai'
-    }
-  }
+```javascript
+const { Cls } = require('@serverless/utils-china');
+// log array
+const logs = [
+  {
+    key: 'err_msg',
+    value: 'error message',
+  },
+  // more...
+];
+const cred = {
+  secret_id: '',
+  secret_key: '',
+  options: {
+    region: 'ap-shanghai',
+  },
+};
 
-  try {
+try {
+  const clsClient = new Cls(cred);
 
-    const clsClient = new Cls(cred)
-
-    // deliver log set to cls, if success return empty string
-    const ret = await clsClient.structuredLog(
-      'topic_id',
-      logs,
-      'timestamp', /*optional default current timestamp*/
-      'filename', /*optional default value 'default'*/
-      'source' /*optional default value ''*/
-      )
-  } catch (e) {
-    console.log(e)
-  }
+  // deliver log set to cls, if success return empty string
+  const ret = await clsClient.structuredLog(
+    'topic_id',
+    logs,
+    'timestamp' /*optional default current timestamp*/,
+    'filename' /*optional default value 'default'*/,
+    'source' /*optional default value ''*/
+  );
+} catch (e) {
+  console.log(e);
+}
 ```
 
 参考地址: https://cloud.tencent.com/document/product/248/31649
 
 ### Coding CI 接口
 
-```
-  const { Ci } = require('./sdk');
+```javascript
+const { Ci } = require('@serverless/utils-china');
 
-  const ciClient = new Ci({
-    secret_id: '',
-    secret_key: '',
-    options: {
-      region: 'ap-shanghai', // now only support shanghai
-    }}
-  );
+const ciClient = new Ci({
+  secret_id: '',
+  secret_key: '',
+  options: {
+    region: 'ap-shanghai', // now only support shanghai
+  },
+});
 
-  let result = await ciClient.createProject({
-     name: 'ci project',
-     alias: 'serverless cicd',
-     description: 'serverless cicd project'
-  })
+let result = await ciClient.createProject({
+  name: 'ci project',
+  alias: 'serverless cicd',
+  description: 'serverless cicd project',
+});
 
-  result = await ciClient.createCodingCIJob('job name', result.ProjectId, depot_id, {
-    TENCENT_SECRET_ID: '',
-    TENCENT_SECRET_KEY: '',
-  });
+result = await ciClient.createCodingCIJob('job name', result.ProjectId, depot_id, {
+  TENCENT_SECRET_ID: '',
+  TENCENT_SECRET_KEY: '',
+});
 
-  // start ci build job
-  result = await ciClient.triggerCodingCIJobBuild(result.Data.Id, {
-    'CODE_URL_COS': 'code url',
-  });
+// start ci build job
+result = await ciClient.triggerCodingCIJobBuild(result.Data.Id, {
+  CODE_URL_COS: 'code url',
+});
 
-  result = await ciClient.describeCodingCIBuildStatus(result.Data.Build.Id);
-  let stages = JSON.parse(result.Data.StageJsonString);
-  console.log(stages);
+result = await ciClient.describeCodingCIBuildStatus(result.Data.Build.Id);
+let stages = JSON.parse(result.Data.StageJsonString);
+console.log(stages);
 
-  // get build all log
-  result = await ciClient.describeCodingCIBuildLog(result.Data.Build.Id, offset);
-  console.log(result.Data.Log)
+// get build all log
+result = await ciClient.describeCodingCIBuildLog(result.Data.Build.Id, offset);
+console.log(result.Data.Log);
 ```
 
 （\* 该接口目前为 1.0 版本，后期会增加其复杂度，但是接口规范不会变。）
