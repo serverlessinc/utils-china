@@ -1086,6 +1086,336 @@ class PostPublishPackageResponse extends AbstractModel {
   }
 }
 
+/**
+ * SetParameter返回参数结构体
+ * @class
+ */
+class SetParameterResponse extends AbstractModel {
+  constructor() {
+    super();
+
+    /**
+     * JSON stringified object containing response payload.
+     * @type {string || null}
+     */
+    this.Body = null;
+
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * @type {string || null}
+     */
+    this.RequestId = null;
+  }
+
+  /**
+   * @private
+   */
+  deserialize(params) {
+    if (!params) {
+      return;
+    }
+    this.Body = 'Body' in params ? params.Body : null;
+    this.RequestId = 'RequestId' in params ? params.RequestId : null;
+  }
+}
+
+/**
+ * ListParameters请求参数结构体
+ * @class
+ */
+class ListParametersRequest extends AbstractModel {
+  constructor() {
+    super();
+
+    /**
+     * JSON stringified object
+     * @type {string || null}
+     */
+    this.Body = null;
+
+    /**
+     * App Name
+     * @type {string || null}
+     */
+    this.AppName = null;
+
+    /**
+     * Stage Name
+     * @type {string || null}
+     */
+    this.StageName = null;
+  }
+
+  /**
+   * @private
+   */
+  deserialize(params) {
+    if (!params) {
+      return;
+    }
+    this.Body = 'Body' in params ? params.Body : null;
+    this.AppName = 'AppName' in params ? params.AppName : null;
+    this.StageName = 'StageName' in params ? params.StageName : null;
+  }
+}
+
+/**
+ * SetParameter请求参数结构体
+ * @class
+ */
+class SetParameterRequest extends AbstractModel {
+  constructor() {
+    super();
+
+    /**
+     * JSON stringified object
+     * @type {string || null}
+     */
+    this.Body = null;
+
+    /**
+     * App Name
+     * @type {string || null}
+     */
+    this.AppName = null;
+
+    /**
+     * Stage Name
+     * @type {string || null}
+     */
+    this.StageName = null;
+  }
+
+  /**
+   * @private
+   */
+  deserialize(params) {
+    if (!params) {
+      return;
+    }
+    this.Body = 'Body' in params ? params.Body : null;
+    this.AppName = 'AppName' in params ? params.AppName : null;
+    this.StageName = 'StageName' in params ? params.StageName : null;
+  }
+}
+
+/**
+ * ListParameters返回参数结构体
+ * @class
+ */
+class ListParametersResponse extends AbstractModel {
+  constructor() {
+    super();
+
+    /**
+     * JSON stringified object containing response payload.
+     * @type {string || null}
+     */
+    this.Body = null;
+
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * @type {string || null}
+     */
+    this.RequestId = null;
+  }
+
+  /**
+   * @private
+   */
+  deserialize(params) {
+    if (!params) {
+      return;
+    }
+    this.Body = 'Body' in params ? params.Body : null;
+    this.RequestId = 'RequestId' in params ? params.RequestId : null;
+  }
+}
+
+/**
+ * GetDeploymentStatus返回参数结构体
+ * @class
+ */
+class GetDeploymentStatusResponse extends AbstractModel {
+  constructor() {
+    super();
+
+    /**
+     * JSON stringified object containing response payload.
+     * @type {string || null}
+     */
+    this.Body = null;
+
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * @type {string || null}
+     */
+    this.RequestId = null;
+  }
+
+  /**
+   * @private
+   */
+  deserialize(params) {
+    if (!params) {
+      return;
+    }
+    this.Body = 'Body' in params ? params.Body : null;
+    this.RequestId = 'RequestId' in params ? params.RequestId : null;
+  }
+}
+
+/**
+ * GetDeploymentStatus请求参数结构体
+ * @class
+ */
+class GetDeploymentStatusRequest extends AbstractModel {
+  constructor() {
+    super();
+
+    /**
+     * Job Build Id
+     * @type {string || null}
+     */
+    this.JobBuildId = null;
+
+    /**
+     * JSON stringified object
+     * @type {string || null}
+     */
+    this.Body = null;
+  }
+
+  /**
+   * @private
+   */
+  deserialize(params) {
+    if (!params) {
+      return;
+    }
+    this.JobBuildId = 'JobBuildId' in params ? params.JobBuildId : null;
+    this.Body = 'Body' in params ? params.Body : null;
+  }
+}
+
+/**
+ * DeployApplication请求参数结构体
+ * @class
+ */
+class DeployApplicationRequest extends AbstractModel {
+  constructor() {
+    super();
+
+    /**
+     * JSON stringified object
+     * @type {string || null}
+     */
+    this.Body = null;
+  }
+
+  /**
+   * @private
+   */
+  deserialize(params) {
+    if (!params) {
+      return;
+    }
+    this.Body = 'Body' in params ? params.Body : null;
+  }
+}
+
+/**
+ * DeployApplication返回参数结构体
+ * @class
+ */
+class DeployApplicationResponse extends AbstractModel {
+  constructor() {
+    super();
+
+    /**
+     * JSON stringified object containing response payload.
+     * @type {string || null}
+     */
+    this.Body = null;
+
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * @type {string || null}
+     */
+    this.RequestId = null;
+  }
+
+  /**
+   * @private
+   */
+  deserialize(params) {
+    if (!params) {
+      return;
+    }
+    this.Body = 'Body' in params ? params.Body : null;
+    this.RequestId = 'RequestId' in params ? params.RequestId : null;
+  }
+}
+
+/**
+ * GetApplicationStatus请求参数结构体
+ * @class
+ */
+class GetApplicationStatusRequest extends AbstractModel {
+  constructor() {
+    super();
+
+    /**
+     * JSON stringified object
+     * @type {string || null}
+     */
+    this.Body = null;
+  }
+
+  /**
+   * @private
+   */
+  deserialize(params) {
+    if (!params) {
+      return;
+    }
+    this.Body = 'Body' in params ? params.Body : null;
+  }
+}
+
+/**
+ * GetApplicationStatus返回参数结构体
+ * @class
+ */
+class GetApplicationStatusResponse extends AbstractModel {
+  constructor() {
+    super();
+
+    /**
+     * JSON stringified object containing response payload.
+     * @type {string || null}
+     */
+    this.Body = null;
+
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * @type {string || null}
+     */
+    this.RequestId = null;
+  }
+
+  /**
+   * @private
+   */
+  deserialize(params) {
+    if (!params) {
+      return;
+    }
+    this.Body = 'Body' in params ? params.Body : null;
+    this.RequestId = 'RequestId' in params ? params.RequestId : null;
+  }
+}
+
 module.exports = {
   ListInstancesResponse,
   GetUploadUrlsResponse,
@@ -1117,4 +1447,14 @@ module.exports = {
   PreparePublishPackageResponse,
   PostPublishPackageRequest,
   PostPublishPackageResponse,
+  SetParameterRequest,
+  SetParameterResponse,
+  ListParametersRequest,
+  ListParametersResponse,
+  DeployApplicationRequest,
+  DeployApplicationResponse,
+  GetDeploymentStatusResponse,
+  GetDeploymentStatusRequest,
+  GetApplicationStatusRequest,
+  GetApplicationStatusResponse,
 };

@@ -1,7 +1,7 @@
 {
   "name": "@serverless/utils-china",
   "description": "Tencent Cloud Tools For Serverless Framewoek",
-  "version": "0.1.27",
+  "version": "1.0.1",
   "publishConfig": {
     "access": "public"
   },
@@ -43,13 +43,12 @@
     "end-of-stream": "^1.4.4",
     "https-proxy-agent": "^5.0.0",
     "kafka-node": "^5.0.0",
-    "object-assign": "^4.1.1",
     "protobufjs": "^6.9.0",
     "socket.io-client": "^2.3.0",
     "winston": "3.2.1"
   },
   "devDependencies": {
-    "@serverless/eslint-config": "^2.1.0",
+    "@serverless/eslint-config": "^3.0.0",
     "@ygkit/secure": "^0.0.3",
     "babel-eslint": "9.0.0",
     "dotenv": "^8.2.0",
@@ -64,8 +63,7 @@
     "extends": "@serverless/eslint-config/node",
     "root": true,
     "rules": {
-      "no-console": "off",
-      "no-underscore-dangle": "off"
+      "no-console": "off"
     }
   },
   "homepage": "https://github.com/serverlessinc/utils-china#readme"
