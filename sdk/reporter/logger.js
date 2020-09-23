@@ -1,6 +1,5 @@
 'use strict';
 
-// const uuidv4 = require('uuid').v4;
 const { formatTime } = require('./utils');
 
 const mergeObj = (baseObj, targetObj) => {
@@ -10,6 +9,24 @@ const mergeObj = (baseObj, targetObj) => {
     }
   });
   return baseObj;
+};
+
+const formatOptions = (baseOptions, options) => {
+  const merged = mergeObj(baseOptions, options);
+  const newObj = [];
+  Object.entries(merged).forEach(([key, val]) => {
+    const newKey = key[0].toLocaleUpperCase().concat(key.slice(1));
+    if (newKey === 'ComponentName' || newKey === 'ComponentVersion') {
+      newObj.ComponentInfo = newObj.ComponentInfo || {};
+      newObj.ComponentInfo[newKey] = val;
+    } else if (newKey === 'OrgId' || newKey === 'AppId' || newKey === 'InstanceId') {
+      newObj.InstanceInfo = newObj.InstanceInfo || {};
+      newObj.InstanceInfo[newKey] = val;
+    } else {
+      newObj[newKey] = val;
+    }
+  });
+  return newObj;
 };
 
 const LOG_LEVELS = {
@@ -50,7 +67,7 @@ const createLog = (baseOptions, options) => {
     'CalleeEndpoint': '',
     'CalleeAction': '',
   };
-  return mergeObj(defaultLog, mergeObj(baseOptions, options));
+  return mergeObj(defaultLog, formatOptions(baseOptions, options));
 };
 
 module.exports = {

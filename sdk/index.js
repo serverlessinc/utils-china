@@ -13,4 +13,5 @@ module.exports = {
   Coding: require('../library/coding'),
   Common: require('../library/common'),
   Ci: require('./ci'),
+  Reporter: require('./reporter'),
 };
