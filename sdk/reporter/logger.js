@@ -1,0 +1,76 @@
+'use strict';
+
+const { formatTime } = require('./utils');
+
+const mergeObj = (baseObj, targetObj) => {
+  Object.entries(targetObj).forEach(([key, val]) => {
+    if (val) {
+      baseObj[key] = val;
+    }
+  });
+  return baseObj;
+};
+
+const formatOptions = (baseOptions, options) => {
+  const merged = mergeObj(baseOptions, options);
+  const newObj = [];
+  Object.entries(merged).forEach(([key, val]) => {
+    const newKey = key[0].toLocaleUpperCase().concat(key.slice(1));
+    if (newKey === 'ComponentName' || newKey === 'ComponentVersion') {
+      newObj.ComponentInfo = newObj.ComponentInfo || {};
+      newObj.ComponentInfo[newKey] = val;
+    } else if (newKey === 'OrgId' || newKey === 'AppId' || newKey === 'InstanceId') {
+      newObj.InstanceInfo = newObj.InstanceInfo || {};
+      newObj.InstanceInfo[newKey] = val;
+    } else {
+      newObj[newKey] = val;
+    }
+  });
+  return newObj;
+};
+
+const LOG_LEVELS = {
+  DEBUG: 'DEBUG',
+  INFO: 'INFO',
+  WARN: 'WARN',
+  ERROR: 'ERROR',
+  FATAL: 'FATAL',
+};
+
+const createLog = (baseOptions, options) => {
+  const defaultLog = {
+    'LogLevel': 'DEBUG',
+    '@Timestamp': formatTime(Date.now(), 'YYYY-MM-DD HH:mm:ss'),
+    'TraceId': '',
+    'Module': '',
+    'Platform': 'tencent|serverless',
+    'ErrorCode': 'InternalError',
+    'SubErrorCode': '',
+    'ErrorStackTrace': '',
+    'CodeLine': '',
+    'LogContent': '',
+    'UserId': '',
+    'ComponentInfo': {
+      ComponentName: '',
+      ComponentVersion: '',
+    },
+    'InstanceInfo': {
+      OrgId: '',
+      AppId: '',
+      InstanceId: '',
+    },
+    'ActionName': '',
+    'CostTime': 0.0,
+    'Region': '',
+    'Caller': '',
+    'Callee': '',
+    'CalleeEndpoint': '',
+    'CalleeAction': '',
+  };
+  return mergeObj(defaultLog, formatOptions(baseOptions, options));
+};
+
+module.exports = {
+  LOG_LEVELS,
+  createLog,
+};
