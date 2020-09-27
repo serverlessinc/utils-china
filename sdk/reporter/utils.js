@@ -1,21 +1,5 @@
 'use strict';
 
-const dayjs = require('dayjs');
-
-function formatTime(time, format = 'YYYY-MM-DD') {
-  let d = time || new Date();
-  try {
-    if (!(d instanceof Date)) {
-      d = new Date(d);
-    }
-  } catch (e) {
-    // if time can not transfer to Date instance, using now date
-    d = new Date();
-  }
-
-  return dayjs(d).format(format);
-}
-
 function getCodeLine() {
   try {
     throw new Error();
@@ -34,6 +18,5 @@ function getCodeLine() {
 }
 
 module.exports = {
-  formatTime,
   getCodeLine,
 };

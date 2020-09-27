@@ -1,7 +1,5 @@
 'use strict';
 
-const { formatTime } = require('./utils');
-
 const mergeObj = (baseObj, targetObj) => {
   Object.entries(targetObj).forEach(([key, val]) => {
     if (val) {
@@ -40,7 +38,7 @@ const LOG_LEVELS = {
 const createLog = (baseOptions, options) => {
   const defaultLog = {
     'LogLevel': 'DEBUG',
-    '@Timestamp': formatTime(Date.now(), 'YYYY-MM-DD HH:mm:ss'),
+    '@Timestamp': new Date().toISOString(),
     'TraceId': '',
     'Module': '',
     'Platform': 'tencent|serverless',

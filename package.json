@@ -36,7 +36,6 @@
   },
   "dependencies": {
     "@tencent-sdk/capi": "^1.1.2",
-    "dayjs": "^1.8.35",
     "dijkstrajs": "^1.0.1",
     "dot-qs": "0.2.0",
     "duplexify": "^4.1.1",
