@@ -21,7 +21,7 @@ const formatOptions = (baseOptions, options) => {
       newObj.InstanceInfo = newObj.InstanceInfo || {};
       newObj.InstanceInfo[newKey] = val;
     } else {
-      newObj[newKey] = val;
+      newObj[newKey] = typeof val === 'object' ? JSON.stringify(val) : val;
     }
   });
   return newObj;
