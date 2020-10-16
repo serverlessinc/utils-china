@@ -157,6 +157,7 @@ class Serverless {
     req.StageName = stageName;
     req.InstanceName = instanceName;
     req.Body = JSON.stringify(instance);
+    req.TraceId = 'traceId' in this.options ? this.options.traceId : null;
     return this._call('GetInstance', req);
   }
 
@@ -175,12 +176,14 @@ class Serverless {
     req.StageName = instance.stageName;
     req.InstanceName = instance.instanceName;
     req.Body = JSON.stringify(instanceData);
+    req.TraceId = 'traceId' in this.options ? this.options.traceId : null;
     return this._call('SaveInstance', req);
   }
 
   async listInstances(data) {
     const req = new SlsModels.ListInstancesRequest();
     req.Body = JSON.stringify(data);
+    req.TraceId = 'traceId' in this.options ? this.options.traceId : null;
     return this._call('ListInstances', req);
   }
 
@@ -191,6 +194,7 @@ class Serverless {
 
     const req = new SlsModels.GetUploadUrlsRequest();
     req.Body = JSON.stringify(data);
+    req.TraceId = 'traceId' in this.options ? this.options.traceId : null;
     return this._call('GetUploadUrls', req);
   }
 
@@ -219,6 +223,7 @@ class Serverless {
       req.RoleName = instance.roleName;
     }
     req.Body = JSON.stringify(data);
+    req.TraceId = 'traceId' in this.options ? this.options.traceId : null;
     return this._call('RunComponent', req);
   }
 
@@ -241,6 +246,7 @@ class Serverless {
     req.StageName = instance.stageName;
     req.InstanceName = instance.instanceName;
     req.Body = JSON.stringify(data);
+    req.TraceId = 'traceId' in this.options ? this.options.traceId : null;
     return await this._call('RunFinishComponent', req);
   }
 
@@ -249,6 +255,7 @@ class Serverless {
     assert(Array.isArray(types), 'The request is parameter types must is array');
     const req = new SlsModels.SendCouponRequest();
     req.Type = types;
+    req.TraceId = 'traceId' in this.options ? this.options.traceId : null;
     return await this._call('SendCoupon', req);
   }
 
@@ -257,6 +264,7 @@ class Serverless {
     const params = {
       Body: JSON.stringify(body),
       Region: options.region ? options.region : 'ap-guangzhou',
+      TraceId: options.traceId ? options.traceId : null,
     };
 
     return Serverless.doRequest('ListPackages', params);
@@ -268,6 +276,7 @@ class Serverless {
       PackageName: name,
       PackageVersion: version || '',
       Region: options.region ? options.region : 'ap-guangzhou',
+      TraceId: options.traceId ? options.traceId : null,
     };
 
     return Serverless.doRequest('GetPackage', params);
@@ -277,6 +286,7 @@ class Serverless {
     assert(body, 'The request is missing a required parameter');
     const req = new SlsModels.PreparePublishPackageRequest();
     req.Body = JSON.stringify(body);
+    req.TraceId = 'traceId' in this.options ? this.options.traceId : null;
     return await this._call('PreparePublishPackage', req);
   }
 
@@ -284,6 +294,7 @@ class Serverless {
     assert(body, 'The request is missing a required parameter');
     const req = new SlsModels.PostPublishPackageRequest();
     req.Body = JSON.stringify(body);
+    req.TraceId = 'traceId' in this.options ? this.options.traceId : null;
     return await this._call('PostPublishPackage', req);
   }
 
@@ -297,6 +308,7 @@ class Serverless {
     req.AppName = instance.appName;
     req.StageName = instance.stageName;
     req.Body = JSON.stringify(body);
+    req.TraceId = 'traceId' in this.options ? this.options.traceId : null;
     return await this._call('SetParameter', req);
   }
 
@@ -310,6 +322,7 @@ class Serverless {
     req.AppName = instance.appName;
     req.StageName = instance.stageName;
     req.Body = JSON.stringify(body);
+    req.TraceId = 'traceId' in this.options ? this.options.traceId : null;
     return await this._call('ListParameters', req);
   }
 
