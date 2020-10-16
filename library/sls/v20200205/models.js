@@ -115,6 +115,12 @@ class RunFinishComponentRequest extends AbstractModel {
      * @type {string || null}
      */
     this.InstanceName = null;
+
+    /**
+     * TraceId
+     * @type {string || null}
+     */
+    this.TraceId = null;
   }
 
   /**
@@ -128,6 +134,7 @@ class RunFinishComponentRequest extends AbstractModel {
     this.AppName = 'AppName' in params ? params.AppName : null;
     this.StageName = 'StageName' in params ? params.StageName : null;
     this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+    this.TraceId = 'TraceId' in params ? params.TraceId : null;
   }
 }
 
@@ -287,6 +294,12 @@ class GetInstanceRequest extends AbstractModel {
      * @type {string || null}
      */
     this.InstanceName = null;
+
+    /**
+     * TraceId
+     * @type {string || null}
+     */
+    this.TraceId = null;
   }
 
   /**
@@ -300,6 +313,7 @@ class GetInstanceRequest extends AbstractModel {
     this.AppName = 'AppName' in params ? params.AppName : null;
     this.StageName = 'StageName' in params ? params.StageName : null;
     this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+    this.TraceId = 'TraceId' in params ? params.TraceId : null;
   }
 }
 
@@ -488,6 +502,12 @@ class GetUploadUrlsRequest extends AbstractModel {
      * @type {string || null}
      */
     this.Body = null;
+
+    /**
+     * TraceId
+     * @type {string || null}
+     */
+    this.TraceId = null;
   }
 
   /**
@@ -498,6 +518,7 @@ class GetUploadUrlsRequest extends AbstractModel {
       return;
     }
     this.Body = 'Body' in params ? params.Body : null;
+    this.TraceId = 'TraceId' in params ? params.TraceId : null;
   }
 }
 
@@ -544,6 +565,12 @@ class RunComponentRequest extends AbstractModel {
      * @type {string || null}
      */
     this.RoleName = null;
+
+    /**
+     * TraceId
+     * @type {string || null}
+     */
+    this.TraceId = null;
   }
 
   /**
@@ -559,6 +586,7 @@ class RunComponentRequest extends AbstractModel {
     this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
     this.Channel = 'Channel' in params ? params.Channel : null;
     this.RoleName = 'RoleName' in params ? params.RoleName : null;
+    this.TraceId = 'TraceId' in params ? params.TraceId : null;
   }
 }
 
@@ -720,6 +748,12 @@ class SaveInstanceRequest extends AbstractModel {
      * @type {string || null}
      */
     this.InstanceName = null;
+
+    /**
+     * TraceId
+     * @type {string || null}
+     */
+    this.TraceId = null;
   }
 
   /**
@@ -733,6 +767,7 @@ class SaveInstanceRequest extends AbstractModel {
     this.AppName = 'AppName' in params ? params.AppName : null;
     this.StageName = 'StageName' in params ? params.StageName : null;
     this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+    this.TraceId = 'TraceId' in params ? params.TraceId : null;
   }
 }
 
@@ -761,6 +796,12 @@ class ListInstancesRequest extends AbstractModel {
      * @type {string || null}
      */
     this.StageName = null;
+
+    /**
+     * TraceId
+     * @type {string || null}
+     */
+    this.TraceId = null;
   }
 
   /**
@@ -773,6 +814,7 @@ class ListInstancesRequest extends AbstractModel {
     this.Body = 'Body' in params ? params.Body : null;
     this.AppName = 'AppName' in params ? params.AppName : null;
     this.StageName = 'StageName' in params ? params.StageName : null;
+    this.TraceId = 'TraceId' in params ? params.TraceId : null;
   }
 }
 
@@ -830,6 +872,12 @@ class SendCouponRequest extends AbstractModel {
      * @type {Array.<string> || null}
      */
     this.Type = null;
+
+    /**
+     * Stage Name
+     * @type {string || null}
+     */
+    this.TraceId = null;
   }
 
   /**
@@ -840,6 +888,7 @@ class SendCouponRequest extends AbstractModel {
       return;
     }
     this.Type = 'Type' in params ? params.Type : null;
+    this.TraceId = 'TraceId' in params ? params.TraceId : null;
   }
 }
 
@@ -895,6 +944,12 @@ class GetPackageRequest extends AbstractModel {
      * @type {string || null}
      */
     this.PackageVersion = null;
+
+    /**
+     * Stage Name
+     * @type {string || null}
+     */
+    this.TraceId = null;
   }
 
   /**
@@ -906,6 +961,7 @@ class GetPackageRequest extends AbstractModel {
     }
     this.PackageName = 'PackageName' in params ? params.PackageName : null;
     this.PackageVersion = 'PackageVersion' in params ? params.PackageVersion : null;
+    this.TraceId = 'TraceId' in params ? params.TraceId : null;
   }
 }
 
@@ -955,6 +1011,12 @@ class ListPackagesRequest extends AbstractModel {
      * @type {string || null}
      */
     this.Body = null;
+
+    /**
+     * Stage Name
+     * @type {string || null}
+     */
+    this.TraceId = null;
   }
 
   /**
@@ -965,6 +1027,7 @@ class ListPackagesRequest extends AbstractModel {
       return;
     }
     this.Body = 'Body' in params ? params.Body : null;
+    this.TraceId = 'TraceId' in params ? params.TraceId : null;
   }
 }
 
@@ -981,6 +1044,12 @@ class PreparePublishPackageRequest extends AbstractModel {
      * @type {string || null}
      */
     this.Body = null;
+
+    /**
+     * Stage Name
+     * @type {string || null}
+     */
+    this.TraceId = null;
   }
 
   /**
@@ -991,6 +1060,7 @@ class PreparePublishPackageRequest extends AbstractModel {
       return;
     }
     this.Body = 'Body' in params ? params.Body : null;
+    this.TraceId = 'TraceId' in params ? params.TraceId : null;
   }
 }
 
@@ -1040,6 +1110,12 @@ class PostPublishPackageRequest extends AbstractModel {
      * @type {string || null}
      */
     this.Body = null;
+
+    /**
+     * Stage Name
+     * @type {string || null}
+     */
+    this.TraceId = null;
   }
 
   /**
@@ -1050,6 +1126,7 @@ class PostPublishPackageRequest extends AbstractModel {
       return;
     }
     this.Body = 'Body' in params ? params.Body : null;
+    this.TraceId = 'TraceId' in params ? params.TraceId : null;
   }
 }
 
@@ -1144,6 +1221,12 @@ class ListParametersRequest extends AbstractModel {
      * @type {string || null}
      */
     this.StageName = null;
+
+    /**
+     * Trace Id
+     * @type {string || null}
+     */
+    this.TraceId = null;
   }
 
   /**
@@ -1156,6 +1239,7 @@ class ListParametersRequest extends AbstractModel {
     this.Body = 'Body' in params ? params.Body : null;
     this.AppName = 'AppName' in params ? params.AppName : null;
     this.StageName = 'StageName' in params ? params.StageName : null;
+    this.TraceId = 'TraceId' in params ? params.TraceId : null;
   }
 }
 
@@ -1184,6 +1268,12 @@ class SetParameterRequest extends AbstractModel {
      * @type {string || null}
      */
     this.StageName = null;
+
+    /**
+     * Trace Id
+     * @type {string || null}
+     */
+    this.TraceId = null;
   }
 
   /**
@@ -1196,6 +1286,7 @@ class SetParameterRequest extends AbstractModel {
     this.Body = 'Body' in params ? params.Body : null;
     this.AppName = 'AppName' in params ? params.AppName : null;
     this.StageName = 'StageName' in params ? params.StageName : null;
+    this.TraceId = 'TraceId' in params ? params.TraceId : null;
   }
 }
 
