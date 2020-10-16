@@ -264,7 +264,7 @@ class Serverless {
     const params = {
       Body: JSON.stringify(body),
       Region: options.region ? options.region : 'ap-guangzhou',
-      TraceId: 'traceId' in this.options ? this.options.traceId : null,
+      TraceId: options.traceId ? options.traceId : null,
     };
 
     return Serverless.doRequest('ListPackages', params);
@@ -276,7 +276,7 @@ class Serverless {
       PackageName: name,
       PackageVersion: version || '',
       Region: options.region ? options.region : 'ap-guangzhou',
-      TraceId: 'traceId' in this.options ? this.options.traceId : null,
+      TraceId: options.traceId ? options.traceId : null,
     };
 
     return Serverless.doRequest('GetPackage', params);
