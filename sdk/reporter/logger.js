@@ -10,7 +10,7 @@ const mergeObj = (baseObj, targetObj) => {
 };
 
 const formatOptions = (baseOptions, options) => {
-  const merged = Object.assign({}, baseOptions, options)
+  const merged = Object.assign({}, baseOptions, options);
   const newObj = [];
   Object.entries(merged).forEach(([key, val]) => {
     const newKey = key[0].toLocaleUpperCase().concat(key.slice(1));
@@ -33,7 +33,7 @@ const LOG_LEVELS = {
   WARN: 'WARN',
   ERROR: 'ERROR',
   FATAL: 'FATAL',
-  TRACE: 'TRACE'
+  TRACE: 'TRACE',
 };
 
 const createLog = (baseOptions, options) => {
