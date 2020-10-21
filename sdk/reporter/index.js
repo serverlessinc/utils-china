@@ -9,6 +9,13 @@ class Reporter {
     this.producerReady = false;
     const client = new kafka.KafkaClient({ kafkaHost: host });
     this.producer = new kafka.Producer(client);
+    // prevent error event emit to process
+    client.on('error', (e) => {
+      console.log(e);
+    });
+    this.producer.on('error', (e) => {
+      console.log(e);
+    });
     this.producer.on('ready', () => {
       this.producerReady = true;
     });
