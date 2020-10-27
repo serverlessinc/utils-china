@@ -7,7 +7,7 @@ const uuidv4 = require('../../library/uuid');
 const QRCode = require('../../library/qrcode/index');
 
 const apiBaseUrl = 'scfdev.tencentserverless.com';
-const devApiBaseUrl = 'scfdevsh.tencentserverless.com'
+const devApiBaseUrl = 'scfdevsh.tencentserverless.com';
 const apiShortUrl = '/login/url';
 const refreshTokenUrl = '/login/info';
 
@@ -19,12 +19,11 @@ class Login {
   }
 
   checkEnvUrl() {
-    const envInfo = process.env.SERVERLESS_PLATFORM_STAGE || 'prod'
-    if (envInfo == "prod") {
-      return apiBaseUrl
-    } else {
-      return devApiBaseUrl
+    const envInfo = process.env.SERVERLESS_PLATFORM_STAGE || 'prod';
+    if (envInfo === 'prod') {
+      return apiBaseUrl;
     }
+    return devApiBaseUrl;
   }
 
   async getShortUrl(uuid) {
