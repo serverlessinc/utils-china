@@ -4,6 +4,9 @@ const { CamClient } = require('../../library/tencent-cloud/client');
 const { GetUserInformation } = require('./userInformation');
 const http = require('http');
 
+const apiBaseUrl = 'service-ocnymoks-1258344699.gz.apigw.tencentcs.com'
+const devApiBaseUrl = 'service-ed5xtaob-1258344699.sh.apigw.tencentcs.com'
+
 class BindRole {
   constructor(credentials = {}) {
     this.credentials = {
@@ -21,6 +24,15 @@ class BindRole {
     });
   }
 
+  checkEnvUrl() {
+    const envInfo = process.env.SERVERLESS_PLATFORM_STAGE || 'prod'
+    if (envInfo == "prod") {
+      return apiBaseUrl
+    } else {
+      return devApiBaseUrl
+    }
+  }
+
   async getOrUpdateBindRoleState(user, action, role, error) {
     const data = {
       user,
@@ -30,7 +42,7 @@ class BindRole {
     const requestData = JSON.stringify(data);
 
     const options = {
-      host: 'service-ocnymoks-1258344699.gz.apigw.tencentcs.com',
+      host: this.checkEnvUrl(),
       port: '80',
       path: `/release/serverless/v2/role/bindv2/${action}`,
       method: 'POST',

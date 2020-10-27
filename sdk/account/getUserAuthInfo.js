@@ -3,7 +3,19 @@
 const http = require('http');
 const os = require('os');
 
+const apiBaseUrl = 'service-ocnymoks-1258344699.gz.apigw.tencentcs.com'
+const devApiBaseUrl = 'service-ed5xtaob-1258344699.sh.apigw.tencentcs.com'
+
 class GetUserAuthInfo {
+  checkEnvUrl() {
+    const envInfo = process.env.SERVERLESS_PLATFORM_STAGE || 'prod'
+    if (envInfo == "prod") {
+      return apiBaseUrl
+    } else {
+      return devApiBaseUrl
+    }
+  }
+
   async isAuth(ownerUin, inputs = {}) {
     const data = {
       uin: ownerUin,
@@ -18,7 +30,7 @@ class GetUserAuthInfo {
     const requestData = JSON.stringify(data);
 
     const options = {
-      host: 'service-ocnymoks-1258344699.gz.apigw.tencentcs.com',
+      host: this.checkEnvUrl(),
       port: '80',
       path: '/release/getUserAuthInfo',
       method: 'POST',
