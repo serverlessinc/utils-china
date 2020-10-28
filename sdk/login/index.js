@@ -5,6 +5,7 @@ const http = require('http');
 const os = require('os');
 const uuidv4 = require('../../library/uuid');
 const QRCode = require('../../library/qrcode/index');
+const { checkEnvUrl } = require('../utils');
 
 const apiBaseUrl = 'scfdev.tencentserverless.com';
 const devApiBaseUrl = 'scfdevsh.tencentserverless.com';
@@ -18,17 +19,9 @@ class Login {
     });
   }
 
-  checkEnvUrl() {
-    const envInfo = process.env.SERVERLESS_PLATFORM_STAGE || 'prod';
-    if (envInfo === 'prod') {
-      return apiBaseUrl;
-    }
-    return devApiBaseUrl;
-  }
-
   async getShortUrl(uuid) {
     const options = {
-      host: this.checkEnvUrl(),
+      host: checkEnvUrl(apiBaseUrl, devApiBaseUrl),
       port: '80',
       path: util.format('%s?os=%s&uuid=%s', apiShortUrl, os.type(), uuid),
     };
@@ -53,7 +46,7 @@ class Login {
   async checkStatus(uuid, url) {
     return new Promise((done) => {
       const options = {
-        host: this.checkEnvUrl(),
+        host: checkEnvUrl(apiBaseUrl, devApiBaseUrl),
         port: '80',
         path: url,
       };
@@ -84,7 +77,7 @@ class Login {
   async flush(uuid, expired, signature, appid) {
     return await new Promise((done) => {
       const options = {
-        host: this.checkEnvUrl(),
+        host: checkEnvUrl(apiBaseUrl, devApiBaseUrl),
         port: '80',
         path: `${refreshTokenUrl}?uuid=${uuid}&os=${os.type()}&expired=${expired}&signature=${signature}&appid=${appid}`,
       };
