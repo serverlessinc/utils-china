@@ -52,10 +52,13 @@ RemoteDebug.prototype.standardRemoteDebug = async function (option) {
   logger = logger || function () {};
   await this.request.ensureFunctionState();
   await this.request.startDebugging();
-  await this.request.ensureDebuggingState();
+  await this.request.ensureDebuggingMode();
+  await this.request.ensureFunctionState();
+  await this.request.buildDebugConnection();
+  const debuggingInfo = await this.request.ensureDebuggingState();
   const {
     DebuggingInfo: { Url, Token },
-  } = await this.request.getDebuggingInfo();
+  } = debuggingInfo;
   if (!Url || !Token) {
     throw Error('Get debugging info error: the remote Url or Token does not exist.');
   }
