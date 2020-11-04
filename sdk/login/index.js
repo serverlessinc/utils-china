@@ -110,6 +110,8 @@ class Login {
       const uuid = uuidv4();
       const apiUrl = await this.getShortUrl(uuid);
 
+      QRCode.setErrorLevel('M');
+
       QRCode.generate(apiUrl.short_url, { small: true }, (qrcode) => {
         console.log(qrcode);
       });
