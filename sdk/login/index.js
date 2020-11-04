@@ -114,8 +114,9 @@ class Login {
         console.log(url);
       });
 
-      console.log('Please scan QR code login from wechat. ');
-      console.log('Wait login...');
+      console.log('请使用微信扫描上方二维码或者点击下方链接登录');
+      console.log(apiUrl.short_url);
+
       // wait 3s start check login status
       await this.sleep(3000);
 

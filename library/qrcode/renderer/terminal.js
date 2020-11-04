@@ -1,35 +1,82 @@
 'use strict';
 
-// var Utils = require('./utils')
+// ref: https://github.com/soldair/node-qrcode/blob/master/lib/renderer/terminal/terminal-small.js
+
+const backgroundWhite = '\x1b[47m';
+const backgroundBlack = '\x1b[40m';
+const foregroundWhite = '\x1b[37m';
+const foregroundBlack = '\x1b[30m';
+const reset = '\x1b[0m';
+const lineSetupNormal = backgroundWhite + foregroundBlack; // setup colors
+const lineSetupInverse = backgroundBlack + foregroundWhite; // setup colors
+
+const createPalette = function (lineSetup, white, black) {
+  return {
+    // 1 ... white, 2 ... black, 0 ... transparent (default)
+
+    '00': `${reset} ${lineSetup}`,
+    '01': `${reset + white}▄${lineSetup}`,
+    '02': `${reset + black}▄${lineSetup}`,
+    '10': `${reset + white}▀${lineSetup}`,
+    '11': ' ',
+    '12': '▄',
+    '20': `${reset + black}▀${lineSetup}`,
+    '21': '▀',
+    '22': '█',
+  };
+};
+
+/**
+ * Returns code for QR pixel
+ * @param {boolean[][]} modules
+ * @param {number} size
+ * @param {number} x
+ * @param {number} y
+ * @return {'0' | '1' | '2'}
+ */
+const mkCodePixel = function (modules, size, x, y) {
+  const sizePlus = size + 1;
+  if (x >= sizePlus || y >= sizePlus || y < -1 || x < -1) return '0';
+  if (x >= size || y >= size || y < 0 || x < 0) return '1';
+  const idx = y * size + x;
+  return modules[idx] ? '2' : '1';
+};
+
+/**
+ * Returns code for four QR pixels. Suitable as key in palette.
+ * @param {boolean[][]} modules
+ * @param {number} size
+ * @param {number} x
+ * @param {number} y
+ * @return {keyof palette}
+ */
+const mkCode = function (modules, size, x, y) {
+  return mkCodePixel(modules, size, x, y) + mkCodePixel(modules, size, x, y + 1);
+};
 
 exports.render = function (qrData, options, cb) {
   const size = qrData.modules.size;
   const data = qrData.modules.data;
 
-  // var opts = Utils.getOptions(options)
+  const inverse = !!(options && options.inverse);
+  const lineSetup = options && options.inverse ? lineSetupInverse : lineSetupNormal;
+  const white = inverse ? foregroundBlack : foregroundWhite;
+  const black = inverse ? foregroundWhite : foregroundBlack;
 
-  // use same scheme as https://github.com/gtanner/qrcode-terminal because it actually works! =)
-  const black = '\x1b[40m  \x1b[0m';
-  const white = '\x1b[47m  \x1b[0m';
+  const palette = createPalette(lineSetup, white, black);
+  const newLine = `${reset}\n${lineSetup}`;
 
-  let output = '';
-  const hMargin = Array(size + 3).join(white);
-  const vMargin = Array(2).join(white);
+  let output = lineSetup; // setup colors
 
-  output += `${hMargin}\n`;
-  for (let i = 0; i < size; ++i) {
-    output += white;
-    for (let j = 0; j < size; j++) {
-      // var topModule = data[i * size + j]
-      // var bottomModule = data[(i + 1) * size + j]
-
-      output += data[i * size + j] ? black : white; // getBlockChar(topModule, bottomModule)
+  for (let y = -1; y < size + 1; y += 2) {
+    for (let x = -1; x < size; x++) {
+      output += palette[mkCode(data, size, x, y)];
     }
-    // output += white+'\n'
-    output += `${vMargin}\n`;
+
+    output += palette[mkCode(data, size, size, y)] + newLine;
   }
 
-  output += `${hMargin}\n`;
+  output += reset;
 
   if (typeof cb === 'function') {
     cb(null, output);
@@ -37,15 +84,3 @@ exports.render = function (qrData, options, cb) {
 
   return output;
 };
-/*
-exports.renderToFile = function renderToFile (path, qrData, options, cb) {
-  if (typeof cb === 'undefined') {
-    cb = options
-    options = undefined
-  }
-
-  var fs = require('fs')
-  var utf8 = exports.render(qrData, options)
-  fs.writeFile(path, utf8, cb)
-}
-*/
