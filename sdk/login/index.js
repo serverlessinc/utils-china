@@ -4,7 +4,7 @@ const util = require('util');
 const http = require('http');
 const os = require('os');
 const uuidv4 = require('../../library/uuid');
-const QRCode = require('../../library/qrcode/index');
+const QRCode = require('qrcode-terminal');
 const { checkEnvUrl } = require('../utils');
 
 const apiBaseUrl = 'scfdev.tencentserverless.com';
@@ -110,12 +110,15 @@ class Login {
       const uuid = uuidv4();
       const apiUrl = await this.getShortUrl(uuid);
 
-      QRCode.toString(apiUrl.short_url, { type: 'terminal' }, (err, url) => {
-        console.log(url);
+      QRCode.setErrorLevel('M');
+
+      QRCode.generate(apiUrl.short_url, { small: true }, (qrcode) => {
+        console.log(qrcode);
       });
 
-      console.log('Please scan QR code login from wechat. ');
-      console.log('Wait login...');
+      console.log('请使用微信扫描上方二维码或者点击下方链接登录');
+      console.log(apiUrl.short_url);
+
       // wait 3s start check login status
       await this.sleep(3000);
 
