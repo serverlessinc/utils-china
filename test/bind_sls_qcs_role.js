@@ -4,10 +4,15 @@ const { BindRole } = require('../sdk/cam/index').BindRole;
 
 class Role {
   async bindSLSQCSRole() {
-    await new BindRole({
-      SecretId: '',
-      SecretKey: '',
-    }).bindSLSQcsRole();
+    try {
+      const resp = await new BindRole({
+        SecretId: '',
+        SecretKey: '',
+      }).bindQCSRole();
+      console.log(resp);
+    } catch (e) {
+      console.log(e.toString());
+    }
   }
 }
 

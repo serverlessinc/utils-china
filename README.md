@@ -623,6 +623,66 @@ result = await ciClient.describeCodingCIBuildLog(result.Data.Build.Id, offset);
 console.log(result.Data.Log);
 ```
 
+### Cam 接口
+
+#### BindQCSRole(非强制绑定角色)
+
+通过此接口，可以绑定 sls 服务使用的角色和策略
+
+基本使用方法(bindQCSRole)：
+
+```javascript
+'use strict';
+
+const { BindRole } = require('../sdk/cam/index').BindRole;
+
+class Role {
+  async bindSLSQCSRole() {
+    try {
+      const resp = await new BindRole({
+        SecretId: '',
+        SecretKey: '',
+      }).bindQCSRole();
+      console.log(resp);
+    } catch (e) {
+      console.log(e.toString());
+    }
+  }
+}
+
+const role = new Role();
+role.bindSLSQCSRole();
+```
+
+#### forceBindQCSRole(强制绑定角色)
+
+通过此接口，可以绑定 sls 服务使用的角色和策略，默认返回的是[null]，如果有错误的话会抛出异常
+
+基本使用方法(forceBindQCSRole)：
+
+```javascript
+'use strict';
+
+const { BindRole } = require('../sdk/cam/index').BindRole;
+
+class Role {
+  async bindSLSQCSRole() {
+    try {
+      const resp = await new BindRole({
+        SecretId: '',
+        SecretKey: '',
+      }).forceBindQCSRole();
+      console.log(resp);
+    } catch (e) {
+      console.log(e.toString());
+    }
+  }
+}
+
+const role = new Role();
+role.bindSLSQCSRole();
+```
+
 （\* 该接口目前为 1.0 版本，后期会增加其复杂度，但是接口规范不会变。）
 
 ## License
