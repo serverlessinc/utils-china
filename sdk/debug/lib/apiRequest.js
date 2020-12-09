@@ -49,11 +49,15 @@ ApiRequest.prototype.request = async function (action, params) {
 };
 
 ApiRequest.prototype.startDebugging = async function (params) {
-  return this.request('StartDebugging', params);
+  return this.request('StartDebugMode', params);
+};
+
+ApiRequest.prototype.buildDebugConnection = async function (params) {
+  return this.request('BuildDebugConnection', params);
 };
 
 ApiRequest.prototype.stopDebugging = async function (params) {
-  return this.request('StopDebugging', params);
+  return this.request('StopDebugMode', params);
 };
 
 ApiRequest.prototype.getDebuggingInfo = async function (params) {
@@ -70,7 +74,7 @@ ApiRequest.prototype.ensureFunctionState = async function (params) {
   let status = await queryFunctionState();
   while (status !== 'Active') {
     status = await queryFunctionState();
-    if (Date.now() - functionStatePollingStartTime > 60000) {
+    if (Date.now() - functionStatePollingStartTime > 120000) {
       break;
     }
   }
@@ -78,19 +82,33 @@ ApiRequest.prototype.ensureFunctionState = async function (params) {
 };
 
 ApiRequest.prototype.ensureDebuggingState = async function (params) {
-  const queryDebuggingState = async () => {
-    const { Response = {} } = (await this.request('GetDebuggingInfo', params)) || {};
-    return Response.Status;
-  };
   const debugStatePollingStartTime = new Date().getTime();
-  let status = await queryDebuggingState();
-  while (status !== 'Active') {
-    status = await queryDebuggingState();
-    if (Date.now() - debugStatePollingStartTime > 60000) {
+  let response = await this.getDebuggingInfo(params);
+  let status = response.Status;
+  let mode = response.Mode;
+  while (mode !== 'DebugOn' && status !== 'Active') {
+    response = await this.getDebuggingInfo(params);
+    status = response.Status;
+    mode = response.Mode;
+    if (Date.now() - debugStatePollingStartTime > 120000) {
       break;
     }
   }
-  return;
+  return response;
+};
+
+ApiRequest.prototype.ensureDebuggingMode = async function (params) {
+  const debugStatePollingStartTime = new Date().getTime();
+  let response = await this.getDebuggingInfo(params);
+  let mode = response.Mode;
+  while (mode !== 'DebugOn') {
+    response = await this.queryDebuggingInfo(params);
+    mode = response.Mode;
+    if (Date.now() - debugStatePollingStartTime > 120000) {
+      break;
+    }
+  }
+  return response;
 };
 
 module.exports = ApiRequest;

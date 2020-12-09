@@ -14,27 +14,30 @@ RemoteDebug.prototype.remoteDebug = async function (cliCallback) {
   try {
     await this.request.ensureFunctionState();
     await this.request.startDebugging();
-    await this.request.ensureDebuggingState();
+    await this.request.ensureDebuggingMode();
+    await this.request.ensureFunctionState();
+    await this.request.buildDebugConnection();
+    const debuggingInfo = await this.request.ensureDebuggingState();
     const {
       DebuggingInfo: { Url, Token },
-    } = await this.request.getDebuggingInfo();
+    } = debuggingInfo;
     if (!Url || !Token) {
-      throw Error('Get debugging info error: the remote Url or Token does not exist.');
+      throw Error('调试开启失败：接口未正常返回远程连接信息。请尝试重新开启');
     }
     this.client = new WshubClient({ Url, Token });
     try {
       await this.client.forwardDebug();
-      cliCallback('Debugging listening on ws://127.0.0.1:9222.');
-      cliCallback('For help see https://nodejs.org/en/docs/inspector.');
+      cliCallback('远程调试链接：ws://127.0.0.1:9222');
+      cliCallback('更多信息请参考：https://nodejs.org/en/docs/inspector');
       cliCallback(
-        'Please open chorme, and visit chrome://inspect, click [Open dedicated DevTools for Node] to debug your code.'
+        '请打开 Chrome 浏览器，地址栏访问 chrome://inspect, 点击 [Open dedicated DevTools for Node] 开始调试代码'
       );
     } catch (e) {
-      cliCallback(`Debug init error: ${e.message || JSON.stringify(e)}`, {
+      cliCallback(`调试开启失败: ${e.message || JSON.stringify(e)}`, {
         type: 'error',
       });
     }
-    cliCallback('--------------------- The realtime log ---------------------');
+    cliCallback('--------------------- 实时日志 ---------------------');
     await this.client.forwardLog(cliCallback.stdout);
   } catch (e) {
     cliCallback(e.message, { type: 'error' });
@@ -52,28 +55,31 @@ RemoteDebug.prototype.standardRemoteDebug = async function (option) {
   logger = logger || function () {};
   await this.request.ensureFunctionState();
   await this.request.startDebugging();
-  await this.request.ensureDebuggingState();
+  await this.request.ensureDebuggingMode();
+  await this.request.ensureFunctionState();
+  await this.request.buildDebugConnection();
+  const debuggingInfo = await this.request.ensureDebuggingState();
   const {
     DebuggingInfo: { Url, Token },
-  } = await this.request.getDebuggingInfo();
+  } = debuggingInfo;
   if (!Url || !Token) {
-    throw Error('Get debugging info error: the remote Url or Token does not exist.');
+    throw Error('调试开启失败：接口未正常返回远程连接信息。请尝试重新开启');
   }
   this.client = new WshubClient({ Url, Token });
   try {
     const ret = await this.client.forwardDebug();
-    logger('Debugging listening on ws://127.0.0.1:9222.');
-    logger('For help see https://nodejs.org/en/docs/inspector.');
+    logger('远程调试链接：ws://127.0.0.1:9222');
+    logger('更多信息请参考：https://nodejs.org/en/docs/inspector');
     logger(
-      'Please open chorme, and visit chrome://inspect, click [Open dedicated DevTools for Node] to debug your code.'
+      '请打开 Chrome 浏览器，地址栏访问 chrome://inspect, 点击 [Open dedicated DevTools for Node] 开始调试代码'
     );
     if (stdout) {
-      logger('--------------------- The realtime log ---------------------');
+      logger('--------------------- 实时日志 ---------------------');
       await this.client.forwardLog(stdout);
     }
     return ret;
   } catch (e) {
-    logger('Debug init error. Please confirm if the local port 9222 is used');
+    logger('调试开启失败：请确认本地的9222端口是否被占用。');
     throw e;
   }
 };
