@@ -58,7 +58,7 @@ class Serverless {
     return await handler(params);
   }
 
-  static async doRequest(action, params) {
+  static async doRequest(action, params, options = {}) {
     const proxyOrigin =
       params.Region === 'ap-shanghai'
         ? 'https://service-k6qwj4qx-1300862921.sh.apigw.tencentcs.com/release/listcompversion-dev'
@@ -66,6 +66,7 @@ class Serverless {
 
     const optional = {
       timeout: 30 * 1000,
+      headers: options.Headers || {}
     };
 
     params.Action = action;
@@ -279,7 +280,11 @@ class Serverless {
       TraceId: options.traceId ? options.traceId : null,
     };
 
-    return Serverless.doRequest('GetPackage', params);
+    const opts = {
+      Headers: options.headers || {}
+    }
+
+    return Serverless.doRequest('GetPackage', params, opts);
   }
 
   async preparePublishPackage(body) {
