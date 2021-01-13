@@ -1637,4 +1637,5 @@ module.exports = {
   GetApplicationStatusRequest,
   GetApplicationStatusResponse,
   GetCacheFileUrlsRequest,
+  GetCacheFileUrlsResponse
 };
