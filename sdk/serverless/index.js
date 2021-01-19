@@ -198,6 +198,23 @@ class Serverless {
     return this._call('GetUploadUrls', req);
   }
 
+  async getCacheFileUrls(data) {
+    const { orgUid, appName, stageName, instanceName } = data;
+    assert(orgUid, 'The request is missing a required parameter orgUid');
+    assert(appName, 'The request is missing a required parameter appName');
+    assert(stageName, 'The request is missing a required parameter stageName');
+    assert(instanceName, 'The request is missing a required parameter instanceName');
+
+    const req = new SlsModels.GetCacheFileUrlsRequest();
+    req.Body = JSON.stringify(data);
+    req.OrgUid = orgUid;
+    req.AppName = appName;
+    req.StageName = stageName;
+    req.InstanceName = instanceName;
+    req.TraceId = 'traceId' in this.options ? this.options.traceId : null;
+    return this._call('GetCacheFileUrls', req);
+  }
+
   async runComponent(data) {
     const { instance, method } = data;
     assert(instance, 'The request is missing a required parameter instance');

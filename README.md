@@ -494,6 +494,30 @@ ret = await Serverless.listPackages(
 );
 ```
 
+### 文件增量变更接口
+
+```javascript
+const { Serverless } = require('@serverless/utils-china');
+
+const sls = new Serverless({
+  appid: app_id,
+  secret_id: secret_id,
+  secret_key: secret_key,
+  options: {
+    region: 'ap-guangzhou',
+    token: 'xxxxxx',
+  },
+});
+
+sls.getCacheFileUrls({
+  orgUid,
+  orgName,
+  appName,
+  stageName,
+  instanceName,
+});
+```
+
 ### Scf 监控接口
 
 ```javascript

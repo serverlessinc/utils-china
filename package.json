@@ -1,7 +1,7 @@
 {
   "name": "@serverless/utils-china",
   "description": "Tencent Cloud Tools For Serverless Framewoek",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "publishConfig": {
     "access": "public"
   },
