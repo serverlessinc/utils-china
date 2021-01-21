@@ -523,6 +523,61 @@ class GetUploadUrlsRequest extends AbstractModel {
 }
 
 /**
+ * GetCacheFileUrls请求参数结构体
+ * @class
+ */
+class GetCacheFileUrlsRequest extends AbstractModel {
+  constructor() {
+    super();
+
+    /**
+     * JSON stringified object
+     * @type {string || null}
+     */
+    this.Body = null;
+
+    /**
+     * JSON stringified object
+     * @type {string || null}
+     */
+    this.OrgUid = null;
+
+    /**
+     * App Name
+     * @type {string || null}
+     */
+    this.AppName = null;
+
+    /**
+     * Stage Name
+     * @type {string || null}
+     */
+    this.StageName = null;
+
+    /**
+     * Instance Name
+     * @type {string || null}
+     */
+    this.InstanceName = null;
+  }
+
+  /**
+   * @private
+   */
+  deserialize(params) {
+    if (!params) {
+      return;
+    }
+    this.Body = 'Body' in params ? params.Body : null;
+    this.OrgUid = 'OrgUid' in params ? params.OrgUid : null;
+    this.AppName = 'AppName' in params ? params.AppName : null;
+    this.StageName = 'StageName' in params ? params.StageName : null;
+    this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+    this.TraceId = 'TraceId' in params ? params.TraceId : null;
+  }
+}
+
+/**
  * RunComponent请求参数结构体
  * @class
  */
@@ -649,6 +704,39 @@ class RunFinishComponentResponse extends AbstractModel {
  * @class
  */
 class PrePublishComponentResponse extends AbstractModel {
+  constructor() {
+    super();
+
+    /**
+     * JSON stringified object containing response payload.
+     * @type {string || null}
+     */
+    this.Body = null;
+
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * @type {string || null}
+     */
+    this.RequestId = null;
+  }
+
+  /**
+   * @private
+   */
+  deserialize(params) {
+    if (!params) {
+      return;
+    }
+    this.Body = 'Body' in params ? params.Body : null;
+    this.RequestId = 'RequestId' in params ? params.RequestId : null;
+  }
+}
+
+/**
+ * GetCacheFileUrls返回参数结构体
+ * @class
+ */
+class GetCacheFileUrlsResponse extends AbstractModel {
   constructor() {
     super();
 
@@ -1548,4 +1636,6 @@ module.exports = {
   GetDeploymentStatusRequest,
   GetApplicationStatusRequest,
   GetApplicationStatusResponse,
+  GetCacheFileUrlsRequest,
+  GetCacheFileUrlsResponse,
 };
