@@ -66,7 +66,7 @@ class Serverless {
 
     const optional = {
       timeout: 30 * 1000,
-      headers: options.Headers || {}
+      headers: options.Headers || {},
     };
 
     params.Action = action;
@@ -281,8 +281,8 @@ class Serverless {
     };
 
     const opts = {
-      Headers: options.headers || {}
-    }
+      Headers: options.headers || {},
+    };
 
     return Serverless.doRequest('GetPackage', params, opts);
   }
