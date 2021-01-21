@@ -511,7 +511,6 @@ const sls = new Serverless({
 
 sls.getCacheFileUrls({
   orgUid,
-  orgName,
   appName,
   stageName,
   instanceName,
