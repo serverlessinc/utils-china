@@ -135,7 +135,7 @@ class Login {
         await this.sleep(1000);
       }
       if (loginFlag === false && timeout === 0) {
-        console.log('Login timeout. Please login again! ');
+        console.log('登录超时，请重试');
         process.exit(0);
       }
       const configure = {
@@ -147,7 +147,7 @@ class Login {
         expired: loginData.expired,
         uuid,
       };
-      console.log('Login successful for TencentCloud. ');
+      console.log('腾讯云 登录成功');
       return configure;
     } catch (e) {
       console.log(e);
