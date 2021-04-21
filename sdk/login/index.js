@@ -135,7 +135,7 @@ class Login {
         await this.sleep(1000);
       }
       if (loginFlag === false && timeout === 0) {
-        console.log('登录失败，请重试');
+        console.log('登录超时，请重试');
         process.exit(0);
       }
       const configure = {
