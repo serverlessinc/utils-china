@@ -1,6 +1,6 @@
 'use strict';
 
-const http = require('http');
+const got = require('got');
 const os = require('os');
 const { checkEnvUrl } = require('../utils');
 
@@ -19,35 +19,14 @@ class GetUserAuthInfo {
       pid: process.pid,
       project: inputs.project,
     };
-    const requestData = JSON.stringify(data);
 
-    const options = {
-      host: checkEnvUrl(apiBaseUrl, devApiBaseUrl),
-      port: '80',
-      path: '/release/getUserAuthInfo',
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    };
-
-    return new Promise((resolve, reject) => {
-      const req = http.request(options, (res) => {
-        res.setEncoding('utf8');
-        res.on('data', (chunk) => {
-          resolve(JSON.parse(chunk));
-        });
-      });
-
-      req.on('error', (e) => {
-        reject(e.message);
-      });
-
-      // write data to request body
-      req.write(requestData);
-
-      req.end();
+    const url = `https://${checkEnvUrl(apiBaseUrl, devApiBaseUrl)}/release/getUserAuthInfo`;
+    const { body } = await got.post(url, {
+      json: data,
+      responseType: 'json',
     });
+
+    return body;
   }
 }
 
