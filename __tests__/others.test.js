@@ -1,3 +1,5 @@
+'use strict';
+
 const { IsInChina, Environment } = require('../sdk/others');
 
 describe('Others', () => {

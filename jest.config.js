@@ -1,4 +1,8 @@
+'use strict';
+
 const { join } = require('path');
+
+// eslint-disable-next-line
 require('dotenv').config({ path: join(__dirname, '.env.test') });
 
 const config = {

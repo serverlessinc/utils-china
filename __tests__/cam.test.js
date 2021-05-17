@@ -1,3 +1,5 @@
+'use strict';
+
 const cam = require('../sdk/cam');
 
 describe('cam', () => {

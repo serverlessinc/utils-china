@@ -1,3 +1,5 @@
+'use strict';
+
 const account = require('../sdk/account');
 
 describe('account', () => {
