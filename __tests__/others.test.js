@@ -18,7 +18,7 @@ describe('Others', () => {
   });
 
   test('Environment: GLOBAL_ACCELERATOR_NA=true', async () => {
-    process.env.GLOBAL_ACCELERATOR_NA = true
+    process.env.GLOBAL_ACCELERATOR_NA = true;
     const client = new Environment();
     const res = await client.useGlobalStore();
 
