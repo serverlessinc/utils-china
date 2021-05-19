@@ -4,7 +4,7 @@ const { Capi } = require('@tencent-sdk/capi');
 
 async function isRealNameVerified({ secretId, secretKey, token }) {
   const client = new Capi({
-    debug: true,
+    debug: false,
     host: 'account.tencentcloudapi.com',
     Version: '2018-12-25',
     Region: 'ap-guangzhou',
@@ -17,7 +17,6 @@ async function isRealNameVerified({ secretId, secretKey, token }) {
     const { Response } = await client.request({
       Action: 'GetAuthStatus',
     });
-    console.log(Response);
     return Number(Response.Status) === 3;
   } catch (e) {
     console.log(e);

@@ -1,7 +1,7 @@
 {
   "name": "@serverless/utils-china",
   "description": "Tencent Cloud Tools For Serverless Framewoek",
-  "version": "1.0.15",
+  "version": "1.1.0",
   "publishConfig": {
     "access": "public"
   },
@@ -13,10 +13,11 @@
   "repository": "serverlessinc/utils-china",
   "scripts": {
     "lint": "eslint .",
+    "test": "jest",
     "lint:updated": "pipe-git-updated --ext=js -- eslint --ignore-path .gitignore",
-    "prettier-check": "prettier -c --ignore-path .gitignore \"**/*.{css,html,js,json,md,yaml,yml}\"",
+    "prettier-check": "prettier -c --ignore-path .gitignore '**/*.{css,html,js,json,md,yaml,yml}'",
     "prettier-check:updated": "pipe-git-updated --ext=css --ext=html --ext=js --ext=json --ext=md --ext=yaml --ext=yml -- prettier -c",
-    "prettify": "prettier --write --ignore-path .gitignore \"**/*.{css,html,js,json,md,yaml,yml}\"",
+    "prettify": "prettier --write --ignore-path .gitignore '**/*.{css,html,js,json,md,yaml,yml}'",
     "prettify:updated": "pipe-git-updated --ext=css --ext=html --ext=js --ext=json --ext=md --ext=yaml --ext=yml -- prettier --write"
   },
   "author": "Tencent Cloud, Inc.",
@@ -35,11 +36,12 @@
     ]
   },
   "dependencies": {
-    "@tencent-sdk/capi": "^1.1.2",
+    "@tencent-sdk/capi": "^1.1.8",
     "dijkstrajs": "^1.0.1",
     "dot-qs": "0.2.0",
     "duplexify": "^4.1.1",
     "end-of-stream": "^1.4.4",
+    "got": "^11.8.2",
     "https-proxy-agent": "^5.0.0",
     "kafka-node": "^5.0.0",
     "protobufjs": "^6.9.0",
@@ -51,11 +53,12 @@
     "@serverless/eslint-config": "^3.0.0",
     "@ygkit/secure": "^0.0.3",
     "babel-eslint": "9.0.0",
-    "dotenv": "^8.2.0",
+    "dotenv": "^9.0.2",
     "eslint": "^7.0.0",
     "eslint-plugin-import": "^2.20.2",
     "git-list-updated": "^1.2.1",
     "husky": "^4.2.5",
+    "jest": "^26.6.3",
     "lint-staged": "^10.2.6",
     "prettier": "^2.0.5"
   },
