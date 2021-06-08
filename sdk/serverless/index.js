@@ -366,51 +366,6 @@ class Serverless {
     req.Body = body;
     return await this._call('DeployApplication', req);
   }
-
-  // async unpublishComponentVersion(name, version) {
-  //     const componentVersion = {
-  //         Name: name,
-  //         ComponentVersion: version
-  //     }
-  //     const req = new SlsModels.UnpublishComponentVersionRequest();
-  //     req.fromJsonString(JSON.stringify(componentVersion));
-  //     return await this._call('UnpublishComponentVersion', req);
-  // }
-
-  // async publishComponentVersion({name, componentVersion, org, author, description, keywords, license}) {
-
-  //     const camRole = new BindRole.BindRole({
-  //         SecretId: this.secret_id,
-  //         SecretKey: this.secret_key,
-  //         token: this.options.token
-  //     });
-
-  //     camRole.bindSLSQcsRole();
-
-  //     const pubComVersionRequest = {
-  //         Name: name,
-  //         ComponentVersion: componentVersion,
-  //         Org: org,
-  //         Author: author,
-  //         Description: description,
-  //         Keywords: keywords,
-  //         License: license
-  //     }
-
-  //     const req = new SlsModels.PublishComponentVersionRequest()
-  //     req.fromJsonString(JSON.stringify(pubComVersionRequest));
-  //     return await this._call('PublishComponentVersion', req);
-  // }
-
-  // async fetchComponentMetadata(name, version) {
-  //     const componentVersion = {
-  //         Name: name,
-  //         ComponentVersion: version
-  //     }
-  //     const req = new SlsModels.FetchComponentMetadataRequest();
-  //     req.fromJsonString(JSON.stringify(componentVersion));
-  //     return await this._call('FetchComponentMetadata', req);
-  // }
 }
 
 module.exports = Serverless;

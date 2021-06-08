@@ -8,6 +8,11 @@ const checkEnvUrl = (apiBaseUrl, devApiBaseUrl) => {
   return devApiBaseUrl;
 };
 
+const getType = (obj) => {
+  return Object.prototype.toString.call(obj).slice(8, -1);
+};
+
 module.exports = {
   checkEnvUrl,
+  getType,
 };
