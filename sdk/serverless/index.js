@@ -61,6 +61,7 @@ class Serverless {
           Response.RequestId
         );
         tcError.code = Response.Error.Code;
+        throw tcError;
       }
 
       return Response;
