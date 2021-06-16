@@ -132,6 +132,11 @@ class Serverless {
       Action: api,
       ...params,
     });
+    if (Response.Error) {
+      const tcError = new TencentCloudSDKHttpException(Response.Error.Message, Response.RequestId);
+      tcError.code = Response.Error.Code;
+      throw tcError;
+    }
     return Response;
   }
 
