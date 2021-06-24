@@ -590,12 +590,6 @@ class PushEventsRequest extends AbstractModel {
      * @type {string || null}
      */
     this.Body = null;
-
-    /**
-     * Event
-     * @type {string || null}
-     */
-    this.Event = null;
   }
 
   /**
@@ -606,7 +600,6 @@ class PushEventsRequest extends AbstractModel {
       return;
     }
     this.Body = 'Body' in params ? params.Body : null;
-    this.Event = 'Event' in params ? params.Event : null;
     this.TraceId = 'TraceId' in params ? params.TraceId : null;
   }
 }

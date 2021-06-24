@@ -234,12 +234,8 @@ class Serverless {
   }
 
   async pushEvents(data) {
-    const { event } = data;
-    assert(event, 'The request is missing a required parameter event');
-
     const req = {};
     req.Body = JSON.stringify(data);
-    req.Event = event;
     req.TraceId = 'traceId' in this.options ? this.options.traceId : null;
     return this._call('PushEvents', req);
   }
