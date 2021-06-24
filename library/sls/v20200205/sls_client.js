@@ -40,6 +40,7 @@ const DeployApplicationResponse = models.DeployApplicationResponse;
 const GetApplicationStatusResponse = models.GetApplicationStatusResponse;
 const GetDeploymentStatusResponse = models.GetDeploymentStatusResponse;
 const GetCacheFileUrlsResponse = models.GetCacheFileUrlsResponse;
+const PushEventsResponse = models.PushEventsResponse;
 
 /**
  * sls client
@@ -96,7 +97,7 @@ class SlsClient extends AbstractClient {
   }
 
   /**
-   * 用户获取Component Instance的预签名URL链接
+   * 用户获取文件缓存URL链接
    * @param {GetCacheFileUrlsRequest} req
    * @param {function(string, GetCacheFileUrlsResponse):void} cb
    * @public
@@ -104,6 +105,17 @@ class SlsClient extends AbstractClient {
   GetCacheFileUrls(req, cb) {
     const resp = new GetCacheFileUrlsResponse();
     this.request('GetCacheFileUrls', req, resp, cb);
+  }
+
+  /**
+   * 用户获取文件缓存URL链接
+   * @param {PushEventsRequest} req
+   * @param {function(string, PushEventsResponse):void} cb
+   * @public
+   */
+  PushEvents(req, cb) {
+    const resp = new PushEventsResponse();
+    this.request('PushEvents', req, resp, cb);
   }
 
   /**

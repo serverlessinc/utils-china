@@ -80,4 +80,13 @@ describe('serverless', () => {
     expect(getType(res.RequestId)).toBe('String');
     expect(JSON.parse(res.Body).body).toBeDefined();
   });
+
+  test('pushEvents', async () => {
+    const res = await sls.pushEvents({
+      event: 'service.action.succeeded',
+    });
+    expect(getType(res.Body)).toBe('String');
+    expect(getType(res.RequestId)).toBe('String');
+    expect(JSON.parse(res.Body).body).toBeDefined();
+  });
 });
