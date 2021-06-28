@@ -89,4 +89,28 @@ describe('serverless', () => {
     expect(getType(res.RequestId)).toBe('String');
     expect(JSON.parse(res.Body).body).toBeDefined();
   });
+
+  test('invokeInstance', async () => {
+    const res = await sls.invokeInstance({
+      orgName: appId,
+      appName: 'appDemo',
+      stageName: 'dev',
+      instanceName: 'wordpressDemo',
+    });
+    expect(getType(res.Body)).toBe('String');
+    expect(getType(res.RequestId)).toBe('String');
+    expect(JSON.parse(res.Body).body).toBeDefined();
+  });
+
+  test('getInstanceLogs', async () => {
+    const res = await sls.getInstanceLogs({
+      orgName: appId,
+      appName: 'appDemo',
+      stageName: 'dev',
+      instanceName: 'wordpressDemo',
+    });
+    expect(getType(res.Body)).toBe('String');
+    expect(getType(res.RequestId)).toBe('String');
+    expect(JSON.parse(res.Body).body).toBeDefined();
+  });
 });

@@ -605,6 +605,130 @@ class PushEventsRequest extends AbstractModel {
 }
 
 /**
+ * InvokeInstance请求参数结构体
+ * @class
+ */
+class InvokeInstanceRequest extends AbstractModel {
+  constructor() {
+    super();
+
+    /**
+     * JSON stringified object
+     * @type {string || null}
+     */
+    this.Body = null;
+
+    /**
+     * JSON stringified object
+     * @type {string || null}
+     */
+    this.OrgName = null;
+
+    /**
+     * App Name
+     * @type {string || null}
+     */
+    this.AppName = null;
+
+    /**
+     * Stage Name
+     * @type {string || null}
+     */
+    this.StageName = null;
+
+    /**
+     * Instance Name
+     * @type {string || null}
+     */
+    this.InstanceName = null;
+
+    /**
+     * Options
+     * @type {string || null}
+     */
+    this.Options = null;
+  }
+
+  /**
+   * @private
+   */
+  deserialize(params) {
+    if (!params) {
+      return;
+    }
+    this.Body = 'Body' in params ? params.Body : null;
+    this.OrgName = 'OrgName' in params ? params.OrgName : null;
+    this.AppName = 'AppName' in params ? params.AppName : null;
+    this.StageName = 'StageName' in params ? params.StageName : null;
+    this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+    this.Options = 'Options' in params ? params.Options : null;
+    this.TraceId = 'TraceId' in params ? params.TraceId : null;
+  }
+}
+
+/**
+ * GetInstanceLogs请求参数结构体
+ * @class
+ */
+class GetInstanceLogsRequest extends AbstractModel {
+  constructor() {
+    super();
+
+    /**
+     * JSON stringified object
+     * @type {string || null}
+     */
+    this.Body = null;
+
+    /**
+     * JSON stringified object
+     * @type {string || null}
+     */
+    this.OrgName = null;
+
+    /**
+     * App Name
+     * @type {string || null}
+     */
+    this.AppName = null;
+
+    /**
+     * Stage Name
+     * @type {string || null}
+     */
+    this.StageName = null;
+
+    /**
+     * Instance Name
+     * @type {string || null}
+     */
+    this.InstanceName = null;
+
+    /**
+     * Options
+     * @type {string || null}
+     */
+    this.Options = null;
+  }
+
+  /**
+   * @private
+   */
+  deserialize(params) {
+    if (!params) {
+      return;
+    }
+    this.Body = 'Body' in params ? params.Body : null;
+    this.OrgName = 'OrgName' in params ? params.OrgName : null;
+    this.AppName = 'AppName' in params ? params.AppName : null;
+    this.StageName = 'StageName' in params ? params.StageName : null;
+    this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+    this.Options = 'Options' in params ? params.Options : null;
+    this.TraceId = 'TraceId' in params ? params.TraceId : null;
+  }
+}
+
+/**
  * RunComponent请求参数结构体
  * @class
  */
@@ -797,6 +921,72 @@ class GetCacheFileUrlsResponse extends AbstractModel {
  * @class
  */
 class PushEventsResponse extends AbstractModel {
+  constructor() {
+    super();
+
+    /**
+     * JSON stringified object containing response payload.
+     * @type {string || null}
+     */
+    this.Body = null;
+
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * @type {string || null}
+     */
+    this.RequestId = null;
+  }
+
+  /**
+   * @private
+   */
+  deserialize(params) {
+    if (!params) {
+      return;
+    }
+    this.Body = 'Body' in params ? params.Body : null;
+    this.RequestId = 'RequestId' in params ? params.RequestId : null;
+  }
+}
+
+/**
+ * InvokeInstance返回参数结构体
+ * @class
+ */
+class InvokeInstanceResponse extends AbstractModel {
+  constructor() {
+    super();
+
+    /**
+     * JSON stringified object containing response payload.
+     * @type {string || null}
+     */
+    this.Body = null;
+
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * @type {string || null}
+     */
+    this.RequestId = null;
+  }
+
+  /**
+   * @private
+   */
+  deserialize(params) {
+    if (!params) {
+      return;
+    }
+    this.Body = 'Body' in params ? params.Body : null;
+    this.RequestId = 'RequestId' in params ? params.RequestId : null;
+  }
+}
+
+/**
+ * GetInstanceLogs返回参数结构体
+ * @class
+ */
+class GetInstanceLogsResponse extends AbstractModel {
   constructor() {
     super();
 
@@ -1700,4 +1890,8 @@ module.exports = {
   GetCacheFileUrlsResponse,
   PushEventsRequest,
   PushEventsResponse,
+  InvokeInstanceRequest,
+  InvokeInstanceResponse,
+  GetInstanceLogsRequest,
+  GetInstanceLogsResponse,
 };

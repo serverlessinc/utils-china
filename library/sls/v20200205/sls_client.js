@@ -41,6 +41,8 @@ const GetApplicationStatusResponse = models.GetApplicationStatusResponse;
 const GetDeploymentStatusResponse = models.GetDeploymentStatusResponse;
 const GetCacheFileUrlsResponse = models.GetCacheFileUrlsResponse;
 const PushEventsResponse = models.PushEventsResponse;
+const InvokeInstanceResponse = models.InvokeInstanceResponse;
+const GetInstanceLogsResponse = models.GetInstanceLogsResponse;
 
 /**
  * sls client
@@ -116,6 +118,28 @@ class SlsClient extends AbstractClient {
   PushEvents(req, cb) {
     const resp = new PushEventsResponse();
     this.request('PushEvents', req, resp, cb);
+  }
+
+  /**
+   * 调用实例
+   * @param {InvokeInstanceRequest} req
+   * @param {function(string, InvokeInstanceResponse):void} cb
+   * @public
+   */
+  InvokeInstance(req, cb) {
+    const resp = new InvokeInstanceResponse();
+    this.request('InvokeInstance', req, resp, cb);
+  }
+
+  /**
+   * 获取日志
+   * @param {GetInstanceLogsRequest} req
+   * @param {function(string, GetInstanceLogsResponse):void} cb
+   * @public
+   */
+  GetInstanceLogs(req, cb) {
+    const resp = new GetInstanceLogsResponse();
+    this.request('GetInstanceLogs', req, resp, cb);
   }
 
   /**
