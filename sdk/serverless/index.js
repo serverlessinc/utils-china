@@ -247,7 +247,7 @@ class Serverless {
   }
 
   async invokeInstance(data) {
-    const { orgName, appName, stageName, instanceName, options } = data;
+    const { orgName, appName, stageName, instanceName } = data;
     assert(orgName, 'The request is missing a required parameter orgName');
     assert(appName, 'The request is missing a required parameter appName');
     assert(stageName, 'The request is missing a required parameter stageName');
@@ -255,17 +255,12 @@ class Serverless {
 
     const req = {};
     req.Body = JSON.stringify(data);
-    req.OrgName = orgName;
-    req.AppName = appName;
-    req.StageName = stageName;
-    req.InstanceName = instanceName;
-    req.Options = options;
     req.TraceId = 'traceId' in this.options ? this.options.traceId : null;
     return this._call('InvokeInstance', req);
   }
 
   async getInstanceLogs(data) {
-    const { orgName, appName, stageName, instanceName, options } = data;
+    const { orgName, appName, stageName, instanceName } = data;
     assert(orgName, 'The request is missing a required parameter orgName');
     assert(appName, 'The request is missing a required parameter appName');
     assert(stageName, 'The request is missing a required parameter stageName');
@@ -273,11 +268,6 @@ class Serverless {
 
     const req = {};
     req.Body = JSON.stringify(data);
-    req.OrgName = orgName;
-    req.AppName = appName;
-    req.StageName = stageName;
-    req.InstanceName = instanceName;
-    req.Options = options;
     req.TraceId = 'traceId' in this.options ? this.options.traceId : null;
     return this._call('GetInstanceLogs', req);
   }

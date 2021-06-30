@@ -619,34 +619,10 @@ class InvokeInstanceRequest extends AbstractModel {
     this.Body = null;
 
     /**
-     * JSON stringified object
+     * TraceId
      * @type {string || null}
      */
-    this.OrgName = null;
-
-    /**
-     * App Name
-     * @type {string || null}
-     */
-    this.AppName = null;
-
-    /**
-     * Stage Name
-     * @type {string || null}
-     */
-    this.StageName = null;
-
-    /**
-     * Instance Name
-     * @type {string || null}
-     */
-    this.InstanceName = null;
-
-    /**
-     * Options
-     * @type {string || null}
-     */
-    this.Options = null;
+    this.TraceId = null;
   }
 
   /**
@@ -657,11 +633,6 @@ class InvokeInstanceRequest extends AbstractModel {
       return;
     }
     this.Body = 'Body' in params ? params.Body : null;
-    this.OrgName = 'OrgName' in params ? params.OrgName : null;
-    this.AppName = 'AppName' in params ? params.AppName : null;
-    this.StageName = 'StageName' in params ? params.StageName : null;
-    this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
-    this.Options = 'Options' in params ? params.Options : null;
     this.TraceId = 'TraceId' in params ? params.TraceId : null;
   }
 }
@@ -681,34 +652,10 @@ class GetInstanceLogsRequest extends AbstractModel {
     this.Body = null;
 
     /**
-     * JSON stringified object
+     * TraceId
      * @type {string || null}
      */
-    this.OrgName = null;
-
-    /**
-     * App Name
-     * @type {string || null}
-     */
-    this.AppName = null;
-
-    /**
-     * Stage Name
-     * @type {string || null}
-     */
-    this.StageName = null;
-
-    /**
-     * Instance Name
-     * @type {string || null}
-     */
-    this.InstanceName = null;
-
-    /**
-     * Options
-     * @type {string || null}
-     */
-    this.Options = null;
+    this.TraceId = null;
   }
 
   /**
@@ -719,11 +666,6 @@ class GetInstanceLogsRequest extends AbstractModel {
       return;
     }
     this.Body = 'Body' in params ? params.Body : null;
-    this.OrgName = 'OrgName' in params ? params.OrgName : null;
-    this.AppName = 'AppName' in params ? params.AppName : null;
-    this.StageName = 'StageName' in params ? params.StageName : null;
-    this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
-    this.Options = 'Options' in params ? params.Options : null;
     this.TraceId = 'TraceId' in params ? params.TraceId : null;
   }
 }
