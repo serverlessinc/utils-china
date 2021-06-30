@@ -233,6 +233,45 @@ class Serverless {
     return this._call('GetCacheFileUrls', req);
   }
 
+  async pushEvents(data) {
+    const { orgUid, appName, stageName, instanceName } = data;
+    assert(orgUid, 'The request is missing a required parameter orgUid');
+    assert(appName, 'The request is missing a required parameter appName');
+    assert(stageName, 'The request is missing a required parameter stageName');
+    assert(instanceName, 'The request is missing a required parameter instanceName');
+
+    const req = {};
+    req.Body = JSON.stringify(data);
+    req.TraceId = 'traceId' in this.options ? this.options.traceId : null;
+    return this._call('PushEvents', req);
+  }
+
+  async invokeInstance(data) {
+    const { orgName, appName, stageName, instanceName } = data;
+    assert(orgName, 'The request is missing a required parameter orgName');
+    assert(appName, 'The request is missing a required parameter appName');
+    assert(stageName, 'The request is missing a required parameter stageName');
+    assert(instanceName, 'The request is missing a required parameter instanceName');
+
+    const req = {};
+    req.Body = JSON.stringify(data);
+    req.TraceId = 'traceId' in this.options ? this.options.traceId : null;
+    return this._call('InvokeInstance', req);
+  }
+
+  async getInstanceLogs(data) {
+    const { orgName, appName, stageName, instanceName } = data;
+    assert(orgName, 'The request is missing a required parameter orgName');
+    assert(appName, 'The request is missing a required parameter appName');
+    assert(stageName, 'The request is missing a required parameter stageName');
+    assert(instanceName, 'The request is missing a required parameter instanceName');
+
+    const req = {};
+    req.Body = JSON.stringify(data);
+    req.TraceId = 'traceId' in this.options ? this.options.traceId : null;
+    return this._call('GetInstanceLogs', req);
+  }
+
   async runComponent(data) {
     const { instance, method } = data;
     assert(instance, 'The request is missing a required parameter instance');

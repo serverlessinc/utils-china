@@ -578,6 +578,99 @@ class GetCacheFileUrlsRequest extends AbstractModel {
 }
 
 /**
+ * PushEvents请求参数结构体
+ * @class
+ */
+class PushEventsRequest extends AbstractModel {
+  constructor() {
+    super();
+
+    /**
+     * JSON stringified object
+     * @type {string || null}
+     */
+    this.Body = null;
+  }
+
+  /**
+   * @private
+   */
+  deserialize(params) {
+    if (!params) {
+      return;
+    }
+    this.Body = 'Body' in params ? params.Body : null;
+    this.TraceId = 'TraceId' in params ? params.TraceId : null;
+  }
+}
+
+/**
+ * InvokeInstance请求参数结构体
+ * @class
+ */
+class InvokeInstanceRequest extends AbstractModel {
+  constructor() {
+    super();
+
+    /**
+     * JSON stringified object
+     * @type {string || null}
+     */
+    this.Body = null;
+
+    /**
+     * TraceId
+     * @type {string || null}
+     */
+    this.TraceId = null;
+  }
+
+  /**
+   * @private
+   */
+  deserialize(params) {
+    if (!params) {
+      return;
+    }
+    this.Body = 'Body' in params ? params.Body : null;
+    this.TraceId = 'TraceId' in params ? params.TraceId : null;
+  }
+}
+
+/**
+ * GetInstanceLogs请求参数结构体
+ * @class
+ */
+class GetInstanceLogsRequest extends AbstractModel {
+  constructor() {
+    super();
+
+    /**
+     * JSON stringified object
+     * @type {string || null}
+     */
+    this.Body = null;
+
+    /**
+     * TraceId
+     * @type {string || null}
+     */
+    this.TraceId = null;
+  }
+
+  /**
+   * @private
+   */
+  deserialize(params) {
+    if (!params) {
+      return;
+    }
+    this.Body = 'Body' in params ? params.Body : null;
+    this.TraceId = 'TraceId' in params ? params.TraceId : null;
+  }
+}
+
+/**
  * RunComponent请求参数结构体
  * @class
  */
@@ -737,6 +830,105 @@ class PrePublishComponentResponse extends AbstractModel {
  * @class
  */
 class GetCacheFileUrlsResponse extends AbstractModel {
+  constructor() {
+    super();
+
+    /**
+     * JSON stringified object containing response payload.
+     * @type {string || null}
+     */
+    this.Body = null;
+
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * @type {string || null}
+     */
+    this.RequestId = null;
+  }
+
+  /**
+   * @private
+   */
+  deserialize(params) {
+    if (!params) {
+      return;
+    }
+    this.Body = 'Body' in params ? params.Body : null;
+    this.RequestId = 'RequestId' in params ? params.RequestId : null;
+  }
+}
+
+/**
+ * PushEvents返回参数结构体
+ * @class
+ */
+class PushEventsResponse extends AbstractModel {
+  constructor() {
+    super();
+
+    /**
+     * JSON stringified object containing response payload.
+     * @type {string || null}
+     */
+    this.Body = null;
+
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * @type {string || null}
+     */
+    this.RequestId = null;
+  }
+
+  /**
+   * @private
+   */
+  deserialize(params) {
+    if (!params) {
+      return;
+    }
+    this.Body = 'Body' in params ? params.Body : null;
+    this.RequestId = 'RequestId' in params ? params.RequestId : null;
+  }
+}
+
+/**
+ * InvokeInstance返回参数结构体
+ * @class
+ */
+class InvokeInstanceResponse extends AbstractModel {
+  constructor() {
+    super();
+
+    /**
+     * JSON stringified object containing response payload.
+     * @type {string || null}
+     */
+    this.Body = null;
+
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * @type {string || null}
+     */
+    this.RequestId = null;
+  }
+
+  /**
+   * @private
+   */
+  deserialize(params) {
+    if (!params) {
+      return;
+    }
+    this.Body = 'Body' in params ? params.Body : null;
+    this.RequestId = 'RequestId' in params ? params.RequestId : null;
+  }
+}
+
+/**
+ * GetInstanceLogs返回参数结构体
+ * @class
+ */
+class GetInstanceLogsResponse extends AbstractModel {
   constructor() {
     super();
 
@@ -1638,4 +1830,10 @@ module.exports = {
   GetApplicationStatusResponse,
   GetCacheFileUrlsRequest,
   GetCacheFileUrlsResponse,
+  PushEventsRequest,
+  PushEventsResponse,
+  InvokeInstanceRequest,
+  InvokeInstanceResponse,
+  GetInstanceLogsRequest,
+  GetInstanceLogsResponse,
 };

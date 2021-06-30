@@ -40,6 +40,9 @@ const DeployApplicationResponse = models.DeployApplicationResponse;
 const GetApplicationStatusResponse = models.GetApplicationStatusResponse;
 const GetDeploymentStatusResponse = models.GetDeploymentStatusResponse;
 const GetCacheFileUrlsResponse = models.GetCacheFileUrlsResponse;
+const PushEventsResponse = models.PushEventsResponse;
+const InvokeInstanceResponse = models.InvokeInstanceResponse;
+const GetInstanceLogsResponse = models.GetInstanceLogsResponse;
 
 /**
  * sls client
@@ -96,7 +99,7 @@ class SlsClient extends AbstractClient {
   }
 
   /**
-   * 用户获取Component Instance的预签名URL链接
+   * 用户获取文件缓存URL链接
    * @param {GetCacheFileUrlsRequest} req
    * @param {function(string, GetCacheFileUrlsResponse):void} cb
    * @public
@@ -104,6 +107,39 @@ class SlsClient extends AbstractClient {
   GetCacheFileUrls(req, cb) {
     const resp = new GetCacheFileUrlsResponse();
     this.request('GetCacheFileUrls', req, resp, cb);
+  }
+
+  /**
+   * 推送用户操作事件
+   * @param {PushEventsRequest} req
+   * @param {function(string, PushEventsResponse):void} cb
+   * @public
+   */
+  PushEvents(req, cb) {
+    const resp = new PushEventsResponse();
+    this.request('PushEvents', req, resp, cb);
+  }
+
+  /**
+   * 调用实例
+   * @param {InvokeInstanceRequest} req
+   * @param {function(string, InvokeInstanceResponse):void} cb
+   * @public
+   */
+  InvokeInstance(req, cb) {
+    const resp = new InvokeInstanceResponse();
+    this.request('InvokeInstance', req, resp, cb);
+  }
+
+  /**
+   * 获取日志
+   * @param {GetInstanceLogsRequest} req
+   * @param {function(string, GetInstanceLogsResponse):void} cb
+   * @public
+   */
+  GetInstanceLogs(req, cb) {
+    const resp = new GetInstanceLogsResponse();
+    this.request('GetInstanceLogs', req, resp, cb);
   }
 
   /**
