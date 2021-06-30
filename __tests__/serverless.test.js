@@ -83,7 +83,9 @@ describe('serverless', () => {
 
   test('pushEvents', async () => {
     const res = await sls.pushEvents({
-      event: 'action.fail',
+      data: {
+        event: 'action.fail',
+      },
     });
     expect(getType(res.Body)).toBe('String');
     expect(getType(res.RequestId)).toBe('String');
