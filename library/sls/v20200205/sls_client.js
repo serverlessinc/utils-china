@@ -110,7 +110,7 @@ class SlsClient extends AbstractClient {
   }
 
   /**
-   * 用户获取文件缓存URL链接
+   * 推送用户操作事件
    * @param {PushEventsRequest} req
    * @param {function(string, PushEventsResponse):void} cb
    * @public
